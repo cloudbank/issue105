@@ -1,3 +1,19 @@
+# Technologies Used
+I tried to use most recent versions of all the softwares/ technologies at present:
+
+Backend:
+- Java 1.8.91
+- Maven 3.3.9
+- Tomcat 8.0.36
+- MySQL 5.7.13
+- SonarCube 5.6
+- SonarScanner 2.6.1
+- EclipseNeon or SpringToolSuite 3.8 (Optional for development)
+Following Dependencies are inbuild in package.json, hence no need to install separately:
+- Spring 4.3.1
+- JUnit 4.12
+- Log4j 1.2
+
 # Backend app usage
 
 - Make sure you have JDK 8 installed and JAVA_HOME is set as path where jdk is installed
@@ -6,20 +22,20 @@
 - Swagger API JSON is also provided
 - To start the api run following command in the root folder:
 	
-	mvnw clean
-	mvnw spring-boot:run
+	mvn clean
+	mvn spring-boot:run
 	
 - To run unit tests, use following command:
 
-	mvnw test
+	mvn test
 	
 -	To build war to deploy to any other application server (not required to run with spring boot which has inbuilt application server):
 
-	mvnw install
+	mvn install
 
 - Unit tests are run by default, please use -DskipTests parameter everywhere to skip unit tests, e.g.:
 
-	mvnw install -DskipTests
+	mvn install -DskipTests
 
 # SonarCube Code Coverage for backend
 

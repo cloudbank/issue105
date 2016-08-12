@@ -1,3 +1,5 @@
 logging.log
 /target
 .DS_Store
+bin
+target

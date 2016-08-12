@@ -1,11 +1,9 @@
 # Technologies Used
-I tried to use most recent versions of all the softwares/ technologies at present:
 
 Backend:
 - Java 1.8.91
 - Maven 3.3.9
 - Tomcat 8.0.36
-- MySQL 5.7.13
 - SonarCube 5.6
 - SonarScanner 2.6.1
 - EclipseNeon or SpringToolSuite 3.8 (Optional for development)
@@ -14,15 +12,24 @@ Following Dependencies are inbuild in package.json, hence no need to install sep
 - JUnit 4.12
 - Log4j 1.2
 
+# video 
+http://screencast.com/t/LFnurIHWI
+
+# Verification document
+docs/SEC YIELD API AND ENGINES CODE CHALLENGE.docx
+
+# POSTMAN Script
+docs/sec_yield_api_postman_collection.json
+
+
 # Backend app usage
 
 - Make sure you have JDK 8 installed and JAVA_HOME is set as path where jdk is installed
-- Install latest version of MySQL, I am using 5.7.13 and create database schema by running src/main/sql/ddl.sql
--	Either load test data by running src/main/sql/test.sql or create test data using postman(any version v1 or v2) collection in docs folder after running the apis
-- Swagger API JSON is also provided
-- To start the api run following command in the root folder:
+
+- Deployment steps
 	
-	```mvn clean```
+	```mvn clean install```
+
 	```mvn spring-boot:run```
 	
 - To run unit tests, use following command:
@@ -67,3 +74,6 @@ E.g. C:\workspace\secyield>c:\sonar-scanner-2.6.1\bin\sonar-scanner
 SonarCube will scan our project and details will be populated in the SonarCube dashboard we have at http://localhost:9000
 
 A screenshot is shown in verification guide.
+
+Also one can use
+	```mvn sonar:sonar```

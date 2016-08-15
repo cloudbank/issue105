@@ -13,6 +13,7 @@ import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * SequenceSecurityCalculationEngine
@@ -91,11 +92,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**
@@ -126,9 +123,8 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
 		try {
-			SecuritySECData updatedSecuritySECData= new SecuritySECData();
+			SecuritySECData updatedSecuritySECData = new SecuritySECData();
 			for (CalculationEngine calcEngine : calculationEngines) {
-				;
 				updatedSecuritySECData = calcEngine.calculate(securitySECData, configuration);
 			}
 			return updatedSecuritySECData;

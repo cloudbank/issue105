@@ -35,7 +35,7 @@ public class CouponIncomeCalculationEngineTest {
 	 */
 	@Autowired
 	private TestUtility utility;
-	
+
 	/**
 	 * CouponIncomeCalculationEngine object
 	 */
@@ -65,15 +65,12 @@ public class CouponIncomeCalculationEngineTest {
 		SecuritySECData securitySECData = new SecuritySECData();
 		couponIncomeCalculationEngine.calculate(securitySECData, null);
 	}
-	
+
 	/**
 	 * Checks coupon income value
 	 * 
-	 * Sh = 7000000
-	 * Y = 0.049592404
-	 * FX = 1
-	 * Am = -45.69
-	 * Income = 918.61
+	 * Sh = 7000000 Y = 0.049592404 FX = 1 Am = -45.69 Income = 918.61
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -84,21 +81,18 @@ public class CouponIncomeCalculationEngineTest {
 		PositionData positionData = new PositionData();
 		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(-45.69)));
-		securitySECData.setPositionData(new PositionData[]{positionData});
+		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();
 		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2, BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
-	
-	
+
 	/**
 	 * Checks coupon income value
 	 * 
-	 * Sh = 4900000
-	 * Y = 0.004199982
-	 * FX = 1
-	 * Am = 0
-	 * Income = 57.17
+	 * Sh = 4900000 Y = 0.004199982 FX = 1 Am = 0 Income = 57.17
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -109,10 +103,11 @@ public class CouponIncomeCalculationEngineTest {
 		PositionData positionData = new PositionData();
 		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(4900000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(0)));
-		securitySECData.setPositionData(new PositionData[]{positionData});
+		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();
 		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2, BigDecimal.ROUND_HALF_DOWN), new BigDecimal(57.17).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(57.17).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
 
 }

@@ -13,6 +13,7 @@ import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * CalculationEngineSelector
@@ -45,7 +46,6 @@ public class CalculationEngineSelector implements CalculationEngine {
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
-	
 	/**
 	 * Configuration exception message
 	 */
@@ -69,16 +69,24 @@ public class CalculationEngineSelector implements CalculationEngine {
 	public CalculationEngineSelector() {
 		// default constructor
 	}
-	
+
+	/**
+	 * Getter calculationEngines
+	 * 
+	 * @return calculationEngines
+	 */
 	public Map<String, CalculationEngine> getCalculationEngines() {
 		return calculationEngines;
 	}
 
+	/**
+	 * Setter calculationEngines
+	 * 
+	 * @param calculationEngines
+	 */
 	public void setCalculationEngines(Map<String, CalculationEngine> calculationEngines) {
 		this.calculationEngines = calculationEngines;
 	}
-
-	
 
 	/**
 	 * Check passed parameter should not be null
@@ -90,11 +98,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**
@@ -108,8 +112,8 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Engine Calculate method implementation
-	 * Checks whether IvType is VPS or VRDN or DVRN and  accordingly calls respective engines 
+	 * Engine Calculate method implementation Checks whether IvType is VPS or
+	 * VRDN or DVRN and accordingly calls respective engines
 	 * 
 	 * @param securitySECData
 	 * @param configuration
@@ -117,20 +121,19 @@ public class CalculationEngineSelector implements CalculationEngine {
 	 * 
 	 * @throws CalculationException
 	 */
-	 @Override
+	@Override
 	public SecuritySECData calculate(SecuritySECData securitySECData, SECConfiguration configuration)
 			throws CalculationException {
 		if (!checkPassedParameters(securitySECData, configuration)) {
 			logger.error(String.format(logErrorFormat, calculateMethodName, illegalArgumentExceptionMessage));
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
-		if (securitySECData.getSecurityReferenceData().getDerStepIndicator()
-				|| securitySECData.getSecurityReferenceData().getDerHybridIndicator())
-		{
+		if (securitySECData.getSecurityReferenceData().isDerStepIndicator()
+				|| securitySECData.getSecurityReferenceData().isDerHybridIndicator()) {
 			throw new UnsupportedOperationException(unSupportedOperationException);
 		}
 		try {
-			
+
 			// if type VP
 			if ("VPS".equalsIgnoreCase(securitySECData.getSecurityReferenceData().getIVType())) {
 				securitySECData.setDerYieldCalcEngine(YtmYieldCalculationEngine.ENGINE_NAME);
@@ -148,13 +151,10 @@ public class CalculationEngineSelector implements CalculationEngine {
 				throw new UnsupportedOperationException(unSupportedOperationException);
 			}
 			return securitySECData;
-		}
-		catch (UnsupportedOperationException ex)
-		{
-			logger.error(String.format(logErrorFormat,calculateMethodName , ex.getMessage()));
+		} catch (UnsupportedOperationException ex) {
+			logger.error(String.format(logErrorFormat, calculateMethodName, ex.getMessage()));
 			throw ex;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			logger.error(String.format(logErrorFormat, calculateMethodName, ex.getMessage()));
 			throw new CalculationException(ex.getMessage(), ex);
 		}

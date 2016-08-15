@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
-@Component
 public class DateUtility {
 	/**
 	 * Private constructor
@@ -111,7 +110,7 @@ public class DateUtility {
 				endDay = 29;
 				startDay = 29;
 
-			} else if (tempDate.getMonthOfYear() == 2 && startDay == 28 && !isLeapYear(tempDate.getYear()) ) {
+			} else if (tempDate.getMonthOfYear() == 2 && startDay == 28 && !isLeapYear(tempDate.getYear())) {
 				endDay = 28;
 				startDay = 28;
 			}

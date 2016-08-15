@@ -1,4 +1,5 @@
 package com.csa.apex.secyield.exceptions;
+
 /**
  * The calculation exception.
  *

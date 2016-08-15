@@ -57,10 +57,10 @@ public class CalculationEngineSelectorTest {
 		SecuritySECData securitySECData = new SecuritySECData();
 		calculationEngineSelector.calculate(securitySECData, null);
 	}
-	
+
 	/**
-	 * Tests UnsupportedOperationException should be thrown if DerStepIndicator is
-	 * true 
+	 * Tests UnsupportedOperationException should be thrown if DerStepIndicator
+	 * is true
 	 * 
 	 * @throws Exception
 	 */
@@ -75,10 +75,10 @@ public class CalculationEngineSelectorTest {
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
-	
+
 	/**
-	 * Tests UnsupportedOperationException should be thrown if DerHybridIndicator is
-	 * true 
+	 * Tests UnsupportedOperationException should be thrown if
+	 * DerHybridIndicator is true
 	 * 
 	 * @throws Exception
 	 */
@@ -93,9 +93,10 @@ public class CalculationEngineSelectorTest {
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
-	
+
 	/**
-	 * Tests UnsupportedOperationException should be thrown if unsupported IVType
+	 * Tests UnsupportedOperationException should be thrown if unsupported
+	 * IVType
 	 * 
 	 * @throws Exception
 	 */
@@ -110,11 +111,10 @@ public class CalculationEngineSelectorTest {
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
-	
-	
+
 	/**
-	 * Tests when security IV type is VPS
-	 * Yield and Income engine should be YTM
+	 * Tests when security IV type is VPS Yield and Income engine should be YTM
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -130,11 +130,11 @@ public class CalculationEngineSelectorTest {
 		assertEquals(securitySECData.getDerYieldCalcEngine(), "YtmYieldCalculationEngine");
 		assertEquals(securitySECData.getDerIncomeCalcEngine(), "YtmIncomeCalculationEngine");
 	}
-	
 
 	/**
-	 * Tests when security IV type is VRDN
-	 * Yield and Income engine should be Coupon
+	 * Tests when security IV type is VRDN Yield and Income engine should be
+	 * Coupon
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -150,11 +150,11 @@ public class CalculationEngineSelectorTest {
 		assertEquals(securitySECData.getDerYieldCalcEngine(), "CouponYieldCalculationEngine");
 		assertEquals(securitySECData.getDerIncomeCalcEngine(), "CouponIncomeCalculationEngine");
 	}
-	
-	
+
 	/**
-	 * Tests when security IV type is DVRN
-	 * Yield and Income engine should be Coupon
+	 * Tests when security IV type is DVRN Yield and Income engine should be
+	 * Coupon
+	 * 
 	 * @throws Exception
 	 */
 	@Test

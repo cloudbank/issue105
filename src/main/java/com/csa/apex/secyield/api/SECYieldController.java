@@ -22,8 +22,8 @@ import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
 
 /**
- * SECYieldController
- * Spring REST Controller for customer data operations. This class is effectively thread safe.
+ * SECYieldController Spring REST Controller for customer data operations. This
+ * class is effectively thread safe.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
@@ -36,24 +36,24 @@ public class SECYieldController {
 	@Autowired()
 	@Qualifier("secYieldServiceImpl")
 	private SECYieldService secYieldService;
-	
+
 	/**
 	 * Configuration exception message
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
-	
+
 	/**
 	 * Constructor
 	 */
-	public SECYieldController()
-	{
-		//default constructor
-		
+	public SECYieldController() {
+		// default constructor
+
 	}
-	
+
 	/**
 	 * Getter secYieldService
+	 * 
 	 * @return secYieldService
 	 */
 	public SECYieldService getSecYieldService() {
@@ -62,13 +62,12 @@ public class SECYieldController {
 
 	/**
 	 * Setter secYieldService
+	 * 
 	 * @param secYieldService
 	 */
 	public void setSecYieldService(SECYieldService secYieldService) {
 		this.secYieldService = secYieldService;
 	}
-
-	
 
 	/**
 	 * Checks beans are injected properly on postconstruct throws
@@ -76,41 +75,44 @@ public class SECYieldController {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		
+
 		if (secYieldService == null) {
 			throw new ConfigurationException(configurationArgumentExceptionMessage);
 		}
 	}
 
 	/**
-	 * Gets SEC Security data with the calculated data for the business date. The securities are also persisted using customer REST API.
+	 * Gets SEC Security data with the calculated data for the business date.
+	 * The securities are also persisted using customer REST API.
 	 * 
-	 * @param businessDate The Business date
+	 * @param businessDate
+	 *            The Business date
 	 * @return List<SecuritySECData>
 	 * @throws SECYieldException
 	 */
-	@RequestMapping(value="securitySECData", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "securitySECData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public List<SecuritySECData> getSecuritySECData(@ModelAttribute Date businessDate) throws  SECYieldException
-	{
+	public List<SecuritySECData> getSecuritySECData(@ModelAttribute Date businessDate) throws SECYieldException {
 		return secYieldService.processSecuritySECData(businessDate);
 	}
-	
+
 	/**
 	 * Gets already calculated SEC Security data for the given date.
-	 * @param businessDate the Business date
+	 * 
+	 * @param businessDate
+	 *            the Business date
 	 * @return already calculated securitySECData;
 	 * @throws SECYieldException
 	 */
-	@RequestMapping(value="calcualtedSecuritySECData", method=RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "calcualtedSecuritySECData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 
-	public List<SecuritySECData> getCalculatedSecuritySECData(@ModelAttribute Date businessDate) throws SECYieldException
-	{
+	public List<SecuritySECData> getCalculatedSecuritySECData(@ModelAttribute Date businessDate)
+			throws SECYieldException {
 		return secYieldService.getCalculatedSecuritySECData(businessDate);
-		
+
 	}
-	
+
 }

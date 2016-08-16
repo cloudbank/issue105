@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.csa.apex.secyield.api.services.impl.CalculationEngine;
-import com.csa.apex.secyield.dto.YtmYieldCalculationVariablesDTO;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 import com.csa.apex.secyield.utility.DateUtility;
 
 /**
@@ -27,6 +27,201 @@ import com.csa.apex.secyield.utility.DateUtility;
  */
 @Component
 public class YtmYieldCalculationEngine implements CalculationEngine {
+	/**
+	 * YtmYieldCalculationVariablesDTO
+	 * 
+	 * 
+	 * Used for storing variables for YTM yield calculation
+	 *
+	 * @author [es],TCSDEVELOPER
+	 * @version 1.0
+	 */
+	private class YtmYieldCalculationVariablesDTO {
+		/**
+		 * Clean price
+		 */
+		private BigDecimal cleanPrice;
+
+		/**
+		 * Redemption value
+		 */
+		private BigDecimal redemptionValue;
+
+		/**
+		 * frequency
+		 */
+		private int frequency;
+
+		/**
+		 * Coupons between settlement and redemption date
+		 */
+		private int couponsBetSettlementRedemption;
+
+		/**
+		 * dsc
+		 */
+		private int dsc;
+
+		/**
+		 * No of days in the period
+		 */
+		private int noOfDaysInPeriod;
+
+		/**
+		 * Days between prior coupon date and settlement date
+		 */
+		private int daysBetPriorCouponDateSettlementDate;
+
+		/**
+		 * Annual Interest Rate
+		 */
+		private BigDecimal annualInterestRate;
+
+		/**
+		 * Getter cleanPrice
+		 * 
+		 * @return cleanPrice
+		 */
+		public BigDecimal getCleanPrice() {
+			return cleanPrice;
+		}
+
+		/**
+		 * Setter cleanPrice
+		 * 
+		 * @param cleanPrice
+		 */
+		public void setCleanPrice(BigDecimal cleanPrice) {
+			this.cleanPrice = cleanPrice;
+		}
+
+		/**
+		 * Getter redemptionValue
+		 * 
+		 * @return redemptionValue
+		 */
+		public BigDecimal getRedemptionValue() {
+			return redemptionValue;
+		}
+
+		/**
+		 * Setter redemptionValue
+		 * 
+		 * @param redemptionValue
+		 */
+		public void setRedemptionValue(BigDecimal redemptionValue) {
+			this.redemptionValue = redemptionValue;
+		}
+
+		/**
+		 * Getter frequency
+		 * 
+		 * @return frequency
+		 */
+		public int getFrequency() {
+			return frequency;
+		}
+
+		/**
+		 * Setter frequency
+		 * 
+		 * @param frequency
+		 */
+		public void setFrequency(int frequency) {
+			this.frequency = frequency;
+		}
+
+		/**
+		 * Getter couponsBetSettlementRedemption
+		 * 
+		 * @return couponsBetSettlementRedemption
+		 */
+		public int getCouponsBetSettlementRedemption() {
+			return couponsBetSettlementRedemption;
+		}
+
+		/**
+		 * Setter couponsBetSettlementRedemption
+		 * 
+		 * @param couponsBetSettlementRedemption
+		 */
+		public void setCouponsBetSettlementRedemption(int couponsBetSettlementRedemption) {
+			this.couponsBetSettlementRedemption = couponsBetSettlementRedemption;
+		}
+
+		/**
+		 * Getter dsc
+		 * 
+		 * @return
+		 */
+		public int getDsc() {
+			return dsc;
+		}
+
+		/**
+		 * Setter dsc
+		 * 
+		 * @param dsc
+		 */
+		public void setDsc(int dsc) {
+			this.dsc = dsc;
+		}
+
+		/**
+		 * Getter noOfDaysInPeriod
+		 * 
+		 * @return noOfDaysInPeriod
+		 */
+		public int getNoOfDaysInPeriod() {
+			return noOfDaysInPeriod;
+		}
+
+		/**
+		 * Setter noOfDaysInPeriod
+		 * 
+		 * @param noOfDaysInPeriod
+		 */
+		public void setNoOfDaysInPeriod(int noOfDaysInPeriod) {
+			this.noOfDaysInPeriod = noOfDaysInPeriod;
+		}
+
+		/**
+		 * Getter getDaysBetPriorCouponDateSettlementDate
+		 * 
+		 * @return getDaysBetPriorCouponDateSettlementDate
+		 */
+		public int getDaysBetPriorCouponDateSettlementDate() {
+			return daysBetPriorCouponDateSettlementDate;
+		}
+
+		/**
+		 * Setter getDaysBetPriorCouponDateSettlementDate
+		 * 
+		 * @param daysBetPriorCouponDateSettlementDate
+		 */
+		public void setDaysBetPriorCouponDateSettlementDate(int daysBetPriorCouponDateSettlementDate) {
+			this.daysBetPriorCouponDateSettlementDate = daysBetPriorCouponDateSettlementDate;
+		}
+
+		/**
+		 * Getter annualInterestRate
+		 * 
+		 * @return annualInterestRate
+		 */
+		public BigDecimal getAnnualInterestRate() {
+			return annualInterestRate;
+		}
+
+		/**
+		 * Setter annualInterestRate
+		 * 
+		 * @param annualInterestRate
+		 */
+		public void setAnnualInterestRate(BigDecimal annualInterestRate) {
+			this.annualInterestRate = annualInterestRate;
+		}
+	}
+
 	/**
 	 * logger class instance
 	 */
@@ -49,7 +244,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
-	
+
 	/**
 	 * Calculation engine name
 	 */
@@ -59,9 +254,9 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
-	
+
 	/**
-	 * Default Rounding mode 
+	 * Default Rounding mode
 	 */
 	private int roundingMode = 4;
 
@@ -99,14 +294,13 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 * more precise outcome yield.
 	 */
 	private int binarySearchCount;
-	
+
 	/**
 	 * Constructor
 	 */
 	public YtmYieldCalculationEngine() {
 		// default constructor
 	}
-
 
 	/**
 	 * Getter ephsilon
@@ -180,7 +374,6 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		this.binarySearchCount = binarySearchCount;
 	}
 
-	
 	/**
 	 * Check passed parameter should not be null
 	 * 
@@ -191,11 +384,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**
@@ -291,7 +480,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		Double onePlusYByM = 1 + yByM;
 		Double comp1 = rv / Math.pow(onePlusYByM, n - 1 + ((double) dsc / e));
 		Double comp2first = (100 * r / m) / Math.pow(onePlusYByM, (double) dsc / e);
-		Double comp2Second = (Math.pow(onePlusYByM, n) - 1) / (yByM * Math.pow(onePlusYByM, (double)n - 1));
+		Double comp2Second = (Math.pow(onePlusYByM, n) - 1) / (yByM * Math.pow(onePlusYByM, (double) n - 1));
 		Double comp2 = comp2first * comp2Second;
 		Double comp3 = (100 * (r / m) * ((double) a / e)) + p;
 		return comp1 + comp2 - comp3;
@@ -341,7 +530,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 * @return yield value
 	 */
 	private BigDecimal getYield(YtmYieldCalculationVariablesDTO ytmYieldCalculationVariablesDTO) {
-		BigDecimal yield =  BigDecimal.valueOf(ephsilon);
+		BigDecimal yield = BigDecimal.valueOf(ephsilon);
 		Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, yield);
 		if (funcVal < 0) {
 			yield = BigDecimal.valueOf(minYield);

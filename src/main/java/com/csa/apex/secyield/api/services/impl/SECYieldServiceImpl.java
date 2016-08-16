@@ -19,18 +19,15 @@ import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
-import com.csa.apex.secyield.utility.MockDataServiceUtility;
 
 /**
- * SECYieldServiceImpl
- * implementation of the SECYieldService. Uses pluggable calculation engines to
- * calculate the security SEC data like yield and income. This class is
- * effectively thread safe.
+ * SECYieldServiceImpl implementation of the SECYieldService. Uses pluggable
+ * calculation engines to calculate the security SEC data like yield and income.
+ * This class is effectively thread safe.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
-@Service
 public class SECYieldServiceImpl implements SECYieldService {
 	/**
 	 * logger class instance
@@ -78,14 +75,15 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	private String getCalculatedSecuritySECDataApiPath;
 
-	
 	/**
-	 * Creating restTemplate object helps in  mock testing
+	 * Creating restTemplate object helps in mock testing
 	 * 
 	 */
-	private RestTemplate restTemplate = new RestTemplate();
-	
+	private RestTemplate restTemplate;
 
+	/**
+	 * Configuration object for the service
+	 */
 	private SECConfiguration configuration;
 
 	/**
@@ -93,16 +91,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
-	
-	/**
-	 * It mocks all the restTemplate class
-	 * Value should be false in prod
-	 */
-	private Boolean doMock;
 
-	
-	
-	
 	/**
 	 * Illegal Argument Exception Message
 	 */
@@ -114,13 +103,13 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Value("${messages.unsupportedoperationexception}")
 	private String unSupportedOperationException;
-	
+
 	/**
 	 * processSingleSecurity method name
 	 */
 	@Value("${secyieldserviceimpl.processsinglesecuritymethodname}")
 	private String processingSingeSecurityMethodName;
-	
+
 	/**
 	 * processSecuritySECData method name
 	 */
@@ -128,14 +117,20 @@ public class SECYieldServiceImpl implements SECYieldService {
 	private String processSecuritySECDataMethodName;
 
 	/**
+	 * Checks error in parallel processing
+	 */
+	private boolean isProcessed = true;
+
+	/**
 	 * Constructor
 	 */
 	public SECYieldServiceImpl() {
-		//default constructor
+		// default constructor
 	}
 
 	/**
 	 * Getter configuration
+	 * 
 	 * @return configuration
 	 */
 	public SECConfiguration getConfiguration() {
@@ -144,6 +139,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 
 	/**
 	 * Setter configuration
+	 * 
 	 * @param configuration
 	 */
 	public void setConfiguration(SECConfiguration configuration) {
@@ -239,53 +235,44 @@ public class SECYieldServiceImpl implements SECYieldService {
 	public void setGetCalculatedSecuritySECDataApiPath(String getCalculatedSecuritySECDataApiPath) {
 		this.getCalculatedSecuritySECDataApiPath = getCalculatedSecuritySECDataApiPath;
 	}
-	
-	
+
 	/**
 	 * Getter restTemplate
+	 * 
 	 * @return restTemplate
 	 */
 	public RestTemplate getRestTemplate() {
 		return restTemplate;
 	}
-	
+
 	/**
 	 * Setter restTemplate
+	 * 
 	 * @param restTemplate
 	 */
 	public void setRestTemplate(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-	
-	/**
-	 * Getter docMock
-	 * @return doMock
-	 */
-	public Boolean getDoMock() {
-		return doMock;
-	}
 
-	/**
-	 * Setter doMock
-	 * @param doMock
-	 */
-	public void setDoMock(Boolean doMock) {
-		this.doMock = doMock;
-	}
-
-	
-	
 	/**
 	 * Checks beans are injected properly on postconstruct throws
 	 * ConfigurationException
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		
-		if (calculationEngineSelector == null && getConfigApiPath != null && getCustomerDataApiPath != null
-				&& getCalculatedSecuritySECDataApiPath != null) {
+		if (calculationEngineSelector == null) {
 			throw new ConfigurationException(configurationArgumentExceptionMessage);
 		}
+
+		if (getConfigApiPath == null || getConfigApiPath.isEmpty())
+			throw new ConfigurationException(configurationArgumentExceptionMessage);
+
+		if (getCustomerDataApiPath == null || getCustomerDataApiPath.isEmpty())
+			throw new ConfigurationException(configurationArgumentExceptionMessage);
+
+		if (getCalculatedSecuritySECDataApiPath == null || getCalculatedSecuritySECDataApiPath.isEmpty())
+			throw new ConfigurationException(configurationArgumentExceptionMessage);
+		configuration = restTemplate.getForObject(getConfigApiPath, SECConfiguration.class);
 	}
 
 	/**
@@ -300,30 +287,34 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecuritySECData> processSecuritySECData(Date businessDate)
-			throws  SECYieldException {
+	public List<SecuritySECData> processSecuritySECData(Date businessDate) throws SECYieldException {
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCustomerDataApiPath)
 					.queryParam("businessDate", businessDate);
-			
+
 			List<SecuritySECData> securities;
-			// if mocking on it will return mock data
-			if(doMock)
-			{
-				securities = MockDataServiceUtility.getSecuritySECDataWithoutYieldAndIncomeData();
-			}
-			else
-			{
-				securities = (List<SecuritySECData>) restTemplate
-						.getForObject(builder.build().encode().toUri(), List.class);
-				
-			}
-			
-			for(SecuritySECData security : securities)
-			{
-				processSingleSecurity(security);
+			securities = (List<SecuritySECData>) restTemplate.getForObject(builder.build().encode().toUri(),
+					List.class);
+
+			securities.parallelStream().forEach(s -> {
+				try {
+					processSingleSecurity(s);
+				} catch (SECYieldException e) {
+					logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+					isProcessed = false;
+				}
+			});
+
+			// if there is any error in parallel processing
+			// throw SECYieldException
+			if (!isProcessed) {
+				isProcessed = true;
+				throw new SECYieldException(secYieldExceptionMessage);
 			}
 
+			for (SecuritySECData security : securities) {
+				processSingleSecurity(security);
+			}
 
 			return securities;
 		} catch (SECYieldException e) {
@@ -346,8 +337,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate)
-			throws SECYieldException {
+	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate) throws SECYieldException {
 		if (businessDate == null) {
 			logger.error(
 					String.format(logErrorFormat, "getCalculatedSecuritySECData", illegalArgumentExceptionMessage));
@@ -357,15 +347,9 @@ public class SECYieldServiceImpl implements SECYieldService {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam("businessDate", businessDate);
 			List<SecuritySECData> securities;
-			if(doMock)
-			{
-				securities = MockDataServiceUtility.getSecuritySECDataWithYieldAndIncomeData();
-			}
-			else
-			{
-				securities = (List<SecuritySECData>) restTemplate
-						.getForObject(builder.build().encode().toUri(), List.class);
-			}
+			securities = (List<SecuritySECData>) restTemplate.getForObject(builder.build().encode().toUri(),
+					List.class);
+
 			return securities;
 		} catch (Exception e) {
 			logger.error(String.format(logErrorFormat, "processSingleSecurity", e.getMessage()));
@@ -382,18 +366,19 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 *            the input securitySECData that is updated in the method.
 	 * @throws SECYieldException
 	 */
-	private void processSingleSecurity(SecuritySECData securitySECData)
-			throws SECYieldException {
+	private void processSingleSecurity(SecuritySECData securitySECData) throws SECYieldException {
 
 		// checks passed value should not be null
 		if (securitySECData == null) {
-			logger.error(String.format(logErrorFormat, processingSingeSecurityMethodName, illegalArgumentExceptionMessage));
+			logger.error(
+					String.format(logErrorFormat, processingSingeSecurityMethodName, illegalArgumentExceptionMessage));
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
 		try {
 			// call engine calculator
-			SecuritySECData updatedSecuritySECData = calculationEngineSelector.calculate(securitySECData, configuration);
-	
+			SecuritySECData updatedSecuritySECData = calculationEngineSelector.calculate(securitySECData,
+					configuration);
+
 			// calculate the data
 			if ("VPS".equalsIgnoreCase(updatedSecuritySECData.getSecurityReferenceData().getIVType())) {
 				updatedSecuritySECData = calculationEngineSelector.getCalculationEngines().get("YTM")
@@ -407,21 +392,15 @@ public class SECYieldServiceImpl implements SECYieldService {
 			}
 			// call the api
 			Boolean saveResponse;
-			if(doMock)
-			{
-				saveResponse = true;
-			}
-			else{
-				 saveResponse = restTemplate.exchange(saveCalculatedSecuritySECDataApiPath, HttpMethod.PUT,
-							new HttpEntity<SecuritySECData>(updatedSecuritySECData), Boolean.class).getBody();
-			}
-			
+			saveResponse = restTemplate.exchange(saveCalculatedSecuritySECDataApiPath, HttpMethod.PUT,
+					new HttpEntity<SecuritySECData>(updatedSecuritySECData), Boolean.class).getBody();
 			// if response false
 			if (!saveResponse) {
-				logger.error(String.format(logErrorFormat, processingSingeSecurityMethodName, secYieldExceptionMessage));
+				logger.error(
+						String.format(logErrorFormat, processingSingeSecurityMethodName, secYieldExceptionMessage));
 				throw new SECYieldException(secYieldExceptionMessage);
 			}
-		} catch (UnsupportedOperationException|SECYieldException e) {
+		} catch (UnsupportedOperationException | SECYieldException e) {
 			logger.error(String.format(logErrorFormat, processingSingeSecurityMethodName, e.getMessage()));
 			throw e;
 		} catch (Exception e) {

@@ -37,7 +37,7 @@ public class SequenceSecurityCalculationEngineTest {
 	 */
 	@Autowired
 	private TestUtility utility;
-	
+
 	/**
 	 * SequenceSecurityCalculationEngine object
 	 */
@@ -67,18 +67,15 @@ public class SequenceSecurityCalculationEngineTest {
 		SecuritySECData securitySECData = new SecuritySECData();
 		sequenceSecurityCalculationEngine.calculate(securitySECData, null);
 	}
-	
 
-	
 	/**
-	 * Checks yield and income of coupon type
-	 * Coupon Engines are automatically injected through bean
-	 * Calculations are already tested in independent engine unit tests
-	 * Only call to engine calculation is checked
+	 * Checks yield and income of coupon type Coupon Engines are automatically
+	 * injected through bean Calculations are already tested in independent
+	 * engine unit tests Only call to engine calculation is checked
 	 * 
 	 * @throws Exception
 	 */
-	
+
 	@Test
 	public void checkCouponYieldIncomeCalculation() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
@@ -89,12 +86,12 @@ public class SequenceSecurityCalculationEngineTest {
 		PositionData positionData = new PositionData();
 		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(-45.69)));
-		securitySECData.setPositionData(new PositionData[]{positionData});
+		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();
 		sequenceSecurityCalculationEngine.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerOneDaySecurityYield(), securityReferenceData.getInterestRt());
-		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2, BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
-
 
 }

@@ -11,6 +11,7 @@ import com.csa.apex.secyield.entities.PositionData;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * YtmIncomeCalculationEngine
@@ -19,7 +20,7 @@ import com.csa.apex.secyield.exceptions.CalculationException;
  * @version 1.0
  */
 @Component
-public class YtmIncomeCalculationEngine implements CalculationEngine{
+public class YtmIncomeCalculationEngine implements CalculationEngine {
 	/**
 	 * logger class instance
 	 */
@@ -30,7 +31,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
-	
+
 	/**
 	 * Calculate method name
 	 */
@@ -52,16 +53,16 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
-	
+
 	/**
-	 * Default Rounding mode 
+	 * Default Rounding mode
 	 */
 	private int roundingMode = 4;
-	
+
 	/**
 	 * The Y/FX threshold for the income calculation
 	 */
-	private double yFxThreshold=0.2;
+	private double yFxThreshold = 0.2;
 
 	/**
 	 * Constructor
@@ -80,11 +81,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**
@@ -102,8 +99,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 	}
 
 	/**
-	 * Engine Calculate method implementation
-	 * Calculates the YTM (TIPS) Income
+	 * Engine Calculate method implementation Calculates the YTM (TIPS) Income
 	 * 
 	 * 
 	 * @param securitySECData
@@ -125,18 +121,25 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 			BigDecimal ai;
 			BigDecimal fx = securitySECData.getFxRate();
 			BigDecimal inflInc;
-			BigDecimal income; 
+			BigDecimal income;
 			for (PositionData positionData : securitySECData.getPositionData()) {
-			   mv = positionData.getMarketValue();
-			   ai = positionData.getAccruedIncome();
-			   inflInc = positionData.getEarnedInflationaryCompensationBase();
-			   if(y.divide(fx).compareTo(BigDecimal.valueOf(yFxThreshold).setScale(operationScale, BigDecimal.ROUND_HALF_UP)) > 0) 
-				   income = mv.add(ai).multiply(BigDecimal.valueOf(yFxThreshold).setScale(operationScale,BigDecimal.ROUND_HALF_UP)).divide(new BigDecimal(360),operationScale,BigDecimal.ROUND_HALF_UP).add(inflInc);
-			   else 
-				   income = mv.add(ai).multiply(y).divide(BigDecimal.valueOf(360).setScale(operationScale,BigDecimal.ROUND_HALF_UP),BigDecimal.ROUND_HALF_UP).divide(fx,operationScale,BigDecimal.ROUND_HALF_UP).add(inflInc);
-			   // round off income to operation scale
-			   income = income.setScale(operationScale, roundingMode);
-			   positionData.setDerOneDaySecurityIncome(income);
+				mv = positionData.getMarketValue();
+				ai = positionData.getAccruedIncome();
+				inflInc = positionData.getEarnedInflationaryCompensationBase();
+				if (y.divide(fx).compareTo(
+						BigDecimal.valueOf(yFxThreshold).setScale(operationScale, BigDecimal.ROUND_HALF_UP)) > 0)
+					income = mv.add(ai)
+							.multiply(
+									BigDecimal.valueOf(yFxThreshold).setScale(operationScale, BigDecimal.ROUND_HALF_UP))
+							.divide(new BigDecimal(360), operationScale, BigDecimal.ROUND_HALF_UP).add(inflInc);
+				else
+					income = mv.add(ai).multiply(y)
+							.divide(BigDecimal.valueOf(360).setScale(operationScale, BigDecimal.ROUND_HALF_UP),
+									BigDecimal.ROUND_HALF_UP)
+							.divide(fx, operationScale, BigDecimal.ROUND_HALF_UP).add(inflInc);
+				// round off income to operation scale
+				income = income.setScale(operationScale, roundingMode);
+				positionData.setDerOneDaySecurityIncome(income);
 			}
 			return securitySECData;
 		} catch (Exception e) {
@@ -144,6 +147,5 @@ public class YtmIncomeCalculationEngine implements CalculationEngine{
 			throw new CalculationException(e.getMessage(), e);
 		}
 
-		
 	}
 }

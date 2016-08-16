@@ -5,8 +5,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
 
 /**
- * CalculationEngine
- * Interface for all calculation engines
+ * CalculationEngine Interface for all calculation engines
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
@@ -19,10 +18,13 @@ public interface CalculationEngine {
 	 * 
 	 * 
 	 * @param securitySECData
+	 *            the input securitySECData
 	 * @param configuration
+	 *            the SECConfiguration to be used for config values
 	 * @return SecuritySECData with updated data
 	 * @throws CalculationException
 	 */
-	public SecuritySECData calculate(SecuritySECData securitySECData,SECConfiguration configuration) throws CalculationException;
-	
+	public SecuritySECData calculate(SecuritySECData securitySECData, SECConfiguration configuration)
+			throws CalculationException;
+
 }

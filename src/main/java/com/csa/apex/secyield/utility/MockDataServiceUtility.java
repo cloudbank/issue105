@@ -17,18 +17,17 @@ import com.csa.apex.secyield.entities.SecuritySECData;
  * @version 1.0
  */
 public class MockDataServiceUtility {
-	
+
 	/**
 	 * Private constructor
 	 */
-	private MockDataServiceUtility()
-	{
-		
+	private MockDataServiceUtility() {
+
 	}
-	
+
 	/**
-	 * Get mock list of data
-	 * Yield and Income is not calcualted
+	 * Get mock list of data Yield and Income is not calcualted
+	 * 
 	 * @return
 	 * @throws ParseException
 	 */
@@ -83,11 +82,10 @@ public class MockDataServiceUtility {
 		data.add(securitySECData);
 		return data;
 	}
-	
-	
+
 	/**
-	 * Get mock list of data
-	 * Yield and Income is calcualted
+	 * Get mock list of data Yield and Income is calcualted
+	 * 
 	 * @return
 	 * @throws ParseException
 	 */

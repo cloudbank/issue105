@@ -10,6 +10,7 @@ import com.csa.apex.secyield.api.services.impl.CalculationEngine;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * CouponYieldCalculationEngine
@@ -29,7 +30,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
-	
+
 	/**
 	 * Calculate method name
 	 */
@@ -51,9 +52,9 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
-	
+
 	/**
-	 * Default Rounding mode 
+	 * Default Rounding mode
 	 */
 	private int roundingMode = 4;
 
@@ -62,7 +63,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	 */
 	public CouponYieldCalculationEngine() {
 		// default constructor
-	}	
+	}
 
 	/**
 	 * Check passed parameter should not be null
@@ -74,11 +75,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**
@@ -113,7 +110,8 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 		}
 		setConfiguration(configuration);
 		try {
-			BigDecimal yield = securitySECData.getSecurityReferenceData().getInterestRt().setScale(operationScale, roundingMode);
+			BigDecimal yield = securitySECData.getSecurityReferenceData().getInterestRt().setScale(operationScale,
+					roundingMode);
 			securitySECData.setDerOneDaySecurityYield(yield);
 			return securitySECData;
 		} catch (Exception e) {

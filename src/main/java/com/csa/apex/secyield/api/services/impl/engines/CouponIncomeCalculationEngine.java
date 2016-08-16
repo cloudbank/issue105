@@ -11,6 +11,7 @@ import com.csa.apex.secyield.entities.PositionData;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * CouponIncomeCalculationEngine
@@ -19,7 +20,7 @@ import com.csa.apex.secyield.exceptions.CalculationException;
  * @version 1.0
  */
 @Component
-public class CouponIncomeCalculationEngine implements  CalculationEngine {
+public class CouponIncomeCalculationEngine implements CalculationEngine {
 	/**
 	 * logger class instance
 	 */
@@ -47,14 +48,14 @@ public class CouponIncomeCalculationEngine implements  CalculationEngine {
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
-	
+
 	/**
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
-	
+
 	/**
-	 * Default Rounding mode 
+	 * Default Rounding mode
 	 */
 	private int roundingMode = 4;
 
@@ -75,11 +76,7 @@ public class CouponIncomeCalculationEngine implements  CalculationEngine {
 	 * @return true if both are not null else returns false
 	 */
 	private Boolean checkPassedParameters(SecuritySECData securitySECData, SECConfiguration configuration) {
-		Boolean isParamsNotNull = false;
-		if (securitySECData != null && configuration != null) {
-			isParamsNotNull = true;
-		}
-		return isParamsNotNull;
+		return CommonUtility.checkPassedParametersEngines(securitySECData, configuration);
 	}
 
 	/**

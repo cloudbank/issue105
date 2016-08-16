@@ -16,7 +16,7 @@ public class SECConfiguration {
 	 * Operation scale
 	 */
 	private int operationScale;
-	
+
 	/**
 	 * Rounding mode
 	 */
@@ -25,13 +25,13 @@ public class SECConfiguration {
 	/**
 	 * Constructor
 	 */
-	public SECConfiguration()
-	{
+	public SECConfiguration() {
 		// default empty constructor
 	}
-	
+
 	/**
 	 * Getter operationScale
+	 * 
 	 * @return operationScale
 	 */
 	public final int getOperationScale() {
@@ -40,6 +40,7 @@ public class SECConfiguration {
 
 	/**
 	 * Setter operationScale
+	 * 
 	 * @param operationScale
 	 */
 	public final void setOperationScale(int operationScale) {
@@ -48,6 +49,7 @@ public class SECConfiguration {
 
 	/**
 	 * Getter roundingMode
+	 * 
 	 * @return roundingMode
 	 */
 	public final int getRoundingMode() {
@@ -56,11 +58,11 @@ public class SECConfiguration {
 
 	/**
 	 * Setter roundingMode
+	 * 
 	 * @param roundingMode
 	 */
 	public final void setRoundingMode(int roundingMode) {
 		this.roundingMode = roundingMode;
 	}
-	
-	
+
 }

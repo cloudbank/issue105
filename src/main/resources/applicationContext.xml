@@ -59,10 +59,10 @@
 	<bean id="ytmYieldCalculationEngine"
 		class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine">
 		<property name="calculationStep">
-			<value>0.0001</value>
+			<value>0.01</value>
 		</property>
 		<property name="binarySearchCount">
-			<value>1000</value>
+			<value>30</value>
 		</property>
 		<property name="ephsilon">
 			<value>0.000000001</value>
@@ -123,23 +123,23 @@
 		<property name="calculationEngineSelector">
 			<ref bean="calculationEngineSelector" />
 		</property>
+		<property name="restTemplate">
+			<bean class="com.csa.apex.secyield.api.services.impl.MockCustomerApiServer" />
+		</property>
 		<property name="configuration">
 			<bean class="com.csa.apex.secyield.entities.SECConfiguration" />
 		</property>
 		<property name="getConfigApiPath">
-			<value>https://stub.com</value>
+			<value>http://localhost:8080/getConfiguration</value>
 		</property>
 		<property name="getCustomerDataApiPath">
-			<value>https://stub.com</value>
+			<value>http://localhost:8080/getCustomerSECData</value>
 		</property>
 		<property name="saveCalculatedSecuritySECDataApiPath">
-			<value>https://stub.com</value>
+			<value>http://localhost:8080/persistSecuritySECData</value>
 		</property>
 		<property name="getCalculatedSecuritySECDataApiPath">
-			<value>https://stub.com</value>
-		</property>
-		<property name="doMock">
-			<value>true</value>
+			<value>http://localhost:8080/getCalculatedSECData</value>
 		</property>
 	</bean>
 	

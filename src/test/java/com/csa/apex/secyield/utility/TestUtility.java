@@ -18,7 +18,6 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 @Component
 public class TestUtility {
 
-	
 	/**
 	 * Returns value with scale 7 with ROUND_HALF_DOWN
 	 * 
@@ -30,15 +29,15 @@ public class TestUtility {
 		val = val.setScale(7, BigDecimal.ROUND_HALF_DOWN);
 		return val;
 	}
-	
+
 	/**
-     * Get Mock list of SecuritySECData
-     * @return List<SecuritySECData>
-	 * @throws ParseException 
-     */
-    public List<SecuritySECData> getSecuritySECData() throws ParseException
-    {
-    	return MockDataServiceUtility.getSecuritySECDataWithYieldAndIncomeData();
-    }
+	 * Get Mock list of SecuritySECData
+	 * 
+	 * @return List<SecuritySECData>
+	 * @throws ParseException
+	 */
+	public List<SecuritySECData> getSecuritySECData() throws ParseException {
+		return MockDataServiceUtility.getSecuritySECDataWithYieldAndIncomeData();
+	}
 
 }

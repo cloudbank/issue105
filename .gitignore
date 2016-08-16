@@ -1,3 +1,6 @@
 logging.log
 /target
 .DS_Store
+.settings
+bin
+target

@@ -1,6 +1,5 @@
 package com.csa.apex.secyield.api.services.impl.engines;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -43,39 +42,35 @@ public class YtmYieldCalculationEngineTest {
 	 */
 	@Autowired
 	private YtmYieldCalculationEngine ytmYieldCalculationEngine;
-	
+
 	/**
 	 * Tests IllegalArgumentException should be thrown if SECConfiguration is
 	 * null
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSecuritySECData() throws Exception {
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(null, configuration);
 	}
-	
+
 	/**
 	 * Checks yield value when operationscale is overridden by configuration
 	 * 
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSECConfiguration() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
 		ytmYieldCalculationEngine.calculate(securitySECData, null);
-	} 
-	
-	
+	}
+
 	/**
-	 * Yield calculation test
-	 * r = 0.01375
-	 * market price = 114.7389035
-	 * maturity date = 02/15/2044
-	 * report date = 06/03/2016
-	 * rv = 100
-	 * TIPSInflationaryRatio = 1.0222502
+	 * Yield calculation test r = 0.01375 market price = 114.7389035 maturity
+	 * date = 02/15/2044 report date = 06/03/2016 rv = 100 TIPSInflationaryRatio
+	 * = 1.0222502
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -92,18 +87,15 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),utility.getBigDecimalWithScale7(new BigDecimal(0.00876286944279763)));
-	} 
-	
-	
+		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
+				utility.getBigDecimalWithScale7(new BigDecimal(0.00876286944279763)));
+	}
+
 	/**
-	 * Yield calculation test
-	 * r = 0.0075
-	 * market price = 98.3082779
-	 * maturity date = 02/15/2045
-	 * report date = 06/03/2016
-	 * rv = 100
-	 * TIPSInflationaryRatio = 1.011740011
+	 * Yield calculation test r = 0.0075 market price = 98.3082779 maturity date
+	 * = 02/15/2045 report date = 06/03/2016 rv = 100 TIPSInflationaryRatio =
+	 * 1.011740011
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -120,18 +112,15 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),utility.getBigDecimalWithScale7(new BigDecimal(0.00861600697373704)));
-	} 
-	
-	
+		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
+				utility.getBigDecimalWithScale7(new BigDecimal(0.00861600697373704)));
+	}
+
 	/**
-	 * Yield calculation test
-	 * r = 0.00625
-	 * market price = 104.7185855
-	 * maturity date = 01/15/2026
-	 * report date = 06/03/2016
-	 * rv = 100
-	 * TIPSInflationaryRatio = 1.00267030
+	 * Yield calculation test r = 0.00625 market price = 104.7185855 maturity
+	 * date = 01/15/2026 report date = 06/03/2016 rv = 100 TIPSInflationaryRatio
+	 * = 1.00267030
+	 * 
 	 * @throws Exception
 	 */
 	@Test
@@ -148,24 +137,20 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),utility.getBigDecimalWithScale7(new BigDecimal(0.001595912)));
-	} 
-	
-	
+		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
+				utility.getBigDecimalWithScale7(new BigDecimal(0.001595912)));
+	}
+
 	/**
-	 * Yield calculation test when yield < 0
-	 * Value should be equal to minYield
-	 * make clear price very high
-	 * r = 0.00625
-	 * market price = 104.7185855
-	 * maturity date = 01/15/2026
-	 * report date = 06/03/2016
-	 * rv = 100
+	 * Yield calculation test when yield < 0 Value should be equal to minYield
+	 * make clear price very high r = 0.00625 market price = 104.7185855
+	 * maturity date = 01/15/2026 report date = 06/03/2016 rv = 100
 	 * TIPSInflationaryRatio = 0.001
+	 * 
 	 * @throws Exception
 	 */
 	@Test
-	public void checkYieldCalculationTest4() throws Exception {
+	public void checkYieldCalculationNegativeTest1() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setSecurityRedemptionPrice(utility.getBigDecimalWithScale7(new BigDecimal(100)));
@@ -178,7 +163,8 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),utility.getBigDecimalWithScale7(new BigDecimal(.0000123)));
-	} 
-	
+		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
+				utility.getBigDecimalWithScale7(new BigDecimal(.0000123)));
+	}
+
 }

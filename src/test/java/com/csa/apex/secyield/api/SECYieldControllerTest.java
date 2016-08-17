@@ -68,7 +68,7 @@ public class SECYieldControllerTest {
 	 * @throws SECYieldException
 	 * @throws IllegalArgumentException
 	 * @throws SECYieldException
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	@Before
 	public void setUp() throws IllegalArgumentException, SECYieldException, ParseException {
@@ -88,7 +88,7 @@ public class SECYieldControllerTest {
 	public void getSecuritySECDataTest() throws Exception {
 		this.mockMvc.perform(get("/securitySECData").param("businessDate", "2016-05-02")).andExpect(status().isOk());
 	}
-	
+
 	/**
 	 * Test calcualtedSecuritySECData
 	 * 
@@ -96,9 +96,8 @@ public class SECYieldControllerTest {
 	 */
 	@Test
 	public void getCalculatedSecuritySECDataTest() throws Exception {
-		this.mockMvc.perform(get("/calcualtedSecuritySECData").param("businessDate", "2016-05-02")).andExpect(status().isOk());
+		this.mockMvc.perform(get("/calcualtedSecuritySECData").param("businessDate", "2016-05-02"))
+				.andExpect(status().isOk());
 	}
-	
-	
 
 }

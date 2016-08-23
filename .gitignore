@@ -1,6 +1,7 @@
-logging.log
-/target
+*/logging.log
 .DS_Store
-.settings
-bin
-target
+*/.settings
+*/bin
+*/target
+*/.classpath
+*/.project

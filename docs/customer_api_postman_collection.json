@@ -1,0 +1,73 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Customer API",
+		"_postman_id": "7d4f7e82-79db-5b61-1972-a921576c0091",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8081/customerSecuritySECData?businessDate=2016-18-08",
+			"request": {
+				"url": "http://localhost:8081/customerSecuritySECData?businessDate=2016-08-18",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Gets the customer SEC security data (without yield and income calculated)."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/persistSecuritySECData",
+			"request": {
+				"url": "http://localhost:8081/persistSecuritySECData",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"securityIdentifier\":\"security_identifier_test\",\r\n   \"reportDate\":\"2016-21-08\",\r\n   \"securityReferenceData\":{\r\n      \"securityIdentifier\":\"security_identifier_test\",\r\n      \"ivType\":\"iv_type_test\",\r\n      \"securityName\":\"security_name_test\",\r\n      \"finalMaturityDate\":\"2016-21-08\",\r\n      \"securityRedemptionPrice\":10,\r\n      \"interestRt\":10,\r\n      \"defIndicator\":false,\r\n      \"derStepIndicator\":false,\r\n      \"derHybridIndicator\":false,\r\n      \"ioHybridField\":\"io_hybrid_field_test\",\r\n      \"as400RateType\":\"as_400_rate_type_test\"\r\n   },\r\n   \"positionData\":[\r\n      {\r\n         \"securityIdentifier\":\"security_identifier_test\",\r\n         \"portfolioNumber\":10,\r\n         \"reportDate\":\"2016-21-08\",\r\n         \"earnedInflationaryCompensationBase\":10,\r\n         \"accruedIncome\":10,\r\n         \"marketValue\":10,\r\n         \"sharePerAmount\":10,\r\n         \"earnedAmortizationBase\":10,\r\n         \"positionValInflationAdjShare\":10,\r\n         \"derOneDaySecurityIncome\":10\r\n      },\r\n      {\r\n         \"securityIdentifier\":\"security_identifier_test\",\r\n         \"portfolioNumber\":11,\r\n         \"reportDate\":\"2016-21-08\",\r\n         \"earnedInflationaryCompensationBase\":10,\r\n         \"accruedIncome\":10,\r\n         \"marketValue\":10,\r\n         \"sharePerAmount\":10,\r\n         \"earnedAmortizationBase\":10,\r\n         \"positionValInflationAdjShare\":10,\r\n         \"derOneDaySecurityIncome\":10\r\n      },\r\n      {\r\n         \"securityIdentifier\":\"security_identifier_test\",\r\n         \"portfolioNumber\":12,\r\n         \"reportDate\":\"2016-21-08\",\r\n         \"earnedInflationaryCompensationBase\":10,\r\n         \"accruedIncome\":10,\r\n         \"marketValue\":10,\r\n         \"sharePerAmount\":10,\r\n         \"earnedAmortizationBase\":10,\r\n         \"positionValInflationAdjShare\":10,\r\n         \"derOneDaySecurityIncome\":10\r\n      }\r\n   ],\r\n   \"derTIPSInflationaryRatio\":10,\r\n   \"securityPrice\":10,\r\n   \"fxRate\":10\r\n}"
+				},
+				"description": "Persists the calculated SEC security data."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/securitySECDataConfiguration",
+			"request": {
+				"url": "http://localhost:8081/securitySECDataConfiguration",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Gets SEC security config for the calculations in engines."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/calculatedSecuritySECData?businessDate=2016-18-08",
+			"request": {
+				"url": "http://localhost:8081/calculatedSecuritySECData?businessDate=2016-08-18",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Gets the calculated SEC security data."
+			},
+			"response": []
+		}
+	]
+}

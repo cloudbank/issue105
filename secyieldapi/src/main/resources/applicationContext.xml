@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:annotation-config />
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+		<property name="locations">
+			<list>
+				<value>classpath:messages.properties</value>
+				<value>classpath:constants.properties</value>
+			</list>
+
+		</property>
+	</bean>
+
+	<context:component-scan base-package="com.csa.apex.secyield" />
+
+	<!-- Injection for SequenceSecurityCalculationEngine -->
+	<bean id="sequenceSecurityCalculationEngine"
+		class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+		<property name="calculationEngines">
+			<list>
+				<bean
+					class="com.csa.apex.secyield.api.services.impl.engines.CouponYieldCalculationEngine" />
+				<bean
+					class="com.csa.apex.secyield.api.services.impl.engines.CouponIncomeCalculationEngine" />
+			</list>
+		</property>
+
+	</bean>
+
+	<!-- Injection for YtmYieldCalculationEngine -->
+	<bean id="ytmYieldCalculationEngine"
+		class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine">
+		<property name="calculationStep">
+			<value>0.01</value>
+		</property>
+		<property name="binarySearchCount">
+			<value>30</value>
+		</property>
+		<property name="ephsilon">
+			<value>0.000000001</value>
+		</property>
+		<property name="minYield">
+			<value>0.0000123</value>
+		</property>
+	</bean>
+
+	<!-- Injection for CalculationEngineSelector -->
+	<bean id="calculationEngineSelector"
+		class="com.csa.apex.secyield.api.services.impl.engines.CalculationEngineSelector">
+		<property name="calculationEngines">
+			<map>
+				<entry>
+					<key>
+						<value>YTM</value>
+					</key>
+					<bean
+						class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+						<property name="calculationEngines">
+							<list>
+								<bean
+									class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine" />
+								<bean
+									class="com.csa.apex.secyield.api.services.impl.engines.YtmIncomeCalculationEngine" />
+							</list>
+						</property>
+
+					</bean>
+
+				</entry>
+				<entry>
+					<key>
+						<value>COUPON</value>
+					</key>
+					<bean
+						class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+						<property name="calculationEngines">
+							<list>
+								<bean
+									class="com.csa.apex.secyield.api.services.impl.engines.CouponYieldCalculationEngine" />
+								<bean
+									class="com.csa.apex.secyield.api.services.impl.engines.CouponIncomeCalculationEngine" />
+							</list>
+						</property>
+
+					</bean>
+
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- Injection for SECYieldServiceImpl -->
+	<bean id="secYieldServiceImpl"
+		class="com.csa.apex.secyield.api.services.impl.SECYieldServiceImpl">
+		<property name="calculationEngineSelector">
+			<ref bean="calculationEngineSelector" />
+		</property>
+		<property name="restTemplate">
+			<bean class="org.springframework.web.client.RestTemplate" />
+		</property>
+		<property name="configuration">
+			<bean class="com.csa.apex.secyield.entities.SECConfiguration" />
+		</property>
+		<property name="getConfigApiPath">
+			<value>http://localhost:8081/securitySECDataConfiguration</value>
+		</property>
+		<property name="getCustomerDataApiPath">
+			<value>http://localhost:8081/customerSecuritySECData</value>
+		</property>
+		<property name="saveCalculatedSecuritySECDataApiPath">
+			<value>http://localhost:8081/persistSecuritySECData</value>
+		</property>
+		<property name="getCalculatedSecuritySECDataApiPath">
+			<value>http://localhost:8081/calculatedSecuritySECData</value>
+		</property>
+	</bean>
+	
+	<bean id="simpleMappingExceptionResolver"
+			class="com.csa.apex.secyield.exceptions.AJAXExceptionResolver">
+	</bean>
+</beans>

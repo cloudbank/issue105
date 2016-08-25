@@ -4,6 +4,7 @@ Backend:
 - Java 1.8.91
 - Maven 3.3.9
 - Tomcat 8.0.36
+- MySQL
 - SonarCube 5.6
 - SonarScanner 2.6.1
 - EclipseNeon or SpringToolSuite 3.8 (Optional for development)
@@ -12,33 +13,53 @@ Following Dependencies are inbuild in package.json, hence no need to install sep
 - JUnit 4.12
 - Log4j 1.2
 
-# video 
-http://screencast.com/t/LFnurIHWI
+# Video 
+https://www.youtube.com/watch?v=-vxsPC0mS64
 
 # Verification document
-docs/SEC YIELD API AND ENGINES CODE CHALLENGE.docx
+docs/SEC Yield Customer API Code Challenge.pdf
 
 # POSTMAN Script
 docs/sec_yield_api_postman_collection.json
 
 
-# Backend app usage
+# Application setup
 
 - Make sure you have JDK 8 installed and JAVA_HOME is set as path where jdk is installed
 
-- Deployment steps
-	
-	```mvn clean install```
+- Configure the db credentials is `customerapi/src/main/resources/db.properties` and `customerapi/src/main/resources/applicationContext-test.xml`.
 
-	```mvn spring-boot:run```
+- Connect to MySQL
 	
-- To run unit tests, use following command:
+	```mysql -u root -p ``` (enter password)
+- Create “secyield” and “test-secyield” dbs if they doesn't exist
+	
+	```CREATE SCHEMA `secyield` ```
+	```CREATE SCHEMA `test-secyield` ```
+
+
+- In `seccommons` folder, run the following command
+	
+	```mvn clean install ``` 
+- In `customerapi` folder, run the following commands
+	
+	```mvn clean install ``` 
+
+    ```mvn spring-boot:run ``` 
+- Switch to “secyield” db
+	
+	```use secyield ```
+- Populate the db with test data
+	
+	```source <path_to_test_data> ``` (where <path_to_test_data> is the absolute path to test_data/test_data.sql)
+- In `secyieldapi` folder, run the following commands
+	
+	```mvn clean install ``` 
+
+	```mvn spring-boot:run ``` 
+- To run unit tests, use the following command in `seccommons`, `customerapi` and `secyieldapi` folders (note that the Customer API has to be running when executing Public API tests):
 
 	```mvn test```
-	
--	To build war to deploy to any other application server (not required to run with spring boot which has inbuilt application server):
-
-	```mvn install```
 
 - Unit tests are run by default, please use -DskipTests parameter everywhere to skip unit tests, e.g.:
 
@@ -46,7 +67,7 @@ docs/sec_yield_api_postman_collection.json
 
 # SonarCube Code Coverage for backend
 
-- To use SonarCube code coverage, sonar-project.properties is present in the root of this folder.
+- To use SonarCube code coverage, sonar-project.properties is present in the root folders of seccommons, customerapi and secyieldapi modules.
 - Go to this link and download latest version of SonarCube Server and SonarCube Scanner:
 http://www.sonarqube.org/downloads/
 http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner

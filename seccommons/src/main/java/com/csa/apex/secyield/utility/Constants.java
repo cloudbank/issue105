@@ -14,5 +14,5 @@ public interface Constants {
 	/**
 	 * The date format of the REST APIs
 	 */
-	public static final String API_DATE_FORMAT = "yyyy-dd-MM";
+	public static final String API_DATE_FORMAT = "yyyy-MM-dd";
 }

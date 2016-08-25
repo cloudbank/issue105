@@ -3,17 +3,13 @@
  */
 package com.csa.apex.secyield.api.services.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -21,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -37,7 +32,6 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
 import com.csa.apex.secyield.utility.Constants;
-import com.opencsv.CSVWriter;
 
 /**
  * SECYieldServiceImpl implementation of the SECYieldService. Uses pluggable calculation engines to calculate the
@@ -518,56 +512,28 @@ public class SECYieldServiceImpl implements SECYieldService {
 			String businessDate) throws IOException, FileNotFoundException {
 
 		String exportArchiveFileName = EXPORT_FILE_NAME_PREFIX + businessDate + ZIP_EXTENSION;
-		File csvFile = createCSVFile(securitiesArray, businessDate);
-		byte[] buffer = new byte[1024];
-		File exportZipFile = new File(exportArchiveFileName);
-		ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(exportZipFile));
-		ZipEntry ze = new ZipEntry(csvFile.getName());
-		zos.putNextEntry(ze);
-		FileInputStream in = new FileInputStream(csvFile);
-		int len;
-		while ((len = in.read(buffer)) > 0) {
-			zos.write(buffer, 0, len);
-		}
-		in.close();
-		zos.closeEntry();
-		zos.close();
-		InputStream myStream = new FileInputStream(exportZipFile);
+		String csvFileName = EXPORT_FILE_NAME_PREFIX + businessDate + CSV_EXTENSION;
+
 		response.addHeader("Content-disposition", "attachment;filename=" + exportArchiveFileName);
 		response.setContentType(EXPORT_FILE_TYPE);
-		IOUtils.copy(myStream, response.getOutputStream());
-		csvFile.delete();
-		exportZipFile.delete();
-	}
 
-	/**
-	 * Create the export CSV file
-	 * 
-	 * @param securitiesArray
-	 *            the array of security SEC data
-	 * @param businessDate
-	 *            the business date string
-	 * @return the CSV file
-	 * @throws IOException
-	 *             if any IO exception occurs
-	 */
-	private File createCSVFile(SecuritySECData[] securitiesArray, String businessDate) throws IOException {
-		String csvFileName = EXPORT_FILE_NAME_PREFIX + businessDate + CSV_EXTENSION;
-		File file = new File(csvFileName);
-		FileWriter fileWriter = new FileWriter(file);
-		CSVWriter writer = new CSVWriter(fileWriter);
-		writer.writeNext(EXPORT_FIELD_NAMES);
-		for (int securityDataIdx = 0; securityDataIdx < securitiesArray.length; securityDataIdx++) {
-			SecuritySECData securitySECData = securitiesArray[securityDataIdx];
+		ZipOutputStream zos = new ZipOutputStream(response.getOutputStream());
+		zos.putNextEntry(new ZipEntry(csvFileName));
+
+		zos.write((Arrays.stream(EXPORT_FIELD_NAMES).collect(Collectors.joining(",")) + "\n").getBytes());
+
+		for (SecuritySECData securitySECData : securitiesArray) {
 			final PositionData[] positionData = securitySECData.getPositionData();
 			if (positionData != null) {
-				for (int positionDataIdx = 0; positionDataIdx < positionData.length; positionDataIdx++) {
-					writer.writeNext(convertPositionDataToCSVRow(securitySECData, positionData[positionDataIdx]));
+				for (PositionData item : positionData) {
+					String[] csvColumns = convertPositionDataToCSVRow(securitySECData, item);
+					String csvLine = Arrays.stream(csvColumns).collect(Collectors.joining(",")) + "\n";
+					zos.write(csvLine.getBytes());
 				}
 			}
 		}
-		writer.close();
-		return file;
+		zos.closeEntry();
+		zos.close();
 	}
 
 	/**

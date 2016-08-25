@@ -14,7 +14,7 @@ Following Dependencies are inbuild in package.json, hence no need to install sep
 - Log4j 1.2
 
 # Video 
-http://screencast.com/t/LFnurIHWI
+https://www.youtube.com/watch?v=-vxsPC0mS64
 
 # Verification document
 docs/SEC Yield Customer API Code Challenge.pdf

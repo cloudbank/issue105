@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Customer API",
-		"_postman_id": "72066b2a-d649-4fc9-080a-19927670d7af",
+		"_postman_id": "7d4f7e82-79db-5b61-1972-a921576c0091",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -10,7 +10,7 @@
 		{
 			"name": "http://localhost:8081/customerSecuritySECData?businessDate=2016-18-08",
 			"request": {
-				"url": "http://localhost:8081/customerSecuritySECData?businessDate=2016-18-08",
+				"url": "http://localhost:8081/customerSecuritySECData?businessDate=2016-08-18",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -58,7 +58,7 @@
 		{
 			"name": "http://localhost:8081/calculatedSecuritySECData?businessDate=2016-18-08",
 			"request": {
-				"url": "http://localhost:8081/calculatedSecuritySECData?businessDate=2016-18-08",
+				"url": "http://localhost:8081/calculatedSecuritySECData?businessDate=2016-08-18",
 				"method": "GET",
 				"header": [],
 				"body": {

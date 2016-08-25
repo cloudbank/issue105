@@ -51,7 +51,7 @@ public class SECYieldController {
 	/**
 	 * The max number of security data to be retrieved
 	 */
-	@Value("${secyieldserviceimpl.maxNumberOfSecurityData}")
+	@Value("${secyieldcontroller.maxNumberOfSecurityData}")
 	private Integer maxNumberOfSecurityData;
 
 	/**

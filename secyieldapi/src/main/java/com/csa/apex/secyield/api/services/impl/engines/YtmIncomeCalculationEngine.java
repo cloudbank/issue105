@@ -129,7 +129,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 				ai = positionData.getAccruedIncome();
 				inflInc = positionData.getEarnedInflationaryCompensationBase();
 
-				if (y.divide(fx/* , operationScale, BigDecimal.ROUND_HALF_UP */).compareTo(
+				if (y.divide(fx , operationScale, BigDecimal.ROUND_HALF_UP).compareTo(
 						BigDecimal.valueOf(yFxThreshold).setScale(operationScale, BigDecimal.ROUND_HALF_UP)) > 0)
 					income = mv.add(ai)
 							.multiply(

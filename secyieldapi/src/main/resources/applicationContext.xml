@@ -12,6 +12,7 @@
 			<list>
 				<value>classpath:messages.properties</value>
 				<value>classpath:constants.properties</value>
+				<value>classpath:calculationtestdata.properties</value>
 			</list>
 
 		</property>
@@ -63,8 +64,7 @@
 						class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
 						<property name="calculationEngines">
 							<list>
-								<bean
-									class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine" />
+								<ref bean="ytmYieldCalculationEngine" />
 								<bean
 									class="com.csa.apex.secyield.api.services.impl.engines.YtmIncomeCalculationEngine" />
 							</list>
@@ -121,6 +121,11 @@
 		</property>
 	</bean>
 	
+	<!--  Common utility test data parser info -->
+	<bean class="com.csa.apex.secyield.utility.CommonUtility">
+		<property name="fileName" value="${calculationtestdata.filename}" />
+		<property name="columns" value="${calculationtestdata.columns}" />
+	</bean>
 	<bean id="simpleMappingExceptionResolver"
 			class="com.csa.apex.secyield.exceptions.AJAXExceptionResolver">
 	</bean>

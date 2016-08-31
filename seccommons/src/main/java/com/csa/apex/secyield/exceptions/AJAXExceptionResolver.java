@@ -4,6 +4,7 @@
 package com.csa.apex.secyield.exceptions;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +40,11 @@ public class AJAXExceptionResolver extends SimpleMappingExceptionResolver {
 		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
 			try {
 				if (exception instanceof IllegalArgumentException) {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, exception.getMessage());
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST, getMessage("INVALID_REQUEST"));
 				} else if (exception instanceof EmptyResultDataAccessException) {
-					response.sendError(HttpServletResponse.SC_NOT_FOUND, exception.getMessage());
+					response.sendError(HttpServletResponse.SC_NOT_FOUND, getMessage("EMPTY_RESULT_ON_REQUEST"));
 				} else {
-					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, exception.getMessage());
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, getMessage("UNKNOWN_ERROR_ON_REQUEST"));
 				}
 			} catch (IOException e) {
 				logger.error("An I/O error occured while resolving exception.");
@@ -52,5 +53,10 @@ public class AJAXExceptionResolver extends SimpleMappingExceptionResolver {
 		} else {
 			return super.resolveException(request, response, handler, exception);
 		}
+	}
+
+	private String getMessage(String key) {
+		ResourceBundle messages = ResourceBundle.getBundle("errorMessage");
+		return messages.getString(key);
 	}
 }

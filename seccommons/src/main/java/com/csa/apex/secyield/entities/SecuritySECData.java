@@ -4,6 +4,7 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -377,5 +378,25 @@ public class SecuritySECData {
 				.append(derOneDaySecurityYield).append(derRedemptionDate).append(derRedemptionPrice)
 				.append(derSecurityType).append(derTIPSInflationaryRatio).append(securityPrice).append(fxRate)
 				.toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "SecuritySECData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", reportDate=" + reportDate +
+				", securityReferenceData=" + securityReferenceData +
+				", derCleanPrice=" + derCleanPrice +
+				", positionData=" + Arrays.toString(positionData) +
+				", derYieldCalcEngine='" + derYieldCalcEngine + '\'' +
+				", derIncomeCalcEngine='" + derIncomeCalcEngine + '\'' +
+				", derOneDaySecurityYield=" + derOneDaySecurityYield +
+				", derRedemptionDate=" + derRedemptionDate +
+				", derRedemptionPrice=" + derRedemptionPrice +
+				", derSecurityType='" + derSecurityType + '\'' +
+				", derTIPSInflationaryRatio=" + derTIPSInflationaryRatio +
+				", securityPrice=" + securityPrice +
+				", fxRate=" + fxRate +
+				'}';
 	}
 }

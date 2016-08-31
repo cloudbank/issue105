@@ -328,4 +328,22 @@ public class SecurityReferenceData {
 				.append(derStepIndicator).append(derHybridIndicator).append(ioHybridField).append(as400RateType)
 				.append(prospectiveMethod).toHashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "SecurityReferenceData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", ivType='" + ivType + '\'' +
+				", securityName='" + securityName + '\'' +
+				", finalMaturityDate=" + finalMaturityDate +
+				", securityRedemptionPrice=" + securityRedemptionPrice +
+				", interestRt=" + interestRt +
+				", defIndicator=" + defIndicator +
+				", derStepIndicator=" + derStepIndicator +
+				", derHybridIndicator=" + derHybridIndicator +
+				", ioHybridField='" + ioHybridField + '\'' +
+				", as400RateType='" + as400RateType + '\'' +
+				", prospectiveMethod='" + prospectiveMethod + '\'' +
+				'}';
+	}
 }

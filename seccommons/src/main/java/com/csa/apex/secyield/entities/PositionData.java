@@ -305,4 +305,21 @@ public class PositionData {
 				.append(sharePerAmount).append(earnedAmortizationBase).append(positionValInflationAdjShare)
 				.append(derOneDaySecurityIncome).toHashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "PositionData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", portfolioNumber=" + portfolioNumber +
+				", portfolioName='" + portfolioName + '\'' +
+				", reportDate=" + reportDate +
+				", earnedInflationaryCompensationBase=" + earnedInflationaryCompensationBase +
+				", accruedIncome=" + accruedIncome +
+				", marketValue=" + marketValue +
+				", sharePerAmount=" + sharePerAmount +
+				", earnedAmortizationBase=" + earnedAmortizationBase +
+				", positionValInflationAdjShare=" + positionValInflationAdjShare +
+				", derOneDaySecurityIncome=" + derOneDaySecurityIncome +
+				'}';
+	}
 }

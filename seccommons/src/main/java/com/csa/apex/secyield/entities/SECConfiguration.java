@@ -84,4 +84,12 @@ public class SECConfiguration {
 	public int hashCode() {
 		return new HashCodeBuilder().append(operationScale).append(roundingMode).toHashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "SECConfiguration{" +
+				"operationScale=" + operationScale +
+				", roundingMode=" + roundingMode +
+				'}';
+	}
 }

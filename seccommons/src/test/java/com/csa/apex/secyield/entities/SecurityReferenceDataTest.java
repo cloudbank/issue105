@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
+ */
 package com.csa.apex.secyield.entities;
 
 import org.junit.Test;

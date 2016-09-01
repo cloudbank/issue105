@@ -56,7 +56,7 @@ public class SecuritySECDataTest {
         securitySECData.setSecurityPrice(new BigDecimal(1111.11));
         securitySECData.setFxRate(new BigDecimal(2222.50));
 
-        String expected = "SecuritySECData{securityIdentifier='1111', reportDate=Fri Jan 15 00:00:00 PHT 2016, securityReferenceData=null, derCleanPrice=1111, positionData=[PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=Fri Jan 15 00:00:00 PHT 2016, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, sharePerAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShare=1111, derOneDaySecurityIncome=1111}], derYieldCalcEngine='1111', derIncomeCalcEngine='1111', derOneDaySecurityYield=1111, derRedemptionDate=Fri Jan 15 00:00:00 PHT 2016, derRedemptionPrice=1111, derSecurityType='SEC1111', derTIPSInflationaryRatio=1111, securityPrice=1111.109999999999899955582804977893829345703125, fxRate=2222.5}";
+        String expected = "SecuritySECData{securityIdentifier='1111', reportDate=01/15/2016, securityReferenceData=null, derCleanPrice=1111, positionData=[PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=01/15/2016, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, sharePerAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShare=1111, derOneDaySecurityIncome=1111}], derYieldCalcEngine='1111', derIncomeCalcEngine='1111', derOneDaySecurityYield=1111, derRedemptionDate=01/15/2016, derRedemptionPrice=1111, derSecurityType='SEC1111', derTIPSInflationaryRatio=1111, securityPrice=1111.109999999999899955582804977893829345703125, fxRate=2222.5}";
 
         assertEquals(expected, securitySECData.toString());
     }

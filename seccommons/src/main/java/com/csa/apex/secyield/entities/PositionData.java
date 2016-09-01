@@ -4,6 +4,8 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -308,11 +310,12 @@ public class PositionData {
 
 	@Override
 	public String toString() {
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		return "PositionData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", portfolioNumber=" + portfolioNumber +
 				", portfolioName='" + portfolioName + '\'' +
-				", reportDate=" + reportDate +
+				", reportDate=" + formatter.format(reportDate) +
 				", earnedInflationaryCompensationBase=" + earnedInflationaryCompensationBase +
 				", accruedIncome=" + accruedIncome +
 				", marketValue=" + marketValue +

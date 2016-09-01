@@ -43,7 +43,7 @@ public class SecurityReferenceDataTest {
         securityReferenceData.setAs400RateType("AS1111");
         securityReferenceData.setProspectiveMethod("PROS1111");
 
-        String expected = "SecurityReferenceData{securityIdentifier='1111', ivType='1111', securityName='SEC1111', finalMaturityDate=Fri Jan 15 00:00:00 PHT 2016, securityRedemptionPrice=1111, interestRt=1.5, defIndicator=false, derStepIndicator=true, derHybridIndicator=true, ioHybridField='IO1111', as400RateType='AS1111', prospectiveMethod='PROS1111'}";
+        String expected = "SecurityReferenceData{securityIdentifier='1111', ivType='1111', securityName='SEC1111', finalMaturityDate=01/15/2016, securityRedemptionPrice=1111, interestRt=1.5, defIndicator=false, derStepIndicator=true, derHybridIndicator=true, ioHybridField='IO1111', as400RateType='AS1111', prospectiveMethod='PROS1111'}";
 
         assertEquals(expected, securityReferenceData.toString());
     }

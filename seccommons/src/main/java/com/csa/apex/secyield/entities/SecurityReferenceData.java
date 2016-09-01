@@ -4,6 +4,8 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -331,11 +333,12 @@ public class SecurityReferenceData {
 
 	@Override
 	public String toString() {
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		return "SecurityReferenceData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", ivType='" + ivType + '\'' +
 				", securityName='" + securityName + '\'' +
-				", finalMaturityDate=" + finalMaturityDate +
+				", finalMaturityDate=" + formatter.format(finalMaturityDate) +
 				", securityRedemptionPrice=" + securityRedemptionPrice +
 				", interestRt=" + interestRt +
 				", defIndicator=" + defIndicator +

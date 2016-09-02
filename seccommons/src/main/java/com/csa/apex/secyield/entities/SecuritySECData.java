@@ -4,6 +4,9 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -377,5 +380,26 @@ public class SecuritySECData {
 				.append(derOneDaySecurityYield).append(derRedemptionDate).append(derRedemptionPrice)
 				.append(derSecurityType).append(derTIPSInflationaryRatio).append(securityPrice).append(fxRate)
 				.toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		return "SecuritySECData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", reportDate=" + formatter.format(reportDate) +
+				", securityReferenceData=" + securityReferenceData +
+				", derCleanPrice=" + derCleanPrice +
+				", positionData=" + Arrays.toString(positionData) +
+				", derYieldCalcEngine='" + derYieldCalcEngine + '\'' +
+				", derIncomeCalcEngine='" + derIncomeCalcEngine + '\'' +
+				", derOneDaySecurityYield=" + derOneDaySecurityYield +
+				", derRedemptionDate=" + formatter.format(derRedemptionDate) +
+				", derRedemptionPrice=" + derRedemptionPrice +
+				", derSecurityType='" + derSecurityType + '\'' +
+				", derTIPSInflationaryRatio=" + derTIPSInflationaryRatio +
+				", securityPrice=" + securityPrice +
+				", fxRate=" + fxRate +
+				'}';
 	}
 }

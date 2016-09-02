@@ -4,6 +4,8 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -327,5 +329,24 @@ public class SecurityReferenceData {
 				.append(finalMaturityDate).append(securityRedemptionPrice).append(interestRt).append(defIndicator)
 				.append(derStepIndicator).append(derHybridIndicator).append(ioHybridField).append(as400RateType)
 				.append(prospectiveMethod).toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		return "SecurityReferenceData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", ivType='" + ivType + '\'' +
+				", securityName='" + securityName + '\'' +
+				", finalMaturityDate=" + formatter.format(finalMaturityDate) +
+				", securityRedemptionPrice=" + securityRedemptionPrice +
+				", interestRt=" + interestRt +
+				", defIndicator=" + defIndicator +
+				", derStepIndicator=" + derStepIndicator +
+				", derHybridIndicator=" + derHybridIndicator +
+				", ioHybridField='" + ioHybridField + '\'' +
+				", as400RateType='" + as400RateType + '\'' +
+				", prospectiveMethod='" + prospectiveMethod + '\'' +
+				'}';
 	}
 }

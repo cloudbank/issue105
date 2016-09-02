@@ -4,6 +4,8 @@
 package com.csa.apex.secyield.entities;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -304,5 +306,23 @@ public class PositionData {
 				.append(reportDate).append(earnedInflationaryCompensationBase).append(accruedIncome).append(marketValue)
 				.append(sharePerAmount).append(earnedAmortizationBase).append(positionValInflationAdjShare)
 				.append(derOneDaySecurityIncome).toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		return "PositionData{" +
+				"securityIdentifier='" + securityIdentifier + '\'' +
+				", portfolioNumber=" + portfolioNumber +
+				", portfolioName='" + portfolioName + '\'' +
+				", reportDate=" + formatter.format(reportDate) +
+				", earnedInflationaryCompensationBase=" + earnedInflationaryCompensationBase +
+				", accruedIncome=" + accruedIncome +
+				", marketValue=" + marketValue +
+				", sharePerAmount=" + sharePerAmount +
+				", earnedAmortizationBase=" + earnedAmortizationBase +
+				", positionValInflationAdjShare=" + positionValInflationAdjShare +
+				", derOneDaySecurityIncome=" + derOneDaySecurityIncome +
+				'}';
 	}
 }

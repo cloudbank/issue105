@@ -120,7 +120,7 @@ public class SECYieldController {
 	 * @return already calculated securitySECData;
 	 * @throws SECYieldException
 	 */
-	@RequestMapping(value = "calcualtedSecuritySECData", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "calculatedSecuritySECData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public List<SecuritySECData> getCalculatedSecuritySECData(

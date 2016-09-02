@@ -43,7 +43,7 @@ public class Application {
 				// add allowed origins here
 				// currently, it allows all origins
 				registry.addMapping("/securitySECData").allowedOrigins("*").allowedMethods("*");
-				registry.addMapping("/calcualtedSecuritySECData").allowedOrigins("*").allowedMethods("*");
+				registry.addMapping("/calculatedSecuritySECData").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/exportCalculatedSecuritySECData").allowedOrigins("*").allowedMethods("*");
 			}
 		};

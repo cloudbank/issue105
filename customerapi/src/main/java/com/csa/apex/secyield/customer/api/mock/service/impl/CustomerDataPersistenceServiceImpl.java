@@ -113,22 +113,22 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	/**
 	 * The table name of calculated_position_data
 	 */
-	private static final String TABLE_CALCULATED_POSITION_DATA = "calculated_position_data";
+	public static final String TABLE_CALCULATED_POSITION_DATA = "calculated_position_data";
 
 	/**
 	 * The table name of calculated_security_sec_data
 	 */
-	private static final String TABLE_CALCULATED_SECURITY_SEC_DATA = "calculated_security_sec_data";
+	public static final String TABLE_CALCULATED_SECURITY_SEC_DATA = "calculated_security_sec_data";
 
 	/**
 	 * The table name of customer_position_data
 	 */
-	private static final String TABLE_CUSTOMER_POSITION_DATA = "customer_position_data";
+	public static final String TABLE_CUSTOMER_POSITION_DATA = "customer_position_data";
 
 	/**
 	 * The table name of customer_security_sec_data
 	 */
-	private static final String TABLE_CUSTOMER_SECURITY_SEC_DATA = "customer_security_sec_data";
+	public static final String TABLE_CUSTOMER_SECURITY_SEC_DATA = "customer_security_sec_data";
 
 	/**
 	 * The select query for retrieving all calculated security SEC data with their position data

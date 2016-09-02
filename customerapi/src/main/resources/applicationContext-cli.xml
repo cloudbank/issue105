@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:annotation-config />
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+				<value>classpath:messages.properties</value>
+				<value>classpath:constants.properties</value>
+			</list>
+
+		</property>
+	</bean>
+
+	<!-- dataSource configuration -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+	</bean>
+
+	<!-- jdbcTemplate uses dataSource -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Initialization for TransactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Injection for CustomerDataPersistenceServiceImpl -->
+	<bean id="customerDataPersistenceServiceImpl"
+		class="com.csa.apex.secyield.customer.api.mock.service.impl.CustomerDataPersistenceServiceImpl">
+		<property name="secConfiguration">
+			<bean class="com.csa.apex.secyield.entities.SECConfiguration">
+				<property name="operationScale" value="${operationScale}" />
+				<property name="roundingMode" value="${roundingMode}" />
+			</bean>
+		</property>
+	</bean>
+</beans>

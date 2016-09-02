@@ -44,7 +44,12 @@ docs/sec_yield_api_postman_collection.json
 - In `customerapi` folder, run the following commands
 	
 	```mvn clean install ``` 
-
+	Import data from excel
+    ```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--excel absolute path of test_data\Phase1TestData.xlsx"``` 
+	You can clean up calculatiion table by passing --clean or -c options
+	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--clean --excel absolute path of test_data\Phase1TestData.xlsx"``` 
+	You can also pass path of mapping properties for excel if excel will change order of columns
+	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--clean --excel absolute path of test_data\Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```
     ```mvn spring-boot:run ``` 
 - Switch to “secyield” db
 	

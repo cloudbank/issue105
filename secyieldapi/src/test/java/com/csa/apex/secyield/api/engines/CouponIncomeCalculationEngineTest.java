@@ -1,12 +1,13 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield.api.services.impl.engines;
+package com.csa.apex.secyield.api.engines;
 
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
+import com.csa.apex.secyield.api.engines.impl.CouponIncomeCalculationEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,13 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.csa.apex.secyield.Application;
 import com.csa.apex.secyield.entities.PositionData;
 import com.csa.apex.secyield.entities.SECConfiguration;
-import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.utility.TestUtility;
 
 /**
- * Test class for the SequenceSecurityCalculationEngine.
+ * Test class for the CouponIncomeCalculationEngine.
  *
- * @see SequenceSecurityCalculationEngine
+ * @see CouponIncomeCalculationEngine
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
@@ -33,8 +33,7 @@ import com.csa.apex.secyield.utility.TestUtility;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class SequenceSecurityCalculationEngineTest {
-
+public class CouponIncomeCalculationEngineTest {
 	/**
 	 * Utility class
 	 */
@@ -42,10 +41,10 @@ public class SequenceSecurityCalculationEngineTest {
 	private TestUtility utility;
 
 	/**
-	 * SequenceSecurityCalculationEngine object
+	 * CouponIncomeCalculationEngine object
 	 */
 	@Autowired
-	private SequenceSecurityCalculationEngine sequenceSecurityCalculationEngine;
+	private CouponIncomeCalculationEngine couponIncomeCalculationEngine;
 
 	/**
 	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
@@ -55,7 +54,7 @@ public class SequenceSecurityCalculationEngineTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSecuritySECData() throws Exception {
 		SECConfiguration configuration = new SECConfiguration();
-		sequenceSecurityCalculationEngine.calculate(null, configuration);
+		couponIncomeCalculationEngine.calculate(null, configuration);
 	}
 
 	/**
@@ -66,32 +65,51 @@ public class SequenceSecurityCalculationEngineTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSECConfiguration() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
-		sequenceSecurityCalculationEngine.calculate(securitySECData, null);
+		couponIncomeCalculationEngine.calculate(securitySECData, null);
 	}
 
 	/**
-	 * Checks yield and income of coupon type Coupon Engines are automatically injected through bean Calculations are
-	 * already tested in independent engine unit tests Only call to engine calculation is checked
+	 * Checks coupon income value
+	 * 
+	 * Sh = 7000000 Y = 0.049592404 FX = 1 Am = -45.69 Income = 918.61
 	 * 
 	 * @throws Exception
 	 */
-
 	@Test
-	public void checkCouponYieldIncomeCalculation() throws Exception {
+	public void checkIncomeCalculationTest1() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
-		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
-		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.049592404)));
-		securitySECData.setSecurityReferenceData(securityReferenceData);
 		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
+		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.049592404)));
 		PositionData positionData = new PositionData();
 		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(-45.69)));
 		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();
-		sequenceSecurityCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getDerOneDaySecurityYield(), securityReferenceData.getInterestRt());
+		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
 				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+	}
+
+	/**
+	 * Checks coupon income value
+	 * 
+	 * Sh = 4900000 Y = 0.004199982 FX = 1 Am = 0 Income = 57.17
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void checkIncomeCalculationTest2() throws Exception {
+		SecuritySECData securitySECData = new SecuritySECData();
+		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
+		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.004199982)));
+		PositionData positionData = new PositionData();
+		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(4900000)));
+		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(0)));
+		securitySECData.setPositionData(new PositionData[] { positionData });
+		SECConfiguration configuration = new SECConfiguration();
+		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
+		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(57.17).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
 
 }

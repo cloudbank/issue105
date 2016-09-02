@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield.api.services.impl.engines;
+package com.csa.apex.secyield.api.engines.impl;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.csa.apex.secyield.api.services.impl.CalculationEngine;
+import com.csa.apex.secyield.api.engines.CalculationEngine;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;

@@ -22,13 +22,13 @@
 
 	<!-- Injection for SequenceSecurityCalculationEngine -->
 	<bean id="sequenceSecurityCalculationEngine"
-		class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+		class="com.csa.apex.secyield.api.engines.impl.SequenceSecurityCalculationEngine">
 		<property name="calculationEngines">
 			<list>
 				<bean
-					class="com.csa.apex.secyield.api.services.impl.engines.CouponYieldCalculationEngine" />
+					class="com.csa.apex.secyield.api.engines.impl.CouponYieldCalculationEngine" />
 				<bean
-					class="com.csa.apex.secyield.api.services.impl.engines.CouponIncomeCalculationEngine" />
+					class="com.csa.apex.secyield.api.engines.impl.CouponIncomeCalculationEngine" />
 			</list>
 		</property>
 
@@ -36,7 +36,7 @@
 
 	<!-- Injection for YtmYieldCalculationEngine -->
 	<bean id="ytmYieldCalculationEngine"
-		class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine">
+		class="com.csa.apex.secyield.api.engines.impl.YtmYieldCalculationEngine">
 		<property name="calculationStep">
 			<value>0.01</value>
 		</property>
@@ -53,7 +53,7 @@
 
 	<!-- Injection for CalculationEngineSelector -->
 	<bean id="calculationEngineSelector"
-		class="com.csa.apex.secyield.api.services.impl.engines.CalculationEngineSelector">
+		class="com.csa.apex.secyield.api.engines.impl.CalculationEngineSelector">
 		<property name="calculationEngines">
 			<map>
 				<entry>
@@ -61,12 +61,12 @@
 						<value>YTM</value>
 					</key>
 					<bean
-						class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+						class="com.csa.apex.secyield.api.engines.impl.SequenceSecurityCalculationEngine">
 						<property name="calculationEngines">
 							<list>
 								<ref bean="ytmYieldCalculationEngine" />
 								<bean
-									class="com.csa.apex.secyield.api.services.impl.engines.YtmIncomeCalculationEngine" />
+									class="com.csa.apex.secyield.api.engines.impl.YtmIncomeCalculationEngine" />
 							</list>
 						</property>
 
@@ -78,13 +78,13 @@
 						<value>COUPON</value>
 					</key>
 					<bean
-						class="com.csa.apex.secyield.api.services.impl.engines.SequenceSecurityCalculationEngine">
+						class="com.csa.apex.secyield.api.engines.impl.SequenceSecurityCalculationEngine">
 						<property name="calculationEngines">
 							<list>
 								<bean
-									class="com.csa.apex.secyield.api.services.impl.engines.CouponYieldCalculationEngine" />
+									class="com.csa.apex.secyield.api.engines.impl.CouponYieldCalculationEngine" />
 								<bean
-									class="com.csa.apex.secyield.api.services.impl.engines.CouponIncomeCalculationEngine" />
+									class="com.csa.apex.secyield.api.engines.impl.CouponIncomeCalculationEngine" />
 							</list>
 						</property>
 

@@ -1,32 +1,35 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield.api.services.impl.engines;
+package com.csa.apex.secyield.api.engines.impl;
 
-import java.math.BigDecimal;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.csa.apex.secyield.api.services.impl.CalculationEngine;
+import com.csa.apex.secyield.api.engines.CalculationEngine;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
+import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
- * CouponYieldCalculationEngine
+ * SequenceSecurityCalculationEngine
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
 @Component
-public class CouponYieldCalculationEngine implements CalculationEngine {
+public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	/**
 	 * logger class instance
 	 */
-	private final Logger logger = Logger.getLogger(CouponYieldCalculationEngine.class);
+	private final Logger logger = Logger.getLogger(SequenceSecurityCalculationEngine.class);
 
 	/**
 	 * Illegal Argument Exception Message
@@ -41,31 +44,45 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	private String calculateMethodName;
 
 	/**
+	 * Configuration exception message
+	 */
+	@Value("${messages.configurationargumentexception}")
+	private String configurationArgumentExceptionMessage;
+
+	/**
 	 * Error log message format
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * Calculation engine name
+	 * list of calculation engines to be executed in sequence
 	 */
-	public static final String ENGINE_NAME = "CouponYieldCalculationEngine";
-
-	/**
-	 * The scale for the BigDecimal operations. Has the default value.
-	 */
-	private int operationScale = 7;
-
-	/**
-	 * Default Rounding mode
-	 */
-	private int roundingMode = 4;
+	private List<CalculationEngine> calculationEngines;
 
 	/**
 	 * Constructor
 	 */
-	public CouponYieldCalculationEngine() {
+	public SequenceSecurityCalculationEngine() {
 		// default constructor
+	}
+
+	/**
+	 * Getter for calculationEngines
+	 * 
+	 * @return calculationEngines
+	 */
+	public List<CalculationEngine> getCalculationEngines() {
+		return calculationEngines;
+	}
+
+	/**
+	 * Setter for calculationEngines
+	 * 
+	 * @param calculationEngines
+	 */
+	public void setCalculationEngines(List<CalculationEngine> calculationEngines) {
+		this.calculationEngines = calculationEngines;
 	}
 
 	/**
@@ -82,16 +99,13 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuraion object and override the operationScale default value
-	 * 
-	 * @param configuration
-	 *            the configuration object
+	 * Checks beans are injected properly on postconstruct
 	 */
-	private void setConfiguration(SECConfiguration configuration) {
-		int passedOperationScale = configuration.getOperationScale();
-		int passedRoundingMode = configuration.getRoundingMode();
-		operationScale = passedOperationScale != 0 ? passedOperationScale : operationScale;
-		roundingMode = passedRoundingMode != 0 ? passedRoundingMode : roundingMode;
+	@PostConstruct
+	protected void checkConfiguration() {
+		if (calculationEngines == null || calculationEngines.isEmpty()) {
+			throw new ConfigurationException(configurationArgumentExceptionMessage);
+		}
 	}
 
 	/**
@@ -101,6 +115,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	 * @param securitySECData
 	 * @param configuration
 	 * @return securitySECData with calculated result
+	 * 
 	 * @throws CalculationException
 	 */
 	@Override
@@ -110,15 +125,15 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 			logger.error(String.format(logErrorFormat, calculateMethodName, illegalArgumentExceptionMessage));
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
-		setConfiguration(configuration);
 		try {
-			BigDecimal yield = securitySECData.getSecurityReferenceData().getInterestRt().setScale(operationScale,
-					roundingMode);
-			securitySECData.setDerOneDaySecurityYield(yield);
-			return securitySECData;
-		} catch (Exception e) {
-			logger.error(String.format(logErrorFormat, calculateMethodName, e.getMessage()));
-			throw new CalculationException(e.getMessage(), e);
+			SecuritySECData updatedSecuritySECData = new SecuritySECData();
+			for (CalculationEngine calcEngine : calculationEngines) {
+				updatedSecuritySECData = calcEngine.calculate(securitySECData, configuration);
+			}
+			return updatedSecuritySECData;
+		} catch (Exception ex) {
+			logger.error(String.format(logErrorFormat, calculateMethodName, ex.getMessage()));
+			throw new CalculationException(ex.getMessage(), ex);
 		}
 	}
 }

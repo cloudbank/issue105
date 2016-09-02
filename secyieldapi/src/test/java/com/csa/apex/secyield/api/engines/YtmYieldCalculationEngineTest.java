@@ -1,13 +1,14 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield.api.services.impl.engines;
+package com.csa.apex.secyield.api.engines;
 
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
+import com.csa.apex.secyield.api.engines.impl.YtmYieldCalculationEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

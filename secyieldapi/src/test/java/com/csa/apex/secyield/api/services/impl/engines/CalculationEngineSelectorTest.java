@@ -103,7 +103,7 @@ public class CalculationEngineSelectorTest {
 		SecuritySECData securitySECData = new SecuritySECData();
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setDerStepIndicator(false);
-		securityReferenceData.setDerHybridIndicator(true);
+		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("UNKNOWN");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
 		SECConfiguration configuration = new SECConfiguration();

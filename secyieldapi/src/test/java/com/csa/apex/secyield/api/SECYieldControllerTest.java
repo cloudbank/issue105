@@ -102,14 +102,14 @@ public class SECYieldControllerTest {
 	}
 
 	/**
-	 * Test calcualtedSecuritySECData
+	 * Test calculatedSecuritySECData
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
 	 */
 	@Test
 	public void getCalculatedSecuritySECDataTest() throws Exception {
-		mockMvc.perform(get("/calcualtedSecuritySECData").param("businessDate", "2016-05-02"))
+		mockMvc.perform(get("/calculatedSecuritySECData").param("businessDate", "2016-05-02"))
 				.andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON_CONTENT_TYPE));
 	}
 

@@ -359,7 +359,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 				try {
 					processSingleSecurity(s);
 				} catch (SECYieldException e) {
-					logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+					logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()), e);
 					isProcessed = false;
 				}
 			});

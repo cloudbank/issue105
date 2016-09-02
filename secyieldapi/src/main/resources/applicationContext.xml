@@ -40,7 +40,7 @@
 		<property name="binarySearchCount">
 			<value>100</value>
 		</property>
-		<property name="ephsilon">
+		<property name="epsilon">
 			<value>0.000000001</value>
 		</property>
 		<property name="minYield">

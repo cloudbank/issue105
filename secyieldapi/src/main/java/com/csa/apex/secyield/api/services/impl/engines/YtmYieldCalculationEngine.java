@@ -4,6 +4,7 @@
 package com.csa.apex.secyield.api.services.impl.engines;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
@@ -281,13 +282,14 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	/**
 	 * Min yield when it is negative
 	 */
-	private double minYield = 0.0000123;
+	private double minYield = -0.02;
+	
 
-	/**
-	 * It is the step to increase the beginning yield in order to find the range of the yield.
-	 */
+    /**
+     * Max yield when it is negative
+     */
+    private double maxYield = 0.02;
 
-	private double calculationStep;
 
 	/**
 	 * It is count to perform binary search. The larger value will result in more precise outcome yield.
@@ -337,23 +339,24 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		this.minYield = minYield;
 	}
 
-	/**
-	 * Getter for calculationStep
-	 * 
-	 * @return calculationStep
-	 */
-	public double getCalculationStep() {
-		return calculationStep;
-	}
 
-	/**
-	 * Setter for calculationStep
-	 * 
-	 * @param calculationStep
-	 */
-	public void setCalculationStep(double calculationStep) {
-		this.calculationStep = calculationStep;
-	}
+    /**
+     * Getter maxYield
+     * 
+     * @return maxYield
+     */
+    public double getMaxYield() {
+        return maxYield;
+    }
+
+    /**
+     * Setter maxYield
+     * 
+     * @param maxYield
+     */
+    public void setMaxYield(double maxYield) {
+        this.maxYield = maxYield;
+    }
 
 	/**
 	 * Getter for binarySearchCount
@@ -484,19 +487,16 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Uses binary search to calculate yield value for which function value is 0
+	 * Uses bisection method to calculate yield value for which function value is 0
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
 	 *            YtmYieldCalculationVariablesDTO object contains value for calculation
-	 * @param yield
-	 *            End yield value for binary search, start yield value is calculated in method using calculationStep
+	 * @param startYield startYield F(startYield) < 0
+	 * @param endYield endYield F(endYield) > 0
 	 * @return yield value
 	 */
-	private BigDecimal binarySearchYield(YtmYieldCalculationVariablesDTO ytmYieldCalculationVariablesDTO,
-			BigDecimal yield) {
-
-		Double startYield = yield.doubleValue() - calculationStep;
-		Double endYield = yield.doubleValue();
+	private BigDecimal bisection(YtmYieldCalculationVariablesDTO ytmYieldCalculationVariablesDTO,
+			Double startYield, Double endYield) {
 		int countSteps = 0;
 		Double mid = (endYield + startYield) / 2;
 		while (endYield > startYield && countSteps < binarySearchCount) {
@@ -509,7 +509,6 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			}
 			countSteps = countSteps + 1;
 		}
-
 		return new BigDecimal(mid);
 
 	}
@@ -526,17 +525,37 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	private BigDecimal getYield(YtmYieldCalculationVariablesDTO ytmYieldCalculationVariablesDTO) {
 		BigDecimal yield = BigDecimal.valueOf(ephsilon);
 		Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, yield);
+		// yield is negative
 		if (funcVal < 0) {
-			yield = BigDecimal.valueOf(minYield);
-		} else {
-			int count = 0;
-			while (funcVal > 0) {
-				yield = yield.add(BigDecimal.valueOf(calculationStep));
-				funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, yield);
-				count = count + 1;
-			}
-
-			yield = binarySearchYield(ytmYieldCalculationVariablesDTO, yield);
+		    // find between -m to 0
+		    yield =  bisection(ytmYieldCalculationVariablesDTO,-1.0 * ytmYieldCalculationVariablesDTO.getFrequency(), -ephsilon);
+		    // if yield < minYield (20%) then return 0.02
+		    if(yield.doubleValue() < minYield)
+		    {
+		        yield = BigDecimal.valueOf(minYield);
+		    }
+		    
+		   
+		}
+		// yield is positive
+		else {
+		    // check yield value at maxYield
+		    Double maxYieldFuncValue = getYieldFormulaVal(ytmYieldCalculationVariablesDTO,BigDecimal.valueOf(maxYield));
+		    // if yield at maxYield < 0 then yield lies between 0 and maxYield
+		    // We can do this when y > = 0 beacause in this case
+		    // d F(y) / d (y) < 0.
+		    // therefore if F(maxYield) > 0 then there will be no y for which F(y) = 0
+		    if(maxYieldFuncValue < 0)
+		    {
+		        // find between 0 and maxYield
+		        yield = bisection(ytmYieldCalculationVariablesDTO, yield.doubleValue(), maxYield);
+		    }
+		    else
+		    {
+		        // else return maxYield
+		        yield = BigDecimal.valueOf(maxYield);
+		    }
+			
 		}
 		return yield;
 	}

@@ -37,18 +37,18 @@
 	<!-- Injection for YtmYieldCalculationEngine -->
 	<bean id="ytmYieldCalculationEngine"
 		class="com.csa.apex.secyield.api.services.impl.engines.YtmYieldCalculationEngine">
-		<property name="calculationStep">
-			<value>0.01</value>
-		</property>
 		<property name="binarySearchCount">
-			<value>30</value>
+			<value>100</value>
 		</property>
 		<property name="ephsilon">
 			<value>0.000000001</value>
 		</property>
 		<property name="minYield">
-			<value>0.0000123</value>
+			<value>-0.2</value>
 		</property>
+		<property name="maxYield">
+            <value>0.2</value>
+        </property>
 	</bean>
 
 	<!-- Injection for CalculationEngineSelector -->

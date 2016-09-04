@@ -141,9 +141,11 @@ public class YtmYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Yield calculation test when yield < 0 Value should be equal to minYield make clear price very high r = 0.00625
-	 * market price = 104.7185855 maturity date = 01/15/2026 report date = 06/03/2016 rv = 100 TIPSInflationaryRatio =
-	 * 0.001
+	 * Yield calculation test when yield < 0 
+	 * r = 0.02375
+	 * market price = 125.4284756 maturity date = 01/15/2017 
+	 * report date = 12/01/2014, rv = 100 
+	 * TIPSInflationaryRatio = 1.18024
 	 * 
 	 * @throws Exception
 	 */
@@ -152,17 +154,17 @@ public class YtmYieldCalculationEngineTest {
 		SecuritySECData securitySECData = new SecuritySECData();
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setSecurityRedemptionPrice(utility.getBigDecimalWithScale7(new BigDecimal(100)));
-		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.00625)));
+		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.02375)));
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-		securityReferenceData.setFinalMaturityDate(formatter.parse("01/15/2026"));
-		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(104.7185855)));
-		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(0.001)));
+		securityReferenceData.setFinalMaturityDate(formatter.parse("01/15/2017"));
+		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(125.4284756)));
+		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(1.18024)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
-		securitySECData.setReportDate(formatter.parse("06/03/2016"));
+		securitySECData.setReportDate(formatter.parse("12/01/2014"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
-				utility.getBigDecimalWithScale7(new BigDecimal(.0000123)));
+				utility.getBigDecimalWithScale7(new BigDecimal(-0.0055940)));
 	}
 
 }

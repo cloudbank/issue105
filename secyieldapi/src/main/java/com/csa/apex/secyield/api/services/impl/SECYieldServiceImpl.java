@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -346,6 +347,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecuritySECData> processSecuritySECData(Date businessDate) throws SECYieldException {
+		List<SecuritySECData> failedSecuritySECDataList = new ArrayList<SecuritySECData>();
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCustomerDataApiPath)
 					.queryParam("businessDate", dateFormat.format(businessDate));
@@ -360,6 +362,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 					processSingleSecurity(s);
 				} catch (SECYieldException e) {
 					logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()), e);
+					failedSecuritySECDataList.add(s);
 					isProcessed = false;
 				}
 			});
@@ -373,10 +376,12 @@ public class SECYieldServiceImpl implements SECYieldService {
 
 			return securities;
 		} catch (SECYieldException e) {
-			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage() + ", URL:" + saveCalculatedSecuritySECDataApiPath));
+			if(!failedSecuritySECDataList.isEmpty()) logger.info(failedSecuritySECDataList);
 			throw e;
 		} catch (Exception e) {
-			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage() + ", URL:" + saveCalculatedSecuritySECDataApiPath));
+			if(!failedSecuritySECDataList.isEmpty()) logger.info(failedSecuritySECDataList);
 			throw new SECYieldException(e.getMessage(), e);
 		}
 

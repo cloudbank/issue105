@@ -72,11 +72,11 @@ public class DateUtility {
 	}
 
 	/**
-	 * Calculate difference between startdate and end date using 360 day calendar
+	 * Calculate difference between startdate and end date using 360 day calendar.
 	 * 
-	 * @param startDate
-	 * @param endDate
-	 * @return
+	 * @param startDate the starting date
+	 * @param endDate the end date
+	 * @return difference between startdate and end date using 360 day calendar.
 	 */
 	private static int getDiff360(DateTime startDate, DateTime endDate) {
 
@@ -103,13 +103,12 @@ public class DateUtility {
 				endDay = endDate.getDayOfMonth();
 			}
 
-			// if year is a leep year
-			// no extra days are added
-			// handling feb
+
+			// no extra days are added if the start date is the last day of February
 			if (isLeapYear(tempDate.getYear()) && tempDate.getMonthOfYear() == 2 && startDay == 29) {
+				// if year is a leap year
 				endDay = 29;
 				startDay = 29;
-
 			} else if (tempDate.getMonthOfYear() == 2 && startDay == 28 && !isLeapYear(tempDate.getYear())) {
 				endDay = 28;
 				startDay = 28;
@@ -122,10 +121,20 @@ public class DateUtility {
 	}
 
 	/**
-	 * Implement day360 method https://support.microsoft.com/en-us/kb/235575 Uses US(NASD) method
+	 * Implementation of the day360 method.
+	 *
+	 * This computes the difference in days between the startDate and the endDate, based on a 360-day year, divided into
+	 * twelve 30-day months.
+	 *
+	 * This implementation uses the US(NASD) method (quoted from https://support.microsoft.com/en-us/kb/235575):
+	 *  - If the starting date is the 31st of a month, it becomes equal to the 30th of the same month.
+	 *  - If the ending date is the 31st of a month and the starting date is NOT the last day of a month,
+	 * the ending date becomes equal to the 1st of the next month, otherwise the ending date becomes equal
+	 * to the 30th of the same month.
+	 *  - If the start date is the last day of February, then extra days added to February are ignored.
 	 * 
-	 * @param startDate
-	 * @param endDate
+	 * @param startDate the start date
+	 * @param endDate the end date
 	 * @return diff in days
 	 */
 	public static int days360(Date startDate, Date endDate) {
@@ -149,20 +158,29 @@ public class DateUtility {
 			dayStartDate = 30;
 		}
 
-		// check the day of end date
+		// Special handling for end dates on the 31st of a month:
+		// The following if-statements will convert the 31st end-date into a 30th end-date
+		// if the start-date is the last day of its month.  Otherwise, the end-date is moved to the
+		// 1st of the next month.
 		if (dayEndDate == 31) {
 			if (dayStartDate == 29 && isLeapYear(yearStartDate) && monthStartDate == 2) {
+				// If the start date is the last day of February for leap years.
 				dayEndDate = 30;
 			} else if (dayStartDate == 28 && monthStartDate == 2 && !isLeapYear(yearStartDate)) {
+				// If the start date is the last day of February - for non-leap years.
 				dayEndDate = 30;
 			} else if (dayStartDate < 30) {
+				// For non-February months:
+				// We can assume that the start date is not the last day of its month if its value
+				// is less than 30.  (31st is converted to 30th in a previous step)
 				DateTime next = getNextMonthDate(monthEndDate, yearEndDate);
 				monthEndDate = next.getMonthOfYear();
 				yearEndDate = next.getYear();
 				dayEndDate = 1;
 
 			} else {
-				// if startdate day < 30
+				// For non-February months:
+				// The start date is not less than 30, so we determine it is the last day of its month.
 				dayEndDate = 30;
 			}
 		}

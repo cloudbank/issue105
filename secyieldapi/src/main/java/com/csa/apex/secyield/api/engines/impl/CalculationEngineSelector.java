@@ -38,10 +38,16 @@ public class CalculationEngineSelector implements CalculationEngine {
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Unsupported operation exception message
+	 * Unsupported operation due to indicator exception message
 	 */
-	@Value("${messages.unsupportedoperationexception}")
-	private String unSupportedOperationException;
+	@Value("${messages.unsupportedoperationduetoindicator}")
+	private String unSupportedOperationDueToIndicator;
+
+	/**
+	 * Unsupported operation for ivType exception message
+	 */
+	@Value("${messages.unsupportedoperationfortype}")
+	private String unSupportedOperationForType;
 
 	/**
 	 * Calculate method name
@@ -133,7 +139,15 @@ public class CalculationEngineSelector implements CalculationEngine {
 		}
 		if (securitySECData.getSecurityReferenceData().isDerStepIndicator()
 				|| securitySECData.getSecurityReferenceData().isDerHybridIndicator()) {
-			throw new UnsupportedOperationException(unSupportedOperationException);
+			StringBuffer sb = new StringBuffer();
+			if (securitySECData.getSecurityReferenceData().isDerStepIndicator())
+				sb.append("derStep");
+			if (securitySECData.getSecurityReferenceData().isDerHybridIndicator()) {
+				if (sb.length() > 0) sb.append(", ");
+				sb.append("derHybrid");
+			}
+			logger.error(String.format(unSupportedOperationDueToIndicator, sb.toString()));
+			throw new UnsupportedOperationException(String.format(unSupportedOperationDueToIndicator, sb.toString()));
 		}
 		try {
 			// if type VP
@@ -150,7 +164,8 @@ public class CalculationEngineSelector implements CalculationEngine {
 			}
 			// else throw exception
 			else {
-				throw new UnsupportedOperationException(unSupportedOperationException);
+				throw new UnsupportedOperationException(String.format(unSupportedOperationForType,
+						securitySECData.getSecurityReferenceData().getIvType()));
 			}
 			return securitySECData;
 		} catch (UnsupportedOperationException ex) {

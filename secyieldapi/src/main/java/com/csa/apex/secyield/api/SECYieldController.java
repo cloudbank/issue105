@@ -9,11 +9,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +37,12 @@ import com.csa.apex.secyield.utility.Constants;
  */
 @RestController
 public class SECYieldController {
+
+	/**
+	 * logger class instance
+	 */
+	private final Logger logger = Logger.getLogger(SECYieldController.class);
+
 	/**
 	 * SecYieldService object
 	 */
@@ -108,8 +116,18 @@ public class SECYieldController {
 	public List<SecuritySECData> getSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws SECYieldException {
+
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+
 		final List<SecuritySECData> securitySECData = secYieldService.processSecuritySECData(businessDate);
-		return truncateResults(securitySECData);
+		List<SecuritySECData> result = truncateResults(securitySECData);
+
+		stopWatch.stop();
+		logger.info("METHOD: SECYieldController.getSecuritySECData(), RUNTIME: " +
+				stopWatch.getTotalTimeMillis() + "ms, # OF SECURITIES: " + securitySECData.size());
+
+		return result;
 	}
 
 	/**
@@ -126,9 +144,18 @@ public class SECYieldController {
 	public List<SecuritySECData> getCalculatedSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws SECYieldException {
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+
 		final List<SecuritySECData> calculatedSecuritySECData = secYieldService
 				.getCalculatedSecuritySECData(businessDate);
-		return truncateResults(calculatedSecuritySECData);
+		List<SecuritySECData> result = truncateResults(calculatedSecuritySECData);
+
+		stopWatch.stop();
+		logger.info("METHOD: SECYieldController.getCalculatedSecuritySECData(), RUNTIME: " +
+				stopWatch.getTotalTimeMillis() + "ms, # OF SECURITIES: " + calculatedSecuritySECData.size());
+
+		return result;
 	}
 
 	/**
@@ -147,7 +174,14 @@ public class SECYieldController {
 	public void exportCalculatedSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate,
 			HttpServletResponse response) throws SECYieldException {
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+
 		secYieldService.exportCalculatedSecuritySECData(businessDate, response);
+
+		stopWatch.stop();
+		logger.info("METHOD: SECYieldController.exportCalculatedSecuritySECData(), RUNTIME: " +
+				stopWatch.getTotalTimeMillis() + "ms");
 	}
 
 	/**

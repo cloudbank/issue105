@@ -24,7 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.secyield.api.services.SECYieldService;
-import com.csa.apex.secyield.api.services.impl.engines.CalculationEngineSelector;
+import com.csa.apex.secyield.api.engines.impl.CalculationEngineSelector;
 import com.csa.apex.secyield.entities.PositionData;
 import com.csa.apex.secyield.entities.SECConfiguration;
 import com.csa.apex.secyield.entities.SecurityReferenceData;

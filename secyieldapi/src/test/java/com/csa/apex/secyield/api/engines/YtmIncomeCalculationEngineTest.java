@@ -1,12 +1,13 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield.api.services.impl.engines;
+package com.csa.apex.secyield.api.engines;
 
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
+import com.csa.apex.secyield.api.engines.impl.YtmIncomeCalculationEngine;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.utility.TestUtility;
 
 /**
- * Test class for the CouponIncomeCalculationEngine.
+ * Test class for the YtmIncomeCalculationEngine
  *
- * @see CouponIncomeCalculationEngine
+ * @see YtmIncomeCalculationEngine
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
@@ -32,7 +33,7 @@ import com.csa.apex.secyield.utility.TestUtility;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class CouponIncomeCalculationEngineTest {
+public class YtmIncomeCalculationEngineTest {
 	/**
 	 * Utility class
 	 */
@@ -40,10 +41,10 @@ public class CouponIncomeCalculationEngineTest {
 	private TestUtility utility;
 
 	/**
-	 * CouponIncomeCalculationEngine object
+	 * YtmIncomeCalculationEngine object
 	 */
 	@Autowired
-	private CouponIncomeCalculationEngine couponIncomeCalculationEngine;
+	private YtmIncomeCalculationEngine ytmIncomeCalculationEngine;
 
 	/**
 	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
@@ -53,7 +54,7 @@ public class CouponIncomeCalculationEngineTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSecuritySECData() throws Exception {
 		SECConfiguration configuration = new SECConfiguration();
-		couponIncomeCalculationEngine.calculate(null, configuration);
+		ytmIncomeCalculationEngine.calculate(null, configuration);
 	}
 
 	/**
@@ -64,51 +65,54 @@ public class CouponIncomeCalculationEngineTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void checkParameterValidationSECConfiguration() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
-		couponIncomeCalculationEngine.calculate(securitySECData, null);
+		ytmIncomeCalculationEngine.calculate(securitySECData, null);
 	}
 
 	/**
-	 * Checks coupon income value
-	 * 
-	 * Sh = 7000000 Y = 0.049592404 FX = 1 Am = -45.69 Income = 918.61
+	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.00948961511103637 infllnc = -4956.56
 	 * 
 	 * @throws Exception
 	 */
+
 	@Test
 	public void checkIncomeCalculationTest1() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
-		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
-		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.049592404)));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
-		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(-45.69)));
+		positionData.setMarketValue(utility.getBigDecimalWithScale7(new BigDecimal(70135342.4)));
+		positionData.setAccruedIncome(utility.getBigDecimalWithScale7(new BigDecimal(257693.72)));
+		positionData.setEarnedInflationaryCompensationBase(utility.getBigDecimalWithScale7(new BigDecimal(-4956.56)));
+		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.00948961511103637)));
 		securitySECData.setPositionData(new PositionData[] { positionData });
+		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
 		SECConfiguration configuration = new SECConfiguration();
-		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
-		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
-				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(918.61).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+		configuration.setOperationScale(7);
+		ytmIncomeCalculationEngine.calculate(securitySECData, configuration);
+		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(0,
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(-3101).setScale(0, BigDecimal.ROUND_HALF_DOWN));
 	}
 
 	/**
-	 * Checks coupon income value
-	 * 
-	 * Sh = 4900000 Y = 0.004199982 FX = 1 Am = 0 Income = 57.17
+	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.30948961511103637 infllnc = -4956.56 Y%/FX>
+	 * threshhold
 	 * 
 	 * @throws Exception
 	 */
+
 	@Test
 	public void checkIncomeCalculationTest2() throws Exception {
 		SecuritySECData securitySECData = new SecuritySECData();
-		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
-		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.004199982)));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(4900000)));
-		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(0)));
+		positionData.setMarketValue(utility.getBigDecimalWithScale7(new BigDecimal(70135342.4)));
+		positionData.setAccruedIncome(utility.getBigDecimalWithScale7(new BigDecimal(257693.72)));
+		positionData.setEarnedInflationaryCompensationBase(utility.getBigDecimalWithScale7(new BigDecimal(-4956.56)));
+		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.30948961511103637)));
 		securitySECData.setPositionData(new PositionData[] { positionData });
+		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
 		SECConfiguration configuration = new SECConfiguration();
-		couponIncomeCalculationEngine.calculate(securitySECData, configuration);
+		configuration.setOperationScale(7);
+		ytmIncomeCalculationEngine.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getPositionData()[0].getDerOneDaySecurityIncome().setScale(2,
-				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(57.17).setScale(2, BigDecimal.ROUND_HALF_DOWN));
+				BigDecimal.ROUND_HALF_DOWN), new BigDecimal(34150.68).setScale(2, BigDecimal.ROUND_HALF_DOWN));
 	}
 
 }

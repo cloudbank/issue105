@@ -118,6 +118,12 @@ public class SECYieldServiceImpl implements SECYieldService {
 	private String unSupportedOperationException;
 
 	/**
+	 * Customer API exception message
+	 */
+	@Value("${messages.customerapiexception}")
+	private String customerApiException;
+
+	/**
 	 * processSingleSecurity method name
 	 */
 	@Value("${secyieldserviceimpl.processsinglesecuritymethodname}")
@@ -193,7 +199,15 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * 
 	 * @return configuration
 	 */
-	public SECConfiguration getConfiguration() {
+	public SECConfiguration getConfiguration() throws SECYieldException {
+		if (configuration == null) {
+			try {
+				configuration = restTemplate.getForObject(getConfigApiPath, SECConfiguration.class);
+			} catch(Exception e) {
+				logger.error(String.format(customerApiException, e.getMessage()));
+				throw new SECYieldException(e.getMessage(), e);
+			}
+		}
 		return configuration;
 	}
 
@@ -331,7 +345,6 @@ public class SECYieldServiceImpl implements SECYieldService {
 
 		if (getCalculatedSecuritySECDataApiPath == null || getCalculatedSecuritySECDataApiPath.isEmpty())
 			throw new ConfigurationException(configurationArgumentExceptionMessage);
-		configuration = restTemplate.getForObject(getConfigApiPath, SECConfiguration.class);
 	}
 
 	/**
@@ -430,15 +443,15 @@ public class SECYieldServiceImpl implements SECYieldService {
 		try {
 			// call engine calculator
 			SecuritySECData updatedSecuritySECData = calculationEngineSelector.calculate(securitySECData,
-					configuration);
+					getConfiguration());
 			// calculate the data
 			if ("VPS".equalsIgnoreCase(updatedSecuritySECData.getSecurityReferenceData().getIvType())) {
 				updatedSecuritySECData = calculationEngineSelector.getCalculationEngines().get("YTM")
-						.calculate(updatedSecuritySECData, configuration);
+						.calculate(updatedSecuritySECData, getConfiguration());
 			} else if ("VRDN".equalsIgnoreCase(updatedSecuritySECData.getSecurityReferenceData().getIvType())
 					|| "DVRN".equalsIgnoreCase(updatedSecuritySECData.getSecurityReferenceData().getIvType())) {
 				updatedSecuritySECData = calculationEngineSelector.getCalculationEngines().get("COUPON")
-						.calculate(updatedSecuritySECData, configuration);
+						.calculate(updatedSecuritySECData, getConfiguration());
 			} else {
 				throw new UnsupportedOperationException(unSupportedOperationException);
 			}

@@ -82,7 +82,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuraion object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default value
 	 * 
 	 * @param configuration
 	 *            the configuration object

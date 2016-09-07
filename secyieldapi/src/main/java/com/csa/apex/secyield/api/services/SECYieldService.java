@@ -22,11 +22,11 @@ public interface SECYieldService {
 	/**
 	 * Process SEC Security data for the business data. This method gets the securities and then process each security
 	 * first to calculate the data, then to persist it using API.
-	 * 
+	 *
 	 * @param businessDate
 	 *            the business date;
 	 * @return securitySECData with calculated result
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             input is invalid
 	 * @throws SECYieldException
@@ -37,11 +37,11 @@ public interface SECYieldService {
 
 	/**
 	 * Gets already calculated SEC Security data for the given date.
-	 * 
+	 *
 	 * @param businessDate
 	 *            the business date
 	 * @return already calculated securitySECData
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             input is invalid
 	 * @throws SECYieldException
@@ -52,9 +52,9 @@ public interface SECYieldService {
 
 	/**
 	 * Exports SEC Security data in CSV format in an archive.
-	 * 
+	 *
 	 * @param businessDate
-	 *            the business date;
+	 *            the business date
 	 * @param response
 	 *            the http response
 	 * @throws IllegalArgumentException

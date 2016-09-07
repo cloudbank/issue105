@@ -105,7 +105,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Checks beans are injected properly on postconstruct
+	 * Checks beans are injected properly on post construct
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {

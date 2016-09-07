@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `test-secyield`.`calculated_security_sec_data` (
   `prospective_method` VARCHAR(128) NULL,
   `der_yield_calc_engine` VARCHAR(128) NULL,
   `der_income_calc_engine` VARCHAR(128) NULL,
-  `der_one_day_secyrity_yield` DECIMAL(20,7) NULL,
+  `der_one_day_security_yield` DECIMAL(20,7) NULL,
   `der_redemption_date` DATETIME NULL,
   `der_redemption_price` DECIMAL(20,7) NULL,
   `der_clean_price` DECIMAL(20,7) NULL,

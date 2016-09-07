@@ -59,7 +59,7 @@ public class YtmYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Checks yield value when operationscale is overridden by configuration
+	 * Checks yield value when operation scale is overridden by configuration
 	 * 
 	 * @throws Exception
 	 */

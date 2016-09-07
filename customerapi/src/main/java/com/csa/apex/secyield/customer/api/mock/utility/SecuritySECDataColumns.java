@@ -29,7 +29,7 @@ public enum SecuritySECDataColumns {
 	PROSPECTIVE_METHOD("prospective_method"),
 	DER_YIELD_CALC_ENGINE("der_yield_calc_engine"),
 	DER_INCOME_CALC_ENGINE("der_income_calc_engine"),
-	DER_ONE_DAY_SECURITY_YIELD("der_one_day_secyrity_yield"),
+	DER_ONE_DAY_SECURITY_YIELD("der_one_day_security_yield"),
 	DER_REDEMPTION_DATE("der_redemption_date"),
 	DER_REDEMPTION_PRICE("der_redemption_price"),
 	DER_CLEAN_PRICE("der_clean_price"),

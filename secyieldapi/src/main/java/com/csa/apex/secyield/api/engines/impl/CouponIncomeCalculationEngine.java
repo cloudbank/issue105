@@ -83,7 +83,8 @@ public class CouponIncomeCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuration object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default
+	 * value
 	 * 
 	 * @param configuration
 	 *            the configuration object
@@ -135,6 +136,9 @@ public class CouponIncomeCalculationEngine implements CalculationEngine {
 			return securitySECData;
 		} catch (Exception e) {
 			logger.error(String.format(logErrorFormat, calculateMethodName, e.getMessage()));
+			logger.error(String.format(
+					"CouponIncomeCalculationEngine.calculate Exception,securitySECData:%s,SECConfiguration:%s",
+					securitySECData.toString(), configuration.toString()));
 			throw new CalculationException(e.getMessage(), e);
 		}
 	}

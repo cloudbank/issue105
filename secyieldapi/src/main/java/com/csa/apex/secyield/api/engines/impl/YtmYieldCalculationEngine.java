@@ -275,9 +275,9 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	private int numOfDaysInPeriod = 180;
 
 	/**
-	 * It defines the least error in the calculation There can be max error = ephsilon More the value accurate is result
+	 * It defines the least error in the calculation There can be max error = epsilon More the value accurate is result
 	 */
-	private double ephsilon = 0.000000001;
+	private double epsilon = 0.000000001;
 
 	/**
 	 * Min yield when it is negative
@@ -304,21 +304,21 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Getter ephsilon
+	 * Getter epsilon
 	 * 
-	 * @return ephsilon
+	 * @return epsilon
 	 */
-	public double getEphsilon() {
-		return ephsilon;
+	public double getEpsilon() {
+		return epsilon;
 	}
 
 	/**
-	 * Setter ephsilon
+	 * Setter epsilon
 	 * 
-	 * @param ephsilon
+	 * @param epsilon
 	 */
-	public void setEphsilon(double ephsilon) {
-		this.ephsilon = ephsilon;
+	public void setEpsilon(double epsilon) {
+		this.epsilon = epsilon;
 	}
 
 	/**
@@ -503,9 +503,9 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			mid = (endYield + startYield) / 2;
 			Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, new BigDecimal(mid));
 			if (funcVal < 0) {
-				endYield = mid - ephsilon;
+				endYield = mid - epsilon;
 			} else if (funcVal > 0) {
-				startYield = mid + ephsilon;
+				startYield = mid + epsilon;
 			}
 			countSteps = countSteps + 1;
 		}
@@ -514,7 +514,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Calculates yield value for YtmYieldCalculationVariablesDTO object It increases yield value from ephsilon and
+	 * Calculates yield value for YtmYieldCalculationVariablesDTO object It increases yield value from epsilon and
 	 * checks whether yield function gives zero value. Then it uses binary search to imprive accuracy of calculated
 	 * yield value
 	 * 
@@ -523,12 +523,12 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 * @return yield value
 	 */
 	private BigDecimal getYield(YtmYieldCalculationVariablesDTO ytmYieldCalculationVariablesDTO) {
-		BigDecimal yield = BigDecimal.valueOf(ephsilon);
+		BigDecimal yield = BigDecimal.valueOf(epsilon);
 		Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, yield);
 		// yield is negative
 		if (funcVal < 0) {
 		    // find between -m to 0
-		    yield =  bisection(ytmYieldCalculationVariablesDTO,-1.0 * ytmYieldCalculationVariablesDTO.getFrequency(), -ephsilon);
+		    yield =  bisection(ytmYieldCalculationVariablesDTO,-1.0 * ytmYieldCalculationVariablesDTO.getFrequency(), -epsilon);
 		    // if yield < minYield (20%) then return 0.02
 		    if(yield.doubleValue() < minYield)
 		    {

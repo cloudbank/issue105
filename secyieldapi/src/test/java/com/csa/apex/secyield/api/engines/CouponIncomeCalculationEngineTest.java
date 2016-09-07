@@ -81,7 +81,7 @@ public class CouponIncomeCalculationEngineTest {
 		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
 		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.049592404)));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
+		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(-45.69)));
 		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();
@@ -103,7 +103,7 @@ public class CouponIncomeCalculationEngineTest {
 		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
 		securitySECData.setDerOneDaySecurityYield(utility.getBigDecimalWithScale7(new BigDecimal(0.004199982)));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(utility.getBigDecimalWithScale7(new BigDecimal(4900000)));
+		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(4900000)));
 		positionData.setEarnedAmortizationBase(utility.getBigDecimalWithScale7(new BigDecimal(0)));
 		securitySECData.setPositionData(new PositionData[] { positionData });
 		SECConfiguration configuration = new SECConfiguration();

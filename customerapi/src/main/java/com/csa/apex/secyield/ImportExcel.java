@@ -242,7 +242,7 @@ public class ImportExcel {
         positionData.setEarnedInflationaryCompensationBase(getNumericCellValue(row, props.get("positionData.earnedInflationaryCompensationBase"), conf));
         positionData.setAccruedIncome(getNumericCellValue(row, props.get("positionData.accruedIncome"), conf));
         positionData.setMarketValue(getNumericCellValue(row, props.get("positionData.marketValue"), conf));
-        positionData.setSharePerAmount(getNumericCellValue(row, props.get("positionData.sharePerAmount"), conf));
+        positionData.setShareParAmount(getNumericCellValue(row, props.get("positionData.shareParAmount"), conf));
         positionData.setEarnedAmortizationBase(getNumericCellValue(row, props.get("positionData.earnedAmortizationBase"), conf));
         positionData.setPositionValInflationAdjShare(getNumericCellValue(row, props.get("positionData.positionValInflationAdjShare"), conf));
         return positionData;
@@ -450,7 +450,7 @@ public class ImportExcel {
                                     .addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName(),
                                             posData.getPositionValInflationAdjShare())
                                     .addValue(PositionDataColumns.REPORT_DATE.getName(), posData.getReportDate())
-                                    .addValue(PositionDataColumns.SHARE_PER_AMOUNT.getName(), posData.getSharePerAmount())
+                                    .addValue(PositionDataColumns.SHARE_PAR_AMOUNT.getName(), posData.getShareParAmount())
                                     .addValue(PositionDataColumns.DER_ONE_DAY_SECURITY_INCOME.getName(),
                                             posData.getDerOneDaySecurityIncome());
                             insertPositionData.execute(positionDataParameters);

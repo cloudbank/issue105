@@ -139,7 +139,7 @@ public class CommonUtility {
                         getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedInflationaryCompensationBase")]));
                 positionData.setDerOneDaySecurityIncome(
                         getBigDecimalValue(nextLine[csvTestDataColumns.get("derOneDaySecurityIncome")]));
-                positionData.setSharePerAmount(getBigDecimalValue(nextLine[csvTestDataColumns.get("shareParAmount")]));
+                positionData.setShareParAmount(getBigDecimalValue(nextLine[csvTestDataColumns.get("shareParAmount")]));
                 positionData.setEarnedAmortizationBase(
                         getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedAmortizationBase")]));
                 securitySECData.setPositionData(new PositionData[] { positionData });

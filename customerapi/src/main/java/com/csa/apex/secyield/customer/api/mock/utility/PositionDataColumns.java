@@ -17,7 +17,7 @@ public enum PositionDataColumns {
 	EARNED_INFLATIONARY_COMPENSATION_BASE("earned_inflationary_compensation_base"),
 	ACCRUED_INCOME("accrued_income"),
 	MARKET_VALUE("market_value"),
-	SHARE_PER_AMOUNT("share_per_amount"),
+	SHARE_PAR_AMOUNT("share_par_amount"),
 	EARNED_AMORTIZATION_BASE("earned_amortization_base"),
 	POSITION_VAL_INFLATION_ADJ_SHARE("position_val_inflation_adj_shares"),
 	DER_ONE_DAY_SECURITY_INCOME("der_one_day_security_income");

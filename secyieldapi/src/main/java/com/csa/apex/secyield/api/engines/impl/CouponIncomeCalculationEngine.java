@@ -122,7 +122,7 @@ public class CouponIncomeCalculationEngine implements CalculationEngine {
 			for (PositionData positionData : securitySECData.getPositionData()) {
 
 				am = positionData.getEarnedAmortizationBase();
-				sh = positionData.getSharePerAmount();
+				sh = positionData.getShareParAmount();
 
 				BigDecimal rightSide = sh.multiply(y).divide(fx, operationScale, BigDecimal.ROUND_HALF_UP)
 						.divide(new BigDecimal(360), operationScale, BigDecimal.ROUND_HALF_UP);

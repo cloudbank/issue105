@@ -447,7 +447,7 @@ public class ImportExcel {
                                             posData.getEarnedInflationaryCompensationBase())
                                     .addValue(PositionDataColumns.MARKET_VALUE.getName(), posData.getMarketValue())
                                     .addValue(PositionDataColumns.PORTFOLIO_NUMBER.getName(), posData.getPortfolioNumber())
-                                    .addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName(),
+                                    .addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARES.getName(),
                                             posData.getPositionValInflationAdjShares())
                                     .addValue(PositionDataColumns.REPORT_DATE.getName(), posData.getReportDate())
                                     .addValue(PositionDataColumns.SHARE_PER_AMOUNT.getName(), posData.getSharePerAmount())

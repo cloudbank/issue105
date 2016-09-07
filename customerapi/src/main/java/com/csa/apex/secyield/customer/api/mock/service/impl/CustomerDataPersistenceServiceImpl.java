@@ -315,7 +315,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 									posData.getEarnedInflationaryCompensationBase())
 							.addValue(PositionDataColumns.MARKET_VALUE.getName(), posData.getMarketValue())
 							.addValue(PositionDataColumns.PORTFOLIO_NUMBER.getName(), posData.getPortfolioNumber())
-							.addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName(),
+							.addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARES.getName(),
 									posData.getPositionValInflationAdjShares())
 							.addValue(PositionDataColumns.REPORT_DATE.getName(), posData.getReportDate())
 							.addValue(PositionDataColumns.SHARE_PER_AMOUNT.getName(), posData.getSharePerAmount())
@@ -407,7 +407,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			positionData.setMarketValue(rs.getBigDecimal(PositionDataColumns.MARKET_VALUE.getName()));
 			positionData.setPortfolioNumber(rs.getBigDecimal(PositionDataColumns.PORTFOLIO_NUMBER.getName()));
 			positionData.setPositionValInflationAdjShares(
-					rs.getBigDecimal(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName()));
+					rs.getBigDecimal(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARES.getName()));
 			positionData.setReportDate(rs.getTimestamp(PositionDataColumns.REPORT_DATE.getName()));
 			positionData.setSharePerAmount(rs.getBigDecimal(PositionDataColumns.SHARE_PER_AMOUNT.getName()));
 

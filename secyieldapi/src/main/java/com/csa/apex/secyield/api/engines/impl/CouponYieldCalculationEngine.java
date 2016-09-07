@@ -112,6 +112,12 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 		}
 		setConfiguration(configuration);
 		try {
+			if (securitySECData.getSecurityPrice() != null && securitySECData.getDerTIPSInflationaryRatio() != null) {
+				BigDecimal cleanPrice = securitySECData.getSecurityPrice()
+						.divide(securitySECData.getDerTIPSInflationaryRatio(), operationScale, BigDecimal.ROUND_HALF_UP);
+				securitySECData.setDerCleanPrice(cleanPrice);
+			}
+
 			BigDecimal yield = securitySECData.getSecurityReferenceData().getInterestRt().setScale(operationScale,
 					roundingMode);
 			securitySECData.setDerOneDaySecurityYield(yield);

@@ -142,6 +142,8 @@ public class CommonUtility {
                 positionData.setSharePerAmount(getBigDecimalValue(nextLine[csvTestDataColumns.get("shareParAmount")]));
                 positionData.setEarnedAmortizationBase(
                         getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedAmortizationBase")]));
+                positionData.setPositionValInflationAdjShares(
+                        getBigDecimalValue(nextLine[csvTestDataColumns.get("positionValInflationAdjShares")]));
                 securitySECData.setPositionData(new PositionData[] { positionData });
                 entities.add(securitySECData);
 

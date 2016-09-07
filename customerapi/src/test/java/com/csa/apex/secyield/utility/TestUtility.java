@@ -63,7 +63,7 @@ public class TestUtility {
 			positionData.setEarnedInflationaryCompensationBase(BigDecimal.TEN);
 			positionData.setMarketValue(BigDecimal.TEN);
 			positionData.setPortfolioNumber(BigDecimal.TEN.add(BigDecimal.valueOf(i)));
-			positionData.setPositionValInflationAdjShare(BigDecimal.TEN);
+			positionData.setPositionValInflationAdjShares(BigDecimal.TEN);
 			positionData.setReportDate(reportDate);
 			positionData.setSharePerAmount(BigDecimal.TEN);
 			positionData.setDerOneDaySecurityIncome(BigDecimal.TEN);

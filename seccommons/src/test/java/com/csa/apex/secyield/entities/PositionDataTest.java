@@ -42,10 +42,10 @@ public class PositionDataTest {
         positionData.setMarketValue(new BigDecimal(1111));
         positionData.setSharePerAmount(new BigDecimal(1111));
         positionData.setEarnedAmortizationBase(new BigDecimal(1111));
-        positionData.setPositionValInflationAdjShare(new BigDecimal(1111));
+        positionData.setPositionValInflationAdjShares(new BigDecimal(1111));
         positionData.setDerOneDaySecurityIncome(new BigDecimal(1111));
 
-        String expected = "PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=01/15/2016, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, sharePerAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShare=1111, derOneDaySecurityIncome=1111}";
+        String expected = "PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=01/15/2016, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, sharePerAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShares=1111, derOneDaySecurityIncome=1111}";
 
         assertEquals(expected, positionData.toString());
     }

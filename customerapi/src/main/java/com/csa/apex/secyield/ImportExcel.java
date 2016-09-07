@@ -244,7 +244,7 @@ public class ImportExcel {
         positionData.setMarketValue(getNumericCellValue(row, props.get("positionData.marketValue"), conf));
         positionData.setSharePerAmount(getNumericCellValue(row, props.get("positionData.sharePerAmount"), conf));
         positionData.setEarnedAmortizationBase(getNumericCellValue(row, props.get("positionData.earnedAmortizationBase"), conf));
-        positionData.setPositionValInflationAdjShare(getNumericCellValue(row, props.get("positionData.positionValInflationAdjShare"), conf));
+        positionData.setPositionValInflationAdjShares(getNumericCellValue(row, props.get("positionData.positionValInflationAdjShares"), conf));
         return positionData;
     }
 
@@ -448,7 +448,7 @@ public class ImportExcel {
                                     .addValue(PositionDataColumns.MARKET_VALUE.getName(), posData.getMarketValue())
                                     .addValue(PositionDataColumns.PORTFOLIO_NUMBER.getName(), posData.getPortfolioNumber())
                                     .addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName(),
-                                            posData.getPositionValInflationAdjShare())
+                                            posData.getPositionValInflationAdjShares())
                                     .addValue(PositionDataColumns.REPORT_DATE.getName(), posData.getReportDate())
                                     .addValue(PositionDataColumns.SHARE_PER_AMOUNT.getName(), posData.getSharePerAmount())
                                     .addValue(PositionDataColumns.DER_ONE_DAY_SECURITY_INCOME.getName(),

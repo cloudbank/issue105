@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 
 import com.csa.apex.secyield.api.engines.impl.YtmYieldCalculationEngine;
+import com.csa.apex.secyield.entities.PositionData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -166,6 +167,37 @@ public class YtmYieldCalculationEngineTest {
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerOneDaySecurityYield().setScale(7, BigDecimal.ROUND_HALF_DOWN),
 				utility.getBigDecimalWithScale7(new BigDecimal(-0.0055940)));
+	}
+
+	/**
+	 * derTIPSInflationaryRatio calculation test on normal scenario
+	 *
+	 * positionValInflationAdjShares = 50438.66
+	 * sharePerAmount = 45
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void checkDerTIPSInflationaryRatioTest() throws Exception {
+		SecuritySECData securitySECData = new SecuritySECData();
+		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
+		securityReferenceData.setSecurityRedemptionPrice(utility.getBigDecimalWithScale7(new BigDecimal(100)));
+		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.01375)));
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		securityReferenceData.setFinalMaturityDate(formatter.parse("02/15/2044"));
+		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(114.7389035)));
+		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setReportDate(formatter.parse("06/03/2016"));
+		SECConfiguration configuration = new SECConfiguration();
+
+		PositionData positionData = new PositionData();
+		positionData.setPositionValInflationAdjShares(new BigDecimal("50438.66"));
+		positionData.setSharePerAmount(new BigDecimal("45"));
+		securitySECData.setPositionData(new PositionData[]{positionData});
+
+		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
+		assertEquals(securitySECData.getDerTIPSInflationaryRatio().setScale(7, BigDecimal.ROUND_HALF_DOWN),
+				utility.getBigDecimalWithScale7(new BigDecimal(1120.859111111111)));
 	}
 
 }

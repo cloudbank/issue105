@@ -93,7 +93,7 @@ public class YtmIncomeCalculationEngineTest {
 
 	/**
 	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.30948961511103637 infllnc = -4956.56 Y%/FX>
-	 * threshhold
+	 * threshold
 	 * 
 	 * @throws Exception
 	 */

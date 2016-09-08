@@ -330,7 +330,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Checks beans are injected properly on postconstruct throws ConfigurationException
+	 * Checks beans are injected properly on post construct throws ConfigurationException
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {

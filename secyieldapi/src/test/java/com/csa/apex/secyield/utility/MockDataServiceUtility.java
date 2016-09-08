@@ -29,7 +29,7 @@ public class MockDataServiceUtility {
 	}
 
 	/**
-	 * Get mock list of data Yield and Income is not calcualted
+	 * Get mock list of data Yield and Income is not calculated
 	 * 
 	 * @return
 	 * @throws ParseException
@@ -87,7 +87,7 @@ public class MockDataServiceUtility {
 	}
 
 	/**
-	 * Get mock list of data Yield and Income is calcualted
+	 * Get mock list of data Yield and Income is calculated
 	 * 
 	 * @return
 	 * @throws ParseException

@@ -390,7 +390,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuraion object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default value
 	 * 
 	 * @param configuration
 	 *            the configuration object
@@ -515,7 +515,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 
 	/**
 	 * Calculates yield value for YtmYieldCalculationVariablesDTO object It increases yield value from epsilon and
-	 * checks whether yield function gives zero value. Then it uses binary search to imprive accuracy of calculated
+	 * checks whether yield function gives zero value. Then it uses binary search to improve accuracy of calculated
 	 * yield value
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
@@ -542,7 +542,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		    // check yield value at maxYield
 		    Double maxYieldFuncValue = getYieldFormulaVal(ytmYieldCalculationVariablesDTO,BigDecimal.valueOf(maxYield));
 		    // if yield at maxYield < 0 then yield lies between 0 and maxYield
-		    // We can do this when y > = 0 beacause in this case
+		    // We can do this when y > = 0 because in this case
 		    // d F(y) / d (y) < 0.
 		    // therefore if F(maxYield) > 0 then there will be no y for which F(y) = 0
 		    if(maxYieldFuncValue < 0)

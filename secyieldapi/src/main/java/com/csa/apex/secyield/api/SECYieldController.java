@@ -88,7 +88,7 @@ public class SECYieldController {
 	}
 
 	/**
-	 * Checks beans are injected properly on postconstruct
+	 * Checks beans are injected properly on post construct
 	 * 
 	 * @throws ConfigurationException
 	 *             if any required field is not initialized properly.

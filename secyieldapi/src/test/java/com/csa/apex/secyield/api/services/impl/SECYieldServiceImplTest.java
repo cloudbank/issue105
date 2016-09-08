@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -183,12 +182,10 @@ public class SECYieldServiceImplTest {
 	 *            the servlet output stream
 	 * @return the file
 	 * @throws IOException
-	 *             if any I/O exception occurs
-	 * @throws FileNotFoundException
-	 *             if the test export file is not found
+	 *             if any I/O exception occurs or if the test export file is not found
 	 */
 	private File convertServletOutputStreamToFile(MockServletOutputStream servletOutputStream)
-			throws IOException, FileNotFoundException {
+			throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ZipInputStream zipInputStream = servletOutputStream.getZipInputStream();
 		while (zipInputStream.getNextEntry() != null) {

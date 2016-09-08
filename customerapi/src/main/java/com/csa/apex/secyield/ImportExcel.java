@@ -34,7 +34,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -477,8 +476,6 @@ public class ImportExcel {
             formatter.printHelp(COMMAND_USAGE, "", options, "");
         } catch (NumberFormatException e) {
             logger.error("Error to parse excelMapping.properties", e);
-        } catch (FileNotFoundException e) {
-            logger.error("Not found excel file " + path, e);
         } catch (IOException e) {
             logger.error("Error to process excel " + path, e);
         } catch (Exception e) {

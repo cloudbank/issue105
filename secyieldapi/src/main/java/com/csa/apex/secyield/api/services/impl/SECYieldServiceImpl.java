@@ -3,7 +3,6 @@
  */
 package com.csa.apex.secyield.api.services.impl;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -352,7 +351,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * Process SEC Security data for the business data. This method gets the securities and then process each security
 	 * first to calculate the data, then to persist it using API.
 	 * 
-	 * @param Date
+	 * @param businessDate
 	 *            businessDate of the security
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
@@ -402,7 +401,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	/**
 	 * Gets already calculated SEC Security data for the given date.
 	 *
-	 * @param Date
+	 * @param businessDate
 	 *            businessDate of the security
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
@@ -520,12 +519,10 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * @param businessDate
 	 *            the business date string
 	 * @throws IOException
-	 *             if any IO exception occurs
-	 * @throws FileNotFoundException
-	 *             if the CSV file is not found
+	 *             if any IO exception occurs or if the CSV file is not found
 	 */
 	private void createExportArchive(HttpServletResponse response, SecuritySECData[] securitiesArray,
-			String businessDate) throws IOException, FileNotFoundException {
+			String businessDate) throws IOException {
 
 		String exportArchiveFileName = EXPORT_FILE_NAME_PREFIX + businessDate + ZIP_EXTENSION;
 		String csvFileName = EXPORT_FILE_NAME_PREFIX + businessDate + CSV_EXTENSION;

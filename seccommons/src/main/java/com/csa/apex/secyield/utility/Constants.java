@@ -9,7 +9,7 @@ package com.csa.apex.secyield.utility;
  * @author TCSDEVELOPER
  * @version 1.0
  */
-public interface Constants {
+public class Constants {
 
 	/**
 	 * The date format of the REST APIs

@@ -103,4 +103,26 @@ public class CouponYieldCalculationEngineTest {
 		assertEquals(securitySECData.getDerOneDaySecurityYield(), securityReferenceData.getInterestRt());
 	}
 
+	/**
+	 * Checks clean price calculation
+	 *
+	 * Security Price : 500.50
+	 * TIPS Inflationary Ratio: 10.10
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void checkCleanPriceCalculation() throws Exception {
+		SecuritySECData securitySECData = new SecuritySECData();
+		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
+		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.04959)));
+		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(500.50)));
+		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(10.10)));
+		SECConfiguration configuration = new SECConfiguration();
+		configuration.setOperationScale(7);
+		couponYieldCalculationEngine.calculate(securitySECData, configuration);
+		assertEquals(utility.getBigDecimalWithScale7(new BigDecimal(49.55445544)), securitySECData.getDerCleanPrice());
+	}
+
 }

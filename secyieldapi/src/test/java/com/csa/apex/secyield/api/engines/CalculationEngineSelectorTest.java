@@ -73,6 +73,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("VPS");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
@@ -90,6 +91,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(true);
 		securityReferenceData.setIvType("VPS");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
@@ -107,6 +109,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("UNKNOWN");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 	}
@@ -124,6 +127,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("VPS");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerYieldCalcEngine(), "YtmYieldCalculationEngine");
@@ -143,6 +147,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("VRDN");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerYieldCalcEngine(), "CouponYieldCalculationEngine");
@@ -162,6 +167,7 @@ public class CalculationEngineSelectorTest {
 		securityReferenceData.setDerHybridIndicator(false);
 		securityReferenceData.setIvType("DVRN");
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		calculationEngineSelector.calculate(securitySECData, configuration);
 		assertEquals(securitySECData.getDerYieldCalcEngine(), "CouponYieldCalculationEngine");

@@ -80,6 +80,7 @@ public class CouponYieldCalculationEngineTest {
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setInterestRt(new BigDecimal(10));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		configuration.setOperationScale(5);
 		couponYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -97,6 +98,7 @@ public class CouponYieldCalculationEngineTest {
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.04959)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		SECConfiguration configuration = new SECConfiguration();
 		configuration.setOperationScale(7);
 		couponYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -117,6 +119,7 @@ public class CouponYieldCalculationEngineTest {
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.04959)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(500.50)));
 		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(10.10)));
 		SECConfiguration configuration = new SECConfiguration();

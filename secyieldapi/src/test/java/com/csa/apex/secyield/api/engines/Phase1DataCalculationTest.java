@@ -76,6 +76,7 @@ public class Phase1DataCalculationTest {
                     securitySECData.getSecurityReferenceData().getInterestRt().divide(BigDecimal.valueOf(100.00)));
             clonedSecurityReferenceData
                     .setFinalMaturityDate(securitySECData.getSecurityReferenceData().getFinalMaturityDate());
+            cloneSecuritySECData.setDerRedemptionDate(clonedSecurityReferenceData.getFinalMaturityDate());
             cloneSecuritySECData.setDerYieldCalcEngine(securitySECData.getDerYieldCalcEngine());
             cloneSecuritySECData.setDerYieldCalcEngine(securitySECData.getDerYieldCalcEngine());
             cloneSecuritySECData.setSecurityPrice(securitySECData.getSecurityPrice());

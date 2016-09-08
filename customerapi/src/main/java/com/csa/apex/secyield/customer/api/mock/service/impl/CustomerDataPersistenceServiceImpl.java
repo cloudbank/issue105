@@ -480,6 +480,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 						.setDerYieldCalcEngine(rs.getString(SecuritySECDataColumns.DER_YIELD_CALC_ENGINE.getName()));
 			}
 			securitySECData.setSecurityReferenceData(securityReferenceData);
+			securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 			return securitySECData;
 		}
 

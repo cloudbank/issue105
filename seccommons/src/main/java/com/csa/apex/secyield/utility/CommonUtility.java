@@ -133,6 +133,7 @@ public class CommonUtility {
                 securitySECData.setSecurityReferenceData(securityReferenceData);
                 Date reportDate = format.parse(nextLine[csvTestDataColumns.get("reportDate")]);
                 securitySECData.setReportDate(reportDate);
+         		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
                 positionData.setMarketValue(getBigDecimalValue(nextLine[csvTestDataColumns.get("marketValue")]));
                 positionData.setAccruedIncome(getBigDecimalValue(nextLine[csvTestDataColumns.get("accruedIncome")]));
                 positionData.setEarnedInflationaryCompensationBase(

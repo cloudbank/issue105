@@ -83,6 +83,7 @@ public class SequenceSecurityCalculationEngineTest {
 		SecurityReferenceData securityReferenceData = new SecurityReferenceData();
 		securityReferenceData.setInterestRt(utility.getBigDecimalWithScale7(new BigDecimal(0.049592404)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setFxRate(utility.getBigDecimalWithScale7(new BigDecimal(1)));
 		PositionData positionData = new PositionData();
 		positionData.setShareParAmount(utility.getBigDecimalWithScale7(new BigDecimal(7000000)));

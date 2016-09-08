@@ -126,7 +126,7 @@ public class CouponIncomeCalculationEngine implements CalculationEngine {
 
 				if((am == null) || (sh == null))
 				{
-					logger.info(String.format("CouponIncomeCalculationEngine.calculate am or sh is null"));
+					logger.info(String.format("In CouponIncomeCalculationEngine.calculate method, am:%s,sh:%s",am,sh));
 					continue;
 				}
 

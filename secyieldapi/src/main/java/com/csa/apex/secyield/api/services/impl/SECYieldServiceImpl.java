@@ -599,7 +599,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 		values[index++] = String.valueOf(positionData.getShareParAmount());
 		values[index++] = String.valueOf(positionData.getEarnedAmortizationBase());
 		values[index++] = String.valueOf(positionData.getPositionValInflationAdjShares());
-		values[index++] = String.valueOf(positionData.getDerOneDaySecurityIncome());
+		values[index] = String.valueOf(positionData.getDerOneDaySecurityIncome());
 
 		return values;
 	}

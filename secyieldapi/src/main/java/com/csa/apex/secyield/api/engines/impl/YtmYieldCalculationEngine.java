@@ -583,7 +583,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			if (securitySECData.getPositionData() != null && securitySECData.getPositionData().length > 0) {
 				PositionData positionData = securitySECData.getPositionData()[0];
 				BigDecimal derTIPSInflationaryRatio = positionData.getPositionValInflationAdjShares().divide(
-						positionData.getSharePerAmount(), operationScale, BigDecimal.ROUND_HALF_UP);
+						positionData.getShareParAmount(), operationScale, BigDecimal.ROUND_HALF_UP);
 				securitySECData.setDerTIPSInflationaryRatio(derTIPSInflationaryRatio);
 			}
 

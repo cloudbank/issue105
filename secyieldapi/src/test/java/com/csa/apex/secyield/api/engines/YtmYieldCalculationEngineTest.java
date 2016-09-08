@@ -173,7 +173,7 @@ public class YtmYieldCalculationEngineTest {
 	 * derTIPSInflationaryRatio calculation test on normal scenario
 	 *
 	 * positionValInflationAdjShares = 50438.66
-	 * sharePerAmount = 45
+	 * shareParAmount = 45
 	 *
 	 * @throws Exception
 	 */
@@ -192,7 +192,7 @@ public class YtmYieldCalculationEngineTest {
 
 		PositionData positionData = new PositionData();
 		positionData.setPositionValInflationAdjShares(new BigDecimal("50438.66"));
-		positionData.setSharePerAmount(new BigDecimal("45"));
+		positionData.setShareParAmount(new BigDecimal("45"));
 		securitySECData.setPositionData(new PositionData[]{positionData});
 
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);

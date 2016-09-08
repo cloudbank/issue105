@@ -135,7 +135,7 @@ public class MockDataServiceUtility {
 		positionData.setAccruedIncome(BigDecimal.valueOf(257693.72));
 		positionData.setDerOneDaySecurityIncome(BigDecimal.valueOf(-4954.1549046));
 		positionData.setEarnedInflationaryCompensationBase(BigDecimal.valueOf(-4956.56));
-		positionData.setSharePerAmount(BigDecimal.valueOf(7000000));
+		positionData.setShareParAmount(BigDecimal.valueOf(7000000));
 		positionData.setPositionValInflationAdjShares(BigDecimal.valueOf(500));
 		securitySECData.setPositionData(new PositionData[] { positionData });
 		securityReferenceData.setSecurityRedemptionPrice(BigDecimal.valueOf(100));

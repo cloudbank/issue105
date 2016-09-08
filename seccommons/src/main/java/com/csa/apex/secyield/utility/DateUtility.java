@@ -27,7 +27,7 @@ public class DateUtility {
 	 * 
 	 * @param year
 	 *            year to be checked
-	 * @return
+	 * @return true, if it is leap year, false otherwise.
 	 */
 	private static Boolean isLeapYear(int year) {
 		GregorianCalendar cal = new GregorianCalendar();
@@ -59,7 +59,7 @@ public class DateUtility {
 	 * @param endDate
 	 *            end date
 	 * 
-	 * @return
+	 * @return true, if dates year/month are equals, false otherwise.
 	 */
 	private static Boolean compareMonthYear(DateTime startDate, DateTime endDate) {
 		Boolean isSame;

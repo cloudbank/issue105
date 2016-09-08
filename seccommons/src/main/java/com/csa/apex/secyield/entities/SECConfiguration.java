@@ -25,7 +25,7 @@ public class SECConfiguration {
 	/**
 	 * Rounding mode
 	 */
-	private int roundingMode;
+	private int roundingMode=-1;
 
 	/**
 	 * Constructor

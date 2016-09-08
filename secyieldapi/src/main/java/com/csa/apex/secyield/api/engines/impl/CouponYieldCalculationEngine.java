@@ -91,7 +91,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 		int passedOperationScale = configuration.getOperationScale();
 		int passedRoundingMode = configuration.getRoundingMode();
 		operationScale = passedOperationScale != 0 ? passedOperationScale : operationScale;
-		roundingMode = passedRoundingMode != 0 ? passedRoundingMode : roundingMode;
+		roundingMode = passedRoundingMode != -1 ? passedRoundingMode : roundingMode;
 	}
 
 	/**

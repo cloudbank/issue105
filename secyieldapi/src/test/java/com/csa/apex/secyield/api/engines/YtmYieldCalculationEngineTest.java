@@ -87,6 +87,7 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(114.7389035)));
 		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(1.022250268)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());		
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -111,6 +112,7 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(98.3082779)));
 		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(1.011740011)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -135,6 +137,7 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(104.7185855)));
 		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(1.00267030)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -162,6 +165,7 @@ public class YtmYieldCalculationEngineTest {
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(125.4284756)));
 		securitySECData.setDerTIPSInflationaryRatio(utility.getBigDecimalWithScale7(new BigDecimal(1.18024)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("12/01/2014"));
 		SECConfiguration configuration = new SECConfiguration();
 		ytmYieldCalculationEngine.calculate(securitySECData, configuration);
@@ -187,6 +191,7 @@ public class YtmYieldCalculationEngineTest {
 		securityReferenceData.setFinalMaturityDate(formatter.parse("02/15/2044"));
 		securitySECData.setSecurityPrice(utility.getBigDecimalWithScale7(new BigDecimal(114.7389035)));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		SECConfiguration configuration = new SECConfiguration();
 

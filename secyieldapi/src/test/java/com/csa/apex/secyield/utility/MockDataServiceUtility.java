@@ -57,6 +57,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityPrice(BigDecimal.valueOf(104.7185855));
 		securitySECData.setDerTIPSInflationaryRatio(BigDecimal.valueOf(0.001));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		data.add(securitySECData);
 
@@ -81,6 +82,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityPrice(BigDecimal.valueOf(104.7185855));
 		securitySECData.setDerTIPSInflationaryRatio(BigDecimal.valueOf(0.001));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		data.add(securitySECData);
 		return data;
@@ -117,6 +119,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityPrice(BigDecimal.valueOf(104.7185855));
 		securitySECData.setDerTIPSInflationaryRatio(BigDecimal.valueOf(0.001));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		securitySECData.setDerOneDaySecurityYield(BigDecimal.valueOf(1.375));
 		data.add(securitySECData);
@@ -145,6 +148,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityPrice(BigDecimal.valueOf(104.7185855));
 		securitySECData.setDerTIPSInflationaryRatio(BigDecimal.valueOf(0.001));
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 		securitySECData.setReportDate(formatter.parse("06/03/2016"));
 		securitySECData.setDerOneDaySecurityYield(BigDecimal.valueOf(0.0000123));
 		data.add(securitySECData);

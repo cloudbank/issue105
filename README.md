@@ -48,13 +48,13 @@ docs/sec_yield_api_postman_collection.json
 	1. ```mvn clean install ```   
 
 	1. Import data from excel  
-    `mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
+    `mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
 
 	  1. You can clean up calculation table by passing --clean or -c options  
-	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
+	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
 
 	  1. You can also pass path of mapping properties for excel if excel will change order of columns  
-		```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
+		```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
 
 	1. ```mvn spring-boot:run ```  
 

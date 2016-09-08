@@ -292,9 +292,9 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 
 
 	/**
-	 * It is count to perform binary search. The larger value will result in more precise outcome yield.
+	 * max iterations allowed in bisection algo. The larger value will result in more precise outcome yield.
 	 */
-	private int binarySearchCount;
+	private int bisectionAlgoMaximumIterations;
 
 	/**
 	 * Constructor
@@ -359,21 +359,21 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
     }
 
 	/**
-	 * Getter for binarySearchCount
+	 * Getter for bisectionAlgoMaximumIterations
 	 * 
 	 * @return
 	 */
-	public int getBinarySearchCount() {
-		return binarySearchCount;
+	public int getBisectionAlgoMaximumIterations() {
+		return bisectionAlgoMaximumIterations;
 	}
 
 	/**
-	 * Setter for binarySearchCount
+	 * Setter for bisectionAlgoMaximumIterations
 	 * 
-	 * @param binarySearchCount
+	 * @param bisectionAlgoMaximumIterations
 	 */
-	public void setBinarySearchCount(int binarySearchCount) {
-		this.binarySearchCount = binarySearchCount;
+	public void setBisectionAlgoMaximumIterations(int bisectionAlgoMaximumIterations) {
+		this.bisectionAlgoMaximumIterations = bisectionAlgoMaximumIterations;
 	}
 
 	/**
@@ -499,7 +499,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			Double startYield, Double endYield) {
 		int countSteps = 0;
 		Double mid = (endYield + startYield) / 2;
-		while (endYield > startYield && countSteps < binarySearchCount) {
+		while (endYield > startYield && countSteps < bisectionAlgoMaximumIterations) {
 			mid = (endYield + startYield) / 2;
 			Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, new BigDecimal(mid));
 			if (funcVal < 0) {
@@ -514,9 +514,8 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Calculates yield value for YtmYieldCalculationVariablesDTO object It increases yield value from epsilon and
-	 * checks whether yield function gives zero value. Then it uses binary search to improve accuracy of calculated
-	 * yield value
+	 * Calculates yield value for YtmYieldCalculationVariablesDTO object.
+	 * It uses bisection algo to calculate value
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
 	 *            the passed YtmYieldCalculationVariablesDTO object

@@ -314,7 +314,7 @@ public class ImportExcel {
      * Main function
      * @param args the arguments
      */
-    public static void main(String[]args) {
+    public static void main(String[] args) {
         Options options = new Options();
         options.addOption("c", "clean", false, "clean up calculation tables");
         options.addOption("h", "help", false, "print help");

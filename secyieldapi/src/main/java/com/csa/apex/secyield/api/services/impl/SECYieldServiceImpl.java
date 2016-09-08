@@ -357,7 +357,6 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecuritySECData> processSecuritySECData(Date businessDate) throws SECYieldException {
 		List<SecuritySECData> failedSecuritySECDataList = new ArrayList<SecuritySECData>();
@@ -408,7 +407,6 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate) throws SECYieldException {
 		if (businessDate == null) {

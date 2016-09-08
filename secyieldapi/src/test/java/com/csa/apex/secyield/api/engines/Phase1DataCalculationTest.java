@@ -89,6 +89,7 @@ public class Phase1DataCalculationTest {
             clonedPositionData
                     .setEarnedAmortizationBase(securitySECData.getPositionData()[0].getEarnedAmortizationBase());
             clonedPositionData.setShareParAmount(securitySECData.getPositionData()[0].getShareParAmount());
+            clonedPositionData.setPositionValInflationAdjShares(securitySECData.getPositionData()[0].getPositionValInflationAdjShares());
             SECConfiguration configuration = new SECConfiguration();
             calculationEngineSelector.calculate(cloneSecuritySECData, configuration);
             if ("VPS".equalsIgnoreCase(cloneSecuritySECData.getSecurityReferenceData().getIvType())) {

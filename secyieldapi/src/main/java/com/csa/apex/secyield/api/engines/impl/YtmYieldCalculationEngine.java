@@ -4,11 +4,11 @@
 package com.csa.apex.secyield.api.engines.impl;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.csa.apex.secyield.entities.PositionData;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
@@ -579,6 +579,14 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 		setConfiguration(configuration);
 		try {
+			// Calculate derTIPSInflationaryRatio
+			if (securitySECData.getPositionData() != null && securitySECData.getPositionData().length > 0) {
+				PositionData positionData = securitySECData.getPositionData()[0];
+				BigDecimal derTIPSInflationaryRatio = positionData.getPositionValInflationAdjShares().divide(
+						positionData.getSharePerAmount(), operationScale, BigDecimal.ROUND_HALF_UP);
+				securitySECData.setDerTIPSInflationaryRatio(derTIPSInflationaryRatio);
+			}
+
 			// initialize parameters for the expression
 			// set P (clean price) as Market Price/Inflationary Index Ratio
 			BigDecimal cleanPrice = securitySECData.getSecurityPrice()
@@ -625,6 +633,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			BigDecimal yield = getYield(ytmYieldCalculationVariablesDTO);
 			yield = yield.setScale(operationScale, roundingMode);
 			securitySECData.setDerOneDaySecurityYield(yield);
+
 			return securitySECData;
 
 		} catch (Exception e) {

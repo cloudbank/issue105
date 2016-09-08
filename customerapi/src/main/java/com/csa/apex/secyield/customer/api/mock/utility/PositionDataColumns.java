@@ -19,7 +19,7 @@ public enum PositionDataColumns {
 	MARKET_VALUE("market_value"),
 	SHARE_PAR_AMOUNT("share_par_amount"),
 	EARNED_AMORTIZATION_BASE("earned_amortization_base"),
-	POSITION_VAL_INFLATION_ADJ_SHARE("position_val_inflation_adj_shares"),
+	POSITION_VAL_INFLATION_ADJ_SHARES("position_val_inflation_adj_shares"),
 	DER_ONE_DAY_SECURITY_INCOME("der_one_day_security_income");
 
 	/**

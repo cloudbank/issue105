@@ -151,7 +151,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 			"securityName", "finalMaturityDate", "securityRedemptionPrice", "interestRt", "defIndicator",
 			"derStepIndicator", "derHybridIndicator", "ioHybridField", "as400RateType", "prospectiveMethod",
 			"portfolioNumber", "portfolioName", "earnedInflationaryCompensationBase", "accruedIncome", "marketValue",
-			"shareParAmount", "earnedAmortizationBase", "positionValInflationAdjShare", "derOneDaySecurityIncome" };
+			"shareParAmount", "earnedAmortizationBase", "positionValInflationAdjShares", "derOneDaySecurityIncome" };
 
 	/**
 	 * Checks error in parallel processing
@@ -600,7 +600,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 		values[index++] = String.valueOf(positionData.getMarketValue());
 		values[index++] = String.valueOf(positionData.getShareParAmount());
 		values[index++] = String.valueOf(positionData.getEarnedAmortizationBase());
-		values[index++] = String.valueOf(positionData.getPositionValInflationAdjShare());
+		values[index++] = String.valueOf(positionData.getPositionValInflationAdjShares());
 		values[index++] = String.valueOf(positionData.getDerOneDaySecurityIncome());
 
 		return values;

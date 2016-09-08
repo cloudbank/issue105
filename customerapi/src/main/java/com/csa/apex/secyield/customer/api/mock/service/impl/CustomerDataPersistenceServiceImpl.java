@@ -39,6 +39,7 @@ import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * Persistence service for customer data operations implementing the persistence interface. This class is effectively
@@ -230,6 +231,11 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	@Override
 	public List<SecuritySECData> getCustomerSECData(Date businessDate) throws SECYieldException {
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCustomerSECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		return extractSecuritySECData(businessDate, SECURITY_SEC_DATA_QUERY);
 	}
 
@@ -353,6 +359,11 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	@Override
 	public List<SecuritySECData> getCalculatedSECData(Date businessDate) throws SECYieldException {
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCalculatedSECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		return extractSecuritySECData(businessDate, CALCULATED_SECURITY_SEC_DATA_QUERY);
 	}
 

@@ -32,6 +32,7 @@ import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
+import com.csa.apex.secyield.utility.CommonUtility;
 import com.csa.apex.secyield.utility.Constants;
 
 /**
@@ -359,6 +360,11 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Override
 	public List<SecuritySECData> processSecuritySECData(Date businessDate) throws SECYieldException {
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "processSecuritySECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		List<SecuritySECData> failedSecuritySECDataList = new ArrayList<SecuritySECData>();
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCustomerDataApiPath)
@@ -409,11 +415,11 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Override
 	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate) throws SECYieldException {
-		if (businessDate == null) {
-			logger.error(
-					String.format(logErrorFormat, "getCalculatedSecuritySECData", illegalArgumentExceptionMessage));
-			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
-		}
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCalculatedSecuritySECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam("businessDate", dateFormat.format(businessDate));
@@ -494,11 +500,11 @@ public class SECYieldServiceImpl implements SECYieldService {
 	@Override
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
 			throws IllegalArgumentException, SECYieldException {
-		if (businessDate == null) {
-			logger.error(String.format(logErrorFormat, exportCalculatedSecuritySECDataMethodName,
-					illegalArgumentExceptionMessage));
-			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
-		}
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, exportCalculatedSecuritySECDataMethodName,
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		try {
 			final List<SecuritySECData> calculatedSecuritySECData = getCalculatedSecuritySECData(businessDate);
 			createExportArchive(response,

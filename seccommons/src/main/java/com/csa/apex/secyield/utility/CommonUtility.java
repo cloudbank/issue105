@@ -57,6 +57,25 @@ public class CommonUtility {
         }
 
     }
+    
+    /**
+     * Check if passed business date is invalid.
+     * More checks can be applied later to check date validity
+     * 
+     * @param businessDate
+     * @return boolean true if date invalid else false
+     */
+    public static Boolean checkBusinessDateInValid(Date businessDate)
+    {
+        if(businessDate == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     /**
      * Set file name

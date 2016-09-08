@@ -125,6 +125,12 @@ public class CouponIncomeCalculationEngine implements CalculationEngine {
 				am = positionData.getEarnedAmortizationBase();
 				sh = positionData.getShareParAmount();
 
+				if((am == null) || (sh == null))
+				{
+					logger.info(String.format("In CouponIncomeCalculationEngine.calculate method, am:%s,sh:%s",am,sh));
+					continue;
+				}
+
 				BigDecimal rightSide = sh.multiply(y).divide(fx, operationScale, BigDecimal.ROUND_HALF_UP)
 						.divide(new BigDecimal(360), operationScale, BigDecimal.ROUND_HALF_UP);
 				income = am.divide(fx, operationScale, BigDecimal.ROUND_HALF_UP).add(rightSide);

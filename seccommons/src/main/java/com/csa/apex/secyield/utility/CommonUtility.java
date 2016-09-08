@@ -63,7 +63,7 @@ public class CommonUtility {
      * 
      * @param fileName
      */
-    public void setFileName(String fileName) {
+    static public void setFileName(String fileName) {
         csvTestDataFileName = fileName;
     }
 
@@ -103,51 +103,47 @@ public class CommonUtility {
         // map column to index;
         HashMap<String, Integer> columnIndex = new HashMap<String, Integer>();
         while ((nextLine = reader.readNext()) != null) {
-            if (nextLine != null) {
-
-                SecuritySECData securitySECData = new SecuritySECData();
-                SecurityReferenceData securityReferenceData = new SecurityReferenceData();
-                PositionData positionData = new PositionData();
-                securityReferenceData.setIvType(nextLine[csvTestDataColumns.get("ivType")]);
-                securitySECData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
-                securityReferenceData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
-                positionData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
-                securityReferenceData.setSecurityName(nextLine[csvTestDataColumns.get("securityName")]);
-                securityReferenceData.setSecurityRedemptionPrice(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("securityRedemptionPrice")]));
-                securityReferenceData
-                        .setDerStepIndicator(getBooleanValue((nextLine[csvTestDataColumns.get("derStepIndicator")])));
-                securityReferenceData.setDerHybridIndicator(
-                        getBooleanValue((nextLine[csvTestDataColumns.get("derHybridIndicator")])));
-                securitySECData.setDerYieldCalcEngine((nextLine[csvTestDataColumns.get("deryieldCalcEngine")]));
-                securityReferenceData.setInterestRt(getBigDecimalValue(nextLine[csvTestDataColumns.get("interestRt")]));
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                Date maturityDate = format.parse(nextLine[csvTestDataColumns.get("finalMaturityDate")]);
-                securityReferenceData.setFinalMaturityDate(maturityDate);
-                securitySECData.setSecurityPrice(getBigDecimalValue(nextLine[csvTestDataColumns.get("securityPrice")]));
-                securitySECData.setFxRate(getBigDecimalValue(nextLine[csvTestDataColumns.get("fxRate")]));
-                securitySECData.setDerTIPSInflationaryRatio(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("derTIPSInflationaryRatio")]));
-                securitySECData.setDerOneDaySecurityYield(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("derOneDaySecurityYield")]));
-                securitySECData.setSecurityReferenceData(securityReferenceData);
-                Date reportDate = format.parse(nextLine[csvTestDataColumns.get("reportDate")]);
-                securitySECData.setReportDate(reportDate);
-                positionData.setMarketValue(getBigDecimalValue(nextLine[csvTestDataColumns.get("marketValue")]));
-                positionData.setAccruedIncome(getBigDecimalValue(nextLine[csvTestDataColumns.get("accruedIncome")]));
-                positionData.setEarnedInflationaryCompensationBase(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedInflationaryCompensationBase")]));
-                positionData.setDerOneDaySecurityIncome(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("derOneDaySecurityIncome")]));
-                positionData.setShareParAmount(getBigDecimalValue(nextLine[csvTestDataColumns.get("shareParAmount")]));
-                positionData.setEarnedAmortizationBase(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedAmortizationBase")]));
-                positionData.setPositionValInflationAdjShares(
-                        getBigDecimalValue(nextLine[csvTestDataColumns.get("positionValInflationAdjShares")]));
-                securitySECData.setPositionData(new PositionData[] { positionData });
-                entities.add(securitySECData);
-
-            }
+            SecuritySECData securitySECData = new SecuritySECData();
+            SecurityReferenceData securityReferenceData = new SecurityReferenceData();
+            PositionData positionData = new PositionData();
+            securityReferenceData.setIvType(nextLine[csvTestDataColumns.get("ivType")]);
+            securitySECData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
+            securityReferenceData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
+            positionData.setSecurityIdentifier(nextLine[csvTestDataColumns.get("securityIdentifier")]);
+            securityReferenceData.setSecurityName(nextLine[csvTestDataColumns.get("securityName")]);
+            securityReferenceData.setSecurityRedemptionPrice(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("securityRedemptionPrice")]));
+            securityReferenceData
+                    .setDerStepIndicator(getBooleanValue((nextLine[csvTestDataColumns.get("derStepIndicator")])));
+            securityReferenceData.setDerHybridIndicator(
+                    getBooleanValue((nextLine[csvTestDataColumns.get("derHybridIndicator")])));
+            securitySECData.setDerYieldCalcEngine((nextLine[csvTestDataColumns.get("deryieldCalcEngine")]));
+            securityReferenceData.setInterestRt(getBigDecimalValue(nextLine[csvTestDataColumns.get("interestRt")]));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date maturityDate = format.parse(nextLine[csvTestDataColumns.get("finalMaturityDate")]);
+            securityReferenceData.setFinalMaturityDate(maturityDate);
+            securitySECData.setSecurityPrice(getBigDecimalValue(nextLine[csvTestDataColumns.get("securityPrice")]));
+            securitySECData.setFxRate(getBigDecimalValue(nextLine[csvTestDataColumns.get("fxRate")]));
+            securitySECData.setDerTIPSInflationaryRatio(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("derTIPSInflationaryRatio")]));
+            securitySECData.setDerOneDaySecurityYield(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("derOneDaySecurityYield")]));
+            securitySECData.setSecurityReferenceData(securityReferenceData);
+            Date reportDate = format.parse(nextLine[csvTestDataColumns.get("reportDate")]);
+            securitySECData.setReportDate(reportDate);
+            positionData.setMarketValue(getBigDecimalValue(nextLine[csvTestDataColumns.get("marketValue")]));
+            positionData.setAccruedIncome(getBigDecimalValue(nextLine[csvTestDataColumns.get("accruedIncome")]));
+            positionData.setEarnedInflationaryCompensationBase(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedInflationaryCompensationBase")]));
+            positionData.setDerOneDaySecurityIncome(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("derOneDaySecurityIncome")]));
+            positionData.setShareParAmount(getBigDecimalValue(nextLine[csvTestDataColumns.get("shareParAmount")]));
+            positionData.setEarnedAmortizationBase(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("earnedAmortizationBase")]));
+            positionData.setPositionValInflationAdjShares(
+                    getBigDecimalValue(nextLine[csvTestDataColumns.get("positionValInflationAdjShares")]));
+            securitySECData.setPositionData(new PositionData[] { positionData });
+            entities.add(securitySECData);
         }
         return entities;
     }
@@ -175,7 +171,7 @@ public class CommonUtility {
      * @param value
      * @return parsed value
      */
-    public static Boolean getBooleanValue(String value) {
+    private static Boolean getBooleanValue(String value) {
         if (value != null && value.compareTo("T") == 0) {
             return true;
         } else {

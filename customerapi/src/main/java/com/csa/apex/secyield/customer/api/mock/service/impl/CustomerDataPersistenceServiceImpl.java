@@ -108,7 +108,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	/**
 	 * The db date format
 	 */
-	private static final SimpleDateFormat DB_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd");
+	private final SimpleDateFormat DB_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd");
 
 	/**
 	 * The table name of calculated_position_data
@@ -259,6 +259,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 					securitySECData.getSecurityIdentifier()));
 			return true;
 		} catch (EmptyResultDataAccessException e) {
+			logger.debug("Security SEC data with identifier {%s} was not found.", e);
 			logger.info(String.format("Persisting Security SEC data with identifier {%s}.",
 					securitySECData.getSecurityIdentifier()));
 			SecurityReferenceData securityReferenceData = securitySECData.getSecurityReferenceData();
@@ -499,6 +500,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			rs.findColumn(column);
 			return true;
 		} catch (SQLException ex) {
+			logger.debug("Column " + column + " is not present in the result set.", ex);
 			return false;
 		}
 	}

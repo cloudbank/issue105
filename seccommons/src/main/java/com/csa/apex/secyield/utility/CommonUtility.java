@@ -109,14 +109,10 @@ public class CommonUtility {
      * 
      */
     public static List<SecuritySECData> parsePhase1TestData() throws IOException, ParseException {
-        // System.out.println(csvTestDataFileName);
-        // System.out.println(csvTestDataColumns);
         CSVReader reader = new CSVReader(
                 new InputStreamReader(CommonUtility.class.getResourceAsStream(csvTestDataFileName)), ',', '"', 1);
         List<SecuritySECData> entities = new ArrayList<SecuritySECData>();
         String[] nextLine;
-        // map column to index;
-        HashMap<String, Integer> columnIndex = new HashMap<String, Integer>();
         while ((nextLine = reader.readNext()) != null) {
             SecuritySECData securitySECData = new SecuritySECData();
             SecurityReferenceData securityReferenceData = new SecurityReferenceData();
@@ -172,7 +168,6 @@ public class CommonUtility {
      * @return parsedValue
      */
     private static BigDecimal getBigDecimalValue(String value) {
-        // System.out.println(value);
         BigDecimal calcVal;
         if (value == null || value.isEmpty() || value.trim().compareTo("-") == 0) {
             calcVal = new BigDecimal("0");

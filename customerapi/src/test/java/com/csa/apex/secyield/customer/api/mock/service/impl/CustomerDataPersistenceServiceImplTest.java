@@ -97,6 +97,17 @@ public class CustomerDataPersistenceServiceImplTest {
 		assertEquals(persistedSecuritySECData.getPositionData().length, securitySECData.getPositionData().length);
 	}
 
+ 	/**
+ 	 * Test performRedemptionDateAndMaturityDateEqualityTest()
+ 	 *
+ 	 * @throws Exception
+ 	 */
+ 	@Test
+ 	public void performRedemptionDateAndMaturityDateEqualityTest() throws Exception {
+ 		SecuritySECData securitySECData = TestUtility.getTestSecuritySECData();
+ 		assertEquals(securitySECData.getDerRedemptionDate(), securitySECData.getSecurityReferenceData().getFinalMaturityDate());
+ 	}
+
 	/**
 	 * Test persistSecuritySECData throws IllegalArgumentException in case the provided security SEC data is null
 	 * 

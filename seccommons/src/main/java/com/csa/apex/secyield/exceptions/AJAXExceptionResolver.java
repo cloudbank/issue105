@@ -47,7 +47,7 @@ public class AJAXExceptionResolver extends SimpleMappingExceptionResolver {
 					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, getMessage("UNKNOWN_ERROR_ON_REQUEST"));
 				}
 			} catch (IOException e) {
-				logger.error("An I/O error occured while resolving exception.");
+				logger.error("An I/O error occured while resolving exception.", e);
 			}
 			return null;
 		} else {

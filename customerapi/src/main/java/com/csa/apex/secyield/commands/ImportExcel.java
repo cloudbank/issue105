@@ -295,6 +295,7 @@ public class ImportExcel {
                     data.setReportDate(reportDate);
                     SecurityReferenceData securityReferenceData = parseSecurityReferenceData(row, props,conf);
                     data.setSecurityReferenceData(securityReferenceData);
+                    data.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
                     PositionData fundData = parsePositionData(row, props,conf);
                     data.setPositionData(new PositionData[]{fundData});
                     data.setDerTIPSInflationaryRatio(getNumericCellValue(row, props.get("derTIPSInflationaryRatio")));
@@ -320,6 +321,7 @@ public class ImportExcel {
                     data.setSecurityIdentifier(i);
                     data.setReportDate(r);
                     data.setSecurityReferenceData(firstData.getSecurityReferenceData());
+                    data.setDerRedemptionDate(firstData.getSecurityReferenceData().getFinalMaturityDate());
                     data.setPositionData(v.stream().map(x -> x.getPositionData()[0]).toArray(PositionData[]::new));
                     data.setDerSecurityType(firstData.getDerSecurityType());
                     data.setDerTIPSInflationaryRatio(v.stream().map(SecuritySECData::getDerTIPSInflationaryRatio).reduce(BigDecimal::add).get().divide(bigDecimalSize, operationScale, roundingMode));

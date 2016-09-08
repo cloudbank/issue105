@@ -255,6 +255,11 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	public static final String ENGINE_NAME = "YtmYieldCalculationEngine";
 
 	/**
+	 * Calculation engine name
+	 */
+	public static final String SECURITY_TYPE = "TIPS";
+
+	/**
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
@@ -578,6 +583,9 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 		setConfiguration(configuration);
 		try {
+			// Set derSecurityType
+			securitySECData.setDerSecurityType(SECURITY_TYPE);
+
 			// Calculate derTIPSInflationaryRatio
 			if (securitySECData.getPositionData() != null && securitySECData.getPositionData().length > 0) {
 				PositionData positionData = securitySECData.getPositionData()[0];

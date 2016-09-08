@@ -78,7 +78,7 @@ public class CommonUtility {
      * 
      * @param fileName
      */
-    public void setFileName(String fileName) {
+    static public void setFileName(String fileName) {
         CommonUtility.csvTestDataFileName = fileName;
     }
 
@@ -118,7 +118,6 @@ public class CommonUtility {
         // map column to index;
         HashMap<String, Integer> columnIndex = new HashMap<String, Integer>();
         while ((nextLine = reader.readNext()) != null) {
-
             SecuritySECData securitySECData = new SecuritySECData();
             SecurityReferenceData securityReferenceData = new SecurityReferenceData();
             PositionData positionData = new PositionData();
@@ -131,8 +130,8 @@ public class CommonUtility {
                     getBigDecimalValue(nextLine[csvTestDataColumns.get("securityRedemptionPrice")]));
             securityReferenceData
                     .setDerStepIndicator(getBooleanValue((nextLine[csvTestDataColumns.get("derStepIndicator")])));
-            securityReferenceData
-                    .setDerHybridIndicator(getBooleanValue((nextLine[csvTestDataColumns.get("derHybridIndicator")])));
+            securityReferenceData.setDerHybridIndicator(
+                    getBooleanValue((nextLine[csvTestDataColumns.get("derHybridIndicator")])));
             securitySECData.setDerYieldCalcEngine((nextLine[csvTestDataColumns.get("deryieldCalcEngine")]));
             securityReferenceData.setInterestRt(getBigDecimalValue(nextLine[csvTestDataColumns.get("interestRt")]));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -147,6 +146,7 @@ public class CommonUtility {
             securitySECData.setSecurityReferenceData(securityReferenceData);
             Date reportDate = format.parse(nextLine[csvTestDataColumns.get("reportDate")]);
             securitySECData.setReportDate(reportDate);
+            securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
             positionData.setMarketValue(getBigDecimalValue(nextLine[csvTestDataColumns.get("marketValue")]));
             positionData.setAccruedIncome(getBigDecimalValue(nextLine[csvTestDataColumns.get("accruedIncome")]));
             positionData.setEarnedInflationaryCompensationBase(
@@ -160,7 +160,6 @@ public class CommonUtility {
                     getBigDecimalValue(nextLine[csvTestDataColumns.get("positionValInflationAdjShares")]));
             securitySECData.setPositionData(new PositionData[] { positionData });
             entities.add(securitySECData);
-
         }
         reader.close();
         return entities;
@@ -189,7 +188,7 @@ public class CommonUtility {
      * @param value
      * @return parsed value
      */
-    public static Boolean getBooleanValue(String value) {
+    private static Boolean getBooleanValue(String value) {
         if (value != null && value.compareTo("T") == 0) {
             return true;
         } else {

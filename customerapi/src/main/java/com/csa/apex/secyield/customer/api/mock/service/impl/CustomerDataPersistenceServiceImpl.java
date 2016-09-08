@@ -272,6 +272,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 					securitySECData.getSecurityIdentifier()));
 			return true;
 		} catch (EmptyResultDataAccessException e) {
+			logger.debug("Security SEC data with identifier {%s} was not found.", e);
 			logger.info(String.format("Persisting Security SEC data with identifier {%s}.",
 					securitySECData.getSecurityIdentifier()));
 			SecurityReferenceData securityReferenceData = securitySECData.getSecurityReferenceData();
@@ -498,6 +499,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 						.setDerYieldCalcEngine(rs.getString(SecuritySECDataColumns.DER_YIELD_CALC_ENGINE.getName()));
 			}
 			securitySECData.setSecurityReferenceData(securityReferenceData);
+			securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 			return securitySECData;
 		}
 

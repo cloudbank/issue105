@@ -52,6 +52,11 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	public static final String ENGINE_NAME = "CouponYieldCalculationEngine";
 
 	/**
+	 * Calculation engine name
+	 */
+	public static final String SECURITY_TYPE = "MUNI";
+
+	/**
 	 * The scale for the BigDecimal operations. Has the default value.
 	 */
 	private int operationScale = 7;
@@ -112,6 +117,9 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 		}
 		setConfiguration(configuration);
 		try {
+			// Set derSecurityType
+			securitySECData.setDerSecurityType(SECURITY_TYPE);
+
 			if (securitySECData.getSecurityPrice() != null && securitySECData.getDerTIPSInflationaryRatio() != null) {
 				BigDecimal cleanPrice = securitySECData.getSecurityPrice()
 						.divide(securitySECData.getDerTIPSInflationaryRatio(), operationScale, BigDecimal.ROUND_HALF_UP);

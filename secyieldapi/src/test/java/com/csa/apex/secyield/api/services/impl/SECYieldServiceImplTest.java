@@ -132,6 +132,20 @@ public class SECYieldServiceImplTest {
 		assertEquals(data.size(), 2);
 	}
 
+ 	/**
+ 	 * Test performRedemptionDateAndMaturityDateEqualityTest()
+ 	 *
+ 	 * @throws Exception
+ 	 */
+ 	@Test
+ 	public void performRedemptionDateAndMaturityDateEqualityTest() throws Exception {
+ 		List<SecuritySECData> data = secyYieldServiceImpl.getCalculatedSecuritySECData(new Date());
+ 		for(SecuritySECData securitySECData :data)
+ 		{
+ 			assertEquals(securitySECData.getDerRedemptionDate(), securitySECData.getSecurityReferenceData().getFinalMaturityDate());
+ 		}
+ 	}
+
 	/**
 	 * Test exportCalculatedSecuritySECData
 	 * 

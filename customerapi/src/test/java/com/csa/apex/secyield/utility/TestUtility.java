@@ -53,6 +53,7 @@ public class TestUtility {
 		securityReferenceData.setSecurityName("security_name_test");
 		securityReferenceData.setSecurityRedemptionPrice(BigDecimal.TEN);
 		securitySECData.setSecurityReferenceData(securityReferenceData);
+ 		securitySECData.setDerRedemptionDate(securityReferenceData.getFinalMaturityDate());
 
 		PositionData[] positionDataArray = new PositionData[3];
 		for (int i = 0; i < positionDataArray.length; i++) {

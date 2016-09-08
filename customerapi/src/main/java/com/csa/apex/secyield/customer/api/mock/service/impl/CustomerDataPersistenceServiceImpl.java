@@ -117,47 +117,48 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
-	/**
-	 * The table name of calculated_position_data
-	 */
-	public static final String TABLE_CALCULATED_POSITION_DATA = "calculated_position_data";
+	 /**
+     * The table name of calculated_position_data
+     */
+    @Value("${table.calculated_position_data}")
+    public String tableCalculatedPositionData;
+    /**
+     * The table name of calculated_security_sec_data
+     */
+    @Value("${table.calculated_security_sec_data}")
+    public String tableCalculatedSecuritySecData;
 
-	/**
-	 * The table name of calculated_security_sec_data
-	 */
-	public static final String TABLE_CALCULATED_SECURITY_SEC_DATA = "calculated_security_sec_data";
+    /**
+     * The table name of customer_position_data
+     */
+    @Value("${table.customer_position_data}")
+    public String tableCustomerPositionData;
 
-	/**
-	 * The table name of customer_position_data
-	 */
-	public static final String TABLE_CUSTOMER_POSITION_DATA = "customer_position_data";
+    /**
+     * The table name of customer_security_sec_data
+     */
+    @Value("${table.customer_security_sec_data}")
+    public String tableCustomerSecuritySecData;
 
-	/**
-	 * The table name of customer_security_sec_data
-	 */
-	public static final String TABLE_CUSTOMER_SECURITY_SEC_DATA = "customer_security_sec_data";
+    /**
+     * The select query for retrieving all calculated security SEC data with
+     * their position data
+     */
+    @Value("${query.calculated_security_sec_data_query}")
+    private String calculatedSecuritySecDataQuery;
 
-	/**
-	 * The select query for retrieving all calculated security SEC data with their position data
-	 */
-	private static final String CALCULATED_SECURITY_SEC_DATA_QUERY = "SELECT * FROM "
-			+ TABLE_CALCULATED_SECURITY_SEC_DATA + " cssd " + "LEFT JOIN " + TABLE_CALCULATED_POSITION_DATA
-			+ " cpd ON cssd.security_identifier = cpd.security_identifier AND cssd.report_date = cpd.report_date "
-			+ "WHERE cssd.report_date >= ? AND cssd.report_date < ?";
-
-	/**
-	 * The select query for retrieving all security SEC data with their position data
-	 */
-	private static final String SECURITY_SEC_DATA_QUERY = "SELECT * FROM " + TABLE_CUSTOMER_SECURITY_SEC_DATA
-			+ " cssd LEFT JOIN " + "" + TABLE_CUSTOMER_POSITION_DATA + " cpd ON cssd.security_identifier = "
-			+ "cpd.security_identifier AND cssd.report_date = cpd.report_date WHERE cssd.report_date >= ? AND "
-			+ "cssd.report_date < ?";
-
-	/**
-	 * The select query for retrieving a security SEC data by security identifier
-	 */
-	private static final String FIND_SECURITY_SEC_DATA_QUERY = "SELECT * FROM " + TABLE_CALCULATED_SECURITY_SEC_DATA
-			+ " WHERE security_identifier = ?";
+    /**
+     * The select query for retrieving all security SEC data with their position
+     * data
+     */
+    @Value("${query.security_sec_data_query}")
+    private String securitySecDataQuery;
+    /**
+     * The select query for retrieving a security SEC data by security
+     * identifier
+     */
+    @Value("${query.find_security_sec_data_query}")
+    private String findSecuritySecDataQuery;
 
 	/**
 	 * Constructor
@@ -219,9 +220,9 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			throw new ConfigurationException(configurationArgumentExceptionMessage);
 		}
 		insertSecuritySECData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-				.withTableName(TABLE_CALCULATED_SECURITY_SEC_DATA);
+				.withTableName(tableCalculatedSecuritySecData);
 		insertPositionData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-				.withTableName(TABLE_CALCULATED_POSITION_DATA);
+				.withTableName(tableCalculatedPositionData);
 	}
 
 	/**
@@ -242,7 +243,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
                     illegalArgumentExceptionMessage));
             throw new IllegalArgumentException(illegalArgumentExceptionMessage);
         }
-		return extractSecuritySECData(businessDate, SECURITY_SEC_DATA_QUERY);
+		return extractSecuritySECData(businessDate, securitySecDataQuery);
 	}
 
 	/**
@@ -265,7 +266,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
 		try {
-			jdbcTemplate.queryForObject(FIND_SECURITY_SEC_DATA_QUERY, new SecuritySECDataRowMapper(),
+			jdbcTemplate.queryForObject(findSecuritySecDataQuery, new SecuritySECDataRowMapper(),
 					securitySECData.getSecurityIdentifier());
 			logger.info(String.format("Security SEC data with identifier {%s} was already calculated.",
 					securitySECData.getSecurityIdentifier()));
@@ -370,7 +371,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
                     illegalArgumentExceptionMessage));
             throw new IllegalArgumentException(illegalArgumentExceptionMessage);
         }
-		return extractSecuritySECData(businessDate, CALCULATED_SECURITY_SEC_DATA_QUERY);
+		return extractSecuritySECData(businessDate, calculatedSecuritySecDataQuery);
 	}
 
 	/**

@@ -71,6 +71,12 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
+	
+    /**
+     * extractSecuritySECData method name
+     */
+    @Value("${customerdatapersistenceserviceimpl.iscolumninresultsetmethodname}")
+    private String isColumnInResultSetMethodName;
 
 	/**
 	 * Illegal Argument Exception Message
@@ -109,7 +115,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	/**
 	 * The db date format
 	 */
-	private static final SimpleDateFormat DB_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd");
+	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
 	/**
 	 * The table name of calculated_position_data
@@ -389,8 +395,8 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 		final DateTime businessDateTime = new DateTime(businessDate).withTimeAtStartOfDay();
 		// Get the data for a single business date (from the start to the end of the day)
 		return jdbcTemplate.query(query,
-				new Object[] { DB_DATE_FORMAT.format(businessDateTime.toDate()),
-						DB_DATE_FORMAT.format(businessDateTime.plusDays(1).withTimeAtStartOfDay().toDate()) },
+				new Object[] { dbDateFormat.format(businessDateTime.toDate()),
+				        dbDateFormat.format(businessDateTime.plusDays(1).withTimeAtStartOfDay().toDate()) },
 				new SecuritySECDataResultSetExtractor());
 	}
 
@@ -510,6 +516,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			rs.findColumn(column);
 			return true;
 		} catch (SQLException ex) {
+		    logger.error(String.format(logErrorFormat, isColumnInResultSetMethodName, ex.getMessage()));
 			return false;
 		}
 	}

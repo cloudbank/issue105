@@ -41,7 +41,7 @@ public class CommonUtility {
     /**
      * Test data csv file name
      */
-    private static String csvTestDataFileName = "";
+    private static volatile String csvTestDataFileName = "";
 
     /**
      * Set csv columns index
@@ -83,7 +83,7 @@ public class CommonUtility {
      * @param fileName
      */
     public void setFileName(String fileName) {
-        csvTestDataFileName = fileName;
+        CommonUtility.csvTestDataFileName = fileName;
     }
 
     /**

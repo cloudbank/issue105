@@ -65,7 +65,7 @@ public class TestUtility {
 			positionData.setPortfolioNumber(BigDecimal.TEN.add(BigDecimal.valueOf(i)));
 			positionData.setPositionValInflationAdjShare(BigDecimal.TEN);
 			positionData.setReportDate(reportDate);
-			positionData.setSharePerAmount(BigDecimal.TEN);
+			positionData.setShareParAmount(BigDecimal.TEN);
 			positionData.setDerOneDaySecurityIncome(BigDecimal.TEN);
 			positionDataArray[i] = positionData;
 		}

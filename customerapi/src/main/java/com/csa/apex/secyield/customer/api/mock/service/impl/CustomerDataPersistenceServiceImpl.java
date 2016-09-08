@@ -318,7 +318,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 							.addValue(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName(),
 									posData.getPositionValInflationAdjShare())
 							.addValue(PositionDataColumns.REPORT_DATE.getName(), posData.getReportDate())
-							.addValue(PositionDataColumns.SHARE_PER_AMOUNT.getName(), posData.getSharePerAmount())
+							.addValue(PositionDataColumns.SHARE_PAR_AMOUNT.getName(), posData.getShareParAmount())
 							.addValue(PositionDataColumns.DER_ONE_DAY_SECURITY_INCOME.getName(),
 									posData.getDerOneDaySecurityIncome());
 					insertPositionData.execute(positionDataParameters);
@@ -409,7 +409,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			positionData.setPositionValInflationAdjShare(
 					rs.getBigDecimal(PositionDataColumns.POSITION_VAL_INFLATION_ADJ_SHARE.getName()));
 			positionData.setReportDate(rs.getTimestamp(PositionDataColumns.REPORT_DATE.getName()));
-			positionData.setSharePerAmount(rs.getBigDecimal(PositionDataColumns.SHARE_PER_AMOUNT.getName()));
+			positionData.setShareParAmount(rs.getBigDecimal(PositionDataColumns.SHARE_PAR_AMOUNT.getName()));
 
 			// Calculated fields
 			if (isColumnInResultSet(rs, PositionDataColumns.DER_ONE_DAY_SECURITY_INCOME.getName())) {

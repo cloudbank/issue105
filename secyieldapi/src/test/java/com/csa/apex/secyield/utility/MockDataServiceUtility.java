@@ -47,7 +47,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityReferenceData(securityReferenceData);
 		securitySECData.setFxRate(new BigDecimal(1));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(BigDecimal.valueOf(7000000));
+		positionData.setShareParAmount(BigDecimal.valueOf(7000000));
 		positionData.setEarnedAmortizationBase(BigDecimal.valueOf(-45.69));
 		securitySECData.setPositionData(new PositionData[] { positionData });
 		securityReferenceData.setSecurityRedemptionPrice(BigDecimal.valueOf(100));
@@ -105,7 +105,7 @@ public class MockDataServiceUtility {
 		securitySECData.setSecurityReferenceData(securityReferenceData);
 		securitySECData.setFxRate(new BigDecimal(1));
 		PositionData positionData = new PositionData();
-		positionData.setSharePerAmount(BigDecimal.valueOf(7000000));
+		positionData.setShareParAmount(BigDecimal.valueOf(7000000));
 		positionData.setEarnedAmortizationBase(BigDecimal.valueOf(-45.69));
 		positionData.setDerOneDaySecurityIncome(BigDecimal.valueOf(26690.4211111));
 		securitySECData.setPositionData(new PositionData[] { positionData });

@@ -61,7 +61,7 @@ public class PositionData {
 	/**
 	 * The share par amount (security shares)
 	 */
-	private BigDecimal sharePerAmount;
+	private BigDecimal shareParAmount;
 
 	/**
 	 * The earned amortization base (daily earned amount)
@@ -212,21 +212,21 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter sharePerAmount
+	 * Getter shareParAmount
 	 * 
-	 * @return sharePerAmount
+	 * @return shareParAmount
 	 */
-	public BigDecimal getSharePerAmount() {
-		return sharePerAmount;
+	public BigDecimal getShareParAmount() {
+		return shareParAmount;
 	}
 
 	/**
-	 * Setter sharePerAmount
+	 * Setter shareParAmount
 	 * 
-	 * @param sharePerAmount
+	 * @param shareParAmount
 	 */
-	public void setSharePerAmount(BigDecimal sharePerAmount) {
-		this.sharePerAmount = sharePerAmount;
+	public void setShareParAmount(BigDecimal shareParAmount) {
+		this.shareParAmount = shareParAmount;
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class PositionData {
 				.append(reportDate, castOther.reportDate)
 				.append(earnedInflationaryCompensationBase, castOther.earnedInflationaryCompensationBase)
 				.append(accruedIncome, castOther.accruedIncome).append(marketValue, castOther.marketValue)
-				.append(sharePerAmount, castOther.sharePerAmount)
+				.append(shareParAmount, castOther.shareParAmount)
 				.append(earnedAmortizationBase, castOther.earnedAmortizationBase)
 				.append(positionValInflationAdjShare, castOther.positionValInflationAdjShare)
 				.append(derOneDaySecurityIncome, castOther.derOneDaySecurityIncome).isEquals();
@@ -304,7 +304,7 @@ public class PositionData {
 	public int hashCode() {
 		return new HashCodeBuilder().append(securityIdentifier).append(portfolioNumber).append(portfolioName)
 				.append(reportDate).append(earnedInflationaryCompensationBase).append(accruedIncome).append(marketValue)
-				.append(sharePerAmount).append(earnedAmortizationBase).append(positionValInflationAdjShare)
+				.append(shareParAmount).append(earnedAmortizationBase).append(positionValInflationAdjShare)
 				.append(derOneDaySecurityIncome).toHashCode();
 	}
 
@@ -319,7 +319,7 @@ public class PositionData {
 				", earnedInflationaryCompensationBase=" + earnedInflationaryCompensationBase +
 				", accruedIncome=" + accruedIncome +
 				", marketValue=" + marketValue +
-				", sharePerAmount=" + sharePerAmount +
+				", shareParAmount=" + shareParAmount +
 				", earnedAmortizationBase=" + earnedAmortizationBase +
 				", positionValInflationAdjShare=" + positionValInflationAdjShare +
 				", derOneDaySecurityIncome=" + derOneDaySecurityIncome +

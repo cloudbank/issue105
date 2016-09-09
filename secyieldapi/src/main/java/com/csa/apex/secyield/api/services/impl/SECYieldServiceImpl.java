@@ -498,7 +498,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Override
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
-			throws IllegalArgumentException, SECYieldException {
+			throws SECYieldException {
 	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
             logger.error(String.format(logErrorFormat, exportCalculatedSecuritySECDataMethodName,
                     illegalArgumentExceptionMessage));

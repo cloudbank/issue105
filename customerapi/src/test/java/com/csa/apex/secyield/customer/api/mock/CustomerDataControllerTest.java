@@ -70,7 +70,7 @@ public class CustomerDataControllerTest {
 	 *             if any parsing exception occurs
 	 */
 	@Before
-	public void setUp() throws IllegalArgumentException, SECYieldException, ParseException {
+	public void setUp() throws SECYieldException, ParseException {
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(customerDataController).build();
 	}

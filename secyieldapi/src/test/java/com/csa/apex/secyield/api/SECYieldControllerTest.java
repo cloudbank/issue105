@@ -81,7 +81,7 @@ public class SECYieldControllerTest {
 	 *             if any parsing exception occurs
 	 */
 	@Before
-	public void setUp() throws IllegalArgumentException, SECYieldException, ParseException {
+	public void setUp() throws SECYieldException, ParseException {
 		MockitoAnnotations.initMocks(this);
 		when(secYieldServiceImpl.processSecuritySECData(any(Date.class))).thenReturn(utility.getSecuritySECData());
 		when(secYieldServiceImpl.getCalculatedSecuritySECData(any(Date.class)))

@@ -12,6 +12,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
+import com.csa.apex.secyield.utility.Constants;
+
 /**
  * 
  * The security reference data
@@ -333,7 +335,7 @@ public class SecurityReferenceData {
 
 	@Override
 	public String toString() {
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
 		return "SecurityReferenceData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", ivType='" + ivType + '\'' +

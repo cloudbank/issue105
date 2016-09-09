@@ -5,6 +5,8 @@ package com.csa.apex.secyield.entities;
 
 import org.junit.Test;
 
+import com.csa.apex.secyield.utility.Constants;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,8 +35,8 @@ public class SecurityReferenceDataTest {
         securityReferenceData.setIvType("1111");
         securityReferenceData.setSecurityName("SEC1111");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        Date dt = formatter.parse("01/15/2016");
+        SimpleDateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
+        Date dt = formatter.parse("2016-01-15");
         securityReferenceData.setFinalMaturityDate(dt);
 
         securityReferenceData.setSecurityRedemptionPrice(new BigDecimal(1111));
@@ -46,7 +48,7 @@ public class SecurityReferenceDataTest {
         securityReferenceData.setAs400RateType("AS1111");
         securityReferenceData.setProspectiveMethod("PROS1111");
 
-        String expected = "SecurityReferenceData{securityIdentifier='1111', ivType='1111', securityName='SEC1111', finalMaturityDate=01/15/2016, securityRedemptionPrice=1111, interestRt=1.5, defIndicator=false, derStepIndicator=true, derHybridIndicator=true, ioHybridField='IO1111', as400RateType='AS1111', prospectiveMethod='PROS1111'}";
+        String expected = "SecurityReferenceData{securityIdentifier='1111', ivType='1111', securityName='SEC1111', finalMaturityDate=2016-01-15, securityRedemptionPrice=1111, interestRt=1.5, defIndicator=false, derStepIndicator=true, derHybridIndicator=true, ioHybridField='IO1111', as400RateType='AS1111', prospectiveMethod='PROS1111'}";
 
         assertEquals(expected, securityReferenceData.toString());
     }

@@ -125,7 +125,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>secyield</finalName>
+		<finalName>customerapi</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -22,7 +22,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 public class TestUtility {
 
 	/**
-	 * Returns value with scale 7 with ROUND_HALF_DOWN
+	 * Returns value with scale 7 with ROUND_HALF_DOWN.
 	 * 
 	 * @param val
 	 *            value passed
@@ -34,7 +34,7 @@ public class TestUtility {
 	}
 
 	/**
-	 * Get Mock list of SecuritySECData
+	 * Get Mock list of SecuritySECData.
 	 * 
 	 * @return List<SecuritySECData>
 	 * @throws ParseException
@@ -45,7 +45,7 @@ public class TestUtility {
 	}
 
 	/**
-	 * Get Mock array of SecuritySECData
+	 * Get Mock array of SecuritySECData.
 	 * 
 	 * @return SecuritySECData[]
 	 * @throws ParseException

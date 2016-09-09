@@ -12,7 +12,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.SECYieldException;
 
 /**
- * SECYieldService Interface
+ * SECYieldService Interface.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.1
@@ -33,7 +33,7 @@ public interface SECYieldService {
 	 *             any error during processing
 	 */
 	public List<SecuritySECData> processSecuritySECData(Date businessDate)
-			throws IllegalArgumentException, SECYieldException;
+			throws SECYieldException;
 
 	/**
 	 * Gets already calculated SEC Security data for the given date.
@@ -48,7 +48,7 @@ public interface SECYieldService {
 	 *             any error during processing
 	 */
 	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate)
-			throws IllegalArgumentException, SECYieldException;
+			throws SECYieldException;
 
 	/**
 	 * Exports SEC Security data in CSV format in an archive.
@@ -63,5 +63,5 @@ public interface SECYieldService {
 	 *             any error during processing
 	 */
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
-			throws IllegalArgumentException, SECYieldException;
+			throws SECYieldException;
 }

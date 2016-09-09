@@ -5,6 +5,8 @@ package com.csa.apex.secyield.entities;
 
 import org.junit.Test;
 
+import com.csa.apex.secyield.utility.Constants;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,14 +24,14 @@ import static org.junit.Assert.assertEquals;
 public class SecuritySECDataTest {
 
     /**
-     * SecuritySECData Test toString
+     * SecuritySECData Test toString.
      *
      * @throws ParseException
      */
     @Test
     public void toStringTest() throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        Date dt = formatter.parse("01/15/2016");
+        SimpleDateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
+        Date dt = formatter.parse("2016-01-15");
 
         PositionData positionData = new PositionData();
         positionData.setSecurityIdentifier("SecId");
@@ -59,7 +61,7 @@ public class SecuritySECDataTest {
         securitySECData.setSecurityPrice(new BigDecimal(1111.11));
         securitySECData.setFxRate(new BigDecimal(2222.50));
 
-        String expected = "SecuritySECData{securityIdentifier='1111', reportDate=01/15/2016, securityReferenceData=null, derCleanPrice=1111, positionData=[PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=01/15/2016, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, shareParAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShares=1111, derOneDaySecurityIncome=1111}], derYieldCalcEngine='1111', derIncomeCalcEngine='1111', derOneDaySecurityYield=1111, derRedemptionDate=01/15/2016, derRedemptionPrice=1111, derSecurityType='SEC1111', derTIPSInflationaryRatio=1111, securityPrice=1111.109999999999899955582804977893829345703125, fxRate=2222.5}";
+        String expected = "SecuritySECData{securityIdentifier='1111', reportDate=2016-01-15, securityReferenceData=null, derCleanPrice=1111, positionData=[PositionData{securityIdentifier='SecId', portfolioNumber=1111, portfolioName='PORT1', reportDate=2016-01-15, earnedInflationaryCompensationBase=1111, accruedIncome=1111, marketValue=1111, shareParAmount=1111, earnedAmortizationBase=1111, positionValInflationAdjShares=1111, derOneDaySecurityIncome=1111}], derYieldCalcEngine='1111', derIncomeCalcEngine='1111', derOneDaySecurityYield=1111, derRedemptionDate=2016-01-15, derRedemptionPrice=1111, derSecurityType='SEC1111', derTIPSInflationaryRatio=1111, securityPrice=1111.109999999999899955582804977893829345703125, fxRate=2222.5}";
 
         assertEquals(expected, securitySECData.toString());
     }

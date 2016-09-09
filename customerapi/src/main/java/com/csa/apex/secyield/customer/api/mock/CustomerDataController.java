@@ -34,20 +34,20 @@ public class CustomerDataController implements CustomerDataService {
 	private CustomerDataPersistenceService customerDataPersistenceService;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 */
 	public CustomerDataController() {
 		// default constructor
 	}
 
 	/**
-	 * Getter customerDataPersistenceService
+	 * Getter customerDataPersistenceService.
 	 * 
 	 * @return the customer data persistence service
 	 */
@@ -56,7 +56,7 @@ public class CustomerDataController implements CustomerDataService {
 	}
 
 	/**
-	 * Setter customerDataPersistenceService
+	 * Setter customerDataPersistenceService.
 	 * 
 	 * @param customerDataPersistenceService
 	 *            the customer data persistence service to be set

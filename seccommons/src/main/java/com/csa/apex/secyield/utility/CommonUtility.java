@@ -20,31 +20,31 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.opencsv.CSVReader;
 
 /**
- * CommonUtility Exposes useful function used through out the code
+ * CommonUtility Exposes useful function used through out the code.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
 public class CommonUtility {
     /**
-     * Private constructor
+     * Private constructor.
      */
     private CommonUtility() {
 
     }
 
     /**
-     * Column mapping for test data
+     * Column mapping for test data.
      */
     private static HashMap<String, Integer> csvTestDataColumns = new HashMap<String, Integer>();
 
     /**
-     * Test data csv file name
+     * Test data csv file name.
      */
-    private static String csvTestDataFileName = "";
+    private static volatile String csvTestDataFileName = "";
 
     /**
-     * Set csv columns index
+     * Set csv columns index.
      * 
      * @param columns
      */
@@ -59,16 +59,31 @@ public class CommonUtility {
     }
 
     /**
-     * Set file name
+     * Check if passed business date is invalid. More checks can be applied
+     * later to check date validity.
+     * 
+     * @param businessDate
+     * @return boolean true if date invalid else false
+     */
+    public static Boolean checkBusinessDateInValid(Date businessDate) {
+        if (businessDate == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Set file name.
      * 
      * @param fileName
      */
     static public void setFileName(String fileName) {
-        csvTestDataFileName = fileName;
+        CommonUtility.csvTestDataFileName = fileName;
     }
 
     /**
-     * Check passed parameter in engine implementations
+     * Check passed parameter in engine implementations.
      * 
      * @param securitySECData
      *            the passed SecuritySECData object
@@ -86,7 +101,7 @@ public class CommonUtility {
     }
 
     /**
-     * Parse Test data CSV File
+     * Parse Test data CSV File.
      * 
      * @return
      * @throws IOException
@@ -94,14 +109,10 @@ public class CommonUtility {
      * 
      */
     public static List<SecuritySECData> parsePhase1TestData() throws IOException, ParseException {
-        // System.out.println(csvTestDataFileName);
-        // System.out.println(csvTestDataColumns);
         CSVReader reader = new CSVReader(
                 new InputStreamReader(CommonUtility.class.getResourceAsStream(csvTestDataFileName)), ',', '"', 1);
         List<SecuritySECData> entities = new ArrayList<SecuritySECData>();
         String[] nextLine;
-        // map column to index;
-        HashMap<String, Integer> columnIndex = new HashMap<String, Integer>();
         while ((nextLine = reader.readNext()) != null) {
             SecuritySECData securitySECData = new SecuritySECData();
             SecurityReferenceData securityReferenceData = new SecurityReferenceData();
@@ -146,17 +157,17 @@ public class CommonUtility {
             securitySECData.setPositionData(new PositionData[] { positionData });
             entities.add(securitySECData);
         }
+        reader.close();
         return entities;
     }
 
     /**
-     * Parse number value in test data
+     * Parse number value in test data.
      * 
      * @param value
      * @return parsedValue
      */
     private static BigDecimal getBigDecimalValue(String value) {
-        // System.out.println(value);
         BigDecimal calcVal;
         if (value == null || value.isEmpty() || value.trim().compareTo("-") == 0) {
             calcVal = new BigDecimal("0");
@@ -167,7 +178,7 @@ public class CommonUtility {
     }
 
     /**
-     * Parse boolean value in test data
+     * Parse boolean value in test data.
      * 
      * @param value
      * @return parsed value

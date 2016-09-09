@@ -6,9 +6,9 @@ CREATE SCHEMA IF NOT EXISTS `secyield` DEFAULT CHARACTER SET utf8 COLLATE utf8_g
 USE `secyield` ;
 
 -- -----------------------------------------------------
--- Table `secyield`.`customer_security_sec_data`
+-- Table `customer_security_sec_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`customer_security_sec_data` (
+CREATE TABLE IF NOT EXISTS `customer_security_sec_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `report_date` DATETIME NOT NULL,
   `iv_type` VARCHAR(24) NOT NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `secyield`.`customer_fund_data`
+-- Table `customer_fund_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`customer_fund_data` (
+CREATE TABLE IF NOT EXISTS `customer_fund_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `portfolio_number` DECIMAL(20,7) NOT NULL,
   `portfolio_name` VARCHAR(256) NOT NULL,
@@ -41,16 +41,16 @@ CREATE TABLE IF NOT EXISTS `secyield`.`customer_fund_data` (
   INDEX `customer_fd_fk_idx` (`security_identifier` ASC, `report_date` ASC),
   CONSTRAINT `customer_fd_s_fk`
     FOREIGN KEY (`security_identifier` , `report_date`)
-    REFERENCES `secyield`.`customer_security_sec_data` (`security_identifier` , `report_date`)
+    REFERENCES `customer_security_sec_data` (`security_identifier` , `report_date`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `secyield`.`customer_position_data`
+-- Table `customer_position_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`customer_position_data` (
+CREATE TABLE IF NOT EXISTS `customer_position_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `portfolio_number` DECIMAL(20,7) NOT NULL,
   `report_date` DATETIME NOT NULL,
@@ -64,16 +64,16 @@ CREATE TABLE IF NOT EXISTS `secyield`.`customer_position_data` (
   INDEX `customer_fd_fk_idx` (`security_identifier` ASC, `report_date` ASC),
   CONSTRAINT `customer_pd_s_fk`
     FOREIGN KEY (`security_identifier` , `report_date`)
-    REFERENCES `secyield`.`customer_security_sec_data` (`security_identifier` , `report_date`)
+    REFERENCES `customer_security_sec_data` (`security_identifier` , `report_date`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `secyield`.`calculated_security_sec_data`
+-- Table `calculated_security_sec_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`calculated_security_sec_data` (
+CREATE TABLE IF NOT EXISTS `calculated_security_sec_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `report_date` DATETIME NOT NULL,
   `iv_type` VARCHAR(24) NOT NULL,
@@ -102,9 +102,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `secyield`.`calculated_fund_data`
+-- Table `calculated_fund_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`calculated_fund_data` (
+CREATE TABLE IF NOT EXISTS `calculated_fund_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `portfolio_number` DECIMAL(20,7) NOT NULL,
   `portfolio_name` VARCHAR(256) NOT NULL,
@@ -113,16 +113,16 @@ CREATE TABLE IF NOT EXISTS `secyield`.`calculated_fund_data` (
   INDEX `customer_fd_fk_idx` (`security_identifier` ASC, `report_date` ASC),
   CONSTRAINT `customer_fd_s_fk0`
     FOREIGN KEY (`security_identifier` , `report_date`)
-    REFERENCES `secyield`.`calculated_security_sec_data` (`security_identifier` , `report_date`)
+    REFERENCES `calculated_security_sec_data` (`security_identifier` , `report_date`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `secyield`.`calculated_position_data`
+-- Table `calculated_position_data`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `secyield`.`calculated_position_data` (
+CREATE TABLE IF NOT EXISTS `calculated_position_data` (
   `security_identifier` VARCHAR(128) NOT NULL,
   `portfolio_number` DECIMAL(20,7) NOT NULL,
   `report_date` DATETIME NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `secyield`.`calculated_position_data` (
   INDEX `customer_fd_fk_idx` (`security_identifier` ASC, `report_date` ASC),
   CONSTRAINT `customer_pd_s_fk0`
     FOREIGN KEY (`security_identifier` , `report_date`)
-    REFERENCES `secyield`.`calculated_security_sec_data` (`security_identifier` , `report_date`)
+    REFERENCES `calculated_security_sec_data` (`security_identifier` , `report_date`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

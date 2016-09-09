@@ -44,12 +44,12 @@ import com.csa.apex.secyield.utility.TestUtility;
 public class SECYieldControllerTest {
 
 	/**
-	 * The export file type
+	 * The export file type.
 	 */
 	private static final String APPLICATION_JSON_CONTENT_TYPE = "application/json";
 
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
@@ -59,19 +59,19 @@ public class SECYieldControllerTest {
 	private SECYieldServiceImpl secYieldServiceImpl;
 
 	/**
-	 * SECYieldServiceImpl object
+	 * SECYieldServiceImpl object.
 	 */
 	@InjectMocks
 	@Autowired
 	SECYieldController seyYieldController;
 
 	/**
-	 * Mock controller
+	 * Mock controller.
 	 */
 	private MockMvc mockMvc;
 
 	/**
-	 * Mock Setup
+	 * Mock Setup.
 	 * 
 	 * @throws SECYieldException
 	 *             if any application specific exception occurs
@@ -81,7 +81,7 @@ public class SECYieldControllerTest {
 	 *             if any parsing exception occurs
 	 */
 	@Before
-	public void setUp() throws IllegalArgumentException, SECYieldException, ParseException {
+	public void setUp() throws SECYieldException, ParseException {
 		MockitoAnnotations.initMocks(this);
 		when(secYieldServiceImpl.processSecuritySECData(any(Date.class))).thenReturn(utility.getSecuritySECData());
 		when(secYieldServiceImpl.getCalculatedSecuritySECData(any(Date.class)))
@@ -90,7 +90,7 @@ public class SECYieldControllerTest {
 	}
 
 	/**
-	 * Test securitySECData
+	 * Test securitySECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -102,7 +102,7 @@ public class SECYieldControllerTest {
 	}
 
 	/**
-	 * Test calculatedSecuritySECData
+	 * Test calculatedSecuritySECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -114,7 +114,7 @@ public class SECYieldControllerTest {
 	}
 
 	/**
-	 * Test exportCalculatedSecuritySECData with valid business date
+	 * Test exportCalculatedSecuritySECData with valid business date.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -126,7 +126,7 @@ public class SECYieldControllerTest {
 	}
 
 	/**
-	 * Test exportCalculatedSecuritySECData with invalid business date
+	 * Test exportCalculatedSecuritySECData with invalid business date.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class SECConfigurationTest {
 
     /**
-     * SECConfiguration Test toString
+     * SECConfiguration Test toString.
      *
      * @throws ParseException
      */

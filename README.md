@@ -48,13 +48,13 @@ docs/sec_yield_api_postman_collection.json
 	1. ```mvn clean install ```   
 
 	1. Import data from excel  
-    `mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
+    `mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
 
 	  1. You can clean up calculation table by passing --clean or -c options  
-	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
+	```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
 
 	  1. You can also pass path of mapping properties for excel if excel will change order of columns  
-		```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
+		```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
 
 	1. ```mvn spring-boot:run ```  
 
@@ -79,6 +79,39 @@ To run unit tests, use the following command in `seccommons`, `customerapi` and 
 Unit tests are run by default, please use -DskipTests parameter everywhere to skip unit tests, e.g.:
 
 	```mvn install -DskipTests```
+
+# Deployment to Tomcat
+
+- In `seccommons` folder, run the following command
+   ```
+   mvn clean install
+   ```
+
+- In `customerapi` folder, run the following command
+   ```
+   mvn clean install
+   ```
+   * Copy generated war (found in `target/customerapi.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
+
+- In `secyieldapi` folder, update the URLs in `resources/application.tomcat.properties` to point to the correct `customerapi` endpoint
+   ```
+   getConfigApiPath=http://localhost:8080/customerapi/securitySECDataConfiguration
+   getCustomerDataApiPath=http://localhost:8080/customerapi/customerSecuritySECData
+   saveCalculatedSecuritySECDataApiPath=http://localhost:8080/customerapi/persistSecuritySECData
+   getCalculatedSecuritySECDataApiPath=http://localhost:8080/customerapi/calculatedSecuritySECData
+   ```
+
+- In `secyieldapi` folder, run the following command
+   ```
+   mvn clean install -Ptomcat
+   ```
+   * Copy generated war (found in `target/secyield.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
+
+- Start Tomcat server
+- Once started, these will be the endpoints:
+  * customerapi --  `/customerapi/<service_name>`  [e.g. `/customerapi/securitySECDataConfiguration`]
+  * secyieldapi --  `/secyield/<service_name>`  [e.g. `/secyield/calculatedSecuritySECData`]
+
 
 # SonarCube Code Coverage for backend
 

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.secyield;
+package com.csa.apex.secyield.commands;
 
 import com.csa.apex.secyield.customer.api.mock.service.CustomerDataPersistenceService;
 import com.csa.apex.secyield.customer.api.mock.service.impl.CustomerDataPersistenceServiceImpl;
@@ -52,71 +52,93 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Import data from excel into customer sec table in DB
+ * Import data from excel into customer sec table in DB.
  *
  * @author TCSDEVELOPER
  * @version 1.0
  */
 public class ImportExcel {
     /**
-     * The logger
+     * The logger.
      */
     private static Logger logger = LogManager.getLogger(ImportExcel.class);
 
     /**
-     * The command usage text
+     * The command usage text.
      */
     private static final String COMMAND_USAGE = "ImportExcel [-c/--clean][-h/--help][-e/--excel][-m/--mapping]";
 
     /**
-     * The table name of calculated_fund_data
+     /**
+     * The table name of calculated_fund_data.
      */
-    public static final String TABLE_CALCULATED_FUND_DATA = "calculated_fund_data";
+    public static String tableCalculatedFundData;
+    
+    /**
+     * The table name of customer_fund_data.
+     */
+    public static String tableCustomerFundData;
+    
+    /**
+     * rounding mode.
+     */
+    public static int roundingMode;
+   
+    /**
+     * operation scale.
+     */
+    public static int operationScale;
+    
+    /**
+     * The table name of calculated_position_data.
+     */
+    public static String tableCalculatedPositionData;
+    
+    
+    /**
+     * The table name of calculated_security_sec_data.
+     */
+    public static String tableCalculatedSecuritySecData;
 
     /**
-     * The table name of customer_fund_data
+     * The table name of customer_position_data.
      */
-    public static final String TABLE_CUSTOMER_FUND_DATA = "customer_fund_data";
+    public static String tableCustomerPositionData;
 
     /**
-     * The delete query to delete customer fund data by security identifiers
+     * The table name of customer_security_sec_data.
      */
-    private static final String DELETE_CUSTOMER_FUND_DATA = "DELETE FROM "+ TABLE_CUSTOMER_FUND_DATA
-            +" WHERE portfolio_number=? and report_date=?;";
+    public static String tableCustomerSecuritySecData;
+        
+    /**
+     * The delete query to delete customer fund data by security identifiers.
+     */
+    private static String deleteCustomerFundData ;
 
     /**
-     * The delete query to delete calculated fund data by security identifiers
+     * The delete query to delete calculated fund data by security identifiers.
      */
-    private static final String DELETE_CALCULATED_FUND_DATA = "DELETE FROM "+ TABLE_CALCULATED_FUND_DATA+
-            " WHERE portfolio_number=? and report_date=?;";
+    private static String deleteCalculatedFundData;
+    /**
+     * The delete query to delete customer position data by security identifiers.
+     */
+    private static String deleteCustomerPositionData;
+    /**
+     * The delete query to delete customer security sec data by security identifiers.
+     */
+    private static String deleteCustomerSecuritySecData;
+    /**
+     * The delete query to delete calculated position data by security identifiers.
+     */
+    private static String deleteCalculatePositionData;
 
     /**
-     * The delete query to delete customer position data by security identifiers
+     * The delete query to delete calculated security sec data by security identifiers.
      */
-    private static final String DELETE_CUSTOMER_POSITION_DATA = "DELETE FROM "+ CustomerDataPersistenceServiceImpl.TABLE_CUSTOMER_POSITION_DATA
-            +" WHERE security_identifier=? and report_date=?;";
+    private static String deleteCalculatedSecuritySecData;
 
     /**
-     * The delete query to delete customer security sec data by security identifiers
-     */
-    private static final String DELETE_CUSTOMER_SECURITY_SEC_DATA = "DELETE FROM "+ CustomerDataPersistenceServiceImpl.TABLE_CUSTOMER_SECURITY_SEC_DATA
-            +" WHERE security_identifier=? and report_date=?";
-
-    /**
-     * The delete query to delete calculated position data by security identifiers
-     */
-    private static final String DELETE_CALCULATED_POSITION_DATA = "DELETE FROM "+ CustomerDataPersistenceServiceImpl.TABLE_CALCULATED_POSITION_DATA+
-            " WHERE security_identifier=? and report_date=?;";
-
-    /**
-     * The delete query to delete calculated security sec data by security identifiers
-     */
-    private static final String DELETE_CALCULATED_SECURITY_SEC_DATA = "DELETE FROM "+ CustomerDataPersistenceServiceImpl.TABLE_CALCULATED_SECURITY_SEC_DATA
-            +" WHERE security_identifier=? and report_date=?";
-
-
-    /**
-     * Load mapping properties
+     * Load mapping properties.
      * @param path the path of mapping properties
      * @return the mapping properties
      * @throws IOException throws if error to load mapping properties
@@ -131,7 +153,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get string cell value
+     * Get string cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the string cell value
@@ -145,7 +167,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get date cell value
+     * Get date cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the date cell value
@@ -159,7 +181,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get BigDecimal cell value with rounding configuration
+     * Get BigDecimal cell value with rounding configuration.
      * @param row the row
      * @param cellNum the cell number
      * @param conf the rounding configuration
@@ -178,7 +200,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get BigDecimal cell value
+     * Get BigDecimal cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the BigDecimal cell value
@@ -188,7 +210,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get boolean cell value
+     * Get boolean cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the boolean cell value
@@ -203,7 +225,7 @@ public class ImportExcel {
     }
 
     /**
-     * Parse security reference data
+     * Parse security reference data.
      * @param row the row
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -227,7 +249,7 @@ public class ImportExcel {
     }
 
     /**
-     * Parse position data
+     * Parse position data.
      * @param row the row
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -249,7 +271,7 @@ public class ImportExcel {
     }
 
     /**
-     * Load excel
+     * Load excel.
      * @param path the path of excel
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -313,10 +335,32 @@ public class ImportExcel {
     }
 
     /**
-     * Main function
+     * Main function.
      * @param args the arguments
      */
-    public static void main(String[]args) {
+    public static void main(String[] args) throws IOException  {
+        Properties prop = new Properties();
+        String propFileName = "constants.properties";
+        InputStream  inputStream = ImportExcel.class.getClassLoader().getResourceAsStream(propFileName);
+        if (inputStream != null) {
+            prop.load(inputStream);
+        } else {
+            throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+        }
+        tableCalculatedFundData =  prop.getProperty("table.calculated_fund_data");
+        tableCustomerFundData = prop.getProperty("table.customer_fund_data");
+        roundingMode = Integer.parseInt(prop.getProperty("roundingMode"));
+        operationScale = Integer.parseInt(prop.getProperty("operationScale"));
+        tableCalculatedPositionData = prop.getProperty("table.calculated_position_data");
+        tableCalculatedSecuritySecData = prop.getProperty("table.calculated_security_sec_data");
+        tableCustomerPositionData = prop.getProperty("table.customer_position_data");
+        tableCustomerSecuritySecData = prop.getProperty("table.customer_security_sec_data");
+        deleteCustomerFundData= prop.getProperty("query.delete_customer_fund_date_query");
+        deleteCalculatedFundData= prop.getProperty("query.delete_calculated_fund_data_query");
+        deleteCustomerPositionData= prop.getProperty("query.delete_customer_position_data_query");
+        deleteCalculatePositionData= prop.getProperty("query.delete_calculated_position_data_query");
+        deleteCustomerSecuritySecData= prop.getProperty("query.delete_customer_security_sec_data_query");
+        deleteCalculatedSecuritySecData= prop.getProperty("query.delete_calculated_security_sec_data_query");
         Options options = new Options();
         options.addOption("c", "clean", false, "clean up calculation tables");
         options.addOption("h", "help", false, "print help");
@@ -334,8 +378,9 @@ public class ImportExcel {
             }
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext-cli.xml");
             context.registerShutdownHook();
-            CustomerDataPersistenceService customerDataPersistenceService = context.getBean("customerDataPersistenceServiceImpl", CustomerDataPersistenceService.class);
-            SECConfiguration conf = customerDataPersistenceService.getConfiguration();
+            SECConfiguration conf = new SECConfiguration();
+            conf.setOperationScale(operationScale);
+            conf.setRoundingMode(roundingMode);
             PlatformTransactionManager transactionManager = context.getBean("transactionManager", PlatformTransactionManager.class);
             JdbcTemplate jdbcTemplate = context.getBean("jdbcTemplate", JdbcTemplate.class);
             Properties properties = loadProperties(cmd.getOptionValue("m"));
@@ -372,21 +417,21 @@ public class ImportExcel {
                     });
                 });
             });
-            jdbcTemplate.batchUpdate(DELETE_CUSTOMER_FUND_DATA, batchArgs2);
-            jdbcTemplate.batchUpdate(DELETE_CUSTOMER_POSITION_DATA, batchArgs1);
-            jdbcTemplate.batchUpdate(DELETE_CUSTOMER_SECURITY_SEC_DATA, batchArgs1);
+            jdbcTemplate.batchUpdate(deleteCustomerFundData, batchArgs2);
+            jdbcTemplate.batchUpdate(deleteCustomerPositionData, batchArgs1);
+            jdbcTemplate.batchUpdate(deleteCustomerSecuritySecData, batchArgs1);
             if(cmd.hasOption("c")){
                 logger.debug("Clean up calculation tables");
-                jdbcTemplate.batchUpdate(DELETE_CALCULATED_FUND_DATA, batchArgs2);
-                jdbcTemplate.batchUpdate(DELETE_CALCULATED_POSITION_DATA, batchArgs1);
-                jdbcTemplate.batchUpdate(DELETE_CALCULATED_SECURITY_SEC_DATA, batchArgs1);
+                jdbcTemplate.batchUpdate(deleteCalculatedFundData, batchArgs2);
+                jdbcTemplate.batchUpdate(deleteCalculatePositionData, batchArgs1);
+                jdbcTemplate.batchUpdate(deleteCalculatedSecuritySecData, batchArgs1);
             }
             SimpleJdbcInsert insertFundData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-                    .withTableName(TABLE_CUSTOMER_FUND_DATA);
+                    .withTableName(tableCustomerFundData);
             SimpleJdbcInsert insertPositionData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-                    .withTableName(CustomerDataPersistenceServiceImpl.TABLE_CUSTOMER_POSITION_DATA);
+                    .withTableName(tableCustomerPositionData);
             SimpleJdbcInsert insertSecuritySECData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-                    .withTableName(CustomerDataPersistenceServiceImpl.TABLE_CUSTOMER_SECURITY_SEC_DATA);
+                    .withTableName(tableCustomerSecuritySecData);
 
             TransactionTemplate tt = new TransactionTemplate(transactionManager);
             tt.execute(transactionStatus -> {
@@ -473,14 +518,13 @@ public class ImportExcel {
                 });
                 return null;
             });
+            context.close();
             System.exit(0);
         } catch (ParseException e) {
             logger.error("command parse error", e);
             formatter.printHelp(COMMAND_USAGE, "", options, "");
         } catch (NumberFormatException e) {
             logger.error("Error to parse excelMapping.properties", e);
-        } catch (FileNotFoundException e) {
-            logger.error("Not found excel file " + path, e);
         } catch (IOException e) {
             logger.error("Error to process excel " + path, e);
         } catch (Exception e) {

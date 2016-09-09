@@ -18,14 +18,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class SECConfiguration {
 	/**
-	 * Operation scale
+	 * Operation scale.
 	 */
 	private int operationScale;
 
 	/**
-	 * Rounding mode
+	 * Rounding mode.
 	 */
-	private int roundingMode;
+	private int roundingMode=-1;
 
 	/**
 	 * Constructor
@@ -35,7 +35,7 @@ public class SECConfiguration {
 	}
 
 	/**
-	 * Getter operationScale
+	 * Getter operationScale.
 	 * 
 	 * @return operationScale
 	 */
@@ -44,7 +44,7 @@ public class SECConfiguration {
 	}
 
 	/**
-	 * Setter operationScale
+	 * Setter operationScale.
 	 * 
 	 * @param operationScale
 	 */
@@ -53,7 +53,7 @@ public class SECConfiguration {
 	}
 
 	/**
-	 * Getter roundingMode
+	 * Getter roundingMode.
 	 * 
 	 * @return roundingMode
 	 */
@@ -62,7 +62,7 @@ public class SECConfiguration {
 	}
 
 	/**
-	 * Setter roundingMode
+	 * Setter roundingMode.
 	 * 
 	 * @param roundingMode
 	 */

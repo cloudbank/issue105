@@ -5,6 +5,8 @@ package com.csa.apex.secyield;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,14 +14,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * The spring application for the Public API
+ * The spring application for the Public API.
  *
  * @author TCSDEVELOPER
  * @version 1.1
  */
 @SpringBootApplication
-@ImportResource("applicationContext.xml")
-public class Application {
+@ImportResource("classpath:applicationContext.xml")
+public class Application extends SpringBootServletInitializer {
+
 	/**
 	 * The method to enter the application.
 	 * 
@@ -28,6 +31,11 @@ public class Application {
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Application.class);
 	}
 
 	/**

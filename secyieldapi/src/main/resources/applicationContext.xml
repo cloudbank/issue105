@@ -10,6 +10,7 @@
 
 		<property name="locations">
 			<list>
+				<value>classpath:application.properties</value>
 				<value>classpath:messages.properties</value>
 				<value>classpath:constants.properties</value>
 				<value>classpath:calculationtestdata.properties</value>
@@ -37,7 +38,7 @@
 	<!-- Injection for YtmYieldCalculationEngine -->
 	<bean id="ytmYieldCalculationEngine"
 		class="com.csa.apex.secyield.api.engines.impl.YtmYieldCalculationEngine">
-		<property name="binarySearchCount">
+		<property name="bisectionAlgoMaximumIterations">
 			<value>100</value>
 		</property>
 		<property name="epsilon">
@@ -108,16 +109,16 @@
 			<bean class="com.csa.apex.secyield.entities.SECConfiguration" />
 		</property>
 		<property name="getConfigApiPath">
-			<value>http://localhost:8081/securitySECDataConfiguration</value>
+			<value>${getConfigApiPath}</value>
 		</property>
 		<property name="getCustomerDataApiPath">
-			<value>http://localhost:8081/customerSecuritySECData</value>
+			<value>${getCustomerDataApiPath}</value>
 		</property>
 		<property name="saveCalculatedSecuritySECDataApiPath">
-			<value>http://localhost:8081/persistSecuritySECData</value>
+			<value>${saveCalculatedSecuritySECDataApiPath}</value>
 		</property>
 		<property name="getCalculatedSecuritySECDataApiPath">
-			<value>http://localhost:8081/calculatedSecuritySECData</value>
+			<value>${getCalculatedSecuritySECDataApiPath}</value>
 		</property>
 	</bean>
 	

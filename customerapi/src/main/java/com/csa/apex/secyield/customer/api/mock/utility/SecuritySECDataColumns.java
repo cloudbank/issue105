@@ -4,7 +4,7 @@
 package com.csa.apex.secyield.customer.api.mock.utility;
 
 /**
- * Enum with column names from calculated_security_sec_data table
+ * Enum with column names from calculated_security_sec_data table.
  *
  * @author TCSDEVELOPER
  * @version 1.0
@@ -36,12 +36,12 @@ public enum SecuritySECDataColumns {
 	DER_SECURITY_TYPE("der_security_type");
 
 	/**
-	 * The column name
+	 * The column name.
 	 */
 	private final String name;
 
 	/**
-	 * Constructor with column name
+	 * Constructor with column name.
 	 * 
 	 * @param name
 	 *            the column name
@@ -51,7 +51,7 @@ public enum SecuritySECDataColumns {
 	}
 
 	/**
-	 * Retrieves the name of the column
+	 * Retrieves the name of the column.
 	 * 
 	 * @return the column name
 	 */

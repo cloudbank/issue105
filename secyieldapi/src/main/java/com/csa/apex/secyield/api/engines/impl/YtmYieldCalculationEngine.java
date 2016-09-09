@@ -42,12 +42,12 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	 */
 	private class YtmYieldCalculationVariablesDTO {
 		/**
-		 * Clean price
+		 * Clean price.
 		 */
 		private BigDecimal cleanPrice;
 
 		/**
-		 * Redemption value
+		 * Redemption value.
 		 */
 		private BigDecimal redemptionValue;
 
@@ -57,7 +57,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		private int frequency;
 
 		/**
-		 * Coupons between settlement and redemption date
+		 * Coupons between settlement and redemption date.
 		 */
 		private int couponsBetSettlementRedemption;
 
@@ -67,22 +67,22 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		private int dsc;
 
 		/**
-		 * No of days in the period
+		 * No of days in the period.
 		 */
 		private int noOfDaysInPeriod;
 
 		/**
-		 * Days between prior coupon date and settlement date
+		 * Days between prior coupon date and settlement date.
 		 */
 		private int daysBetPriorCouponDateSettlementDate;
 
 		/**
-		 * Annual Interest Rate
+		 * Annual Interest Rate.
 		 */
 		private BigDecimal annualInterestRate;
 
 		/**
-		 * Getter cleanPrice
+		 * Getter cleanPrice.
 		 * 
 		 * @return cleanPrice
 		 */
@@ -91,7 +91,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter cleanPrice
+		 * Setter cleanPrice.
 		 * 
 		 * @param cleanPrice
 		 */
@@ -100,7 +100,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter redemptionValue
+		 * Getter redemptionValue.
 		 * 
 		 * @return redemptionValue
 		 */
@@ -109,7 +109,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter redemptionValue
+		 * Setter redemptionValue.
 		 * 
 		 * @param redemptionValue
 		 */
@@ -118,7 +118,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter frequency
+		 * Getter frequency.
 		 * 
 		 * @return frequency
 		 */
@@ -127,7 +127,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter frequency
+		 * Setter frequency.
 		 * 
 		 * @param frequency
 		 */
@@ -136,7 +136,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter couponsBetSettlementRedemption
+		 * Getter couponsBetSettlementRedemption.
 		 * 
 		 * @return couponsBetSettlementRedemption
 		 */
@@ -145,7 +145,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter couponsBetSettlementRedemption
+		 * Setter couponsBetSettlementRedemption.
 		 * 
 		 * @param couponsBetSettlementRedemption
 		 */
@@ -154,7 +154,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter dsc
+		 * Getter dsc.
 		 * 
 		 * @return
 		 */
@@ -163,7 +163,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter dsc
+		 * Setter dsc.
 		 * 
 		 * @param dsc
 		 */
@@ -172,7 +172,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter noOfDaysInPeriod
+		 * Getter noOfDaysInPeriod.
 		 * 
 		 * @return noOfDaysInPeriod
 		 */
@@ -181,7 +181,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter noOfDaysInPeriod
+		 * Setter noOfDaysInPeriod.
 		 * 
 		 * @param noOfDaysInPeriod
 		 */
@@ -190,7 +190,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter getDaysBetPriorCouponDateSettlementDate
+		 * Getter getDaysBetPriorCouponDateSettlementDate.
 		 * 
 		 * @return getDaysBetPriorCouponDateSettlementDate
 		 */
@@ -199,7 +199,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter getDaysBetPriorCouponDateSettlementDate
+		 * Setter getDaysBetPriorCouponDateSettlementDate.
 		 * 
 		 * @param daysBetPriorCouponDateSettlementDate
 		 */
@@ -208,7 +208,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Getter annualInterestRate
+		 * Getter annualInterestRate.
 		 * 
 		 * @return annualInterestRate
 		 */
@@ -217,7 +217,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		}
 
 		/**
-		 * Setter annualInterestRate
+		 * Setter annualInterestRate.
 		 * 
 		 * @param annualInterestRate
 		 */
@@ -227,35 +227,35 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(CouponYieldCalculationEngine.class);
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * Calculate method name
+	 * Calculate method name.
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
 	/**
-	 * Calculation engine name
+	 * Calculation engine name.
 	 */
 	public static final String ENGINE_NAME = "YtmYieldCalculationEngine";
 
 	/**
-	 * Calculation engine name
+	 * Calculation engine name.
 	 */
 	public static final String SECURITY_TYPE = "TIPS";
 
@@ -265,12 +265,12 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	private int operationScale = 7;
 
 	/**
-	 * Default Rounding mode
+	 * Default Rounding mode.
 	 */
 	private int roundingMode = 4;
 
 	/**
-	 * The YTM (TIPS) Yield calculation engine. Uses symja to evaluate equation and find the unknown value of Y (Yield)
+	 * The YTM (TIPS) Yield calculation engine. Uses symja to evaluate equation and find the unknown value of Y (Yield).
 	 */
 	private int frequencyValue = 2;
 
@@ -280,26 +280,26 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	private int numOfDaysInPeriod = 180;
 
 	/**
-	 * It defines the least error in the calculation There can be max error = epsilon More the value accurate is result
+	 * It defines the least error in the calculation There can be max error = epsilon More the value accurate is result.
 	 */
 	private double epsilon = 0.000000001;
 
 	/**
-	 * Min yield when it is negative
+	 * Min yield when it is negative.
 	 */
 	private double minYield = -0.02;
 	
 
     /**
-     * Max yield when it is negative
+     * Max yield when it is negative.
      */
     private double maxYield = 0.02;
 
 
 	/**
-	 * It is count to perform binary search. The larger value will result in more precise outcome yield.
+	 * max iterations allowed in bisection algo. The larger value will result in more precise outcome yield.
 	 */
-	private int binarySearchCount;
+	private int bisectionAlgoMaximumIterations;
 
 	/**
 	 * Constructor
@@ -309,7 +309,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Getter epsilon
+	 * Getter epsilon.
 	 * 
 	 * @return epsilon
 	 */
@@ -318,7 +318,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Setter epsilon
+	 * Setter epsilon.
 	 * 
 	 * @param epsilon
 	 */
@@ -327,7 +327,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Getter minYield
+	 * Getter minYield.
 	 * 
 	 * @return minYield
 	 */
@@ -336,7 +336,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Setter minYield
+	 * Setter minYield.
 	 * 
 	 * @param minYield
 	 */
@@ -346,7 +346,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 
 
     /**
-     * Getter maxYield
+     * Getter maxYield.
      * 
      * @return maxYield
      */
@@ -355,7 +355,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
     }
 
     /**
-     * Setter maxYield
+     * Setter maxYield.
      * 
      * @param maxYield
      */
@@ -364,25 +364,25 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
     }
 
 	/**
-	 * Getter for binarySearchCount
+	 * Getter for bisectionAlgoMaximumIterations.
 	 * 
 	 * @return
 	 */
-	public int getBinarySearchCount() {
-		return binarySearchCount;
+	public int getBisectionAlgoMaximumIterations() {
+		return bisectionAlgoMaximumIterations;
 	}
 
 	/**
-	 * Setter for binarySearchCount
+	 * Setter for bisectionAlgoMaximumIterations.
 	 * 
-	 * @param binarySearchCount
+	 * @param bisectionAlgoMaximumIterations
 	 */
-	public void setBinarySearchCount(int binarySearchCount) {
-		this.binarySearchCount = binarySearchCount;
+	public void setBisectionAlgoMaximumIterations(int bisectionAlgoMaximumIterations) {
+		this.bisectionAlgoMaximumIterations = bisectionAlgoMaximumIterations;
 	}
 
 	/**
-	 * Check passed parameter should not be null
+	 * Check passed parameter should not be null.
 	 * 
 	 * @param securitySECData
 	 *            the passed SecuritySECData object
@@ -395,7 +395,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuration object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default value.
 	 * 
 	 * @param configuration
 	 *            the configuration object
@@ -404,11 +404,11 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 		int passedOperationScale = configuration.getOperationScale();
 		int passedRoundingMode = configuration.getRoundingMode();
 		operationScale = passedOperationScale != 0 ? passedOperationScale : operationScale;
-		roundingMode = passedRoundingMode != 0 ? passedRoundingMode : roundingMode;
+		roundingMode = passedRoundingMode != -1 ? passedRoundingMode : roundingMode;
 	}
 
 	/**
-	 * Gets previous coupon date of the security
+	 * Gets previous coupon date of the security.
 	 * 
 	 * @param securitySECData
 	 *            the SecuritySECData object
@@ -445,7 +445,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Calculates DSC for the security
+	 * Calculates DSC for the security.
 	 * 
 	 * @param securitySECData
 	 *            the SecuritySECData object
@@ -463,7 +463,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Gets value of yield function
+	 * Gets value of yield function.
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
 	 *            YtmYieldCalculationVariablesDTO object contains data for calculation
@@ -492,7 +492,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Uses bisection method to calculate yield value for which function value is 0
+	 * Uses bisection method to calculate yield value for which function value is 0.
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
 	 *            YtmYieldCalculationVariablesDTO object contains value for calculation
@@ -504,7 +504,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 			Double startYield, Double endYield) {
 		int countSteps = 0;
 		Double mid = (endYield + startYield) / 2;
-		while (endYield > startYield && countSteps < binarySearchCount) {
+		while (endYield > startYield && countSteps < bisectionAlgoMaximumIterations) {
 			mid = (endYield + startYield) / 2;
 			Double funcVal = getYieldFormulaVal(ytmYieldCalculationVariablesDTO, new BigDecimal(mid));
 			if (funcVal < 0) {
@@ -519,9 +519,8 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Calculates yield value for YtmYieldCalculationVariablesDTO object It increases yield value from epsilon and
-	 * checks whether yield function gives zero value. Then it uses binary search to improve accuracy of calculated
-	 * yield value
+	 * Calculates yield value for YtmYieldCalculationVariablesDTO object.
+	 * It uses bisection algo to calculate value.
 	 * 
 	 * @param ytmYieldCalculationVariablesDTO
 	 *            the passed YtmYieldCalculationVariablesDTO object
@@ -566,7 +565,7 @@ public class YtmYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Engine Calculate method implementation
+	 * Engine Calculate method implementation.
 	 * 
 	 * @param securitySECData
 	 *            the SecuritySECData object

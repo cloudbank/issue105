@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -62,17 +61,17 @@ import com.csa.apex.secyield.utility.TestUtility;
 public class SECYieldServiceImplTest {
 
 	/**
-	 * The test export file name
+	 * The test export file name.
 	 */
 	private static final String TEST_EXPORT_CSV_FILE_NAME = "test-export.csv";
 
 	/**
-	 * The export file type
+	 * The export file type.
 	 */
 	private static final String EXPORT_FILE_TYPE = "application/zip";
 
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
@@ -82,7 +81,7 @@ public class SECYieldServiceImplTest {
 	private RestTemplate restTemplate;
 
 	/**
-	 * Mock Setup
+	 * Mock Setup.
 	 * 
 	 * @throws ParseException
 	 * @throws RestClientException
@@ -98,7 +97,7 @@ public class SECYieldServiceImplTest {
 	}
 
 	/**
-	 * SECYieldServiceImpl object
+	 * SECYieldServiceImpl object.
 	 */
 	@InjectMocks
 	@Autowired
@@ -106,7 +105,7 @@ public class SECYieldServiceImplTest {
 	SECYieldServiceImpl secyYieldServiceImpl;
 
 	/**
-	 * Test processSecuritySECData Yield and income is asserted to check calculation has been done
+	 * Test processSecuritySECData Yield and income is asserted to check calculation has been done.
 	 * 
 	 * @throws Exception
 	 */
@@ -122,7 +121,7 @@ public class SECYieldServiceImplTest {
 	}
 
 	/**
-	 * Test getCalculatedSecuritySECData
+	 * Test getCalculatedSecuritySECData.
 	 * 
 	 * @throws Exception
 	 */
@@ -133,7 +132,7 @@ public class SECYieldServiceImplTest {
 	}
 
  	/**
- 	 * Test performRedemptionDateAndMaturityDateEqualityTest()
+ 	 * Test performRedemptionDateAndMaturityDateEqualityTest. 
  	 *
  	 * @throws Exception
  	 */
@@ -147,7 +146,7 @@ public class SECYieldServiceImplTest {
  	}
 
 	/**
-	 * Test exportCalculatedSecuritySECData
+	 * Test exportCalculatedSecuritySECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -167,7 +166,7 @@ public class SECYieldServiceImplTest {
 	}
 
 	/**
-	 * Mocked <ServletOutputStream> to check the contents of the zip file after it is written
+	 * Mocked <ServletOutputStream> to check the contents of the zip file after it is written.
 	 */
 	private final class MockServletOutputStream extends ServletOutputStream {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -191,18 +190,16 @@ public class SECYieldServiceImplTest {
 	}
 
 	/**
-	 * Converts the servlet output stream to a file
+	 * Converts the servlet output stream to a file.
 	 * 
 	 * @param servletOutputStream
 	 *            the servlet output stream
 	 * @return the file
 	 * @throws IOException
-	 *             if any I/O exception occurs
-	 * @throws FileNotFoundException
-	 *             if the test export file is not found
+	 *             if any I/O exception occurs or if the test export file is not found
 	 */
 	private File convertServletOutputStreamToFile(MockServletOutputStream servletOutputStream)
-			throws IOException, FileNotFoundException {
+			throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		ZipInputStream zipInputStream = servletOutputStream.getZipInputStream();
 		while (zipInputStream.getNextEntry() != null) {
@@ -222,7 +219,7 @@ public class SECYieldServiceImplTest {
 	}
 
 	/**
-	 * Transforms the contents of a CSV file to string
+	 * Transforms the contents of a CSV file to string.
 	 * 
 	 * @param csvFile
 	 *            the CSV file

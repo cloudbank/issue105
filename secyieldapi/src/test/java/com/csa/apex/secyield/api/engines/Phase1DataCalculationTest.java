@@ -27,7 +27,7 @@ import com.csa.apex.secyield.exceptions.CalculationException;
 import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
- * Tests all the phase 1 data for calculations
+ * Tests all the phase 1 data for calculations.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
@@ -38,14 +38,14 @@ import com.csa.apex.secyield.utility.CommonUtility;
 @IntegrationTest
 public class Phase1DataCalculationTest {
     /**
-     * CalculationEngineSelector object
+     * CalculationEngineSelector object.
      */
     @Autowired
     @Qualifier("calculationEngineSelector")
     private CalculationEngineSelector calculationEngineSelector;
 
     /**
-     * Check all phase1testdata
+     * Check all phase1testdata.
      * 
      * @throws ParseException
      * @throws IOException

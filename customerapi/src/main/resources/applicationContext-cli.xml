@@ -37,15 +37,4 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
-	<!-- Injection for CustomerDataPersistenceServiceImpl -->
-	<bean id="customerDataPersistenceServiceImpl"
-		class="com.csa.apex.secyield.customer.api.mock.service.impl.CustomerDataPersistenceServiceImpl">
-		<property name="secConfiguration">
-			<bean class="com.csa.apex.secyield.entities.SECConfiguration">
-				<property name="operationScale" value="${operationScale}" />
-				<property name="roundingMode" value="${roundingMode}" />
-			</bean>
-		</property>
-	</bean>
 </beans>

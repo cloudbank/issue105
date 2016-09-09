@@ -27,48 +27,48 @@ import com.csa.apex.secyield.utility.CommonUtility;
 @Component
 public class CalculationEngineSelector implements CalculationEngine {
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(CalculationEngineSelector.class);
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Unsupported operation due to indicator exception message
+	 * Unsupported operation due to indicator exception message.
 	 */
 	@Value("${messages.unsupportedoperationduetoindicator}")
 	private String unSupportedOperationDueToIndicator;
 
 	/**
-	 * Unsupported operation for ivType exception message
+	 * Unsupported operation for ivType exception message.
 	 */
 	@Value("${messages.unsupportedoperationfortype}")
 	private String unSupportedOperationForType;
 
 	/**
-	 * Calculate method name
+	 * Calculate method name.
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * list of calculation engines to be executed in sequence
+	 * list of calculation engines to be executed in sequence.
 	 */
 	private Map<String, CalculationEngine> calculationEngines;
 
@@ -80,7 +80,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Getter calculationEngines
+	 * Getter calculationEngines.
 	 * 
 	 * @return calculationEngines
 	 */
@@ -89,7 +89,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Setter calculationEngines
+	 * Setter calculationEngines.
 	 * 
 	 * @param calculationEngines
 	 */
@@ -98,7 +98,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Check passed parameter should not be null
+	 * Check passed parameter should not be null.
 	 * 
 	 * @param securitySECData
 	 *            the passed SecuritySECData object
@@ -111,7 +111,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	}
 
 	/**
-	 * Checks beans are injected properly on post construct
+	 * Checks beans are injected properly on post construct.
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
@@ -122,7 +122,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 
 	/**
 	 * Engine Calculate method implementation Checks whether IvType is VPS or VRDN or DVRN and accordingly calls
-	 * respective engines
+	 * respective engines.
 	 * 
 	 * @param securitySECData
 	 * @param configuration

@@ -23,7 +23,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.utility.TestUtility;
 
 /**
- * Test class for the YtmIncomeCalculationEngine
+ * Test class for the YtmIncomeCalculationEngine.
  *
  * @see YtmIncomeCalculationEngine
  * @author [es],TCSDEVELOPER
@@ -35,19 +35,19 @@ import com.csa.apex.secyield.utility.TestUtility;
 @IntegrationTest
 public class YtmIncomeCalculationEngineTest {
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
 
 	/**
-	 * YtmIncomeCalculationEngine object
+	 * YtmIncomeCalculationEngine object.
 	 */
 	@Autowired
 	private YtmIncomeCalculationEngine ytmIncomeCalculationEngine;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
+	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -58,7 +58,7 @@ public class YtmIncomeCalculationEngineTest {
 	}
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -69,7 +69,7 @@ public class YtmIncomeCalculationEngineTest {
 	}
 
 	/**
-	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.00948961511103637 infllnc = -4956.56
+	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.00948961511103637 infllnc = -4956.56 .
 	 * 
 	 * @throws Exception
 	 */
@@ -93,7 +93,7 @@ public class YtmIncomeCalculationEngineTest {
 
 	/**
 	 * Ytm income calculation mv = 70135342.4 ai = 257693.72 y = 0.30948961511103637 infllnc = -4956.56 Y%/FX>
-	 * threshold
+	 * threshold.
 	 * 
 	 * @throws Exception
 	 */

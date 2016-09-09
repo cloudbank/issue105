@@ -12,9 +12,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
+import com.csa.apex.secyield.utility.Constants;
+
 /**
  * 
- * The security reference data
+ * The security reference data.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.1
@@ -24,62 +26,62 @@ import org.springframework.stereotype.Component;
 public class SecurityReferenceData {
 
 	/**
-	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.)
+	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.).
 	 */
 	private String securityIdentifier;
 
 	/**
-	 * The specific security type (eg: CMO, STEP, MUNI - to be computed by the rules flow)
+	 * The specific security type (eg: CMO, STEP, MUNI - to be computed by the rules flow).
 	 */
 	private String ivType;
 
 	/**
-	 * Security Short Name
+	 * Security Short Name.
 	 */
 	private String securityName;
 
 	/**
-	 * Final Maturity Date
+	 * Final Maturity Date.
 	 */
 	private Date finalMaturityDate;
 
 	/**
-	 * The security redemption price (maturity price)
+	 * The security redemption price (maturity price).
 	 */
 	private BigDecimal securityRedemptionPrice;
 
 	/**
-	 * The interest (coupon) rate
+	 * The interest (coupon) rate.
 	 */
 	private BigDecimal interestRt;
 
 	/**
-	 * The default indicator
+	 * The default indicator.
 	 */
 	private boolean defIndicator;
 
 	/**
-	 * The step indicator
+	 * The step indicator.
 	 */
 	private boolean derStepIndicator;
 
 	/**
-	 * The hybrid indicator
+	 * The hybrid indicator.
 	 */
 	private boolean derHybridIndicator;
 
 	/**
-	 * Io hybrid field
+	 * Io hybrid field.
 	 */
 	private String ioHybridField;
 
 	/**
-	 * As 400 rate type
+	 * As 400 rate type.
 	 */
 	private String as400RateType;
 
 	/**
-	 * The prospective method
+	 * The prospective method.
 	 */
 	private String prospectiveMethod;
 
@@ -91,7 +93,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter securityIdentifier
+	 * Getter securityIdentifier.
 	 * 
 	 * @return securityIdentifier
 	 */
@@ -100,7 +102,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter securityIdentifier
+	 * Setter securityIdentifier.
 	 * 
 	 * @param securityIdentifier
 	 */
@@ -109,7 +111,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter ivType
+	 * Getter ivType.
 	 * 
 	 * @return ivType
 	 */
@@ -118,7 +120,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter ivType
+	 * Setter ivType.
 	 * 
 	 * @param ivType
 	 */
@@ -127,7 +129,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter securityName
+	 * Getter securityName.
 	 * 
 	 * @return securityName
 	 */
@@ -136,7 +138,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter securityName
+	 * Setter securityName.
 	 * 
 	 * @param securityName
 	 */
@@ -154,7 +156,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter finalMaturityDate
+	 * Setter finalMaturityDate.
 	 * 
 	 * @param finalMaturityDate
 	 */
@@ -163,7 +165,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter securityRedemptionPrice
+	 * Getter securityRedemptionPrice.
 	 * 
 	 * @return securityRedemptionPrice
 	 */
@@ -172,7 +174,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter securityRedemptionPrice
+	 * Setter securityRedemptionPrice.
 	 * 
 	 * @param securityRedemptionPrice
 	 */
@@ -181,7 +183,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter interestRt
+	 * Getter interestRt.
 	 * 
 	 * @return interestRt
 	 */
@@ -190,7 +192,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter interestRt
+	 * Setter interestRt.
 	 * 
 	 * @param interestRt
 	 */
@@ -199,7 +201,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter defIndicator
+	 * Getter defIndicator.
 	 * 
 	 * @return defIndicator
 	 */
@@ -208,7 +210,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter defIndicator
+	 * Setter defIndicator.
 	 * 
 	 * @param defIndicator
 	 */
@@ -217,7 +219,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter derStepIndicator
+	 * Getter derStepIndicator.
 	 * 
 	 * @return derStepIndicator
 	 */
@@ -226,7 +228,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter derStepIndicator
+	 * Setter derStepIndicator.
 	 * 
 	 * @param derStepIndicator
 	 */
@@ -235,7 +237,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter derHybridIndicator
+	 * Getter derHybridIndicator.
 	 * 
 	 * @return derHybridIndicator
 	 */
@@ -244,7 +246,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter derHybridIndicator
+	 * Setter derHybridIndicator.
 	 * 
 	 * @param derHybridIndicator
 	 */
@@ -253,7 +255,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter derHybridIndicator
+	 * Getter derHybridIndicator.
 	 * 
 	 * @return derHybridIndicator
 	 */
@@ -262,7 +264,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter derHybridIndicator
+	 * Setter derHybridIndicator.
 	 * 
 	 * @param ioHybridField
 	 */
@@ -271,7 +273,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter as400RateType
+	 * Getter as400RateType.
 	 * 
 	 * @return as400RateType
 	 */
@@ -280,7 +282,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter as400RateType
+	 * Setter as400RateType.
 	 * 
 	 * @param as400RateType
 	 */
@@ -289,7 +291,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Getter prospectiveMethod
+	 * Getter prospectiveMethod.
 	 * 
 	 * @return prospectiveMethod
 	 */
@@ -298,7 +300,7 @@ public class SecurityReferenceData {
 	}
 
 	/**
-	 * Setter prospectiveMethod
+	 * Setter prospectiveMethod.
 	 * 
 	 * @param prospectiveMethod
 	 */
@@ -333,7 +335,7 @@ public class SecurityReferenceData {
 
 	@Override
 	public String toString() {
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
 		return "SecurityReferenceData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", ivType='" + ivType + '\'' +

@@ -39,25 +39,25 @@ import com.csa.apex.secyield.utility.Constants;
 public class SECYieldController {
 
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(SECYieldController.class);
 
 	/**
-	 * SecYieldService object
+	 * SecYieldService object.
 	 */
 	@Autowired()
 	@Qualifier("secYieldServiceImpl")
 	private SECYieldService secYieldService;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
 
 	/**
-	 * The max number of security data to be retrieved
+	 * The max number of security data to be retrieved.
 	 */
 	@Value("${secyieldcontroller.maxNumberOfSecurityData}")
 	private Integer maxNumberOfSecurityData;
@@ -70,7 +70,7 @@ public class SECYieldController {
 	}
 
 	/**
-	 * Getter secYieldService
+	 * Getter secYieldService.
 	 * 
 	 * @return secYieldService
 	 */
@@ -79,7 +79,7 @@ public class SECYieldController {
 	}
 
 	/**
-	 * Setter secYieldService
+	 * Setter secYieldService.
 	 * 
 	 * @param secYieldService
 	 */
@@ -88,7 +88,7 @@ public class SECYieldController {
 	}
 
 	/**
-	 * Checks beans are injected properly on post construct
+	 * Checks beans are injected properly on post construct.
 	 * 
 	 * @throws ConfigurationException
 	 *             if any required field is not initialized properly.
@@ -185,7 +185,7 @@ public class SECYieldController {
 	}
 
 	/**
-	 * Truncates the result list based on a configured limit number
+	 * Truncates the result list based on a configured limit number.
 	 * 
 	 * @param calculatedSecuritySECData
 	 *            the list of security SEC data

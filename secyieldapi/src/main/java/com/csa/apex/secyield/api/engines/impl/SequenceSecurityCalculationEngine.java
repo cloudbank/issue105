@@ -32,19 +32,19 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	private final Logger logger = Logger.getLogger(SequenceSecurityCalculationEngine.class);
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Calculate method name
+	 * Calculate method name.
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
@@ -56,7 +56,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	private String logErrorFormat;
 
 	/**
-	 * list of calculation engines to be executed in sequence
+	 * list of calculation engines to be executed in sequence.
 	 */
 	private List<CalculationEngine> calculationEngines;
 
@@ -68,7 +68,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Getter for calculationEngines
+	 * Getter for calculationEngines.
 	 * 
 	 * @return calculationEngines
 	 */
@@ -77,7 +77,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Setter for calculationEngines
+	 * Setter for calculationEngines.
 	 * 
 	 * @param calculationEngines
 	 */
@@ -86,7 +86,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Check passed parameter should not be null
+	 * Check passed parameter should not be null.
 	 * 
 	 * @param securitySECData
 	 *            the passed SecuritySECData object
@@ -99,7 +99,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Checks beans are injected properly on post construct
+	 * Checks beans are injected properly on post construct.
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
@@ -109,7 +109,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Engine Calculate method implementation
+	 * Engine Calculate method implementation.
 	 * 
 	 * 
 	 * @param securitySECData

@@ -44,23 +44,23 @@ public class CustomerDataControllerTest {
 	private static final String BUSINESS_DATE_PARAM_NAME = "businessDate";
 
 	/**
-	 * The export file type
+	 * The export file type.
 	 */
 	private static final String APPLICATION_JSON_CONTENT_TYPE = "application/json";
 
 	/**
-	 * CustomerDataController to be tested
+	 * CustomerDataController to be tested.
 	 */
 	@Autowired
 	CustomerDataService customerDataController;
 
 	/**
-	 * Mock controller
+	 * Mock controller.
 	 */
 	private MockMvc mockMvc;
 
 	/**
-	 * Mock Setup
+	 * Mock Setup.
 	 * 
 	 * @throws SECYieldException
 	 *             if any application specific exception occurs
@@ -70,13 +70,13 @@ public class CustomerDataControllerTest {
 	 *             if any parsing exception occurs
 	 */
 	@Before
-	public void setUp() throws IllegalArgumentException, SECYieldException, ParseException {
+	public void setUp() throws SECYieldException, ParseException {
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(customerDataController).build();
 	}
 
 	/**
-	 * Test getCustomerSECData
+	 * Test getCustomerSECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -88,7 +88,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test getCustomerSECData with invalid business date
+	 * Test getCustomerSECData with invalid business date.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -100,7 +100,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test getCustomerSECData
+	 * Test getCustomerSECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -114,7 +114,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test persistSecuritySECData with invalid input data
+	 * Test persistSecuritySECData with invalid input data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -126,7 +126,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test getConfiguration
+	 * Test getConfiguration.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -139,7 +139,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test getCalculatedSECData
+	 * Test getCalculatedSECData.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -151,7 +151,7 @@ public class CustomerDataControllerTest {
 	}
 
 	/**
-	 * Test getCalculatedSECData with invalid input data
+	 * Test getCalculatedSECData with invalid input data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs

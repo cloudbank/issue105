@@ -14,7 +14,7 @@ import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 
 /**
- * MockDataServiceUtility Used for mocking customer API
+ * MockDataServiceUtility Used for mocking customer API.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
@@ -22,14 +22,14 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 public class MockDataServiceUtility {
 
 	/**
-	 * Private constructor
+	 * Private constructor.
 	 */
 	private MockDataServiceUtility() {
 
 	}
 
 	/**
-	 * Get mock list of data Yield and Income is not calculated
+	 * Get mock list of data Yield and Income is not calculated.
 	 * 
 	 * @return
 	 * @throws ParseException
@@ -89,7 +89,7 @@ public class MockDataServiceUtility {
 	}
 
 	/**
-	 * Get mock list of data Yield and Income is calculated
+	 * Get mock list of data Yield and Income is calculated.
 	 * 
 	 * @return
 	 * @throws ParseException

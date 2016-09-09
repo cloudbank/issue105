@@ -3,7 +3,6 @@
  */
 package com.csa.apex.secyield.api.services.impl;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -32,6 +31,7 @@ import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
+import com.csa.apex.secyield.utility.CommonUtility;
 import com.csa.apex.secyield.utility.Constants;
 
 /**
@@ -49,7 +49,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	private final Logger logger = Logger.getLogger(SECYieldServiceImpl.class);
 
 	/**
-	 * CalcultionEngineSelector object
+	 * CalcultionEngineSelector object.
 	 */
 	private CalculationEngineSelector calculationEngineSelector;
 
@@ -60,7 +60,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	private String logErrorFormat;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
@@ -90,60 +90,60 @@ public class SECYieldServiceImpl implements SECYieldService {
 	private String getCalculatedSecuritySECDataApiPath;
 
 	/**
-	 * Creating restTemplate object helps in mock testing
+	 * Creating restTemplate object helps in mock testing.
 	 * 
 	 */
 	private RestTemplate restTemplate;
 
 	/**
-	 * Configuration object for the service
+	 * Configuration object for the service.
 	 */
 	private SECConfiguration configuration;
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.secyieldexception}")
 	private String secYieldExceptionMessage;
 
 	/**
-	 * Unsupported operation exception message
+	 * Unsupported operation exception message.
 	 */
 	@Value("${messages.unsupportedoperationexception}")
 	private String unSupportedOperationException;
 
 	/**
-	 * Customer API exception message
+	 * Customer API exception message.
 	 */
 	@Value("${messages.customerapiexception}")
 	private String customerApiException;
 
 	/**
-	 * processSingleSecurity method name
+	 * processSingleSecurity method name.
 	 */
 	@Value("${secyieldserviceimpl.processsinglesecuritymethodname}")
 	private String processingSingeSecurityMethodName;
 
 	/**
-	 * exportCalculatedSecuritySECData method name
+	 * exportCalculatedSecuritySECData method name.
 	 */
 	@Value("${secyieldserviceimpl.exportCalculatedSecuritySECDataMethodName}")
 	private String exportCalculatedSecuritySECDataMethodName;
 
 	/**
-	 * processSecuritySECData method name
+	 * processSecuritySECData method name.
 	 */
 	@Value("${secyieldserviceimpl.processSecuritySECDataMethodName}")
 	private String processSecuritySECDataMethodName;
 
 	/**
-	 * The field names to be exported
+	 * The field names to be exported.
 	 */
 	private static final String[] EXPORT_FIELD_NAMES = new String[] { "securityIdentifier", "reportDate",
 			"derCleanPrice", "derYieldCalcEngine", "derIncomeCalcEngine", "derOneDaySecurityYield", "derRedemptionDate",
@@ -154,37 +154,37 @@ public class SECYieldServiceImpl implements SECYieldService {
 			"shareParAmount", "earnedAmortizationBase", "positionValInflationAdjShares", "derOneDaySecurityIncome" };
 
 	/**
-	 * Checks error in parallel processing
+	 * Checks error in parallel processing.
 	 */
 	private boolean isProcessed = true;
 
 	/**
-	 * The API date format
+	 * The API date format.
 	 */
 	private SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.API_DATE_FORMAT);
 
 	/**
-	 * The value to be exported for null values
+	 * The value to be exported for null values.
 	 */
 	private static final String NULL_CSV_VALUE = "null";
 
 	/**
-	 * The export file type
+	 * The export file type.
 	 */
 	private static final String EXPORT_FILE_TYPE = "application/zip";
 
 	/**
-	 * The CSV extension
+	 * The CSV extension.
 	 */
 	private static final String CSV_EXTENSION = ".csv";
 
 	/**
-	 * The ZIP extension
+	 * The ZIP extension.
 	 */
 	private static final String ZIP_EXTENSION = ".zip";
 
 	/**
-	 * The export file name prefix
+	 * The export file name prefix.
 	 */
 	private static final String EXPORT_FILE_NAME_PREFIX = "export-";
 
@@ -196,7 +196,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter configuration
+	 * Getter configuration.
 	 * 
 	 * @return configuration
 	 */
@@ -213,7 +213,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter configuration
+	 * Setter configuration.
 	 * 
 	 * @param configuration
 	 */
@@ -222,7 +222,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter calculationEngineSelector
+	 * Getter calculationEngineSelector.
 	 * 
 	 * @return calculationEngineSelector
 	 */
@@ -231,7 +231,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter calculationEngineSelector
+	 * Setter calculationEngineSelector.
 	 * 
 	 * @param calculationEngineSelector
 	 */
@@ -240,7 +240,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter getConfigApiPath
+	 * Getter getConfigApiPath.
 	 * 
 	 * @return getConfigApiPath
 	 */
@@ -249,7 +249,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter getConfigApiPath
+	 * Setter getConfigApiPath.
 	 * 
 	 * @param getConfigApiPath
 	 */
@@ -258,7 +258,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter getCustomerDataApiPath
+	 * Getter getCustomerDataApiPath.
 	 * 
 	 * @return getCustomerDataApiPath
 	 */
@@ -267,7 +267,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter getCustomerDataApiPath
+	 * Setter getCustomerDataApiPath.
 	 * 
 	 * @param getCustomerDataApiPath
 	 */
@@ -276,7 +276,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter saveCalculatedSecuritySECDataApiPath
+	 * Getter saveCalculatedSecuritySECDataApiPath.
 	 * 
 	 * @return saveCalculatedSecuritySECDataApiPath
 	 */
@@ -285,7 +285,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter saveCalculatedSecuritySECDataApiPath
+	 * Setter saveCalculatedSecuritySECDataApiPath.
 	 * 
 	 * @param saveCalculatedSecuritySECDataApiPath
 	 */
@@ -294,7 +294,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter getCalculatedSecuritySECDataApiPath
+	 * Getter getCalculatedSecuritySECDataApiPath.
 	 * 
 	 * @return getCalculatedSecuritySECDataApiPath
 	 */
@@ -303,7 +303,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter getCalculatedSecuritySECDataApiPath
+	 * Setter getCalculatedSecuritySECDataApiPath.
 	 * 
 	 * @param getCalculatedSecuritySECDataApiPath
 	 */
@@ -312,7 +312,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Getter restTemplate
+	 * Getter restTemplate.
 	 * 
 	 * @return restTemplate
 	 */
@@ -321,7 +321,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Setter restTemplate
+	 * Setter restTemplate.
 	 * 
 	 * @param restTemplate
 	 */
@@ -330,7 +330,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Checks beans are injected properly on post construct throws ConfigurationException
+	 * Checks beans are injected properly on post construct throws ConfigurationException.
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
@@ -352,13 +352,18 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * Process SEC Security data for the business data. This method gets the securities and then process each security
 	 * first to calculate the data, then to persist it using API.
 	 * 
-	 * @param Date
+	 * @param businessDate
 	 *            businessDate of the security
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
 	 */
 	@Override
 	public List<SecuritySECData> processSecuritySECData(Date businessDate) throws SECYieldException {
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "processSecuritySECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		List<SecuritySECData> failedSecuritySECDataList = new ArrayList<SecuritySECData>();
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCustomerDataApiPath)
@@ -402,18 +407,18 @@ public class SECYieldServiceImpl implements SECYieldService {
 	/**
 	 * Gets already calculated SEC Security data for the given date.
 	 *
-	 * @param Date
+	 * @param businessDate
 	 *            businessDate of the security
 	 * @return List<SecuritySECData> list of SecuritySECData for the date
 	 * @throws SECYieldException
 	 */
 	@Override
 	public List<SecuritySECData> getCalculatedSecuritySECData(Date businessDate) throws SECYieldException {
-		if (businessDate == null) {
-			logger.error(
-					String.format(logErrorFormat, "getCalculatedSecuritySECData", illegalArgumentExceptionMessage));
-			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
-		}
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCalculatedSecuritySECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam("businessDate", dateFormat.format(businessDate));
@@ -493,12 +498,12 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 */
 	@Override
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
-			throws IllegalArgumentException, SECYieldException {
-		if (businessDate == null) {
-			logger.error(String.format(logErrorFormat, exportCalculatedSecuritySECDataMethodName,
-					illegalArgumentExceptionMessage));
-			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
-		}
+			throws SECYieldException {
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, exportCalculatedSecuritySECDataMethodName,
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
 		try {
 			final List<SecuritySECData> calculatedSecuritySECData = getCalculatedSecuritySECData(businessDate);
 			createExportArchive(response,
@@ -511,7 +516,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Create the export zip file
+	 * Create the export zip file.
 	 * 
 	 * @param response
 	 *            the http response to which the archive will be written
@@ -520,12 +525,10 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * @param businessDate
 	 *            the business date string
 	 * @throws IOException
-	 *             if any IO exception occurs
-	 * @throws FileNotFoundException
-	 *             if the CSV file is not found
+	 *             if any IO exception occurs or if the CSV file is not found
 	 */
 	private void createExportArchive(HttpServletResponse response, SecuritySECData[] securitiesArray,
-			String businessDate) throws IOException, FileNotFoundException {
+			String businessDate) throws IOException {
 
 		String exportArchiveFileName = EXPORT_FILE_NAME_PREFIX + businessDate + ZIP_EXTENSION;
 		String csvFileName = EXPORT_FILE_NAME_PREFIX + businessDate + CSV_EXTENSION;
@@ -553,7 +556,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	}
 
 	/**
-	 * Convert the position data to an array of position data field values
+	 * Convert the position data to an array of position data field values.
 	 * 
 	 * @param securitySECData
 	 *            the security SEC data
@@ -599,13 +602,13 @@ public class SECYieldServiceImpl implements SECYieldService {
 		values[index++] = String.valueOf(positionData.getShareParAmount());
 		values[index++] = String.valueOf(positionData.getEarnedAmortizationBase());
 		values[index++] = String.valueOf(positionData.getPositionValInflationAdjShares());
-		values[index++] = String.valueOf(positionData.getDerOneDaySecurityIncome());
+		values[index] = String.valueOf(positionData.getDerOneDaySecurityIncome());
 
 		return values;
 	}
 
 	/**
-	 * Retrieve formatted date
+	 * Retrieve formatted date.
 	 * 
 	 * @param date
 	 *            the date to be formatted

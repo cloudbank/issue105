@@ -35,19 +35,19 @@ import com.csa.apex.secyield.utility.TestUtility;
 @IntegrationTest
 public class CouponIncomeCalculationEngineTest {
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
 
 	/**
-	 * CouponIncomeCalculationEngine object
+	 * CouponIncomeCalculationEngine object.
 	 */
 	@Autowired
 	private CouponIncomeCalculationEngine couponIncomeCalculationEngine;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
+	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -58,7 +58,7 @@ public class CouponIncomeCalculationEngineTest {
 	}
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -69,7 +69,7 @@ public class CouponIncomeCalculationEngineTest {
 	}
 
 	/**
-	 * Checks coupon income value
+	 * Checks coupon income value.
 	 * 
 	 * Sh = 7000000 Y = 0.049592404 FX = 1 Am = -45.69 Income = 918.61
 	 * 
@@ -91,7 +91,7 @@ public class CouponIncomeCalculationEngineTest {
 	}
 
 	/**
-	 * Checks coupon income value
+	 * Checks coupon income value.
 	 * 
 	 * Sh = 4900000 Y = 0.004199982 FX = 1 Am = 0 Income = 57.17
 	 * 

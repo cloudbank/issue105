@@ -39,6 +39,7 @@ import com.csa.apex.secyield.entities.SecurityReferenceData;
 import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.ConfigurationException;
 import com.csa.apex.secyield.exceptions.SECYieldException;
+import com.csa.apex.secyield.utility.CommonUtility;
 
 /**
  * Persistence service for customer data operations implementing the persistence interface. This class is effectively
@@ -50,107 +51,114 @@ import com.csa.apex.secyield.exceptions.SECYieldException;
 public class CustomerDataPersistenceServiceImpl implements CustomerDataPersistenceService {
 
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(CustomerDataPersistenceServiceImpl.class);
 
 	/**
-	 * The autowired jdbcTemplate
+	 * The autowired jdbcTemplate.
 	 */
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	/**
-	 * The injected SECConfiguration
+	 * The injected SECConfiguration.
 	 */
 	private SECConfiguration secConfiguration;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
+	
+    /**
+     * extractSecuritySECData method name.
+     */
+    @Value("${customerdatapersistenceserviceimpl.iscolumninresultsetmethodname}")
+    private String isColumnInResultSetMethodName;
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * extractSecuritySECData method name
+	 * extractSecuritySECData method name.
 	 */
 	@Value("${customerdatapersistenceserviceimpl.extractsecuritysecdatamethodname}")
 	private String extractSecuritySECDataMethodName;
 
 	/**
-	 * persistSecuritySECData method name
+	 * persistSecuritySECData method name.
 	 */
 	@Value("${customerdatapersistenceserviceimpl.persistsecuritysecdata}")
 	private String persistSecuritySECDataMethodName;
 
 	/**
-	 * The jdbc insert utility for security SEC data
+	 * The jdbc insert utility for security SEC data.
 	 */
 	private SimpleJdbcInsert insertSecuritySECData;
 
 	/**
-	 * The jdbc insert utility for position data
+	 * The jdbc insert utility for position data.
 	 */
 	private SimpleJdbcInsert insertPositionData;
 
 	/**
-	 * The db date format
+	 * The db date format.
 	 */
-	private final SimpleDateFormat DB_DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd");
+	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
-	/**
-	 * The table name of calculated_position_data
-	 */
-	public static final String TABLE_CALCULATED_POSITION_DATA = "calculated_position_data";
+	 /**
+     * The table name of calculated_position_data.
+     */
+    @Value("${table.calculated_position_data}")
+    public String tableCalculatedPositionData;
+    /**
+     * The table name of calculated_security_sec_data.
+     */
+    @Value("${table.calculated_security_sec_data}")
+    public String tableCalculatedSecuritySecData;
 
-	/**
-	 * The table name of calculated_security_sec_data
-	 */
-	public static final String TABLE_CALCULATED_SECURITY_SEC_DATA = "calculated_security_sec_data";
+    /**
+     * The table name of customer_position_data.
+     */
+    @Value("${table.customer_position_data}")
+    public String tableCustomerPositionData;
 
-	/**
-	 * The table name of customer_position_data
-	 */
-	public static final String TABLE_CUSTOMER_POSITION_DATA = "customer_position_data";
+    /**
+     * The table name of customer_security_sec_data.
+     */
+    @Value("${table.customer_security_sec_data}")
+    public String tableCustomerSecuritySecData;
 
-	/**
-	 * The table name of customer_security_sec_data
-	 */
-	public static final String TABLE_CUSTOMER_SECURITY_SEC_DATA = "customer_security_sec_data";
+    /**
+     * The select query for retrieving all calculated security SEC data with
+     * their position data.
+     */
+    @Value("${query.calculated_security_sec_data_query}")
+    private String calculatedSecuritySecDataQuery;
 
-	/**
-	 * The select query for retrieving all calculated security SEC data with their position data
-	 */
-	private static final String CALCULATED_SECURITY_SEC_DATA_QUERY = "SELECT * FROM "
-			+ TABLE_CALCULATED_SECURITY_SEC_DATA + " cssd " + "LEFT JOIN " + TABLE_CALCULATED_POSITION_DATA
-			+ " cpd ON cssd.security_identifier = cpd.security_identifier AND cssd.report_date = cpd.report_date "
-			+ "WHERE cssd.report_date >= ? AND cssd.report_date < ?";
-
-	/**
-	 * The select query for retrieving all security SEC data with their position data
-	 */
-	private static final String SECURITY_SEC_DATA_QUERY = "SELECT * FROM " + TABLE_CUSTOMER_SECURITY_SEC_DATA
-			+ " cssd LEFT JOIN " + "" + TABLE_CUSTOMER_POSITION_DATA + " cpd ON cssd.security_identifier = "
-			+ "cpd.security_identifier AND cssd.report_date = cpd.report_date WHERE cssd.report_date >= ? AND "
-			+ "cssd.report_date < ?";
-
-	/**
-	 * The select query for retrieving a security SEC data by security identifier
-	 */
-	private static final String FIND_SECURITY_SEC_DATA_QUERY = "SELECT * FROM " + TABLE_CALCULATED_SECURITY_SEC_DATA
-			+ " WHERE security_identifier = ?";
+    /**
+     * The select query for retrieving all security SEC data with their position
+     * data.
+     */
+    @Value("${query.security_sec_data_query}")
+    private String securitySecDataQuery;
+    /**
+     * The select query for retrieving a security SEC data by security
+     * identifier.
+     */
+    @Value("${query.find_security_sec_data_query}")
+    private String findSecuritySecDataQuery;
 
 	/**
 	 * Constructor
@@ -160,7 +168,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Getter jdbcTemplate
+	 * Getter jdbcTemplate.
 	 * 
 	 * @return the jdbc template
 	 */
@@ -169,7 +177,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Setter jdbcTemplate
+	 * Setter jdbcTemplate.
 	 * 
 	 * @param jdbcTemplate
 	 *            the jdbc template to be set
@@ -179,7 +187,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Getter secConfiguration
+	 * Getter secConfiguration.
 	 * 
 	 * @return the sec configuration
 	 */
@@ -188,7 +196,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Setter secConfiguration
+	 * Setter secConfiguration.
 	 * 
 	 * @param secConfiguration
 	 *            the sec configuration to be set
@@ -212,9 +220,9 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			throw new ConfigurationException(configurationArgumentExceptionMessage);
 		}
 		insertSecuritySECData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-				.withTableName(TABLE_CALCULATED_SECURITY_SEC_DATA);
+				.withTableName(tableCalculatedSecuritySecData);
 		insertPositionData = new SimpleJdbcInsert(jdbcTemplate.getDataSource())
-				.withTableName(TABLE_CALCULATED_POSITION_DATA);
+				.withTableName(tableCalculatedPositionData);
 	}
 
 	/**
@@ -230,7 +238,12 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	@Override
 	public List<SecuritySECData> getCustomerSECData(Date businessDate) throws SECYieldException {
-		return extractSecuritySECData(businessDate, SECURITY_SEC_DATA_QUERY);
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCustomerSECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
+		return extractSecuritySECData(businessDate, securitySecDataQuery);
 	}
 
 	/**
@@ -253,7 +266,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			throw new IllegalArgumentException(illegalArgumentExceptionMessage);
 		}
 		try {
-			jdbcTemplate.queryForObject(FIND_SECURITY_SEC_DATA_QUERY, new SecuritySECDataRowMapper(),
+			jdbcTemplate.queryForObject(findSecuritySecDataQuery, new SecuritySECDataRowMapper(),
 					securitySECData.getSecurityIdentifier());
 			logger.info(String.format("Security SEC data with identifier {%s} was already calculated.",
 					securitySECData.getSecurityIdentifier()));
@@ -354,7 +367,12 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	 */
 	@Override
 	public List<SecuritySECData> getCalculatedSECData(Date businessDate) throws SECYieldException {
-		return extractSecuritySECData(businessDate, CALCULATED_SECURITY_SEC_DATA_QUERY);
+	    if (CommonUtility.checkBusinessDateInValid(businessDate)) {
+            logger.error(String.format(logErrorFormat, "getCalculatedSECData",
+                    illegalArgumentExceptionMessage));
+            throw new IllegalArgumentException(illegalArgumentExceptionMessage);
+        }
+		return extractSecuritySECData(businessDate, calculatedSecuritySecDataQuery);
 	}
 
 	/**
@@ -379,8 +397,8 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 		final DateTime businessDateTime = new DateTime(businessDate).withTimeAtStartOfDay();
 		// Get the data for a single business date (from the start to the end of the day)
 		return jdbcTemplate.query(query,
-				new Object[] { DB_DATE_FORMAT.format(businessDateTime.toDate()),
-						DB_DATE_FORMAT.format(businessDateTime.plusDays(1).withTimeAtStartOfDay().toDate()) },
+				new Object[] { dbDateFormat.format(businessDateTime.toDate()),
+				        dbDateFormat.format(businessDateTime.plusDays(1).withTimeAtStartOfDay().toDate()) },
 				new SecuritySECDataResultSetExtractor());
 	}
 
@@ -488,7 +506,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Determines if a column name is present in a result set
+	 * Determines if a column name is present in a result set.
 	 * 
 	 * @param rs
 	 *            the result set
@@ -501,7 +519,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 			rs.findColumn(column);
 			return true;
 		} catch (SQLException ex) {
-			logger.debug("Column " + column + " is not present in the result set.", ex);
+		    logger.error(String.format(logErrorFormat, isColumnInResultSetMethodName, ex.getMessage()));
 			return false;
 		}
 	}

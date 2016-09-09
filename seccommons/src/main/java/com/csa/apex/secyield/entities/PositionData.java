@@ -12,6 +12,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.stereotype.Component;
 
+import com.csa.apex.secyield.utility.Constants;
+
 /**
  * 
  * A PositionData.
@@ -310,7 +312,7 @@ public class PositionData {
 
 	@Override
 	public String toString() {
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
 		return "PositionData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", portfolioNumber=" + portfolioNumber +

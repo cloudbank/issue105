@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 
- * The Security SEC data
+ * The Security SEC data.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.1
@@ -25,72 +25,72 @@ import org.springframework.stereotype.Component;
 public class SecuritySECData {
 
 	/**
-	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.)
+	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.).
 	 */
 	private String securityIdentifier;
 
 	/**
-	 * Report Date
+	 * Report Date.
 	 */
 	private Date reportDate;
 
 	/**
-	 * The security reference data
+	 * The security reference data.
 	 */
 	private SecurityReferenceData securityReferenceData;
 
 	/**
-	 * The clean price
+	 * The clean price.
 	 */
 	private BigDecimal derCleanPrice;
 
 	/**
-	 * The position data
+	 * The position data.
 	 */
 	private PositionData[] positionData;
 
 	/**
-	 * The yield calculation engine name
+	 * The yield calculation engine name.
 	 */
 	private String derYieldCalcEngine;
 
 	/**
-	 * The Income calculation engine name
+	 * The Income calculation engine name.
 	 */
 	private String derIncomeCalcEngine;
 
 	/**
-	 * The one day security income
+	 * The one day security income.
 	 */
 	private BigDecimal derOneDaySecurityYield;
 
 	/**
-	 * The redemption date
+	 * The redemption date.
 	 */
 	private Date derRedemptionDate;
 
 	/**
-	 * The redemption price
+	 * The redemption price.
 	 */
 	private BigDecimal derRedemptionPrice;
 
 	/**
-	 * The security type
+	 * The security type.
 	 */
 	private String derSecurityType;
 
 	/**
-	 * TIPS inflationary ratio
+	 * TIPS inflationary ratio.
 	 */
 	private BigDecimal derTIPSInflationaryRatio;
 
 	/**
-	 * The security (market) price
+	 * The security (market) price.
 	 */
 	private BigDecimal securityPrice;
 
 	/**
-	 * The FX rate
+	 * The FX rate.
 	 */
 	private BigDecimal fxRate;
 
@@ -102,7 +102,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter securityIdentifier
+	 * Getter securityIdentifier.
 	 * 
 	 * @return securityIdentifier
 	 */
@@ -111,7 +111,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter securityIdentifier
+	 * Setter securityIdentifier.
 	 * 
 	 * @param securityIdentifier
 	 */
@@ -120,7 +120,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter reportDate
+	 * Getter reportDate.
 	 * 
 	 * @return reportDate
 	 */
@@ -129,7 +129,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter reportDate
+	 * Setter reportDate.
 	 * 
 	 * @param reportDate
 	 */
@@ -138,7 +138,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter securityReferenceData
+	 * Getter securityReferenceData.
 	 * 
 	 * @return securityReferenceData
 	 */
@@ -147,7 +147,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter securityReferenceData
+	 * Setter securityReferenceData.
 	 * 
 	 * @param securityReferenceData
 	 */
@@ -156,7 +156,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derCleanPrice
+	 * Getter derCleanPrice.
 	 * 
 	 * @return derCleanPrice
 	 */
@@ -165,7 +165,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derCleanPrice
+	 * Setter derCleanPrice.
 	 * 
 	 * @param derCleanPrice
 	 */
@@ -174,7 +174,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter positionData
+	 * Getter positionData.
 	 * 
 	 * @return
 	 */
@@ -183,7 +183,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter positionData
+	 * Setter positionData.
 	 * 
 	 * @param positionData
 	 */
@@ -192,7 +192,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derYieldCalcEngine
+	 * Getter derYieldCalcEngine.
 	 * 
 	 * @return derYieldCalcEngine
 	 */
@@ -201,7 +201,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derYieldCalcEngine
+	 * Setter derYieldCalcEngine.
 	 * 
 	 * @param derYieldCalcEngine
 	 */
@@ -210,7 +210,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derIncomeCalcEngine
+	 * Getter derIncomeCalcEngine.
 	 * 
 	 * @return derIncomeCalcEngine
 	 */
@@ -219,7 +219,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derIncomeCalcEngine
+	 * Setter derIncomeCalcEngine.
 	 * 
 	 * @param derIncomeCalcEngine
 	 */
@@ -228,7 +228,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derOneDaySecurityYield
+	 * Getter derOneDaySecurityYield.
 	 * 
 	 * @return derOneDaySecurityYield
 	 */
@@ -237,7 +237,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derOneDaySecurityYield
+	 * Setter derOneDaySecurityYield.
 	 * 
 	 * @param derOneDaySecurityYield
 	 */
@@ -246,7 +246,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derRedemptionDate
+	 * Getter derRedemptionDate.
 	 * 
 	 * @return derRedemptionDate
 	 */
@@ -255,7 +255,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derRedemptionDate
+	 * Setter derRedemptionDate.
 	 * 
 	 * @param derRedemptionDate
 	 */
@@ -264,7 +264,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derRedemptionPrice
+	 * Getter derRedemptionPrice.
 	 * 
 	 * @return derRedemptionPrice
 	 */
@@ -273,7 +273,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derRedemptionPrice
+	 * Setter derRedemptionPrice.
 	 * 
 	 * @param derRedemptionPrice
 	 */
@@ -282,7 +282,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derSecurityType
+	 * Getter derSecurityType.
 	 * 
 	 * @return derSecurityType
 	 */
@@ -291,7 +291,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derSecurityType
+	 * Setter derSecurityType.
 	 * 
 	 * @param derSecurityType
 	 */
@@ -300,7 +300,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter derTIPSInflationaryRatio
+	 * Getter derTIPSInflationaryRatio.
 	 * 
 	 * @return derTIPSInflationaryRatio
 	 */
@@ -309,7 +309,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter derTIPSInflationaryRatio
+	 * Setter derTIPSInflationaryRatio.
 	 * 
 	 * @param derTIPSInflationaryRatio
 	 */
@@ -318,7 +318,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter securityPrice
+	 * Getter securityPrice.
 	 * 
 	 * @return securityPrice
 	 */
@@ -327,7 +327,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter securityPrice
+	 * Setter securityPrice.
 	 * 
 	 * @param securityPrice
 	 */
@@ -336,7 +336,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Getter fxRate
+	 * Getter fxRate.
 	 * 
 	 * @return fxRate
 	 */
@@ -345,7 +345,7 @@ public class SecuritySECData {
 	}
 
 	/**
-	 * Setter fxRate
+	 * Setter fxRate.
 	 * 
 	 * @param fxRate
 	 */

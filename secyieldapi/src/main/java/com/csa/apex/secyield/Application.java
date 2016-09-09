@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * The spring application for the Public API
+ * The spring application for the Public API.
  *
  * @author TCSDEVELOPER
  * @version 1.1

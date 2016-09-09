@@ -24,35 +24,35 @@ import com.csa.apex.secyield.utility.CommonUtility;
 @Component
 public class CouponYieldCalculationEngine implements CalculationEngine {
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(CouponYieldCalculationEngine.class);
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Calculate method name
+	 * Calculate method name.
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * Calculation engine name
+	 * Calculation engine name.
 	 */
 	public static final String ENGINE_NAME = "CouponYieldCalculationEngine";
 
 	/**
-	 * Calculation engine name
+	 * Calculation engine name.
 	 */
 	public static final String SECURITY_TYPE = "MUNI";
 
@@ -62,7 +62,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	private int operationScale = 7;
 
 	/**
-	 * Default Rounding mode
+	 * Default Rounding mode.
 	 */
 	private int roundingMode = 4;
 
@@ -74,7 +74,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Check passed parameter should not be null
+	 * Check passed parameter should not be null.
 	 * 
 	 * @param securitySECData
 	 *            the passed SecuritySECData object
@@ -87,7 +87,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuration object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default value.
 	 * 
 	 * @param configuration
 	 *            the configuration object
@@ -100,7 +100,7 @@ public class CouponYieldCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Engine Calculate method implementation
+	 * Engine Calculate method implementation.
 	 * 
 	 * 
 	 * @param securitySECData

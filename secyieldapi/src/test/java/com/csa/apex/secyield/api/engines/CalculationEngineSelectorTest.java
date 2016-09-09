@@ -33,13 +33,13 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 public class CalculationEngineSelectorTest {
 
 	/**
-	 * CalculationEngineSelector object
+	 * CalculationEngineSelector object.
 	 */
 	@Autowired
 	private CalculationEngineSelector calculationEngineSelector;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
+	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -50,7 +50,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -61,7 +61,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests UnsupportedOperationException should be thrown if DerStepIndicator is true
+	 * Tests UnsupportedOperationException should be thrown if DerStepIndicator is true.
 	 * 
 	 * @throws Exception
 	 */
@@ -79,7 +79,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests UnsupportedOperationException should be thrown if DerHybridIndicator is true
+	 * Tests UnsupportedOperationException should be thrown if DerHybridIndicator is true.
 	 * 
 	 * @throws Exception
 	 */
@@ -97,7 +97,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests UnsupportedOperationException should be thrown if unsupported IVType
+	 * Tests UnsupportedOperationException should be thrown if unsupported IVType.
 	 * 
 	 * @throws Exception
 	 */
@@ -115,7 +115,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests when security IV type is VPS Yield and Income engine should be YTM
+	 * Tests when security IV type is VPS Yield and Income engine should be YTM.
 	 * 
 	 * @throws Exception
 	 */
@@ -135,7 +135,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests when security IV type is VRDN Yield and Income engine should be Coupon
+	 * Tests when security IV type is VRDN Yield and Income engine should be Coupon.
 	 * 
 	 * @throws Exception
 	 */
@@ -155,7 +155,7 @@ public class CalculationEngineSelectorTest {
 	}
 
 	/**
-	 * Tests when security IV type is DVRN Yield and Income engine should be Coupon
+	 * Tests when security IV type is DVRN Yield and Income engine should be Coupon.
 	 * 
 	 * @throws Exception
 	 */

@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class SecuritySECDataTest {
 
     /**
-     * SecuritySECData Test toString
+     * SecuritySECData Test toString.
      *
      * @throws ParseException
      */

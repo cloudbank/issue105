@@ -37,19 +37,19 @@ import com.csa.apex.secyield.utility.TestUtility;
 @IntegrationTest
 public class YtmYieldCalculationEngineTest {
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
 
 	/**
-	 * the YtmYieldCalculationEngine object
+	 * the YtmYieldCalculationEngine object.
 	 */
 	@Autowired
 	private YtmYieldCalculationEngine ytmYieldCalculationEngine;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -60,7 +60,7 @@ public class YtmYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Checks yield value when operation scale is overridden by configuration
+	 * Checks yield value when operation scale is overridden by configuration.
 	 * 
 	 * @throws Exception
 	 */
@@ -72,7 +72,7 @@ public class YtmYieldCalculationEngineTest {
 
 	/**
 	 * Yield calculation test r = 0.01375 market price = 114.7389035 maturity date = 02/15/2044 report date = 06/03/2016
-	 * rv = 100 TIPSInflationaryRatio = 1.0222502
+	 * rv = 100 TIPSInflationaryRatio = 1.0222502 .
 	 * 
 	 * @throws Exception
 	 */
@@ -97,7 +97,7 @@ public class YtmYieldCalculationEngineTest {
 
 	/**
 	 * Yield calculation test r = 0.0075 market price = 98.3082779 maturity date = 02/15/2045 report date = 06/03/2016
-	 * rv = 100 TIPSInflationaryRatio = 1.011740011
+	 * rv = 100 TIPSInflationaryRatio = 1.011740011 .
 	 * 
 	 * @throws Exception
 	 */
@@ -122,7 +122,7 @@ public class YtmYieldCalculationEngineTest {
 
 	/**
 	 * Yield calculation test r = 0.00625 market price = 104.7185855 maturity date = 01/15/2026 report date = 06/03/2016
-	 * rv = 100 TIPSInflationaryRatio = 1.00267030
+	 * rv = 100 TIPSInflationaryRatio = 1.00267030 .
 	 * 
 	 * @throws Exception
 	 */
@@ -146,7 +146,7 @@ public class YtmYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Yield calculation test when yield < 0 
+	 * Yield calculation test when yield < 0 .
 	 * r = 0.02375
 	 * market price = 125.4284756 maturity date = 01/15/2017 
 	 * report date = 12/01/2014, rv = 100 
@@ -174,7 +174,7 @@ public class YtmYieldCalculationEngineTest {
 	}
 
 	/**
-	 * derTIPSInflationaryRatio calculation test on normal scenario
+	 * derTIPSInflationaryRatio calculation test on normal scenario.
 	 *
 	 * positionValInflationAdjShares = 50438.66
 	 * shareParAmount = 45

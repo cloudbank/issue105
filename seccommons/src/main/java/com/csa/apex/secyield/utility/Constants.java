@@ -12,7 +12,7 @@ package com.csa.apex.secyield.utility;
 public class Constants {
 
 	/**
-	 * The date format of the REST APIs
+	 * The date format of the REST APIs.
 	 */
 	public static final String API_DATE_FORMAT = "yyyy-MM-dd";
 }

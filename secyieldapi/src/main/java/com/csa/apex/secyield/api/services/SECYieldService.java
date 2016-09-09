@@ -12,7 +12,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.SECYieldException;
 
 /**
- * SECYieldService Interface
+ * SECYieldService Interface.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.1

@@ -20,31 +20,31 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.opencsv.CSVReader;
 
 /**
- * CommonUtility Exposes useful function used through out the code
+ * CommonUtility Exposes useful function used through out the code.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
 public class CommonUtility {
     /**
-     * Private constructor
+     * Private constructor.
      */
     private CommonUtility() {
 
     }
 
     /**
-     * Column mapping for test data
+     * Column mapping for test data.
      */
     private static HashMap<String, Integer> csvTestDataColumns = new HashMap<String, Integer>();
 
     /**
-     * Test data csv file name
+     * Test data csv file name.
      */
     private static volatile String csvTestDataFileName = "";
 
     /**
-     * Set csv columns index
+     * Set csv columns index.
      * 
      * @param columns
      */
@@ -60,7 +60,7 @@ public class CommonUtility {
 
     /**
      * Check if passed business date is invalid. More checks can be applied
-     * later to check date validity
+     * later to check date validity.
      * 
      * @param businessDate
      * @return boolean true if date invalid else false
@@ -74,7 +74,7 @@ public class CommonUtility {
     }
 
     /**
-     * Set file name
+     * Set file name.
      * 
      * @param fileName
      */
@@ -83,7 +83,7 @@ public class CommonUtility {
     }
 
     /**
-     * Check passed parameter in engine implementations
+     * Check passed parameter in engine implementations.
      * 
      * @param securitySECData
      *            the passed SecuritySECData object
@@ -101,7 +101,7 @@ public class CommonUtility {
     }
 
     /**
-     * Parse Test data CSV File
+     * Parse Test data CSV File.
      * 
      * @return
      * @throws IOException
@@ -162,7 +162,7 @@ public class CommonUtility {
     }
 
     /**
-     * Parse number value in test data
+     * Parse number value in test data.
      * 
      * @param value
      * @return parsedValue
@@ -178,7 +178,7 @@ public class CommonUtility {
     }
 
     /**
-     * Parse boolean value in test data
+     * Parse boolean value in test data.
      * 
      * @param value
      * @return parsed value

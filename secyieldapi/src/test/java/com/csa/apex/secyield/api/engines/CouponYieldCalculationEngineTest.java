@@ -36,19 +36,19 @@ import com.csa.apex.secyield.utility.TestUtility;
 public class CouponYieldCalculationEngineTest {
 
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
 
 	/**
-	 * CouponYieldCalculationEngine object
+	 * CouponYieldCalculationEngine object.
 	 */
 	@Autowired
 	private CouponYieldCalculationEngine couponYieldCalculationEngine;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
+	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -59,7 +59,7 @@ public class CouponYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -70,7 +70,7 @@ public class CouponYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Checks scale value when operation scale is overridden by configuration
+	 * Checks scale value when operation scale is overridden by configuration.
 	 * 
 	 * @throws Exception
 	 */
@@ -88,7 +88,7 @@ public class CouponYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Checks coupon yield calculation Coupon Rate : 0.04959
+	 * Checks coupon yield calculation Coupon Rate : 0.04959 .
 	 * 
 	 * @throws Exception
 	 */
@@ -106,7 +106,7 @@ public class CouponYieldCalculationEngineTest {
 	}
 
 	/**
-	 * Checks clean price calculation
+	 * Checks clean price calculation.
 	 *
 	 * Security Price : 500.50
 	 * TIPS Inflationary Ratio: 10.10

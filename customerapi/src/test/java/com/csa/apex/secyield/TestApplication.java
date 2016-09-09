@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 /**
- * The spring test application for the Customer API
+ * The spring test application for the Customer API.
  *
  * @author TCSDEVELOPER
  * @version 1.0

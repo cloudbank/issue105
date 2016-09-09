@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 
- * A PositionData
+ * A PositionData.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.1
@@ -24,52 +24,52 @@ import org.springframework.stereotype.Component;
 public class PositionData {
 
 	/**
-	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.)
+	 * Security identifier (CUSIP, ISIN, SEDOL, Other ID, etc.).
 	 */
 	private String securityIdentifier;
 
 	/**
-	 * The portfolio number
+	 * The portfolio number.
 	 */
 	private BigDecimal portfolioNumber;
 
 	/**
-	 * The portfolio name
+	 * The portfolio name.
 	 */
 	private String portfolioName;
 
 	/**
-	 * The report date
+	 * The report date.
 	 */
 	private Date reportDate;
 
 	/**
-	 * The earned inflationary compensation base (inflation income)
+	 * The earned inflationary compensation base (inflation income).
 	 */
 	private BigDecimal earnedInflationaryCompensationBase;
 
 	/**
-	 * The accrued income
+	 * The accrued income.
 	 */
 	private BigDecimal accruedIncome;
 
 	/**
-	 * The market value
+	 * The market value.
 	 */
 	private BigDecimal marketValue;
 
 	/**
-	 * The share par amount (security shares)
+	 * The share par amount (security shares).
 	 */
 	private BigDecimal shareParAmount;
 
 	/**
-	 * The earned amortization base (daily earned amount)
+	 * The earned amortization base (daily earned amount).
 	 */
 	private BigDecimal earnedAmortizationBase;
 
 	/**
-	 * The position val inflation adj shares (inflationary shares)
+	 * The position val inflation adj shares (inflationary shares).
 	 */
 	private BigDecimal positionValInflationAdjShares;
 
@@ -86,7 +86,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter securityIdentifier
+	 * Getter securityIdentifier.
 	 * 
 	 * @return securityIdentifier
 	 */
@@ -95,7 +95,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter securityIdentifier
+	 * Setter securityIdentifier.
 	 * 
 	 * @param securityIdentifier
 	 */
@@ -104,7 +104,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter portfolioNumber
+	 * Getter portfolioNumber.
 	 * 
 	 * @return portfolioNumber
 	 */
@@ -113,7 +113,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter portfolioNumber
+	 * Setter portfolioNumber.
 	 * 
 	 * @param portfolioNumber
 	 */
@@ -122,7 +122,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter portfolioName
+	 * Getter portfolioName.
 	 * 
 	 * @return portfolioName
 	 */
@@ -131,7 +131,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter portfolioName
+	 * Setter portfolioName.
 	 * 
 	 * @param portfolioName
 	 */
@@ -140,7 +140,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter reportDate
+	 * Getter reportDate.
 	 * 
 	 * @return reportDate
 	 */
@@ -158,7 +158,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter earnedInflationaryCompensationBase
+	 * Getter earnedInflationaryCompensationBase.
 	 * 
 	 * @return earnedInflationaryCompensationBase
 	 */
@@ -167,7 +167,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter earnedInflationaryCompensationBase
+	 * Setter earnedInflationaryCompensationBase.
 	 * 
 	 * @param earnedInflationaryCompensationBase
 	 */
@@ -176,7 +176,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter accruedIncome
+	 * Getter accruedIncome.
 	 * 
 	 * @return accruedIncome
 	 */
@@ -185,7 +185,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter accruedIncome
+	 * Setter accruedIncome.
 	 * 
 	 * @param accruedIncome
 	 */
@@ -194,7 +194,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter marketValue
+	 * Getter marketValue.
 	 * 
 	 * @return marketValue
 	 */
@@ -203,7 +203,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter marketValue
+	 * Setter marketValue.
 	 * 
 	 * @param marketValue
 	 */
@@ -212,7 +212,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter shareParAmount
+	 * Getter shareParAmount.
 	 * 
 	 * @return shareParAmount
 	 */
@@ -221,7 +221,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter shareParAmount
+	 * Setter shareParAmount.
 	 * 
 	 * @param shareParAmount
 	 */
@@ -230,7 +230,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter earnedAmortizationBase
+	 * Getter earnedAmortizationBase.
 	 * 
 	 * @return earnedAmortizationBase
 	 */
@@ -239,7 +239,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter earnedAmortizationBase
+	 * Setter earnedAmortizationBase.
 	 * 
 	 * @param earnedAmortizationBase
 	 */
@@ -248,7 +248,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter positionValInflationAdjShares
+	 * Getter positionValInflationAdjShares.
 	 * 
 	 * @return positionValInflationAdjShares
 	 */
@@ -257,7 +257,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter positionValInflationAdjShares
+	 * Setter positionValInflationAdjShares.
 	 * 
 	 * @param positionValInflationAdjShares
 	 */
@@ -266,7 +266,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Getter derOneDaySecurityIncome
+	 * Getter derOneDaySecurityIncome.
 	 * 
 	 * @return derOneDaySecurityIncome
 	 */
@@ -275,7 +275,7 @@ public class PositionData {
 	}
 
 	/**
-	 * Setter derOneDaySecurityIncome
+	 * Setter derOneDaySecurityIncome.
 	 * 
 	 * @param derOneDaySecurityIncome
 	 */

@@ -37,13 +37,13 @@ import com.csa.apex.secyield.utility.TestUtility;
 public class CustomerDataPersistenceServiceImplTest {
 
 	/**
-	 * SECYieldServiceImpl object
+	 * SECYieldServiceImpl object.
 	 */
 	@Autowired
 	CustomerDataPersistenceService customerDataPersistenceService;
 
 	/**
-	 * Test getCustomerSECData retrieves correct data
+	 * Test getCustomerSECData retrieves correct data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -56,7 +56,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getCustomerSECData retrieves no data for date that is not present in the db data
+	 * Test getCustomerSECData retrieves no data for date that is not present in the db data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -69,7 +69,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getCustomerSECData throws IllegalArgumentException in case the provided date is null
+	 * Test getCustomerSECData throws IllegalArgumentException in case the provided date is null.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -80,7 +80,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test persistSecuritySECData persists data successfully
+	 * Test persistSecuritySECData persists data successfully.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -98,7 +98,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
  	/**
- 	 * Test performRedemptionDateAndMaturityDateEqualityTest()
+ 	 * Test performRedemptionDateAndMaturityDateEqualityTest().
  	 *
  	 * @throws Exception
  	 */
@@ -109,7 +109,7 @@ public class CustomerDataPersistenceServiceImplTest {
  	}
 
 	/**
-	 * Test persistSecuritySECData throws IllegalArgumentException in case the provided security SEC data is null
+	 * Test persistSecuritySECData throws IllegalArgumentException in case the provided security SEC data is null.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -120,7 +120,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getConfiguration retrieves the correct config
+	 * Test getConfiguration retrieves the correct config.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -133,7 +133,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getCalculatedSECData retrieves correct data
+	 * Test getCalculatedSECData retrieves correct data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -146,7 +146,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getCalculatedSECData retrieves no data for date that is not present in the db data
+	 * Test getCalculatedSECData retrieves no data for date that is not present in the db data.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs
@@ -159,7 +159,7 @@ public class CustomerDataPersistenceServiceImplTest {
 	}
 
 	/**
-	 * Test getCalculatedSECData throws IllegalArgumentException in case the provided date is null
+	 * Test getCalculatedSECData throws IllegalArgumentException in case the provided date is null.
 	 * 
 	 * @throws Exception
 	 *             if any exception occurs

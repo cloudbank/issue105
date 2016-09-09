@@ -11,12 +11,12 @@ package com.csa.apex.secyield.exceptions;
  */
 public class SECYieldException extends Exception {
 	/**
-	 * The default serial version uid
+	 * The default serial version uid.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor with message
+	 * Constructor with message.
 	 * 
 	 * @param message
 	 *            the error message

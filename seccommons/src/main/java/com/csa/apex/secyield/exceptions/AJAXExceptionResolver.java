@@ -23,7 +23,7 @@ import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 public class AJAXExceptionResolver extends SimpleMappingExceptionResolver {
 
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(AJAXExceptionResolver.class);
 

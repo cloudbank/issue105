@@ -52,93 +52,93 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Import data from excel into customer sec table in DB
+ * Import data from excel into customer sec table in DB.
  *
  * @author TCSDEVELOPER
  * @version 1.0
  */
 public class ImportExcel {
     /**
-     * The logger
+     * The logger.
      */
     private static Logger logger = LogManager.getLogger(ImportExcel.class);
 
     /**
-     * The command usage text
+     * The command usage text.
      */
     private static final String COMMAND_USAGE = "ImportExcel [-c/--clean][-h/--help][-e/--excel][-m/--mapping]";
 
     /**
      /**
-     * The table name of calculated_fund_data
+     * The table name of calculated_fund_data.
      */
     public static String tableCalculatedFundData;
     
     /**
-     * The table name of customer_fund_data
+     * The table name of customer_fund_data.
      */
     public static String tableCustomerFundData;
     
     /**
-     * rounding mode
+     * rounding mode.
      */
     public static int roundingMode;
    
     /**
-     * operation scale
+     * operation scale.
      */
     public static int operationScale;
     
     /**
-     * The table name of calculated_position_data
+     * The table name of calculated_position_data.
      */
     public static String tableCalculatedPositionData;
     
     
     /**
-     * The table name of calculated_security_sec_data
+     * The table name of calculated_security_sec_data.
      */
     public static String tableCalculatedSecuritySecData;
 
     /**
-     * The table name of customer_position_data
+     * The table name of customer_position_data.
      */
     public static String tableCustomerPositionData;
 
     /**
-     * The table name of customer_security_sec_data
+     * The table name of customer_security_sec_data.
      */
     public static String tableCustomerSecuritySecData;
         
     /**
-     * The delete query to delete customer fund data by security identifiers
+     * The delete query to delete customer fund data by security identifiers.
      */
     private static String deleteCustomerFundData ;
 
     /**
-     * The delete query to delete calculated fund data by security identifiers
+     * The delete query to delete calculated fund data by security identifiers.
      */
     private static String deleteCalculatedFundData;
     /**
-     * The delete query to delete customer position data by security identifiers
+     * The delete query to delete customer position data by security identifiers.
      */
     private static String deleteCustomerPositionData;
     /**
-     * The delete query to delete customer security sec data by security identifiers
+     * The delete query to delete customer security sec data by security identifiers.
      */
     private static String deleteCustomerSecuritySecData;
     /**
-     * The delete query to delete calculated position data by security identifiers
+     * The delete query to delete calculated position data by security identifiers.
      */
     private static String deleteCalculatePositionData;
 
     /**
-     * The delete query to delete calculated security sec data by security identifiers
+     * The delete query to delete calculated security sec data by security identifiers.
      */
     private static String deleteCalculatedSecuritySecData;
 
     /**
-     * Load mapping properties
+     * Load mapping properties.
      * @param path the path of mapping properties
      * @return the mapping properties
      * @throws IOException throws if error to load mapping properties
@@ -153,7 +153,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get string cell value
+     * Get string cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the string cell value
@@ -167,7 +167,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get date cell value
+     * Get date cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the date cell value
@@ -181,7 +181,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get BigDecimal cell value with rounding configuration
+     * Get BigDecimal cell value with rounding configuration.
      * @param row the row
      * @param cellNum the cell number
      * @param conf the rounding configuration
@@ -200,7 +200,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get BigDecimal cell value
+     * Get BigDecimal cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the BigDecimal cell value
@@ -210,7 +210,7 @@ public class ImportExcel {
     }
 
     /**
-     * Get boolean cell value
+     * Get boolean cell value.
      * @param row the row
      * @param cellNum the cell number
      * @return the boolean cell value
@@ -225,7 +225,7 @@ public class ImportExcel {
     }
 
     /**
-     * Parse security reference data
+     * Parse security reference data.
      * @param row the row
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -249,7 +249,7 @@ public class ImportExcel {
     }
 
     /**
-     * Parse position data
+     * Parse position data.
      * @param row the row
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -271,7 +271,7 @@ public class ImportExcel {
     }
 
     /**
-     * Load excel
+     * Load excel.
      * @param path the path of excel
      * @param props the mapping properties
      * @param conf the rounding configurations
@@ -335,7 +335,7 @@ public class ImportExcel {
     }
 
     /**
-     * Main function
+     * Main function.
      * @param args the arguments
      */
     public static void main(String[] args) throws IOException  {

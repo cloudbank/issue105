@@ -4,7 +4,7 @@
 package com.csa.apex.secyield.customer.api.mock.utility;
 
 /**
- * Enum with column names from calculated_position_data table
+ * Enum with column names from calculated_position_data table.
  *
  * @author TCSDEVELOPER
  * @version 1.0
@@ -23,12 +23,12 @@ public enum PositionDataColumns {
 	DER_ONE_DAY_SECURITY_INCOME("der_one_day_security_income");
 
 	/**
-	 * The column name
+	 * The column name.
 	 */
 	private final String name;
 
 	/**
-	 * Constructor with column name
+	 * Constructor with column name.
 	 * 
 	 * @param name
 	 *            the column name
@@ -38,7 +38,7 @@ public enum PositionDataColumns {
 	}
 
 	/**
-	 * Retrieves the name of the column
+	 * Retrieves the name of the column.
 	 * 
 	 * @return the column name
 	 */

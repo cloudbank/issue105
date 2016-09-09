@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 public class SecurityReferenceDataTest {
 
     /**
-     * SecurityReferenceData Test toString
+     * SecurityReferenceData Test toString.
      *
      * @throws ParseException
      */

@@ -30,25 +30,25 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 	private final Logger logger = Logger.getLogger(YtmIncomeCalculationEngine.class);
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Calculate method name
+	 * Calculate method name.
 	 */
 	@Value("${calculationengine.calculatemethodname}")
 	private String calculateMethodName;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * Calculation engine name
+	 * Calculation engine name.
 	 */
 	public static final String ENGINE_NAME = "YtmIncomeCalculationEngine";
 
@@ -58,12 +58,12 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 	private int operationScale = 7;
 
 	/**
-	 * Default Rounding mode
+	 * Default Rounding mode.
 	 */
 	private int roundingMode = 4;
 
 	/**
-	 * The Y/FX threshold for the income calculation
+	 * The Y/FX threshold for the income calculation.
 	 */
 	private double yFxThreshold = 0.2;
 
@@ -75,7 +75,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Check passed parameter should not be null
+	 * Check passed parameter should not be null.
 	 * 
 	 * @param securitySECData
 	 *            the passed SecuritySECData object
@@ -88,7 +88,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Read from configuration object and override the operationScale default value
+	 * Read from configuration object and override the operationScale default value.
 	 * 
 	 * @param configuration
 	 *            the configuration object
@@ -101,7 +101,7 @@ public class YtmIncomeCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Engine Calculate method implementation Calculates the YTM (TIPS) Income
+	 * Engine Calculate method implementation Calculates the YTM (TIPS) Income.
 	 * 
 	 * 
 	 * @param securitySECData

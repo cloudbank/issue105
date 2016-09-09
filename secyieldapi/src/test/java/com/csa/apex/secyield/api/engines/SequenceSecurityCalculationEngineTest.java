@@ -37,19 +37,19 @@ import com.csa.apex.secyield.utility.TestUtility;
 public class SequenceSecurityCalculationEngineTest {
 
 	/**
-	 * Utility class
+	 * Utility class.
 	 */
 	@Autowired
 	private TestUtility utility;
 
 	/**
-	 * SequenceSecurityCalculationEngine object
+	 * SequenceSecurityCalculationEngine object.
 	 */
 	@Autowired
 	private SequenceSecurityCalculationEngine sequenceSecurityCalculationEngine;
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null
+	 * Tests IllegalArgumentException should be thrown if SecuritySECData is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -60,7 +60,7 @@ public class SequenceSecurityCalculationEngineTest {
 	}
 
 	/**
-	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null
+	 * Tests IllegalArgumentException should be thrown if SECConfiguration is null.
 	 * 
 	 * @throws Exception
 	 */
@@ -72,7 +72,7 @@ public class SequenceSecurityCalculationEngineTest {
 
 	/**
 	 * Checks yield and income of coupon type Coupon Engines are automatically injected through bean Calculations are
-	 * already tested in independent engine unit tests Only call to engine calculation is checked
+	 * already tested in independent engine unit tests Only call to engine calculation is checked.
 	 * 
 	 * @throws Exception
 	 */

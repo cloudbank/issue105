@@ -51,111 +51,111 @@ import com.csa.apex.secyield.utility.CommonUtility;
 public class CustomerDataPersistenceServiceImpl implements CustomerDataPersistenceService {
 
 	/**
-	 * logger class instance
+	 * logger class instance.
 	 */
 	private final Logger logger = Logger.getLogger(CustomerDataPersistenceServiceImpl.class);
 
 	/**
-	 * The autowired jdbcTemplate
+	 * The autowired jdbcTemplate.
 	 */
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	/**
-	 * The injected SECConfiguration
+	 * The injected SECConfiguration.
 	 */
 	private SECConfiguration secConfiguration;
 
 	/**
-	 * Configuration exception message
+	 * Configuration exception message.
 	 */
 	@Value("${messages.configurationargumentexception}")
 	private String configurationArgumentExceptionMessage;
 	
     /**
-     * extractSecuritySECData method name
+     * extractSecuritySECData method name.
      */
     @Value("${customerdatapersistenceserviceimpl.iscolumninresultsetmethodname}")
     private String isColumnInResultSetMethodName;
 
 	/**
-	 * Illegal Argument Exception Message
+	 * Illegal Argument Exception Message.
 	 */
 	@Value("${messages.illegalargumentexception}")
 	private String illegalArgumentExceptionMessage;
 
 	/**
-	 * Error log message format
+	 * Error log message format.
 	 */
 	@Value("${messages.errorlogmessage}")
 	private String logErrorFormat;
 
 	/**
-	 * extractSecuritySECData method name
+	 * extractSecuritySECData method name.
 	 */
 	@Value("${customerdatapersistenceserviceimpl.extractsecuritysecdatamethodname}")
 	private String extractSecuritySECDataMethodName;
 
 	/**
-	 * persistSecuritySECData method name
+	 * persistSecuritySECData method name.
 	 */
 	@Value("${customerdatapersistenceserviceimpl.persistsecuritysecdata}")
 	private String persistSecuritySECDataMethodName;
 
 	/**
-	 * The jdbc insert utility for security SEC data
+	 * The jdbc insert utility for security SEC data.
 	 */
 	private SimpleJdbcInsert insertSecuritySECData;
 
 	/**
-	 * The jdbc insert utility for position data
+	 * The jdbc insert utility for position data.
 	 */
 	private SimpleJdbcInsert insertPositionData;
 
 	/**
-	 * The db date format
+	 * The db date format.
 	 */
 	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
 	 /**
-     * The table name of calculated_position_data
+     * The table name of calculated_position_data.
      */
     @Value("${table.calculated_position_data}")
     public String tableCalculatedPositionData;
     /**
-     * The table name of calculated_security_sec_data
+     * The table name of calculated_security_sec_data.
      */
     @Value("${table.calculated_security_sec_data}")
     public String tableCalculatedSecuritySecData;
 
     /**
-     * The table name of customer_position_data
+     * The table name of customer_position_data.
      */
     @Value("${table.customer_position_data}")
     public String tableCustomerPositionData;
 
     /**
-     * The table name of customer_security_sec_data
+     * The table name of customer_security_sec_data.
      */
     @Value("${table.customer_security_sec_data}")
     public String tableCustomerSecuritySecData;
 
     /**
      * The select query for retrieving all calculated security SEC data with
-     * their position data
+     * their position data.
      */
     @Value("${query.calculated_security_sec_data_query}")
     private String calculatedSecuritySecDataQuery;
 
     /**
      * The select query for retrieving all security SEC data with their position
-     * data
+     * data.
      */
     @Value("${query.security_sec_data_query}")
     private String securitySecDataQuery;
     /**
      * The select query for retrieving a security SEC data by security
-     * identifier
+     * identifier.
      */
     @Value("${query.find_security_sec_data_query}")
     private String findSecuritySecDataQuery;
@@ -168,7 +168,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Getter jdbcTemplate
+	 * Getter jdbcTemplate.
 	 * 
 	 * @return the jdbc template
 	 */
@@ -177,7 +177,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Setter jdbcTemplate
+	 * Setter jdbcTemplate.
 	 * 
 	 * @param jdbcTemplate
 	 *            the jdbc template to be set
@@ -187,7 +187,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Getter secConfiguration
+	 * Getter secConfiguration.
 	 * 
 	 * @return the sec configuration
 	 */
@@ -196,7 +196,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Setter secConfiguration
+	 * Setter secConfiguration.
 	 * 
 	 * @param secConfiguration
 	 *            the sec configuration to be set
@@ -506,7 +506,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	}
 
 	/**
-	 * Determines if a column name is present in a result set
+	 * Determines if a column name is present in a result set.
 	 * 
 	 * @param rs
 	 *            the result set

@@ -23,7 +23,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 public class TestUtility {
 
 	/**
-	 * Get a mocked security SEC data
+	 * Get a mocked security SEC data.
 	 * 
 	 * @return the security SEC data
 	 * @throws ParseException

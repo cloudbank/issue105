@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 /**
- * The spring application for the Commons Module
+ * The spring application for the Commons Module.
  *
  * @author TCSDEVELOPER
  * @version 1.1

@@ -8,7 +8,7 @@ import com.csa.apex.secyield.entities.SecuritySECData;
 import com.csa.apex.secyield.exceptions.CalculationException;
 
 /**
- * CalculationEngine Interface for all calculation engines
+ * CalculationEngine Interface for all calculation engines.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
@@ -17,7 +17,7 @@ import com.csa.apex.secyield.exceptions.CalculationException;
 public interface CalculationEngine {
 
 	/**
-	 * Calculate method
+	 * Calculate method.
 	 * 
 	 * 
 	 * @param securitySECData

@@ -22,7 +22,7 @@ import java.util.Date;
 public class PositionDataTest {
 
     /**
-     * PositionData Test toString
+     * PositionData Test toString.
      *
      * @throws ParseException
      */

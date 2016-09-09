@@ -10,20 +10,20 @@ import java.util.GregorianCalendar;
 import org.joda.time.DateTime;
 
 /**
- * DateUtility Exposes useful function not available in Joda
+ * DateUtility Exposes useful function not available in Joda.
  *
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */
 public class DateUtility {
 	/**
-	 * Private constructor
+	 * Private constructor.
 	 */
 	private DateUtility() {
 	}
 
 	/**
-	 * Checks whether year is leap year or not
+	 * Checks whether year is leap year or not.
 	 * 
 	 * @param year
 	 *            year to be checked
@@ -35,7 +35,7 @@ public class DateUtility {
 	}
 
 	/**
-	 * Get next month and year for passed values
+	 * Get next month and year for passed values.
 	 * 
 	 * @param month
 	 *            current month
@@ -50,9 +50,9 @@ public class DateUtility {
 	}
 
 	/**
-	 * Compares date for month and year
+	 * Compares date for month and year.
 	 * 
-	 * So 12 July 2016 and 18 July 2016 will return true as both month and year matches
+	 * So 12 July 2016 and 18 July 2016 will return true as both month and year matches.
 	 * 
 	 * @param startDate
 	 *            start date

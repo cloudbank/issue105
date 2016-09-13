@@ -95,7 +95,7 @@
 			</map>
 		</property>
 	</bean>
-	
+
 	<!-- Injection for SECYieldServiceImpl -->
 	<bean id="secYieldServiceImpl"
 		class="com.csa.apex.secyield.api.services.impl.SECYieldServiceImpl">
@@ -104,9 +104,6 @@
 		</property>
 		<property name="restTemplate">
 			<bean class="org.springframework.web.client.RestTemplate" />
-		</property>
-		<property name="configuration">
-			<bean class="com.csa.apex.secyield.entities.SECConfiguration" />
 		</property>
 		<property name="getConfigApiPath">
 			<value>${getConfigApiPath}</value>
@@ -121,7 +118,7 @@
 			<value>${getCalculatedSecuritySECDataApiPath}</value>
 		</property>
 	</bean>
-	
+
 	<!--  Common utility test data parser info -->
 	<bean class="com.csa.apex.secyield.utility.CommonUtility">
 		<property name="fileName" value="${calculationtestdata.filename}" />

@@ -387,16 +387,22 @@ public class SecuritySECData {
 	@Override
 	public String toString() {
 		DateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
+		String reportDateString = "";
+		String derRedemptionDateString = "";
+		// Check date fields not null to avoid NPE
+		if (reportDate != null) reportDateString = formatter.format(reportDate); 
+		if (derRedemptionDate != null) derRedemptionDateString = formatter.format(derRedemptionDate);
+		
 		return "SecuritySECData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
-				", reportDate=" + formatter.format(reportDate) +
+				", reportDate=" + reportDateString +
 				", securityReferenceData=" + securityReferenceData +
 				", derCleanPrice=" + derCleanPrice +
 				", positionData=" + Arrays.toString(positionData) +
 				", derYieldCalcEngine='" + derYieldCalcEngine + '\'' +
 				", derIncomeCalcEngine='" + derIncomeCalcEngine + '\'' +
 				", derOneDaySecurityYield=" + derOneDaySecurityYield +
-				", derRedemptionDate=" + formatter.format(derRedemptionDate) +
+				", derRedemptionDate=" + derRedemptionDateString +
 				", derRedemptionPrice=" + derRedemptionPrice +
 				", derSecurityType='" + derSecurityType + '\'' +
 				", derTIPSInflationaryRatio=" + derTIPSInflationaryRatio +

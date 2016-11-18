@@ -313,11 +313,15 @@ public class PositionData {
 	@Override
 	public String toString() {
 		DateFormat formatter = new SimpleDateFormat(Constants.API_DATE_FORMAT);
+		String reportDateString = "";
+		// Check date fields not null to avoid NPE
+		if (reportDate != null) reportDateString = formatter.format(reportDate); 
+		
 		return "PositionData{" +
 				"securityIdentifier='" + securityIdentifier + '\'' +
 				", portfolioNumber=" + portfolioNumber +
 				", portfolioName='" + portfolioName + '\'' +
-				", reportDate=" + formatter.format(reportDate) +
+				", reportDate=" + reportDateString +
 				", earnedInflationaryCompensationBase=" + earnedInflationaryCompensationBase +
 				", accruedIncome=" + accruedIncome +
 				", marketValue=" + marketValue +

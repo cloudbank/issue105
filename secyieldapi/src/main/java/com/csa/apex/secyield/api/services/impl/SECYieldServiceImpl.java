@@ -200,10 +200,13 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 * 
 	 * @return configuration
 	 */
+	// TODO Move Customer API access code into separate class
 	public SECConfiguration getConfiguration() throws SECYieldException {
 		if (configuration == null) {
 			try {
 				configuration = restTemplate.getForObject(getConfigApiPath, SECConfiguration.class);
+				// Check that configuration is not null
+				if (configuration == null) throw new SECYieldException("Configuration data from customer API is null");
 			} catch(Exception e) {
 				logger.error(String.format(customerApiException, e.getMessage()));
 				throw new SECYieldException(e.getMessage(), e);
@@ -368,10 +371,17 @@ public class SECYieldServiceImpl implements SECYieldService {
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCustomerDataApiPath)
 					.queryParam("businessDate", dateFormat.format(businessDate));
-
+			
+			// TODO Move Customer API access code into separate class
 			SecuritySECData[] securitiesArray = restTemplate.getForObject(builder.build().encode().toUri(),
 					SecuritySECData[].class);
 
+			// Throw SECYieldException if no data is returned
+			if (securitiesArray == null){
+				logger.error(String.format(customerApiException, "No data returned, URL: " + builder.toUriString()));
+				throw new SECYieldException(secYieldExceptionMessage);
+			}
+			
 			List<SecuritySECData> securities = Arrays.asList(securitiesArray);
 
 			securities.parallelStream().forEach(s -> {
@@ -393,12 +403,26 @@ public class SECYieldServiceImpl implements SECYieldService {
 
 			return securities;
 		} catch (SECYieldException e) {
-			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage() + ", URL:" + saveCalculatedSecuritySECDataApiPath));
-			if(!failedSecuritySECDataList.isEmpty()) logger.info(failedSecuritySECDataList);
+			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+			// Display all securities that failed to process
+			if(!failedSecuritySECDataList.isEmpty()){
+				String failedSecurityMsg = "The following SecuritySECData objects failed to process: \n";
+				for(SecuritySECData s : failedSecuritySECDataList){
+					failedSecurityMsg = failedSecurityMsg + s.toString() + "\n";
+				}
+				logger.info(failedSecurityMsg);
+			}
 			throw e;
 		} catch (Exception e) {
-			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage() + ", URL:" + saveCalculatedSecuritySECDataApiPath));
-			if(!failedSecuritySECDataList.isEmpty()) logger.info(failedSecuritySECDataList);
+			logger.error(String.format(logErrorFormat, processSecuritySECDataMethodName, e.getMessage()));
+			// Display all securities that failed to process
+			if(!failedSecuritySECDataList.isEmpty()){
+				String failedSecurityMsg = "The following SecuritySECData objects failed to process: \n";
+				for(SecuritySECData s : failedSecuritySECDataList){
+					failedSecurityMsg = failedSecurityMsg + s.toString() + "\n";
+				}
+				logger.info(failedSecurityMsg);
+			}
 			throw new SECYieldException(e.getMessage(), e);
 		}
 
@@ -423,9 +447,16 @@ public class SECYieldServiceImpl implements SECYieldService {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam("businessDate", dateFormat.format(businessDate));
 
+			// TODO Move Customer API access code into separate class
 			SecuritySECData[] securitiesArray = restTemplate.getForObject(builder.build().encode().toUri(),
 					SecuritySECData[].class);
 
+			// Throw SECYieldException if no data is returned
+			if (securitiesArray == null){
+				logger.error(String.format(customerApiException, "No data returned, URL: " + builder.toUriString()));
+				throw new SECYieldException(secYieldExceptionMessage);
+			}
+			
 			return Arrays.asList(securitiesArray);
 		} catch (Exception e) {
 			logger.error(String.format(logErrorFormat, "getCalculatedSecuritySECData", e.getMessage()));
@@ -441,6 +472,7 @@ public class SECYieldServiceImpl implements SECYieldService {
 	 *            the input securitySECData that is updated in the method.
 	 * @throws SECYieldException
 	 */
+	// TODO Re-factor code - To Perform calculations for all SecuritySECData in list, then persist the entire list
 	private void processSingleSecurity(SecuritySECData securitySECData) throws SECYieldException {
 		// checks passed value should not be null
 		if (securitySECData == null) {
@@ -466,12 +498,15 @@ public class SECYieldServiceImpl implements SECYieldService {
 			// call the api
 			Boolean saveResponse;
 
+			// TODO  Move Customer API access code into separate class
 			saveResponse = restTemplate.exchange(saveCalculatedSecuritySECDataApiPath, HttpMethod.PUT,
 					new HttpEntity<SecuritySECData>(updatedSecuritySECData), Boolean.class).getBody();
 			// if response false
 			if (!saveResponse) {
+				// Changed to include more meaningful log information
 				logger.error(
-						String.format(logErrorFormat, processingSingeSecurityMethodName, secYieldExceptionMessage));
+						String.format(logErrorFormat, processingSingeSecurityMethodName, 
+						"Failed to persist SecuritySECData, URL: " + saveCalculatedSecuritySECDataApiPath));
 				throw new SECYieldException(secYieldExceptionMessage);
 			}
 		} catch (UnsupportedOperationException | SECYieldException e) {

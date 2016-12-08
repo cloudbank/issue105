@@ -115,7 +115,7 @@ public class CustomerDataPersistenceServiceImpl implements CustomerDataPersisten
 	/**
 	 * The db date format.
 	 */
-	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("YYYY-MM-dd");
+	private SimpleDateFormat dbDateFormat = new SimpleDateFormat("dd-MMM-YY");
 
 	 /**
      * The table name of calculated_position_data.

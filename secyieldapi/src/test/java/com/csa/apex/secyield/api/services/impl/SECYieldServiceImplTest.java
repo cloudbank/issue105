@@ -89,7 +89,7 @@ public class SECYieldServiceImplTest {
 	@Before
 	public void setUp() throws RestClientException, ParseException {
 		MockitoAnnotations.initMocks(this);
-		when(restTemplate.getForObject(any(URI.class), eq(SECConfiguration.class))).thenReturn(new SECConfiguration());
+		when(restTemplate.getForObject(any(String.class), eq(SECConfiguration.class))).thenReturn(new SECConfiguration());
 		when(restTemplate.getForObject(any(URI.class), eq(SecuritySECData[].class)))
 				.thenReturn(utility.getSecuritySECDataArray());
 		when(restTemplate.exchange(any(String.class), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Boolean.class)))

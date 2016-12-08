@@ -31,8 +31,7 @@ import com.csa.apex.secyield.utility.TestUtility;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TestApplication.class)
 @SqlGroup({
-		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = { "classpath:test-schema.sql",
-				"classpath:beforeTestRun.sql" }),
+		@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforeTestRun.sql"),
 		@Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:afterTestRun.sql") })
 public class CustomerDataPersistenceServiceImplTest {
 

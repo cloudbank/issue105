@@ -14,12 +14,12 @@ public enum PositionDataColumns {
 	SECURITY_IDENTIFIER("security_identifier"),
 	PORTFOLIO_NUMBER("portfolio_number"),
 	REPORT_DATE("report_date"),
-	EARNED_INFLATIONARY_COMPENSATION_BASE("earned_inflationary_compensation_base"),
+	EARNED_INFLATIONARY_COMPENSATION_BASE("earned_inflationary_comp_base"),
 	ACCRUED_INCOME("accrued_income"),
 	MARKET_VALUE("market_value"),
 	SHARE_PAR_AMOUNT("share_par_amount"),
 	EARNED_AMORTIZATION_BASE("earned_amortization_base"),
-	POSITION_VAL_INFLATION_ADJ_SHARES("position_val_inflation_adj_shares"),
+	POSITION_VAL_INFLATION_ADJ_SHARES("position_val_inf_adj_shares"),
 	DER_ONE_DAY_SECURITY_INCOME("der_one_day_security_income");
 
 	/**

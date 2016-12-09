@@ -2,8 +2,15 @@ before_script:
   - which java
   - pwd
  
-rubocop:
+build-seccom:
   script:
-    - mvn -f secyieldapi/pom.xml clean install
-    - mvn -f customerapi/pom.xml clean install
+      - mvn -f seccommons/pom.xml clean install
+
+build-customerapi:
+  script:
+      - mvn install:install-file -Dfile=customerapi/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+      - mvn -f customerapi/pom.xml clean install
+
+build-secyield:
+  script:
     - mvn -f secyieldapi/pom.xml clean install

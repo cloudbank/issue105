@@ -1,5 +1,6 @@
 before_script:
   - which java
+  - pwd
  
 
 build:

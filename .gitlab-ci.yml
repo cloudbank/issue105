@@ -2,10 +2,8 @@ before_script:
   - which java
   - pwd
  
-
-build:
-  script: "mvn install -B"
-
 rubocop:
   script:
-    - mvn package
+    - mvn -f secyieldapi/pom.xml clean install
+    - mvn -f customerapi/pom.xml clean install
+    - mvn -f secyieldapi/pom.xml clean install

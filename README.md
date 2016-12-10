@@ -217,6 +217,56 @@ Also one can use
 
 # Deployment to AWS 
 
+#### AWS Instance Creation
 - As a prerequisite , you should have AWS account to create instance on AWS
-- Login to AWS and select services , EC2 as shown below
-![Alt text](docs/img/login_service.png )
+- Login to AWS and select services ->  EC2 as shown below
+![](docs/img/login_service.png )
+- Click on Launch Instance button to create new instance
+![](docs/img/launch_instance.png )
+- Select Red Hat Enterprise Linux 7.3 instance
+![](docs/img/select_red_hat.png )
+- On Choose an Instance Type page click Next as default settings is fine 
+- On Configure Instance Details page click Next as default settings is fine 
+- On Add Storage page , click on Add New Volume to add 4GB space and click Next, which will be used as SWAP memory 
+![](docs/img/add_storage.png )
+- Click Next on  Add Tags page
+- On Configure Security Group page , add required inbound ports by clicking AddRule , all below ports(80,8080,1521,22) 
+should  be added with 	Source as 0.0.0.0/0 and click Review And Launch 
+![](docs/img/security_grp.png )
+- Once you verify all the details click on Launch
+![](docs/img/review.png )
+- Once you click on Launch , you will be promoted to select security key pair , if you dont have any key pair already , click on Download Key Pair 
+after naming it. This will be used to login into the server.
+![](docs/img/keypair.png )
+- Once you downloaded key pair click on Launch and View Instance
+- Now you can see newly created instance, We need one more instance for Oracle DB
+- Right click on Intance and select Launch More like this option to clone this instance
+![](docs/img/clone_instance.png )
+-Review the cloned instance and Lunch
+![](docs/img/clone_reviewe.png )
+
+
+#### Installtion on AWS instance
+- Login into any one of the created instance to configure through putty
+- Please refer the below link for getting ppk file from pem file and using that to login 
+ https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console
+- Default user name would be ec2-user
+- Once you login execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
+you can edit urls and names in script to install different version if needed. you can copy the file using winscp or create new file using  ```vi install_sec.sh```
+and copy paste the content of the file
+        ```sudo sh install_sec.sh```
+- Now we have to configure tomcat as a service.
+- Create and open the Systemd  file by below command and copy paste content from script/tomcat.service
+```sudo vi /etc/systemd/system/tomcat.service```
+- Reload Systemd  to load tomcat file
+```sudo systemctl daemon-reload```
+- Start tomcat using below command
+```sudo systemctl start tomcat```
+- Make tomcat as a service by below command
+```sudo systemctl enable tomcat```
+
+#### Installtion and Configuration of AWS instance
+
+
+
+

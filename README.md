@@ -213,3 +213,10 @@ A screenshot is shown in verification guide.
 Also one can use  
 
 ```mvn sonar:sonar```
+
+
+# Deployment to AWS 
+
+- As a prerequisite , you should have AWS account to create instance on AWS
+- Login to AWS and select services , EC2 as shown below
+![Alt text](docs/img/login_service.png )

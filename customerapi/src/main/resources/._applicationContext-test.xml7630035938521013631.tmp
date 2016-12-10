@@ -5,13 +5,11 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 	<context:annotation-config />
-	<context:property-placeholder />
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 
 		<property name="locations">
 			<list>
-				<value>classpath:db.properties</value>
 				<value>classpath:messages.properties</value>
 				<value>classpath:constants.properties</value>
 			</list>
@@ -19,13 +17,15 @@
 		</property>
 	</bean>
 
+	<context:component-scan base-package="com.csa.apex.secyield" />
+
 	<!-- dataSource configuration -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${oracle_driverClassName}" />
-		<property name="url" value="${oracle_url}" />
-		<property name="username" value="${oracle_username}" />
-		<property name="password" value="${oracle_password}" />
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@35.164.236.218:1521:xe" />
+		<property name="username" value="test_secyield" />
+		<property name="password" value="password" />
 	</bean>
 
 	<!-- jdbcTemplate uses dataSource -->
@@ -37,5 +37,16 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- Injection for CustomerDataPersistenceServiceImpl -->
+	<bean id="customerDataPersistenceServiceImpl"
+		class="com.csa.apex.secyield.customer.api.mock.service.impl.CustomerDataPersistenceServiceImpl">
+		<property name="secConfiguration">
+			<bean class="com.csa.apex.secyield.entities.SECConfiguration">
+				<property name="operationScale" value="1" />
+				<property name="roundingMode" value="2" />
+			</bean>
+		</property>
 	</bean>
 </beans>

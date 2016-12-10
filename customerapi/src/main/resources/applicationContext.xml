@@ -24,10 +24,10 @@
 	<!-- dataSource configuration -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${oracle_driverClassName}" />
-		<property name="url" value="${oracle_url}" />
-		<property name="username" value="${oracle_username}" />
-		<property name="password" value="${oracle_password}" />
+		<property name="driverClassName" value="${oracle.driverClassName}" />
+		<property name="url" value="${oracle.url}" />
+		<property name="username" value="${oracle.username}" />
+		<property name="password" value="${oracle.password}" />
 	</bean>
 
 	<!-- jdbcTemplate uses dataSource -->

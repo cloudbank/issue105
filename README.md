@@ -243,15 +243,15 @@ after naming it. This will be used to login into the server.
 - Right click on Intance and select Launch More like this option to clone this instance
 ![](docs/img/clone_instance.png )
 -Review the cloned instance and Lunch
-![](docs/img/clone_reviewe.png )
+![](docs/img/clone_review.png )
 
 
 #### Installtion on AWS instance
-- Login into any one of the created instance to configure through putty
-- Please refer the below link for getting ppk file from pem file and using that to login 
+- Login into any one of the created instance  through putty
+- Please refer the link for getting ppk file from pem file and using that to login 
  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console
 - Default user name would be ec2-user
-- Once you login execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
+- Once you login, execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
 you can edit urls and names in script to install different version if needed. you can copy the file using winscp or create new file using  ```vi install_sec.sh```
 and copy paste the content of the file
         ```sudo sh install_sec.sh```
@@ -265,7 +265,39 @@ and copy paste the content of the file
 - Make tomcat as a service by below command
 ```sudo systemctl enable tomcat```
 
-#### Installtion and Configuration of AWS instance
+- Start apache httpd server using below command
+```sudo service  httpd start```
+
+#### GIT CI Runner configuration
+-Before we begin git ci runner configuration , we have to get runner token from the gitlab
+- To get runner token , browse the project in gitlab and click on setting icon on top right corner and select Runner 
+![](docs/img/gitrunner.png )
+
+- This page displays runner information and available runners ,you can  "Disable Shared Runners" here
+![](docs/img/runnerinfo.png.png )
+ 
+#### Oracle XE Configuration on AWS
+- Login into next instance of EC2 using putty.
+- We need oracle rpm package for installation , it can not be downloaded from server since oracle website required you to login to download.
+- You can download package from official site and copy the rpm package through WinSCP.
+Download link http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
+- Here my downloaded file name is oracle-xe-11.2.0-1.0.x86_64.rpm.zip and you can run below commands to install oracle xe
+
+```
+sudo yum -y install unzip
+sudo yum -y install libaio
+sudo yum -y install bc
+sudo unzip "oracle-xe-11.2.0-1.0.x86_64.rpm.zip"
+cd Disk1
+sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
+```
+
+- Once oracle-xe is installed , you can configure using below command.
+
+```sudo /etc/init.d/oracle-xe configure```
+
+- it will be asking for http port , oracle listenr port , password for sys, system and load on start up values 
+- you can leave default for http , oracle listenr port and select y for start on system boot option.
 
 
 

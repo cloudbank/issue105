@@ -12,7 +12,7 @@ build-customerapi:
       - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/customerapi"
       - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/secyield"
       - curl -T "secyieldapi/target/secyield.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/secyield&update=true"	  
-      - curl -T "customerapi/target/customerapi.jar" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/customerapi&update=true"
+      - curl -T "customerapi/target/customerapi.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/customerapi&update=true"
 
 
 

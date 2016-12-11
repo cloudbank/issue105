@@ -220,29 +220,46 @@ Also one can use
 #### AWS Instance Creation
 - As a prerequisite , you should have AWS account to create instance on AWS
 - Login to AWS and select services ->  EC2 as shown below
+
 ![](docs/img/login_service.png )
+
 - Click on Launch Instance button to create new instance
+
 ![](docs/img/launch_instance.png )
+
 - Select Red Hat Enterprise Linux 7.3 instance
+
 ![](docs/img/select_red_hat.png )
+
 - On Choose an Instance Type page click Next as default settings is fine 
 - On Configure Instance Details page click Next as default settings is fine 
 - On Add Storage page , click on Add New Volume to add 4GB space and click Next, which will be used as SWAP memory 
+
 ![](docs/img/add_storage.png )
+
 - Click Next on  Add Tags page
 - On Configure Security Group page , add required inbound ports by clicking AddRule , all below ports(80,8080,1521,22) 
 should  be added with 	Source as 0.0.0.0/0 and click Review And Launch 
+
 ![](docs/img/security_grp.png )
+
 - Once you verify all the details click on Launch
+
 ![](docs/img/review.png )
+
 - Once you click on Launch , you will be promoted to select security key pair , if you dont have any key pair already , click on Download Key Pair 
 after naming it. This will be used to login into the server.
+
 ![](docs/img/keypair.png )
+
 - Once you downloaded key pair click on Launch and View Instance
 - Now you can see newly created instance, We need one more instance for Oracle DB
 - Right click on Intance and select Launch More like this option to clone this instance
+
 ![](docs/img/clone_instance.png )
+
 -Review the cloned instance and Lunch
+
 ![](docs/img/clone_review.png )
 
 
@@ -271,10 +288,12 @@ and copy paste the content of the file
 #### GIT CI Runner configuration
 -Before we begin git ci runner configuration , we have to get runner token from the gitlab
 - To get runner token , browse the project in gitlab and click on setting icon on top right corner and select Runner 
+
 ![](docs/img/gitrunner.png )
 
 - This page displays runner information and available runners ,you can  "Disable Shared Runners" here
-![](docs/img/runnerinfo.png.png )
+
+![](docs/img/runnerinfo.png )
  
 #### Oracle XE Configuration on AWS
 - Login into next instance of EC2 using putty.

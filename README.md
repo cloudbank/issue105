@@ -285,8 +285,7 @@ at the end of the file
 - Follow same procudure to add swap space in another server as well
 
 - Once you login, execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
-- This script contains different sections for installing different  modules and updating user permissions, you can better run commands from this 
-script manually to install each module to avoid any memeory issues in EC2 servers.
+- This script contains different sections for installing different  modules and updating user permissions.
 you can edit urls and names in script to install different version if needed. you can copy the file using winscp or create new file using  ```vi install_sec.sh```
 and copy paste the content of the file
         ```sudo sh install_sec.sh```
@@ -355,7 +354,8 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 ```sudo /etc/init.d/oracle-xe configure```
 
 - it will be asking for http port , oracle listenr port , password for sys, system and load on start up values 
-- you can leave default for http(8080) , oracle listener port (1521) and select y for start on system boot option.
+- you can leave default for http(8080) , oracle listener port (1521) and select y for start on system boot option. Configuration may take some time to complete.
+- Once Db is up and running , you can connect to this DB using sql developer and follow steps mentioned in Db Setup section to create user and schema
 
 ### Updating application configurations
 

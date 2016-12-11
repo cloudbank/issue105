@@ -3,4 +3,4 @@ deploy_package:
   - cd `pwd`; sh -x /home/gitlab-runner/backend_build.sh
   
   only:
-  - master
+  - develop

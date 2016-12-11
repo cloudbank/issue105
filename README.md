@@ -294,13 +294,49 @@ and copy paste the content of the file
 - This page displays runner information and available runners ,you can  "Disable Shared Runners" here
 
 ![](docs/img/runnerinfo.png )
+
+- Once you get token , login into web server EC2 instance we created and run below command to register and configure  runner.
+
+```sudo gitlab-ci-multi-runner register``` 
+
+- You will be asked to provide inputs for following questions once you run above command.
+    1.Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/): https://gitlab.com/ci (obtained from runner page in gitlab)
+    2.Please enter the gitlab-ci token for this runner: zmaasJ3Ynq3RXxikwGov (obtained from runner page in gitlab)
+    3.Please enter the gitlab-ci description for this runner: backendrunner (runner description here)
+    4.Please enter the gitlab-ci tags for this runner (comma separated): backend, java (tags here)
+    5.Please enter the executor: docker-ssh, ssh, virtualbox, docker-ssh+machine, kubernetes, docker, parallels, shell, docker+machine: shell (we will be using shell runner)
+ 
+ - Runner has been  registered and will be visible in gitlab runner configuration page of the project
+ - Create one more runner for front end build based on token from frontend project runner cofig page
+ - We have to create build scripts in gitlab-runner's home directory , our gitlab-ci.yml file is based on these scripts
+ - Our logged in user is ec2-user , switch to gitlab-runner user and create two build file backend_build.sh and frontend_build.sh 
+ - user below command to switch to gitlab-runner user and go to home directory to create file in home directory.
+ ```sudo su gitlab-runner``` 
+ ```cd ~```
+ - These two files are already available with this project in scripts/ directory. you can copy copy the content and paste in server using vi editor
+ - Gitlab CI triggers the build based on commits to entire repository , we are restricting the build using commit version of required branch.
+ - If commit version of previous and current build requests are same then we are not doing the build
+ - Below four file are required to maintain the commit version , make sure they are available in gitlab-runner home directory , they are created as a part of install script,
+ if they are not available , create them using below commands.
+ ```
+ touch /home/gitlab-runner/f.build.version.prev
+ touch /home/gitlab-runner/f.build.version
+ touch /home/gitlab-runner/b.build.version.prev
+ touch /home/gitlab-runner/b.build.version
+ ``` 
+ 
+#### Finalizing AWS webserver setup.
+
+- We have configured apache and tomcat webservers requied to host our frontend and backend.
+- Make sure our server are up and running , for testing apache hit http://ipaddress/ (ex:http://35.165.104.194/) , for tomcat http://ipaddress:8080/ (ex:http://35.165.104.194:8080/)
+- Take a note of webserver ip address , we will using this in our application configuration file.
  
 #### Oracle XE Configuration on AWS
-- Login into next instance of EC2 using putty.
+- Login into next instance of EC2 using putty. This instance will be used as our DB server.
 - We need oracle rpm package for installation , it can not be downloaded from server since oracle website required you to login to download.
 - You can download package from official site and copy the rpm package through WinSCP.
 Download link http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
-- Here my downloaded file name is oracle-xe-11.2.0-1.0.x86_64.rpm.zip and you can run below commands to install oracle xe
+- Here our downloaded file name is oracle-xe-11.2.0-1.0.x86_64.rpm.zip and you can run below commands to install oracle xe
 
 ```
 sudo yum -y install unzip
@@ -316,7 +352,27 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 ```sudo /etc/init.d/oracle-xe configure```
 
 - it will be asking for http port , oracle listenr port , password for sys, system and load on start up values 
-- you can leave default for http , oracle listenr port and select y for start on system boot option.
+- you can leave default for http(8080) , oracle listener port (1521) and select y for start on system boot option.
+
+### Updating application configurations
+
+######Updating backend project properties
+- update below files with new webserver ip address /port number and DB server ip  address and port number
+
+secyieldapi\src\main\resources\application.properties
+customerapi\src\main\resources\db.properties
+customerapi\src\main\resources\applicationContext-test.xml
+
+######Updating frontend project properties
+- Update below file with backend api details
+src\client\app\shared\config\app-config.ts
+
+### Triggering build.
+- When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
+- You can monitor the build status from gitlab , Pipeline page.
+- If any test cases fails or build fails  , maven will return non zero retrun code , which will stop our build process from proceeding  . 
+- After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)
+
 
 
 

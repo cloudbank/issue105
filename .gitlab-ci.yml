@@ -1,6 +1,6 @@
 deploy_package: 
   script:
-  - cd `pwd`; sh /home/gitlab-runner/backend_build.sh
+  - cd `pwd`; sh -x /home/gitlab-runner/backend_build.sh
   
   only:
   - develop

@@ -1,28 +1,23 @@
 stages:
 - test
-- build
 - deploy
 run_tests:
   stage: test
   script:
   - mvn install:install-file -Dfile=customerapi/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f seccommons/pom.xml clean test
-  - mvn -f seccommons/pom.xml install
+  - mvn -f seccommons/pom.xml clean install
   - mvn -f customerapi/pom.xml clean test
   - mvn -f secyieldapi/pom.xml clean test
   only:
   - develop
 
 build_package:
-  stage: build
-  script:
-  - mvn -f customerapi/pom.xml  install
-  - mvn -f secyieldapi/pom.xml  install
-  only:
-  - develop
-deploy-war:
   stage: deploy
   script:
+  - mvn -f seccommons/pom.xml clean install
+  - mvn -f customerapi/pom.xml clean install
+  - mvn -f secyieldapi/pom.xml clean install
   - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/customerapi"
   - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/secyield"
   - curl -T "secyieldapi/target/secyield.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/secyield&update=true"  

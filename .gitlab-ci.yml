@@ -13,7 +13,7 @@ run_tests:
   only:
   - develop
 
-build_package:
+build_deploy:
   stage: build
   script:
   - mvn -f seccommons/pom.xml clean install

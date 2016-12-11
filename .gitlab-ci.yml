@@ -14,4 +14,4 @@ run_tests:
   - curl -T "customerapi/target/customerapi.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/customerapi&update=true"
 
   only:
-  - master
+  - develop

@@ -7,7 +7,7 @@ run_tests:
   script:
   - mvn install:install-file -Dfile=customerapi/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f seccommons/pom.xml clean test
-  - mvn -f seccommons/pom.xml clean install
+  - mvn -f seccommons/pom.xml install
   - mvn -f customerapi/pom.xml clean test
   - mvn -f secyieldapi/pom.xml clean test
   only:
@@ -16,9 +16,8 @@ run_tests:
 build_package:
   stage: build
   script:
-  - mvn -f seccommons/pom.xml clean install
-  - mvn -f customerapi/pom.xml clean install
-  - mvn -f secyieldapi/pom.xml clean install
+  - mvn -f customerapi/pom.xml  install
+  - mvn -f secyieldapi/pom.xml  install
   only:
   - develop
 deploy-war:

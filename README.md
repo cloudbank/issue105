@@ -326,22 +326,7 @@ and copy paste the content of the file
  
  - Runner has been  registered and will be visible in gitlab runner configuration page of the project
  - Create one more runner for front end build based on token from frontend project runner cofig page
- - We have to create build scripts in gitlab-runner's home directory , our gitlab-ci.yml file is based on these scripts
- - Our logged in user is ec2-user , switch to gitlab-runner user and create two build file backend_build.sh and frontend_build.sh 
- - user below command to switch to gitlab-runner user and go to home directory to create file in home directory.
- ```sudo su gitlab-runner``` 
- ```cd ~```
- - These two files are already available with this project in scripts/ directory. you can copy copy the content and paste in server using vi editor
- - Gitlab CI triggers the build based on commits to entire repository , we are restricting the build using commit version of required branch.
- - If commit version of previous and current build requests are same then we are not doing the build
- - Below four file are required to maintain the commit version , make sure they are available in gitlab-runner home directory , they are created as a part of install script,
- if they are not available , create them using below commands.
- ```
- touch /home/gitlab-runner/f.build.version.prev
- touch /home/gitlab-runner/f.build.version
- touch /home/gitlab-runner/b.build.version.prev
- touch /home/gitlab-runner/b.build.version
- ``` 
+
  
 #### Finalizing AWS webserver setup.
 
@@ -387,10 +372,6 @@ src\client\app\shared\config\app-config.ts
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
-- If you want to retrigger a build with out commit , you can delete the file /home/gitlab-runner/f.build.version.prev for front end build or b.build.version.prev for backend build
-and trigger the build from gitlab.
-- If you want to retrigger build with out accessing server then  can create trigger in gitlab and pass any variable in the trigger URL and modify build realted scripts to 
-trigger build based on these variables even though  build versions are same.
 - You can monitor the build status from gitlab , Pipeline page.
 - If any test cases fails or build fails  , maven will return non zero retrun code , which will stop our build process from proceeding  . 
 - After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)

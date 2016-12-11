@@ -6,10 +6,7 @@ sudo yum -y install wget
 #Git CI Runner installation
 curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.rpm.sh | sudo bash
 sudo yum -y  install gitlab-ci-multi-runner
-touch /home/gitlab-runner/f.build.version.prev
-touch /home/gitlab-runner/f.build.version
-touch /home/gitlab-runner/b.build.version.prev
-touch /home/gitlab-runner/b.build.version
+
 
 #Java Installation
 wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm"

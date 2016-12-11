@@ -4,6 +4,7 @@ stages:
 run_tests:
   stage: test
   script:
+  - echo $MERGE_BUILD
   - mvn install:install-file -Dfile=customerapi/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f seccommons/pom.xml clean test
   - mvn -f seccommons/pom.xml clean install

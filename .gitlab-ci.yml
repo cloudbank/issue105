@@ -12,8 +12,7 @@ run_tests:
   - mvn -f secyieldapi/pom.xml clean test
   only:
   - develop
-  except:
-  - /.*/
+
 
 build_package:
   stage: deploy

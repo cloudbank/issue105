@@ -258,7 +258,7 @@ after naming it. This will be used to login into the server.
 
 ![](docs/img/clone_instance.png )
 
--Review the cloned instance and Lunch
+-Review the cloned instance ,add EBS storage if missing  and launch 
 
 ![](docs/img/clone_review.png )
 
@@ -268,7 +268,24 @@ after naming it. This will be used to login into the server.
 - Please refer the link for getting ppk file from pem file and using that to login 
  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console
 - Default user name would be ec2-user
+- Before we start with configuration we have to converting EBS storage we added to SWAP space.
+- Run below command to get availabe disks.
+```lsblk -p```
+- It will list our EBS disk with 4G as size with out any "MOUNTPOINT" , in my case it was /dev/xvdb.
+- Make /dev/xvdb as a swap space using below commands
+```sudo mkswap /dev/xvdb```
+```sudo swapon /dev/xvdb```
+- Now SWAP space has been created , you can verify this using the below command.It will list the drive  /dev/xvdb. 
+
+```swapon -s```
+
+-Add the created SWAP space to /etc/fstab by opening file using ```sudo vi /etc/fstab``` and pasting the line ```/dev/xvdb       none    swap    sw  0       0``` 
+at the end of the file
+- Follow same procudure to add swap space in another server as well
+
 - Once you login, execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
+- This script contains different sections for installing different  modules and updating user permissions, you can better run commands from this 
+script manually to install each module to avoid any memeory issues in EC2 servers.
 you can edit urls and names in script to install different version if needed. you can copy the file using winscp or create new file using  ```vi install_sec.sh```
 and copy paste the content of the file
         ```sudo sh install_sec.sh```
@@ -369,6 +386,10 @@ src\client\app\shared\config\app-config.ts
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
+- If you want to retrigger a build with out commit , you can delete the file /home/gitlab-runner/f.build.version.prev for front end build or b.build.version.prev for backend build
+and trigger the build from gitlab.
+- If you want to retrigger build with out accessing server then  can create trigger in gitlab and pass any variable in the trigger URL and modify build realted scripts to 
+trigger build based on these variables even though  build versions are same.
 - You can monitor the build status from gitlab , Pipeline page.
 - If any test cases fails or build fails  , maven will return non zero retrun code , which will stop our build process from proceeding  . 
 - After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)

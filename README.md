@@ -393,7 +393,7 @@ and trigger the build from gitlab.
 trigger build based on these variables even though  build versions are same.
 - You can monitor the build status from gitlab , Pipeline page.
 - If any test cases fails or build fails  , maven will return non zero retrun code , which will stop our build process from proceeding  . 
-- After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)
+- After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/).
 
 
 

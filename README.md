@@ -292,6 +292,17 @@ and copy paste the content of the file
 - Now we have to configure tomcat as a service.
 - Create and open the Systemd  file by below command and copy paste content from script/tomcat.service
 ```sudo vi /etc/systemd/system/tomcat.service```
+- We have to add admin user to tomcat for remote deployement, open the tomcat user file.
+```sudo vi /opt/tomcat/conf/tomcat-users.xml```
+- Add below line just before ```</tomcat-users>``` tag and save the file.
+
+```
+<role rolename="admin"/>
+<role rolename="manager-script"/>
+<role rolename="manager-gui"/>
+<user username="tomcat" roles="admin,manager-script,manager-gui" password="admin" />
+```
+
 - Reload Systemd  to load tomcat file
 ```sudo systemctl daemon-reload```
 - Start tomcat using below command

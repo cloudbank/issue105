@@ -273,8 +273,9 @@ after naming it. This will be used to login into the server.
 ```lsblk -p```
 - It will list our EBS disk with 4G as size with out any "MOUNTPOINT" , in my case it was /dev/xvdb.
 - Make /dev/xvdb as a swap space using below commands
-```sudo mkswap /dev/xvdb```
-```sudo swapon /dev/xvdb```
+```sudo mkswap /dev/xvdb
+    sudo swapon /dev/xvdb
+```
 - Now SWAP space has been created , you can verify this using the below command.It will list the drive  /dev/xvdb. 
 
 ```swapon -s```

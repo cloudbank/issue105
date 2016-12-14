@@ -218,7 +218,7 @@ Also one can use
 # Deployment to AWS 
 
 #### AWS Instance Creation
-- As a prerequisite , you should have AWS account to create instance on AWS
+- As a prerequisite, you should have AWS account to create instance on AWS
 - Login to AWS and select services ->  EC2 as shown below
 
 ![](docs/img/login_service.png )
@@ -237,8 +237,8 @@ Also one can use
 
 ![](docs/img/add_storage.png )
 
-- Click Next on  Add Tags page
-- On Configure Security Group page , add required inbound ports by clicking AddRule , all below ports(80,8080,1521,22) 
+- On Tag page ,you can name your server like webserver or dbserver  for future reference 
+- On Configure Security Group page, add required inbound ports by clicking AddRule, all below ports(80,8080,1521,22) 
 should  be added with 	Source as 0.0.0.0/0 and click Review And Launch 
 
 ![](docs/img/security_grp.png )
@@ -247,52 +247,63 @@ should  be added with 	Source as 0.0.0.0/0 and click Review And Launch
 
 ![](docs/img/review.png )
 
-- Once you click on Launch , you will be promoted to select security key pair , if you dont have any key pair already , click on Download Key Pair 
-after naming it. This will be used to login into the server.
+- Once you click on Launch, you will be asked to select security key pair, if you don't have any key pair already, click on Download Key Pair 
+after naming it. This will be used as login credential.
 
 ![](docs/img/keypair.png )
 
-- Once you downloaded key pair click on Launch and View Instance
+- Once you downloaded key pair click on Launch and View Instances
 - Now you can see newly created instance, We need one more instance for Oracle DB
-- Right click on Intance and select Launch More like this option to clone this instance
+- Right click on Instance and select Launch More like this option to clone this instance
 
 ![](docs/img/clone_instance.png )
 
--Review the cloned instance ,add EBS storage if missing  and launch 
+-Review the cloned instance, EBS storage would be missing, you have to add that by going back and edit the tag to name the server.
 
 ![](docs/img/clone_review.png )
 
 
-#### Installtion on AWS instance
-- Login into any one of the created instance  through putty
-- Please refer the link for getting ppk file from pem file and using that to login 
+#### Installation on AWS instance
+- Login to web server we created,  using ssh, we need pem file we downloaded while server setup.
+- You can use ssh to login to created server using below command.
+    ```ssh -i /path to pem/demo.pem ec2-user@serverip```    
+- If you are using windows machine and dont have ssh installed, please refer the link for getting ppk file from pem file and using that to login via putty
  https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html?icmpid=docs_ec2_console
 - Default user name would be ec2-user
-- Before we start with configuration we have to converting EBS storage we added to SWAP space.
-- Run below command to get availabe disks.
+- Before we start with configuration we have to convert EBS storage we added to SWAP space.
+- Run below command to get available disks.
 ```lsblk -p```
-- It will list our EBS disk with 4G as size with out any "MOUNTPOINT" , in my case it was /dev/xvdb.
-- Make /dev/xvdb as a swap space using below commands
+- It will list our EBS disk with 4G as size without any "MOUNTPOINT", in my case it was /dev/xvdb.
+- Make /dev/xvdb as swap space using below commands
 ```sudo mkswap /dev/xvdb
     sudo swapon /dev/xvdb
 ```
-- Now SWAP space has been created , you can verify this using the below command.It will list the drive  /dev/xvdb. 
+- Now SWAP space has been created, you can verify this using the below command.It will list the drive  /dev/xvdb. 
 
 ```swapon -s```
 
--Add the created SWAP space to /etc/fstab by opening file using ```sudo vi /etc/fstab``` and pasting the line ```/dev/xvdb       none    swap    sw  0       0``` 
+- Add the created SWAP space to /etc/fstab by opening file using ```sudo vi /etc/fstab``` and pasting the line ```/dev/xvdb       none    swap    sw  0       0``` 
 at the end of the file
-- Follow same procudure to add swap space in another server as well
-
-- Once you login, execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
+- Follow same procedure to add swap space in another server as well
+- Once you login,we have to  execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
 - This script contains different sections for installing different  modules and updating user permissions.
-you can edit urls and names in script to install different version if needed. you can copy the file using winscp or create new file using  ```vi install_sec.sh```
-and copy paste the content of the file
+you can edit urls and names in script to install different version if needed. 
+- You can copy the file using scp / winscp or create new file using  ```vi install_sec.sh```
+and copy paste the content of the file. If you are using windows machine , you may have to convert the file to unix format using dos2unix tool , you can use below commands to install dos2unix and covert the file.
+
+```
+sudo yum install dos2unix
+dos2unix install_sec.sh
+```
+
+- Change the file permissions to make the file executable using below command.
+        ```chmod +x install_sec.sh```
+- Execute the script file using below command. This may take some time to download and install all the required dependencies.
         ```sudo sh install_sec.sh```
 - Now we have to configure tomcat as a service.
 - Create and open the Systemd  file by below command and copy paste content from script/tomcat.service
 ```sudo vi /etc/systemd/system/tomcat.service```
-- We have to add admin user to tomcat for remote deployement, open the tomcat user file.
+- We have to add admin user to tomcat for remote deployment, open the tomcat user file.
 ```sudo vi /opt/tomcat/conf/tomcat-users.xml```
 - Add below line just before ```</tomcat-users>``` tag and save the file.
 
@@ -314,16 +325,18 @@ and copy paste the content of the file
 ```sudo service  httpd start```
 
 #### GIT CI Runner configuration
--Before we begin git ci runner configuration , we have to get runner token from the gitlab
-- To get runner token , browse the project in gitlab and click on setting icon on top right corner and select Runner 
+- Before we begin git ci runner configuration, we have to get runner token from the gitlab
+- To get runner token, browse the project in gitlab and click on setting icon on top right corner and select Runner 
 
 ![](docs/img/gitrunner.png )
 
-- This page displays runner information and available runners ,you can  "Disable Shared Runners" here
+- This page displays runner information and available runners,you should "Disable Shared Runners" here, We will configure our own runners in web server.
 
 ![](docs/img/runnerinfo.png )
 
-- Once you get token , login into web server EC2 instance we created and run below command to register and configure  runner.
+- Once you get token, login into web server EC2 instance we created and run below command to register and configure runner.
+###### Configuring backend runner
+- Execute below command to start the runner configuration.
 
 ```sudo gitlab-ci-multi-runner register``` 
 
@@ -333,21 +346,38 @@ and copy paste the content of the file
     3.Please enter the gitlab-ci description for this runner: backendrunner (runner description here)
     4.Please enter the gitlab-ci tags for this runner (comma separated): backend, java (tags here)
     5.Please enter the executor: docker-ssh, ssh, virtualbox, docker-ssh+machine, kubernetes, docker, parallels, shell, docker+machine: shell (we will be using shell runner)
+
+- Backend runner has been  registered and will be visible in gitlab runner configuration page of the project backend project.
+ - Build configuration is given in the file .gitlab-ci.yml of backend project.
  
- - Runner has been  registered and will be visible in gitlab runner configuration page of the project
- - Create one more runner for front end build based on token from frontend project runner cofig page
+###### Configuring frontend runner
+  
+ - Browser to frontend's project's runner configuration and get the runner token like we did for backend project.
+ - Execute below command to start the runner configuration.
+ 
+ ```sudo gitlab-ci-multi-runner register``` 
+ 
+ - You will be asked to provide inputs for following questions once you run above command.
+     1.Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/): https://gitlab.com/ci (obtained from runner page in gitlab)
+     2.Please enter the gitlab-ci token for this runner: jwasdf3Ynq3RXxikwGov (obtained from runner page in gitlab)
+     3.Please enter the gitlab-ci description for this runner: frontendrunner (runner description here)
+     4.Please enter the gitlab-ci tags for this runner (comma separated): frontend, angular , node (tags here)
+     5.Please enter the executor: docker-ssh, ssh, virtualbox, docker-ssh+machine, kubernetes, docker, parallels, shell, docker+machine: shell (we will be using shell runner)
+ 
+ - Frontend runner has been  registered and will be visible in gitlab runner configuration page of the project frontend project.
+ - Build configuration is given in the file .gitlab-ci.yml of frontend project.
 
  
-#### Finalizing AWS webserver setup.
+#### Finalizing AWS web server setup.
 
-- We have configured apache and tomcat webservers requied to host our frontend and backend.
-- Make sure our server are up and running , for testing apache hit http://ipaddress/ (ex:http://35.165.104.194/) , for tomcat http://ipaddress:8080/ (ex:http://35.165.104.194:8080/)
-- Take a note of webserver ip address , we will using this in our application configuration file.
+- We have configured apache and tomcat web servers required to host our frontend and backend.
+- Make sure our web servers are up and running, for testing apache hit http://ipaddress/ (ex:http://35.165.104.194/) , for tomcat http://ipaddress:8080/ (ex:http://35.165.104.194:8080/)
+- Take a note of web server ip address, we using this in our application configuration file.
  
 #### Oracle XE Configuration on AWS
-- Login into next instance of EC2 using putty. This instance will be used as our DB server.
+- Login into next instance of EC2 (dbserver) . This instance will be used as our DB server.
 - We need oracle rpm package for installation , it can not be downloaded from server since oracle website required you to login to download.
-- You can download package from official site and copy the rpm package through WinSCP.
+- You can download package from official site and copy the rpm package through SCP / WinSCP , RPM package size is ~300MB, it may take some time for downloading and uploading depends on your internet speed.
 Download link http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
 - Here our downloaded file name is oracle-xe-11.2.0-1.0.x86_64.rpm.zip and you can run below commands to install oracle xe
 
@@ -364,9 +394,9 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 
 ```sudo /etc/init.d/oracle-xe configure```
 
-- it will be asking for http port , oracle listenr port , password for sys, system and load on start up values 
-- you can leave default for http(8080) , oracle listener port (1521) and select y for start on system boot option. Configuration may take some time to complete.
-- Once Db is up and running , you can connect to this DB using sql developer and follow steps mentioned in Db Setup section to create user and schema
+- it will be asking for http port, oracle listener port, password for sys, system and load on start up values 
+- you can leave default for http(8080), oracle listener port (1521) and select y for start on system boot option. Configuration may take some time to complete.
+- Once Db is up and running, you can connect to this DB using sql developer and follow steps mentioned in Db Setup section to create user, schema and load sample data.
 
 ### Updating application configurations
 
@@ -383,8 +413,8 @@ src\client\app\shared\config\app-config.ts
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
-- You can monitor the build status from gitlab , Pipeline page.
-- If any test cases fails or build fails  , maven will return non zero retrun code , which will stop our build process from proceeding  . 
+- You can monitor the build status from gitlab's Pipeline page. By default you will get a notification mail after every build, to your registered mail id in gitlab. 
+- If any test case fails or build fails  , maven will return non zero return code, which will stop our build process from proceeding. 
 - After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/).
 
 

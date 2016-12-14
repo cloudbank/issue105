@@ -22,9 +22,9 @@ sudo mv maven.sh  /etc/profile.d/maven.sh
 
 
 #NodeJS Installation
-wget --no-check-certificate  https://nodejs.org/dist/v6.9.2/node-v6.9.2-linux-x64.tar.xz
+wget --no-check-certificate  https://nodejs.org/download/release/v5.9.1/node-v5.9.1-linux-x64.tar.xz
 sudo mkdir /usr/local/node
-sudo tar --strip-components 1 -xJf node-v6.9.2-linux-x64.tar.xz -C /usr/local/node
+sudo tar --strip-components 1 -xJf node-v5.9.1-linux-x64.tar.xz -C /usr/local/node
 sudo echo  'export NODE_HOME=/usr/local/node;export NODE_BIN=$NODE_HOME/bin;export PATH=$NODE_BIN:$PATH'  >   node.sh
 sudo mv node.sh /etc/profile.d/node.sh
 

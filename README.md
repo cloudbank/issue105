@@ -403,13 +403,18 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 ######Updating backend project properties
 - update below files with new webserver ip address /port number and DB server ip  address and port number
 
+````
 secyieldapi\src\main\resources\application.properties
 customerapi\src\main\resources\db.properties
 customerapi\src\main\resources\applicationContext-test.xml
+````
 
 ######Updating frontend project properties
 - Update below file with backend api details
+
+``
 src\client\app\shared\config\app-config.ts
+``
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.

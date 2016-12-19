@@ -31,7 +31,6 @@ docs/sec_yield_api_postman_collection.json
 
 ###### For Windows, the Oracle port we will use to connect is 1521.
 
-
 ## Linux (Red Hat Linux 5)
 1. To install Oracle Express 11g for Linux, follow the guide provided in this link: http://docs.oracle.com/cd/E17781_01/install.112/e18802/toc.htm#XEINL122
 

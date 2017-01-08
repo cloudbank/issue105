@@ -1,5 +1,0 @@
-DELETE calculated_position_data;
-DELETE calculated_security_sec_data;
-DELETE customer_position_data;
-DELETE customer_security_sec_data;
-COMMIT;

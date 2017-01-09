@@ -3,7 +3,6 @@
  */
 package com.csa.apex.fundyield.faya.api.mock.service.impl;
 
-import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.sql.ResultSet;
@@ -20,8 +19,6 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.BeanProcessor;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jdbc.support.oracle.BeanPropertyStructMapper;
 import org.springframework.data.jdbc.support.oracle.SqlStructValue;
@@ -61,11 +58,6 @@ import oracle.jdbc.OracleTypes;
  */
 @Service
 public class StoredProcedures {
-
-    /**
-     * The logger.
-     */
-    private static final Logger LOGGER = LogManager.getLogger(StoredProcedures.class);
 
     /**
      * Struct mapper for Instrument.
@@ -262,15 +254,6 @@ public class StoredProcedures {
             String columnName = field.getAnnotation(ColumnName.class).value().toLowerCase();
             mappedFields.put(columnName, mappedFields.get(field.getName().toLowerCase()));
         });
-        if (entityType == PortfolioHoldingSnapshot.class) {
-            try {
-                mappedFields.put("TRADABLE_ENTITY_SID".toLowerCase(),
-                        new PropertyDescriptor("tradableEntity.tradableEntitySid", null, null));
-            } catch (IntrospectionException e) {
-                // Should not happen
-                LOGGER.error("Failed to create struct mapper for " + entityType, e);
-            }
-        }
         return mapper;
     }
 
@@ -814,20 +797,6 @@ public class StoredProcedures {
         protected Object processColumn(ResultSet rs, int index, Class<?> propType) throws SQLException {
             if (propType.equals(Date.class)) {
                 return rs.getDate(index);
-            }
-            if (rs.getObject(index) != null) {
-                if (propType == Instrument.class) {
-                    long sid = rs.getLong(index);
-                    Instrument entity = new Instrument();
-                    entity.setInstrumentSid(sid);
-                    return entity;
-                } else if (propType == TradableEntity.class) {
-                    long sid = rs.getLong(index);
-                    TradableEntity entity = new TradableEntity();
-                    entity.setTradableEntitySid(sid);
-                    ;
-                    return entity;
-                }
             }
             return super.processColumn(rs, index, propType);
         }

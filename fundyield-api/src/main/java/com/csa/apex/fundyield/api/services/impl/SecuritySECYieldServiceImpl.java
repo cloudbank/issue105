@@ -388,7 +388,7 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			TradableEntitySnapshot tes, Portfolio portfolio, PortfolioHoldingSnapshot portfolioHolding) {
 		String[] values = new String[EXPORT_FIELD_NAMES.length];
 		int index = 0;
-		values[index++] = instrument.getInstrumentId();
+		values[index++] = String.valueOf(instrument.getInstrumentId());
 		values[index++] = getFormattedDate(data.getReportDate());
 		values[index++] = String.valueOf(tes.getFdrCleanPrice());
 		values[index++] = tes.getDerYieldCalcEngineCode();

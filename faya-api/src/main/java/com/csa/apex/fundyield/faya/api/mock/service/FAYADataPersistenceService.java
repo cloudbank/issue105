@@ -18,17 +18,17 @@ import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 public interface FAYADataPersistenceService {
 
     /**
-     * Gets the customer SEC Security.
+     * Gets the SEC Security.
      * 
      * @param businessDate
      *        the business date
-     * @return the list of customer security SEC data
+     * @return the list of security SEC data
      * @throws FundAccountingYieldException
      *         in case any error occurred during processing
      * @throws IllegalArgumentException
      *         in case the input is invalid (null)
      */
-    public FundAccountingYieldData getCustomerSECData(Date businessDate) throws FundAccountingYieldException;
+    public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException;
 
     /**
      * Persists the calculated SEC security data.

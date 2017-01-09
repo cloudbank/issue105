@@ -12,7 +12,7 @@ import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
  * @version 1.0
  * @since FAYA Java App - Phase 1 Updates Code Challenge
  */
-public class BaseCalculationInput {
+public abstract class BaseCalculationInput {
 
 	/**
 	 * Operation scale.

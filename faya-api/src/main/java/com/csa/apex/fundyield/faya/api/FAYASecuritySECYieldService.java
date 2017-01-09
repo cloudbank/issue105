@@ -30,11 +30,11 @@ import com.csa.apex.fundyield.utility.Constants;
 public interface FAYASecuritySECYieldService {
 
 	/**
-	 * Gets the customer SEC security data.
+	 * Gets the SEC security data.
 	 *
 	 * @param businessDate
 	 *            the business date
-	 * @return the list of customer security SEC data
+	 * @return the list of security SEC data
 	 * @throws FundAccountingYieldException
 	 *             in case any error occurred during processing
 	 * @throws IllegalArgumentException
@@ -43,7 +43,7 @@ public interface FAYASecuritySECYieldService {
 	@RequestMapping(value = "fayaFundAccountingSECYieldData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public FundAccountingYieldData getCustomerSECData(
+	public FundAccountingYieldData getFAYASECData(
 			@RequestParam("businessDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException;
 

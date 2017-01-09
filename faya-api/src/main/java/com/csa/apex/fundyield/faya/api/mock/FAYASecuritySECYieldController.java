@@ -54,11 +54,11 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	}
 
 	/**
-	 * Gets the customer SEC security data.
+	 * Gets the SEC security data.
 	 * 
 	 * @param businessDate
 	 *            the business date
-	 * @return the list of customer security SEC data
+	 * @return the list of security SEC data
 	 * @throws FundAccountingYieldException
 	 *             in case any error occurred during processing
 	 * @throws IllegalArgumentException
@@ -66,8 +66,8 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@Override
     @LogMethod
-	public FundAccountingYieldData getCustomerSECData(Date businessDate) throws FundAccountingYieldException {
-		return fayaDataPersistenceService.getCustomerSECData(businessDate);
+	public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
+		return fayaDataPersistenceService.getFAYASECData(businessDate);
 	}
 
 	/**

@@ -186,7 +186,7 @@ public class SecuritySECYieldServiceImplTest {
 			File expectedCsvFile = new File(classLoader.getResource(TEST_EXPORT_CSV_FILE_NAME).getFile());
 			assertEquals(getCSVFileContentsAsString(csvFile), getCSVFileContentsAsString(expectedCsvFile));
 		} finally {
-			csvFile.delete();
+			//csvFile.delete();
 		}
 	}
 

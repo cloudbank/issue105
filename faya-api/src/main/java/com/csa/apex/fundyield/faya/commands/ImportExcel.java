@@ -81,10 +81,7 @@ public class ImportExcel {
      */
     private static String getStringCellValue(XSSFRow row, int cellNum) {
         XSSFCell cell = row.getCell(cellNum);
-        if (cell != null) {
-            return StringUtils.trimToNull(cell.getStringCellValue());
-        }
-        return null;
+        return cell != null ? StringUtils.trimToNull(cell.getStringCellValue()) : null;
     }
 
     /**
@@ -95,10 +92,7 @@ public class ImportExcel {
      */
     private static Date getDateCellValue(XSSFRow row, int cellNum) {
         XSSFCell cell = row.getCell(cellNum);
-        if (cell != null) {
-            return cell.getDateCellValue();
-        }
-        return null;
+        return cell != null ? cell.getDateCellValue() : null;
     }
 
     /**
@@ -140,7 +134,7 @@ public class ImportExcel {
     private static Instrument parseInstrument(XSSFRow row, Map<String, Integer> columnMapping, SECConfiguration conf) {
 
         Instrument instrument = new Instrument();
-        instrument.setInstrumentId(getStringCellValue(row, columnMapping.get("instrument.id")));
+        instrument.setInstrumentId(getNumericCellValue(row, columnMapping.get("instrument.id")).longValue());
         instrument.setInstrumentTypeCode(Enum.valueOf(InstrumentTypeCode.class,
                 getStringCellValue(row, columnMapping.get("instrument.instrumentTypeCode"))));
         instrument.setInstrumentShortName(getStringCellValue(row, columnMapping.get("instrument.instrumentShortName")));
@@ -433,6 +427,7 @@ public class ImportExcel {
 
             PortfolioHoldingSnapshot holding = data.getPortfolios().get(0).getPortfolioHoldings().get(0);
             holding.setPortfolioSid(data.getPortfolios().get(0).getPortfolioSid());
+            holding.setTradableEntitySid(te.getTradableEntitySid());
             storedProcedures.savePortfolioHoldingSnapshot(holding, cleanCalcResult);
 
             LOGGER.info("Row imported:\n" + data.toString());

@@ -41,7 +41,7 @@ import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
- * Persistence service for customer data operations implementing the persistence interface. This class is effectively
+ * Persistence service for FAYA data operations implementing the persistence interface. This class is effectively
  * thread safe.
  * @author [es], TCSDEVELOPER
  * @version 1.0
@@ -84,18 +84,16 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
      */
     private void persistInstrument(Instrument instrument) throws PersistenceException {
 
-        if (instrument.getTradableEntities() == null) {
-            return;
-        }
-
         try {
-            for (TradableEntity te : instrument.getTradableEntities()) {
-                if (te.getTradableEntitySnapshots() != null) {
-                    te.getTradableEntitySnapshots().forEach(snapshot -> {
-                        snapshot.setCreateId(USER_ID);
-                        storedProcedures.saveTradableEntitySnapshot(snapshot, true);
-                    });
-                }
+            if (instrument.getTradableEntities() != null) {
+                instrument.getTradableEntities().forEach(te -> {
+                    if (te.getTradableEntitySnapshots() != null) {
+                        te.getTradableEntitySnapshots().forEach(snapshot -> {
+                            snapshot.setCreateId(USER_ID);
+                            storedProcedures.saveTradableEntitySnapshot(snapshot, true);
+                        });
+                    }
+                });
             }
         } catch (DataAccessException dae) {
             throw new PersistenceException("Failed to save instrument: " + instrument, dae);
@@ -167,15 +165,15 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
     }
 
     /**
-     * Gets the customer SEC Security.
+     * Gets the SEC Security.
      * @param businessDate the business date
-     * @return the list of customer security SEC data
+     * @return the list of security SEC data
      * @throws FundAccountingYieldException in case any error occurred during processing
      * @throws IllegalArgumentException in case the input is invalid (null)
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getCustomerSECData(Date businessDate) throws FundAccountingYieldException {
+    public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
         CommonUtility.checkNull(businessDate, "Parameter businessDate");
 
         // The business date input parameters
@@ -224,7 +222,7 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
         // Map from Portfolio sid to PortfolioHoldingSnapshots
         Map<Long, List<PortfolioHoldingSnapshot>> portfolioHoldingSnapshotsMap = ((List<PortfolioHoldingSnapshot>) results
                 .get("PORTFOLIO_HOLDING_SNAPSHOT_CUR")).stream().collect(Collectors.groupingBy(e -> {
-                    e.setTradableEntity(tradableEntitiesMap.get(e.getTradableEntity().getTradableEntitySid()));
+                    e.setTradableEntity(tradableEntitiesMap.get(e.getTradableEntitySid()));
                     return e.getPortfolioSid();
                 }));
 
@@ -306,9 +304,9 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
         // Map from Instrument sid to UnderlyingInstrumentLinks
         Map<Long, List<UnderlyingInstrumentLink>> underlyingInstrumentLinksMap = ((List<UnderlyingInstrumentLink>) results
                 .get("UNDERLYING_INSTRUMENT_LINK_CUR")).stream().collect(Collectors.groupingBy(e -> {
-                    long underlyingInstrumentSid = e.getUnderlyingInstrument().getInstrumentSid();
+                    long underlyingInstrumentSid = e.getUnderlyingInstrumentSid();
                     e.setUnderlyingInstrument(underlyingInstrumentsMap.get(underlyingInstrumentSid));
-                    return e.getOverlayingInstrument().getInstrumentSid();
+                    return e.getOverlayingInstrumentSid();
                 }));
 
         List<Instrument> instruments = (List<Instrument>) results.get("INSTRUMENT_CUR");
@@ -336,6 +334,6 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
     @Override
     @LogMethod
     public FundAccountingYieldData getCalculatedSECData(Date businessDate) throws FundAccountingYieldException {
-        return getCustomerSECData(businessDate);
+        return getFAYASECData(businessDate);
     }
 }

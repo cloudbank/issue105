@@ -129,7 +129,7 @@ docs/fundyield-api.postman_collection.json
   ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
 
   5. You can also pass path of mapping properties for excel if excel will change order of columns  
-    ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
+    ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of faya-api\src\main\resources\excelMapping.properties"```  
 
   6. ```mvn spring-boot:run ```  
 

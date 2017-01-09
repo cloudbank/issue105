@@ -30,7 +30,7 @@ import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
- * SECYieldController Spring REST Controller for customer data operations. This class is effectively thread safe.
+ * SECYieldController Spring REST Controller for security SEC data operations. This class is effectively thread safe.
  *
  * @author [es], TCSDEVELOPER
  * @version 1.0
@@ -116,7 +116,7 @@ public class SecuritySECYieldController {
 		truncateResults(securitySECData);
 
 		stopWatch.stop();
-		logger.info("METHOD: SECYieldController.getSecuritySECData(), RUNTIME: " +
+		logger.info("METHOD: SecuritySECYieldController.getSecuritySECData(), RUNTIME: " +
 				stopWatch.getTotalTimeMillis() + "ms, # OF SECURITIES: " + securitySECData.getPortfolios().size());
 
 		return securitySECData;
@@ -144,7 +144,7 @@ public class SecuritySECYieldController {
 		truncateResults(securitySECData);
 
 		stopWatch.stop();
-		logger.info("METHOD: SECYieldController.getCalculatedSecuritySECData(), RUNTIME: " +
+		logger.info("METHOD: SecuritySECYieldController.getCalculatedSecuritySECData(), RUNTIME: " +
 				stopWatch.getTotalTimeMillis() + "ms, # OF SECURITIES: " + securitySECData.getPortfolios().size());
 
 		return securitySECData;
@@ -173,7 +173,7 @@ public class SecuritySECYieldController {
 		secYieldService.exportCalculatedSecuritySECData(businessDate, response);
 
 		stopWatch.stop();
-		logger.info("METHOD: SECYieldController.exportCalculatedSecuritySECData(), RUNTIME: " +
+		logger.info("METHOD: SecuritySECYieldController.exportCalculatedSecuritySECData(), RUNTIME: " +
 				stopWatch.getTotalTimeMillis() + "ms");
 	}
 

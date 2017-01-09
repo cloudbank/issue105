@@ -43,13 +43,13 @@ public class FAYADataPersistenceServiceImplTest {
     private FAYADataPersistenceService fayaDataPersistenceService;
 
     /**
-     * Test getCustomerSECData retrieves correct data.
+     * Test getFAYASECData retrieves correct data.
      * @throws Exception if any exception occurs
      */
     @Test
-    public void getCustomerSECDataTestSuccess() throws Exception {
+    public void getFAYASECDataTestSuccess() throws Exception {
         FundAccountingYieldData data = fayaDataPersistenceService
-                .getCustomerSECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
         assertEquals(12, data.getInstruments().size());
         assertEquals(13, data.getPortfolios().size());
 
@@ -69,24 +69,24 @@ public class FAYADataPersistenceServiceImplTest {
     }
 
     /**
-     * Test getCustomerSECData retrieves no data for date that is not present in the db data.
+     * Test getFAYASECData retrieves no data for date that is not present in the db data.
      * @throws Exception if any exception occurs
      */
     @Test
-    public void getCustomerSECDataTestNoData() throws Exception {
+    public void getFAYASECDataTestNoData() throws Exception {
         FundAccountingYieldData data = fayaDataPersistenceService
-                .getCustomerSECData(DateTime.parse("2000-12-01").toDate());
+                .getFAYASECData(DateTime.parse("2000-12-01").toDate());
         assertEquals(data.getInstruments().size(), 0);
         assertEquals(data.getPortfolios().size(), 0);
     }
 
     /**
-     * Test getCustomerSECData throws IllegalArgumentException in case the provided date is null.
+     * Test getFAYASECData throws IllegalArgumentException in case the provided date is null.
      * @throws Exception if any exception occurs
      */
     @Test(expected = IllegalArgumentException.class)
-    public void getCustomerSECDataTestNullDate() throws Exception {
-        fayaDataPersistenceService.getCustomerSECData(null);
+    public void getFAYASECDataTestNullDate() throws Exception {
+        fayaDataPersistenceService.getFAYASECData(null);
     }
 
     /**
@@ -97,7 +97,7 @@ public class FAYADataPersistenceServiceImplTest {
     public void persistSecuritySECDataTestSuccess() throws Exception {
 
         FundAccountingYieldData data = fayaDataPersistenceService
-                .getCustomerSECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         BigDecimal yield = new BigDecimal(23.55);
         BigDecimal income = new BigDecimal(0.532);
@@ -110,7 +110,7 @@ public class FAYADataPersistenceServiceImplTest {
         // Persist
         fayaDataPersistenceService.persistSecuritySECData(data);
 
-        data = fayaDataPersistenceService.getCustomerSECData(DateTime.parse("2014-12-01").toDate());
+        data = fayaDataPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         assertEquals(yield.setScale(2, BigDecimal.ROUND_HALF_DOWN),
                 data.getInstruments().get(0).getTradableEntities().get(0).getTradableEntitySnapshots().get(0)

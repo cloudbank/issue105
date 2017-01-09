@@ -86,34 +86,34 @@ public class FAYASecuritySECYieldControllerTest {
     }
 
     /**
-     * Test getCustomerSECData.
+     * Test getFAYASECData.
      * @throws Exception if any exception occurs
      */
     @Test
-    public void getCustomerSECDataTest() throws Exception {
+    public void getFAYASECDataTest() throws Exception {
         mockMvc.perform(get("/fayaFundAccountingSECYieldData").param(BUSINESS_DATE_PARAM_NAME, "2014-12-01"))
                 .andExpect(status().isOk()).andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE));
     }
 
     /**
-     * Test getCustomerSECData with invalid business date.
+     * Test getFAYASECData with invalid business date.
      * @throws Exception if any exception occurs
      */
     @Test
-    public void getCustomerSECDataInvalidTest() throws Exception {
+    public void getFAYASECDataInvalidTest() throws Exception {
         this.mockMvc.perform(get("/fayaFundAccountingSECYieldData").param("businessDate", "invalid"))
                 .andExpect(status().is(400));
     }
 
     /**
-     * Test getCustomerSECData.
+     * Test persistSecuritySECData.
      * @throws Exception if any exception occurs
      */
     @Test
     public void persistSecuritySECDataTest() throws Exception {
 
         FundAccountingYieldData data = fayaDataPersistenceService
-                .getCustomerSECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         // Set some calculation result
         BigDecimal yield = new BigDecimal(23.55);
@@ -128,7 +128,7 @@ public class FAYASecuritySECYieldControllerTest {
         mockMvc.perform(put("/calculatedFundAccountingSECYieldData")
                 .contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE).content(json)).andExpect(status().isOk());
 
-        data = fayaDataPersistenceService.getCustomerSECData(DateTime.parse("2014-12-01").toDate());
+        data = fayaDataPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         assertEquals(yield.setScale(2, BigDecimal.ROUND_HALF_DOWN),
                 data.getInstruments().get(0).getTradableEntities().get(0).getTradableEntitySnapshots().get(0)

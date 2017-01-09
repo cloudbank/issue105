@@ -25,7 +25,7 @@ public class Instrument extends Versionable {
      * A unique key derived in source system, i.e. MDM system and used to identify an individual instrument.
      */
 	@ColumnName("INSTRUMENT_ID")
-    private String instrumentId;
+    private long instrumentId;
 
     /**
      * Identifies an instrument by its full legal name plus descriptive information.
@@ -212,7 +212,7 @@ public class Instrument extends Versionable {
      * Getter method for property <tt>instrumentId</tt>.
      * @return property value of instrumentId
      */
-    public String getInstrumentId() {
+    public long getInstrumentId() {
         return instrumentId;
     }
 
@@ -220,7 +220,7 @@ public class Instrument extends Versionable {
      * Setter method for property <tt>instrumentId</tt>.
      * @param instrumentId value to be assigned to property instrumentId
      */
-    public void setInstrumentId(String instrumentId) {
+    public void setInstrumentId(long instrumentId) {
         this.instrumentId = instrumentId;
     }
 

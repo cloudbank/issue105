@@ -48,6 +48,26 @@ public class ImportExcelTest {
     }
 
     /**
+     * Test import, no args.
+     * @throws Exception if any exception occurs
+     */
+    @Test
+    public void testImport_NoArgs() throws Exception {
+        ImportExcel.main(new String[] {});
+    }
+
+    /**
+     * Test import, IO error.
+     * @throws Exception if any exception occurs
+     */
+    @Test
+    public void testImport_IOError() throws Exception {
+        ImportExcel.main(new String[] {"-m", "NoSuchFile.properties", "-e",
+                ImportExcel.class.getClassLoader().getResource("Phase1TestData.xlsx").getPath(), "-x",
+                "applicationContext-cli-test.xml"});
+    }
+
+    /**
      * Test import.
      * @throws Exception if any exception occurs
      */

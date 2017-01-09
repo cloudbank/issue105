@@ -7,7 +7,6 @@ run_tests:
   - mvn install:install-file -Dfile=faya-api/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f seccommons/pom.xml clean install
   - mvn -f faya-api/pom.xml clean install
-  - mvn -f faya-api/pom.xml  exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--excel test_data/Phase1TestData.xlsx"
   - mvn -f fundyield-api/pom.xml clean install -Ptomcat
   - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/faya-api"
   - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/fundyield-api"

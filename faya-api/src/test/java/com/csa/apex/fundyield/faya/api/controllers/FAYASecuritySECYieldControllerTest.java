@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Collection;
 
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYASecuritySECYieldPersistenceService;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
-import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
 import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.Constants;
@@ -57,10 +57,10 @@ public class FAYASecuritySECYieldControllerTest {
     private static final String BUSINESS_DATE_PARAM_NAME = "businessDate";
 
     /**
-     * FAYADataPersistenceService object.
+     * FAYASecuritySECYieldPersistenceService object.
      */
     @Autowired
-    private FAYADataPersistenceService fayaDataPersistenceService;
+    private FAYASecuritySECYieldPersistenceService fayaSecuritySECYieldPersistenceService;
 
     /**
      * FAYASecuritySECYieldController to be tested.
@@ -112,7 +112,7 @@ public class FAYASecuritySECYieldControllerTest {
     @Test
     public void persistSecuritySECDataTest() throws Exception {
 
-        FundAccountingYieldData data = fayaDataPersistenceService
+        FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
                 .getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         // Set some calculation result
@@ -128,7 +128,7 @@ public class FAYASecuritySECYieldControllerTest {
         mockMvc.perform(put("/calculatedFundAccountingSECYieldData")
                 .contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE).content(json)).andExpect(status().isOk());
 
-        data = fayaDataPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
+        data = fayaSecuritySECYieldPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
 
         assertEquals(yield.setScale(2, BigDecimal.ROUND_HALF_DOWN),
                 data.getInstruments().get(0).getTradableEntities().get(0).getTradableEntitySnapshots().get(0)

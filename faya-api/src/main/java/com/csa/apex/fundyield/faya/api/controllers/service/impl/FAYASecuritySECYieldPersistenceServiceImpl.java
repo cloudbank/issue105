@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.exceptions.PersistenceException;
-import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.CallSchedule;
 import com.csa.apex.fundyield.seccommons.entities.CashDividendSchedule;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
@@ -48,7 +48,7 @@ import com.csa.apex.fundyield.utility.LogMethod;
  * @since FAYA Java App - Phase 1 Updates Code Challenge
  */
 @Service
-public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceService {
+public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecuritySECYieldPersistenceService {
 
     /**
      * User id. Hard coded as currently there is no user context.
@@ -64,7 +64,7 @@ public class FAYADataPersistenceServiceImpl implements FAYADataPersistenceServic
     /**
      * Constructor
      */
-    public FAYADataPersistenceServiceImpl() {
+    public FAYASecuritySECYieldPersistenceServiceImpl() {
         // default constructor
     }
 

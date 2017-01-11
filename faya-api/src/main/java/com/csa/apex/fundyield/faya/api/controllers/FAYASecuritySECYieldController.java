@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
-import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
@@ -33,7 +33,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 * The persistence service to perform operations on FAYA SEC security data.
 	 */
     @Autowired
-	private FAYADataPersistenceService fayaDataPersistenceService;
+	private FAYASecuritySECYieldPersistenceService fayaSecuritySECYieldPersistenceService;
 
 	/**
 	 * Constructor.
@@ -50,7 +50,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaDataPersistenceService, "fayaDataPersistenceService");
+        CommonUtility.checkNullConfig(fayaSecuritySECYieldPersistenceService, "fayaSecuritySECYieldPersistenceService");
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	@Override
     @LogMethod
 	public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
-		return fayaDataPersistenceService.getFAYASECData(businessDate);
+		return fayaSecuritySECYieldPersistenceService.getFAYASECData(businessDate);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
     @LogMethod
 	@Transactional
 	public boolean persistSecuritySECData(FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
-		return fayaDataPersistenceService.persistSecuritySECData(fundAccountingYieldData);
+		return fayaSecuritySECYieldPersistenceService.persistSecuritySECData(fundAccountingYieldData);
 	}
 
 	/**
@@ -102,6 +102,6 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	@Override
     @LogMethod
 	public FundAccountingYieldData getCalculatedSECData(Date businessDate) throws FundAccountingYieldException {
-		return fayaDataPersistenceService.getCalculatedSECData(businessDate);
+		return fayaSecuritySECYieldPersistenceService.getCalculatedSECData(businessDate);
 	}
 }

@@ -15,7 +15,7 @@ import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
  * @version 1.0
  * @since FAYA Java App - Phase 1 Updates Code Challenge
  */
-public interface FAYADataPersistenceService {
+public interface FAYASecuritySECYieldPersistenceService {
 
     /**
      * Gets the SEC Security.

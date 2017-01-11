@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.faya.api.mock;
+package com.csa.apex.fundyield.faya.api.controllers;
 
 import java.util.Date;
 
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
-import com.csa.apex.fundyield.faya.api.mock.service.FAYADataPersistenceService;
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;

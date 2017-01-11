@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
-import com.csa.apex.fundyield.faya.api.mock.service.FAYADataPersistenceService;
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
 import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.Constants;

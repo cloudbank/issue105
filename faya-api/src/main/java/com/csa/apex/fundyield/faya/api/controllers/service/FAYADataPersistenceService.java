@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.faya.api.mock.service;
+package com.csa.apex.fundyield.faya.api.controllers.service;
 
 import java.util.Date;
 

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.faya.api.mock.service.impl;
+package com.csa.apex.fundyield.faya.api.controllers.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.exceptions.PersistenceException;
-import com.csa.apex.fundyield.faya.api.mock.service.FAYADataPersistenceService;
+import com.csa.apex.fundyield.faya.api.controllers.service.FAYADataPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.CallSchedule;
 import com.csa.apex.fundyield.seccommons.entities.CashDividendSchedule;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;

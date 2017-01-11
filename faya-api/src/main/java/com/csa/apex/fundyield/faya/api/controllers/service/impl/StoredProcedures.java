@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.faya.api.mock.service.impl;
+package com.csa.apex.fundyield.faya.api.controllers.service.impl;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;

@@ -33,7 +33,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.csa.apex.fundyield.faya.api.mock.service.impl.StoredProcedures;
+import com.csa.apex.fundyield.faya.api.controllers.service.impl.StoredProcedures;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.InstrumentTypeCode;

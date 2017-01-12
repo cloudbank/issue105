@@ -37,23 +37,23 @@ public class YtmIncomeCalculator {
 		CommonUtility.checkNull(input, "Parameter YtmIncomeCalculationInput");
 
 		BigDecimal income;
-		if (input.getY().divide(input.getFx(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).compareTo(BigDecimal
+		if (input.getDerOneDaySecurityYield().divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).compareTo(BigDecimal
 				.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(), BigDecimal.ROUND_HALF_UP)) > 0)
-			income = input.getMv().add(input.getAi())
+			income = input.getMarketValueBaseAmount().add(input.getAccruedIncomeAmount())
 					.multiply(BigDecimal.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(),
 							BigDecimal.ROUND_HALF_UP))
 					.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-					.add(input.getInflInc());
+					.add(input.getEarnedInflCmpsBaseAmount());
 		else
-			income = input.getMv().add(input.getAi()).multiply(input.getY())
+			income = input.getMarketValueBaseAmount().add(input.getAccruedIncomeAmount()).multiply(input.getDerOneDaySecurityYield())
 					.divide(BigDecimal.valueOf(360).setScale(input.getOperationScale(), BigDecimal.ROUND_HALF_UP),
 							BigDecimal.ROUND_HALF_UP)
-					.divide(input.getFx(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).add(input.getInflInc());
+					.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).add(input.getEarnedInflCmpsBaseAmount());
 
 		// round off income to operation scale
 		income = income.setScale(input.getOperationScale(), input.getRoundingMode());
 		YtmIncomeCalculationOutput output = new YtmIncomeCalculationOutput();
-		output.setI(income);
+		output.setDerSecYield1DayIncomeAmt(income);
 		return output;
 	}
 }

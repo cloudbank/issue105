@@ -15,9 +15,9 @@ import java.math.BigDecimal;
 public class YtmIncomeCalculationOutput {
 
 	/**
-     * Income amount
-     */
-	private BigDecimal i;
+	 * Income amount.
+	 */
+	private BigDecimal derSecYield1DayIncomeAmt;
 
 	/**
 	 * Empty constructor.
@@ -27,22 +27,22 @@ public class YtmIncomeCalculationOutput {
 	}
 
 	/**
-	 * Getter method for property <tt>i</tt>.
+	 * Getter method for property <tt>derSecYield1DayIncomeAmt</tt>.
 	 * 
-	 * @return property value of i
+	 * @return property value of derSecYield1DayIncomeAmt
 	 */
-	public BigDecimal getI() {
-		return i;
+	public BigDecimal getDerSecYield1DayIncomeAmt() {
+		return derSecYield1DayIncomeAmt;
 	}
 
 	/**
-	 * Setter method for property <tt>i</tt>.
+	 * Setter method for property <tt>derSecYield1DayIncomeAmt</tt>.
 	 * 
-	 * @param i
-	 *            value to be assigned to property i
+	 * @param derSecYield1DayIncomeAmt
+	 *            value to be assigned to property derSecYield1DayIncomeAmt
 	 */
-	public void setI(BigDecimal i) {
-		this.i = i;
+	public void setDerSecYield1DayIncomeAmt(BigDecimal derSecYield1DayIncomeAmt) {
+		this.derSecYield1DayIncomeAmt = derSecYield1DayIncomeAmt;
 	}
-}
 
+}

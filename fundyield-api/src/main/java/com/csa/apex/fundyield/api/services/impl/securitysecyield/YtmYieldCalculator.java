@@ -110,7 +110,7 @@ public class YtmYieldCalculator {
 		int dsc = dto.dsc;
 		int e = input.getNumOfDaysInPeriod();
 		// (Annual Interest Rate) equal to Coupon (interest) Rate
-		Double r = input.getCir().doubleValue();
+		Double r = input.getCurrentIncomeRate().doubleValue();
 		int a = dto.daysBetPriorCouponDateSettlementDate;
 		Double p = dto.cleanPrice.doubleValue();
 		Double yByM = yield.divide(new BigDecimal(m)).doubleValue();
@@ -213,7 +213,7 @@ public class YtmYieldCalculator {
 		CommonUtility.checkNull(input, "Parameter YtmYieldCalculationInput");
 
 		// set P (clean price) as Market Price/Inflationary Index Ratio
-		BigDecimal p = input.getMp().divide(input.getIir(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		BigDecimal p = input.getMarketPrice().divide(input.getFdrTipsInsflationaryRatio(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
 
 		// calculate N (Number of coupons payable between settlement date and
 		// redemption date, rounded up)
@@ -242,9 +242,9 @@ public class YtmYieldCalculator {
 
 		// set the output values
 		YtmYieldCalculationOutput output = new YtmYieldCalculationOutput();
-		output.setP(p);
-		output.setY(yield);
-		output.setRv(input.getMaturityPrice());
+		output.setFdrCleanPrice(p);
+		output.setDerOneDaySecurityYield(yield);
+		output.setDerRedemptionPrice(input.getMaturityPrice());
 		return output;
 	}
 

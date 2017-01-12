@@ -16,96 +16,110 @@ import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
  */
 public class CouponIncomeCalculationInput extends BaseCalculationInput {
 
-    /**
-     * Yield amount.
-     */
-    private BigDecimal y;
+	/**
+	 * Yield amount.
+	 */
+	private BigDecimal derOneDaySecurityYield;
 
-    /**
-     * Daily Earned Amort
-     */
-    private BigDecimal am;
+	/**
+	 * Daily Earned Amort amount.
+	 */
+	private BigDecimal earnedAmortBaseAmount;
 
-    /**
-     * Shares amount.
-     */
-    private BigDecimal sh;
+	/**
+	 * Shares amount.
+	 */
+	private BigDecimal settledShareCount;
 
-    /**
-     * Current FX Rate
-     */
-    private BigDecimal fx;
+	/**
+	 * Current FX Rate.
+	 */
+	private BigDecimal fxRate;
 
 	/**
 	 * Constructor.
-	 * @param configuration The SEC configuration
+	 * 
+	 * @param configuration
+	 *            The SEC configuration
 	 */
 	public CouponIncomeCalculationInput(SECConfiguration configuration) {
 		super(configuration);
 	}
 
 	/**
-	 * Getter method for property <tt>y</tt>.
-	 * @return property value of y
+	 * Getter method for property <tt>derOneDaySecurityYield</tt>.
+	 * 
+	 * @return property value of derOneDaySecurityYield
 	 */
-	public BigDecimal getY() {
-		return y;
+	public BigDecimal getDerOneDaySecurityYield() {
+		return derOneDaySecurityYield;
 	}
 
 	/**
-	 * Setter method for property <tt>y</tt>.
-	 * @param y value to be assigned to property y
+	 * Setter method for property <tt>derOneDaySecurityYield</tt>.
+	 * 
+	 * @param derOneDaySecurityYield
+	 *            value to be assigned to property derOneDaySecurityYield
 	 */
-	public void setY(BigDecimal y) {
-		this.y = y;
+	public void setDerOneDaySecurityYield(BigDecimal derOneDaySecurityYield) {
+		this.derOneDaySecurityYield = derOneDaySecurityYield;
 	}
 
 	/**
-	 * Getter method for property <tt>am</tt>.
-	 * @return property value of am
+	 * Getter method for property <tt>earnedAmortBaseAmount</tt>.
+	 * 
+	 * @return property value of earnedAmortBaseAmount
 	 */
-	public BigDecimal getAm() {
-		return am;
+	public BigDecimal getEarnedAmortBaseAmount() {
+		return earnedAmortBaseAmount;
 	}
 
 	/**
-	 * Setter method for property <tt>am</tt>.
-	 * @param am value to be assigned to property am
+	 * Setter method for property <tt>earnedAmortBaseAmount</tt>.
+	 * 
+	 * @param earnedAmortBaseAmount
+	 *            value to be assigned to property earnedAmortBaseAmount
 	 */
-	public void setAm(BigDecimal am) {
-		this.am = am;
+	public void setEarnedAmortBaseAmount(BigDecimal earnedAmortBaseAmount) {
+		this.earnedAmortBaseAmount = earnedAmortBaseAmount;
 	}
 
 	/**
-	 * Getter method for property <tt>sh</tt>.
-	 * @return property value of sh
+	 * Getter method for property <tt>settledShareCount</tt>.
+	 * 
+	 * @return property value of settledShareCount
 	 */
-	public BigDecimal getSh() {
-		return sh;
+	public BigDecimal getSettledShareCount() {
+		return settledShareCount;
 	}
 
 	/**
-	 * Setter method for property <tt>sh</tt>.
-	 * @param sh value to be assigned to property sh
+	 * Setter method for property <tt>settledShareCount</tt>.
+	 * 
+	 * @param settledShareCount
+	 *            value to be assigned to property settledShareCount
 	 */
-	public void setSh(BigDecimal sh) {
-		this.sh = sh;
+	public void setSettledShareCount(BigDecimal settledShareCount) {
+		this.settledShareCount = settledShareCount;
 	}
 
 	/**
-	 * Getter method for property <tt>fx</tt>.
-	 * @return property value of fx
+	 * Getter method for property <tt>fxRate</tt>.
+	 * 
+	 * @return property value of fxRate
 	 */
-	public BigDecimal getFx() {
-		return fx;
+	public BigDecimal getFxRate() {
+		return fxRate;
 	}
 
 	/**
-	 * Setter method for property <tt>fx</tt>.
-	 * @param fx value to be assigned to property fx
+	 * Setter method for property <tt>fxRate</tt>.
+	 * 
+	 * @param fxRate
+	 *            value to be assigned to property fxRate
 	 */
-	public void setFx(BigDecimal fx) {
-		this.fx = fx;
+	public void setFxRate(BigDecimal fxRate) {
+		this.fxRate = fxRate;
 	}
+
 }
-

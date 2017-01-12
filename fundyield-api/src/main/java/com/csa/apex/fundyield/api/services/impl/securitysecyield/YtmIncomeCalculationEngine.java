@@ -90,19 +90,19 @@ public class YtmIncomeCalculationEngine extends BaseCalculationEngine {
 		YtmIncomeCalculationInput input = new YtmIncomeCalculationInput(configuration);
 
 		input.setyFxThreshold(yFxThreshold);
-		input.setY(tes.getDerOneDaySecurityYield());
+		input.setDerOneDaySecurityYield(tes.getDerOneDaySecurityYield());
 
 		for (PortfolioHoldingSnapshot holding : CommonUtility.getRelatedPortfolioHoldings(data,
 				tes.getTradableEntitySid())) {
-			input.setFx(holding.getFxRt());
-			input.setMv(holding.getMarketValueBaseAmt());
-			input.setAi(holding.getAccruedIncomeAmt());
-			input.setInflInc(holding.getEarnedInflCmpsBaseAmt());
+			input.setFxRate(holding.getFxRt());
+			input.setMarketValueBaseAmount(holding.getMarketValueBaseAmt());
+			input.setAccruedIncomeAmount(holding.getAccruedIncomeAmt());
+			input.setEarnedInflCmpsBaseAmount(holding.getEarnedInflCmpsBaseAmt());
 
 			// calculate
 			YtmIncomeCalculationOutput output = calculator.calculate(input);
 
-			holding.setDerSecYield1DayIncomeAmt(output.getI());
+			holding.setDerSecYield1DayIncomeAmt(output.getDerSecYield1DayIncomeAmt());
 		}
 	}
 }

@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,12 @@ import com.csa.apex.fundyield.utility.CommonUtility;
  */
 @Service
 public class CouponYieldCalculationEngine extends BaseCalculationEngine {
+
+	/**
+	 * The calculator.
+	 */
+	@Autowired
+	private CouponYieldCalculator calculator;
 
 	/**
 	 * Engine code.
@@ -79,8 +86,9 @@ public class CouponYieldCalculationEngine extends BaseCalculationEngine {
 					.divide(tes.getFdrTipsInflationaryRatio(), configuration.getOperationScale(), BigDecimal.ROUND_HALF_UP);
 			tes.setFdrCleanPrice(cleanPrice);
 		}
-
-		BigDecimal yield = tes.getCurrentIncomeRate().setScale(configuration.getOperationScale(), configuration.getRoundingMode());
-	    tes.setDerOneDaySecurityYield(yield);
+		CouponYieldCalculationInput input = new CouponYieldCalculationInput(configuration);
+		input.setCurrentIncomeRate(tes.getCurrentIncomeRate());
+		CouponYieldCalculationOutput output = calculator.calculate(input);
+	    tes.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
 	}
 }

@@ -152,9 +152,9 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 		input.setNumOfDaysInPeriod(numOfDaysInPeriod);
 		input.setMinYield(minYield);
 		input.setMaxYield(maxYield);
-		input.setMp(tes.getMarketPrice());
-		input.setCir(tes.getCurrentIncomeRate());
-		input.setIir(tes.getFdrTipsInflationaryRatio());
+		input.setMarketPrice(tes.getMarketPrice());
+		input.setCurrentIncomeRate(tes.getCurrentIncomeRate());
+		input.setFdrTipsInsflationaryRatio(tes.getFdrTipsInflationaryRatio());
 		input.setMaturityPrice(instrument.getMaturityPrc());
 		input.setMaturityDate(instrument.getFinalMaturityDate());
 		input.setReportDate(data.getReportDate());
@@ -162,8 +162,8 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 		// calculate
 		YtmYieldCalculationOutput output = calculator.calculate(input);
 
-		tes.setDerOneDaySecurityYield(output.getY());
-		tes.setFdrCleanPrice(output.getP());
-		tes.setDerRedemptionPrice(output.getRv());
+		tes.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
+		tes.setFdrCleanPrice(output.getFdrCleanPrice());
+		tes.setDerRedemptionPrice(output.getDerRedemptionPrice());
 	}
 }

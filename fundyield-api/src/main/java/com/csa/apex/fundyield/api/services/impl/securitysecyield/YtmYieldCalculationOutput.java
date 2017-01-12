@@ -17,17 +17,17 @@ public class YtmYieldCalculationOutput {
 	/**
 	 * Clean price.
 	 */
-	private BigDecimal p;
+	private BigDecimal fdrCleanPrice;
 
 	/**
-	 * The yield amount
+	 * The yield amount.
 	 */
-	private BigDecimal y;
+	private BigDecimal derOneDaySecurityYield;
 
 	/**
 	 * Redemption value.
 	 */
-	private BigDecimal rv;
+	private BigDecimal derRedemptionPrice;
 
 	/**
 	 * Empty constructor.
@@ -37,59 +37,60 @@ public class YtmYieldCalculationOutput {
 	}
 
 	/**
-	 * Getter method for property <tt>p</tt>.
+	 * Getter method for property <tt>fdrCleanPrice</tt>.
 	 * 
-	 * @return property value of p
+	 * @return property value of fdrCleanPrice
 	 */
-	public BigDecimal getP() {
-		return p;
+	public BigDecimal getFdrCleanPrice() {
+		return fdrCleanPrice;
 	}
 
 	/**
-	 * Setter method for property <tt>p</tt>.
+	 * Setter method for property <tt>fdrCleanPrice</tt>.
 	 * 
-	 * @param p
-	 *            value to be assigned to property p
+	 * @param fdrCleanPrice
+	 *            value to be assigned to property fdrCleanPrice
 	 */
-	public void setP(BigDecimal p) {
-		this.p = p;
+	public void setFdrCleanPrice(BigDecimal fdrCleanPrice) {
+		this.fdrCleanPrice = fdrCleanPrice;
 	}
 
 	/**
-	 * Getter method for property <tt>y</tt>.
+	 * Getter method for property <tt>derOneDaySecurityYield</tt>.
 	 * 
-	 * @return property value of y
+	 * @return property value of derOneDaySecurityYield
 	 */
-	public BigDecimal getY() {
-		return y;
+	public BigDecimal getDerOneDaySecurityYield() {
+		return derOneDaySecurityYield;
 	}
 
 	/**
-	 * Setter method for property <tt>y</tt>.
+	 * Setter method for property <tt>derOneDaySecurityYield</tt>.
 	 * 
-	 * @param y
-	 *            value to be assigned to property y
+	 * @param derOneDaySecurityYield
+	 *            value to be assigned to property derOneDaySecurityYield
 	 */
-	public void setY(BigDecimal y) {
-		this.y = y;
+	public void setDerOneDaySecurityYield(BigDecimal derOneDaySecurityYield) {
+		this.derOneDaySecurityYield = derOneDaySecurityYield;
 	}
 
 	/**
-	 * Getter method for property <tt>rv</tt>.
+	 * Getter method for property <tt>derRedemptionPrice</tt>.
 	 * 
-	 * @return property value of rv
+	 * @return property value of derRedemptionPrice
 	 */
-	public BigDecimal getRv() {
-		return rv;
+	public BigDecimal getDerRedemptionPrice() {
+		return derRedemptionPrice;
 	}
 
 	/**
-	 * Setter method for property <tt>rv</tt>.
+	 * Setter method for property <tt>derRedemptionPrice</tt>.
 	 * 
-	 * @param rv
-	 *            value to be assigned to property rv
+	 * @param derRedemptionPrice
+	 *            value to be assigned to property derRedemptionPrice
 	 */
-	public void setRv(BigDecimal rv) {
-		this.rv = rv;
+	public void setDerRedemptionPrice(BigDecimal derRedemptionPrice) {
+		this.derRedemptionPrice = derRedemptionPrice;
 	}
+
 }

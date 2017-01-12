@@ -89,24 +89,24 @@ public class CouponIncomeCalculationEngine extends BaseCalculationEngine {
 
 		CouponIncomeCalculationInput input = new CouponIncomeCalculationInput(configuration);
 
-		input.setY(tes.getDerOneDaySecurityYield());
+		input.setDerOneDaySecurityYield(tes.getDerOneDaySecurityYield());
 
 		for (PortfolioHoldingSnapshot holding : CommonUtility
 				.getRelatedPortfolioHoldings(data, tes.getTradableEntitySid())) {
-			input.setFx(holding.getFxRt());
-			input.setAm(holding.getEarnedAmortBaseAmt());
-			input.setSh(holding.getSettleShareCnt());
+			input.setFxRate(holding.getFxRt());
+			input.setEarnedAmortBaseAmount(holding.getEarnedAmortBaseAmt());
+			input.setSettledShareCount(holding.getSettleShareCnt());
 
-			if (input.getAm() == null || input.getSh() == null) {
-				LOGGER.info(String.format("In CouponIncomeCalculationEngine.calculate method, am:%s,sh:%s",
-						input.getAm(), input.getSh()));
+			if (input.getEarnedAmortBaseAmount() == null || input.getSettledShareCount() == null) {
+				LOGGER.info(String.format("CouponIncomeCalculationEngine.calculate will be escapsed, earnedAmortBaseAmount:%s, settleShareCnt:%s",
+						input.getEarnedAmortBaseAmount(), input.getSettledShareCount()));
 				continue;
 			}
 
 			// calculate
 			CouponIncomeCalculationOutput output = calculator.calculate(input);
 
-			holding.setDerSecYield1DayIncomeAmt(output.getI());
+			holding.setDerSecYield1DayIncomeAmt(output.getDerSecYield1DayIncomeAmt());
 		}
 	}
 }

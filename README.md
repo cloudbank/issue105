@@ -1,6 +1,7 @@
 # Technologies Used
 
 Backend:
+
 - Java 1.8.91
 - Maven 3.3.9
 - Tomcat 8.0.36
@@ -9,7 +10,9 @@ Backend:
 - SonarCube 5.6
 - SonarScanner 2.6.1
 - EclipseNeon or SpringToolSuite 3.8 (Optional for development)
+
 Following Dependencies are in package.json, hence no need to install separately:
+
 - Spring 4.3.5
 - JUnit 4.12
 - Log4j 1.2
@@ -114,7 +117,7 @@ docs/fundyield-api.postman_collection.json
 #### Build App
 - In `seccommons` folder, run the following command
 
-  ```mvn clean install ```
+  * ```mvn clean install ```
 
 - In `faya-api` folder, run the following commands
 

@@ -16,126 +16,144 @@ import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
  */
 public class YtmIncomeCalculationInput extends BaseCalculationInput {
 
-    /**
-     * Yield amount.
-     */
-    private BigDecimal y;
+	/**
+	 * Yield amount.
+	 */
+	private BigDecimal derOneDaySecurityYield;
 
-    /**
-     * Accrued Income
-     */
-    private BigDecimal ai;
+	/**
+	 * Accrued Income
+	 */
+	private BigDecimal accruedIncomeAmount;
 
-    /**
-     * Earned Inflation Income
-     */
-    private BigDecimal inflInc;
+	/**
+	 * Earned Inflation Income
+	 */
+	private BigDecimal earnedInflCmpsBaseAmount;
 
-    /**
-     * Current FX Rate
-     */
-    private BigDecimal fx;
+	/**
+	 * Current FX Rate
+	 */
+	private BigDecimal fxRate;
 
-    /**
-     * Market value.
-     */
-    private BigDecimal mv;
+	/**
+	 * Market value.
+	 */
+	private BigDecimal marketValueBaseAmount;
 
-    /**
-     * The Y/FX threshold for the income calculation.
-     */
-    private double yFxThreshold;
+	/**
+	 * The Y/FX threshold for the income calculation.
+	 */
+	private double yFxThreshold;
 
 	/**
 	 * Constructor.
-	 * @param configuration The SEC configuration
+	 * 
+	 * @param configuration
+	 *            The SEC configuration
 	 */
 	public YtmIncomeCalculationInput(SECConfiguration configuration) {
 		super(configuration);
 	}
 
 	/**
-	 * Getter method for property <tt>y</tt>.
-	 * @return property value of y
+	 * Getter method for property <tt>derOneDaySecurityYield</tt>.
+	 * 
+	 * @return property value of derOneDaySecurityYield
 	 */
-	public BigDecimal getY() {
-		return y;
+	public BigDecimal getDerOneDaySecurityYield() {
+		return derOneDaySecurityYield;
 	}
 
 	/**
-	 * Setter method for property <tt>y</tt>.
-	 * @param y value to be assigned to property y
+	 * Setter method for property <tt>derOneDaySecurityYield</tt>.
+	 * 
+	 * @param derOneDaySecurityYield
+	 *            value to be assigned to property derOneDaySecurityYield
 	 */
-	public void setY(BigDecimal y) {
-		this.y = y;
+	public void setDerOneDaySecurityYield(BigDecimal derOneDaySecurityYield) {
+		this.derOneDaySecurityYield = derOneDaySecurityYield;
 	}
 
 	/**
-	 * Getter method for property <tt>ai</tt>.
-	 * @return property value of ai
+	 * Getter method for property <tt>accruedIncomeAmount</tt>.
+	 * 
+	 * @return property value of accruedIncomeAmount
 	 */
-	public BigDecimal getAi() {
-		return ai;
+	public BigDecimal getAccruedIncomeAmount() {
+		return accruedIncomeAmount;
 	}
 
 	/**
-	 * Setter method for property <tt>ai</tt>.
-	 * @param ai value to be assigned to property ai
+	 * Setter method for property <tt>accruedIncomeAmount</tt>.
+	 * 
+	 * @param accruedIncomeAmount
+	 *            value to be assigned to property accruedIncomeAmount
 	 */
-	public void setAi(BigDecimal ai) {
-		this.ai = ai;
+	public void setAccruedIncomeAmount(BigDecimal accruedIncomeAmount) {
+		this.accruedIncomeAmount = accruedIncomeAmount;
 	}
 
 	/**
-	 * Getter method for property <tt>inflInc</tt>.
-	 * @return property value of inflInc
+	 * Getter method for property <tt>earnedInflCmpsBaseAmount</tt>.
+	 * 
+	 * @return property value of earnedInflCmpsBaseAmount
 	 */
-	public BigDecimal getInflInc() {
-		return inflInc;
+	public BigDecimal getEarnedInflCmpsBaseAmount() {
+		return earnedInflCmpsBaseAmount;
 	}
 
 	/**
-	 * Setter method for property <tt>inflInc</tt>.
-	 * @param inflInc value to be assigned to property inflInc
+	 * Setter method for property <tt>earnedInflCmpsBaseAmount</tt>.
+	 * 
+	 * @param earnedInflCmpsBaseAmount
+	 *            value to be assigned to property earnedInflCmpsBaseAmount
 	 */
-	public void setInflInc(BigDecimal inflInc) {
-		this.inflInc = inflInc;
+	public void setEarnedInflCmpsBaseAmount(BigDecimal earnedInflCmpsBaseAmount) {
+		this.earnedInflCmpsBaseAmount = earnedInflCmpsBaseAmount;
 	}
 
 	/**
-	 * Getter method for property <tt>fx</tt>.
-	 * @return property value of fx
+	 * Getter method for property <tt>fxRate</tt>.
+	 * 
+	 * @return property value of fxRate
 	 */
-	public BigDecimal getFx() {
-		return fx;
+	public BigDecimal getFxRate() {
+		return fxRate;
 	}
 
 	/**
-	 * Setter method for property <tt>fx</tt>.
-	 * @param fx value to be assigned to property fx
+	 * Setter method for property <tt>fxRate</tt>.
+	 * 
+	 * @param fxRate
+	 *            value to be assigned to property fxRate
 	 */
-	public void setFx(BigDecimal fx) {
-		this.fx = fx;
+	public void setFxRate(BigDecimal fxRate) {
+		this.fxRate = fxRate;
 	}
 
 	/**
-	 * Getter method for property <tt>mv</tt>.
-	 * @return property value of mv
+	 * Getter method for property <tt>marketValueBaseAmount</tt>.
+	 * 
+	 * @return property value of marketValueBaseAmount
 	 */
-	public BigDecimal getMv() {
-		return mv;
+	public BigDecimal getMarketValueBaseAmount() {
+		return marketValueBaseAmount;
 	}
 
 	/**
-	 * Setter method for property <tt>mv</tt>.
-	 * @param mv value to be assigned to property mv
+	 * Setter method for property <tt>marketValueBaseAmount</tt>.
+	 * 
+	 * @param marketValueBaseAmount
+	 *            value to be assigned to property marketValueBaseAmount
 	 */
-	public void setMv(BigDecimal mv) {
-		this.mv = mv;
+	public void setMarketValueBaseAmount(BigDecimal marketValueBaseAmount) {
+		this.marketValueBaseAmount = marketValueBaseAmount;
 	}
 
 	/**
 	 * Getter method for property <tt>yFxThreshold</tt>.
+	 * 
 	 * @return property value of yFxThreshold
 	 */
 	public double getyFxThreshold() {
@@ -144,10 +162,11 @@ public class YtmIncomeCalculationInput extends BaseCalculationInput {
 
 	/**
 	 * Setter method for property <tt>yFxThreshold</tt>.
-	 * @param yFxThreshold value to be assigned to property yFxThreshold
+	 * 
+	 * @param yFxThreshold
+	 *            value to be assigned to property yFxThreshold
 	 */
 	public void setyFxThreshold(double yFxThreshold) {
 		this.yFxThreshold = yFxThreshold;
 	}
 }
-

@@ -50,7 +50,7 @@ public class YtmYieldCalculationInput extends BaseCalculationInput {
 	/**
 	 * Market price.
 	 */
-	private BigDecimal mp;
+	private BigDecimal marketPrice;
 
 	/**
 	 * Maturity date.
@@ -65,12 +65,12 @@ public class YtmYieldCalculationInput extends BaseCalculationInput {
 	/**
 	 * Inflationary Index Ratio.
 	 */
-	private BigDecimal iir;
+	private BigDecimal fdrTipsInsflationaryRatio;
 
 	/**
-	 * Coupon (interest) Rate
+	 * Current income rate.
 	 */
-	private BigDecimal cir;
+	private BigDecimal currentIncomeRate;
 
 	/**
 	 * Maturity price.
@@ -79,7 +79,9 @@ public class YtmYieldCalculationInput extends BaseCalculationInput {
 
 	/**
 	 * Constructor.
-	 * @param configuration The SEC configuration
+	 * 
+	 * @param configuration
+	 *            The SEC configuration
 	 */
 	public YtmYieldCalculationInput(SECConfiguration configuration) {
 		super(configuration);
@@ -200,22 +202,22 @@ public class YtmYieldCalculationInput extends BaseCalculationInput {
 	}
 
 	/**
-	 * Getter method for property <tt>mp</tt>.
+	 * Getter method for property <tt>marketPrice</tt>.
 	 * 
-	 * @return property value of mp
+	 * @return property value of marketPrice
 	 */
-	public BigDecimal getMp() {
-		return mp;
+	public BigDecimal getMarketPrice() {
+		return marketPrice;
 	}
 
 	/**
-	 * Setter method for property <tt>mp</tt>.
+	 * Setter method for property <tt>marketPrice</tt>.
 	 * 
-	 * @param mp
-	 *            value to be assigned to property mp
+	 * @param marketPrice
+	 *            value to be assigned to property marketPrice
 	 */
-	public void setMp(BigDecimal mp) {
-		this.mp = mp;
+	public void setMarketPrice(BigDecimal marketPrice) {
+		this.marketPrice = marketPrice;
 	}
 
 	/**
@@ -257,41 +259,41 @@ public class YtmYieldCalculationInput extends BaseCalculationInput {
 	}
 
 	/**
-	 * Getter method for property <tt>iir</tt>.
+	 * Getter method for property <tt>fdrTipsInsflationaryRatio</tt>.
 	 * 
-	 * @return property value of iir
+	 * @return property value of fdrTipsInsflationaryRatio
 	 */
-	public BigDecimal getIir() {
-		return iir;
+	public BigDecimal getFdrTipsInsflationaryRatio() {
+		return fdrTipsInsflationaryRatio;
 	}
 
 	/**
-	 * Setter method for property <tt>iir</tt>.
+	 * Setter method for property <tt>fdrTipsInsflationaryRatio</tt>.
 	 * 
-	 * @param iir
-	 *            value to be assigned to property iir
+	 * @param fdrTipsInsflationaryRatio
+	 *            value to be assigned to property fdrTipsInsflationaryRatio
 	 */
-	public void setIir(BigDecimal iir) {
-		this.iir = iir;
+	public void setFdrTipsInsflationaryRatio(BigDecimal fdrTipsInsflationaryRatio) {
+		this.fdrTipsInsflationaryRatio = fdrTipsInsflationaryRatio;
 	}
 
 	/**
-	 * Getter method for property <tt>cir</tt>.
+	 * Getter method for property <tt>currentIncomeRate</tt>.
 	 * 
-	 * @return property value of cir
+	 * @return property value of currentIncomeRate
 	 */
-	public BigDecimal getCir() {
-		return cir;
+	public BigDecimal getCurrentIncomeRate() {
+		return currentIncomeRate;
 	}
 
 	/**
-	 * Setter method for property <tt>cir</tt>.
+	 * Setter method for property <tt>currentIncomeRate</tt>.
 	 * 
-	 * @param cir
-	 *            value to be assigned to property cir
+	 * @param currentIncomeRate
+	 *            value to be assigned to property currentIncomeRate
 	 */
-	public void setCir(BigDecimal cir) {
-		this.cir = cir;
+	public void setCurrentIncomeRate(BigDecimal currentIncomeRate) {
+		this.currentIncomeRate = currentIncomeRate;
 	}
 
 	/**

@@ -36,15 +36,15 @@ public class CouponIncomeCalculator {
 	public CouponIncomeCalculationOutput calculate(CouponIncomeCalculationInput input) {
 		CommonUtility.checkNull(input, "Parameter CouponIncomeCalculationInput");
 
-		BigDecimal rightSide = input.getSh().multiply(input.getY())
-				.divide(input.getFx(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
+		BigDecimal rightSide = input.getSettledShareCount().multiply(input.getDerOneDaySecurityYield())
+				.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
 				.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
-		BigDecimal income = input.getAm().divide(input.getFx(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
+		BigDecimal income = input.getEarnedAmortBaseAmount().divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
 				.add(rightSide);
 		income = income.setScale(input.getOperationScale(), input.getRoundingMode());
 
 		CouponIncomeCalculationOutput output = new CouponIncomeCalculationOutput();
-		output.setI(income);
+		output.setDerSecYield1DayIncomeAmt(income);
 		return output;
     }
 }

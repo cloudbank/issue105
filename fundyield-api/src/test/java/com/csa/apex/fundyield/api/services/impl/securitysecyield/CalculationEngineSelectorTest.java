@@ -26,7 +26,7 @@ import com.csa.apex.fundyield.utility.TestUtility;
 /**
  * Test class for the CalculationEngineSelector.
  *
- * @see CalculationEngineSelectorTest
+ * @see CalculationEngineSelector
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */

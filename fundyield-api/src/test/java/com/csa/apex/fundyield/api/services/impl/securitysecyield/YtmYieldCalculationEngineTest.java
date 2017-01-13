@@ -29,7 +29,7 @@ import com.csa.apex.fundyield.utility.TestUtility;
 /**
  * Test class for the YtmYieldCalculationEngine .
  *
- * @see YtmYieldCalculationEngineTest
+ * @see YtmYieldCalculationEngine
  * @author [es],TCSDEVELOPER
  * @version 1.0
  */

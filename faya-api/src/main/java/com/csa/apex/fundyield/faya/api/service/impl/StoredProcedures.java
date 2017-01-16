@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.BeanProcessor;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jdbc.support.oracle.BeanPropertyStructMapper;
 import org.springframework.data.jdbc.support.oracle.SqlStructValue;
 import org.springframework.data.jdbc.support.oracle.StructMapper;
@@ -30,9 +31,11 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
+import com.csa.apex.fundyield.exceptions.PersistenceException;
 import com.csa.apex.fundyield.seccommons.entities.CallSchedule;
 import com.csa.apex.fundyield.seccommons.entities.CashDividendSchedule;
 import com.csa.apex.fundyield.seccommons.entities.ColumnName;
+import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.InterestRateSchedule;
 import com.csa.apex.fundyield.seccommons.entities.Portfolio;
@@ -58,6 +61,11 @@ import oracle.jdbc.OracleTypes;
  */
 @Service
 public class StoredProcedures {
+
+    /**
+     * User id. Hard coded as currently there is no user context.
+     */
+    private static final String USER_ID = "CALCULATOR";
 
     /**
      * Struct mapper for Instrument.
@@ -258,6 +266,91 @@ public class StoredProcedures {
     }
 
     /**
+     * Persist portfolio data.
+     * @param portfolio The portfolio data to be persisted
+     * @throws PersistenceException in case any error occurred during persisting
+     */
+    private void persistPortfolio(Portfolio portfolio) throws PersistenceException {
+
+        try {
+            if (portfolio.getPortfolioSnapshots() != null) {
+                portfolio.getPortfolioSnapshots().forEach(snapshot -> {
+                    snapshot.setCreateId(USER_ID);
+                    savePortfolioSnapshot(snapshot, true);
+                });
+            }
+            if (portfolio.getPortfolioHoldings() != null) {
+                portfolio.getPortfolioHoldings().forEach(snapshot -> {
+                    snapshot.setCreateId(USER_ID);
+                    savePortfolioHoldingSnapshot(snapshot, true);
+                });
+            }
+            if (portfolio.getShareClasses() != null) {
+                portfolio.getShareClasses().forEach(sc -> {
+                    if (sc.getShareClassSnapshots() != null) {
+                        sc.getShareClassSnapshots().forEach(snapshot -> {
+                            snapshot.setCreateId(USER_ID);
+                            saveShareClassSnapshot(snapshot, true);
+                        });
+                    }
+                });
+            }
+        } catch (DataAccessException dae) {
+            throw new PersistenceException("Failed to save portfolio: " + portfolio, dae);
+        }
+    }
+
+    /**
+     * Persist portfolio data.
+     * @param fundAccountingYieldData The FAYA data to be persisted
+     * @throws PersistenceException in case any error occurred during persisting
+     */
+    public void saveFAYAPortfolioData(FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
+        if (fundAccountingYieldData.getPortfolios() != null) {
+            for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
+                persistPortfolio(portfolio);
+            }
+        }
+    }
+
+    /**
+     * Persist instrument data.
+     * @param instrument The instrument data to be persisted
+     * @throws PersistenceException in case any error occurred during persisting
+     */
+    private void persistInstrument(Instrument instrument) throws PersistenceException {
+
+        try {
+            if (instrument.getTradableEntities() != null) {
+                instrument.getTradableEntities().forEach(te -> {
+                    if (te.getTradableEntitySnapshots() != null) {
+                        te.getTradableEntitySnapshots().forEach(snapshot -> {
+                            snapshot.setCreateId(USER_ID);
+                            saveTradableEntitySnapshot(snapshot, true);
+                        });
+                    }
+                });
+            }
+        } catch (DataAccessException dae) {
+            throw new PersistenceException("Failed to save instrument: " + instrument, dae);
+        }
+    }
+
+
+    /**
+     * Persist instrument data.
+     * @param fundAccountingYieldData The FAYA data to be persisted
+     * @throws PersistenceException in case any error occurred during persisting
+     */
+    public void saveFAYAInstrumentData(FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
+        if (fundAccountingYieldData.getInstruments() != null) {
+            for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
+                persistInstrument(instrument);
+            }
+        }
+    }
+
+    /**
      * Save Instrument.
      *
      * @param entity The Instrument to save
@@ -298,7 +391,7 @@ public class StoredProcedures {
         Map<String, Object> params = new HashMap<>();
         params.put(ENTITY_PARAM, new SqlStructValue<Portfolio>(entity, PORTFOLIO_MAPPER));
 
-        Map<String, Object> result = savePortfolioCall.execute(params);
+        Map<String, Object> result = this.savePortfolioCall.execute(params);
         entity.setPortfolioSid(((Number) result.get(OSID_PARAM)).longValue());
     }
 
@@ -319,7 +412,7 @@ public class StoredProcedures {
         Map<String, Object> params = new HashMap<>();
         params.put(ENTITY_PARAM, new SqlStructValue<TradableEntity>(entity, TRADABLE_ENTITY_MAPPER));
 
-        Map<String, Object> result = saveTradableEntityCall.execute(params);
+        Map<String, Object> result = this.saveTradableEntityCall.execute(params);
         entity.setTradableEntitySid(((Number) result.get(OSID_PARAM)).longValue());
     }
 

@@ -19,7 +19,9 @@ public interface CalculationEngine {
 	 * Get engine code.
 	 * @return engine code
 	 */
-	public String getEngineCode();
+	public default String getEngineCode() {
+	    return this.getClass().getSimpleName();
+	}
 
 	/**
 	 * Calculate method.

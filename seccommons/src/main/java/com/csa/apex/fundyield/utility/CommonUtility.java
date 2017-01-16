@@ -145,6 +145,31 @@ public class CommonUtility {
     }
 
     /**
+     * Check string property is not null/empty.
+     * @param str The string property
+     * @param des The description
+     * @throws ConfigurationException if string property is null/empty
+     */
+    public static void checkString(String str, String des) {
+        if (StringUtils.isBlank(str)) {
+            throw new IllegalArgumentException(des + " can not be null/empty");
+        }
+    }
+
+    /**
+     * Check number is not negative.
+     * @param num The number
+     * @param des The description
+     * @throws IllegalArgumentException if num is null or negative
+     */
+    public static void checkNumber(Number num, String des) {
+        checkNull(num, des);
+        if (num.longValue() < 0) {
+            throw new IllegalArgumentException(des + " cannot be negative");
+        }
+    }
+
+    /**
      * Check object property is configured properly.
      * @param obj The object property
      * @param des The description

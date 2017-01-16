@@ -4,7 +4,6 @@
 package com.csa.apex.fundyield.api.services.impl;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -22,22 +21,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.fundyield.api.services.SecuritySECYieldService;
 import com.csa.apex.fundyield.api.services.impl.securitysecyield.CalculationEngineSelector;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
-import com.csa.apex.fundyield.exceptions.DataNotFoundException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.Portfolio;
 import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
-import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -50,7 +45,7 @@ import com.csa.apex.fundyield.utility.LogMethod;
  * @since FAYA Java App - Phase 1 Updates Code Challenge
  */
 @Service
-public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
+public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements SecuritySECYieldService {
 
 	/**
 	 * The field names to be exported.
@@ -62,11 +57,6 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			"derStepIndicator", "derHybridIndicator", "ioHybridField", "as400RateType", "prospectiveMethod",
 			"portfolioNumber", "portfolioName", "earnedInflationaryCompensationBase", "accruedIncome", "marketValue",
 			"shareParAmount", "earnedAmortizationBase", "positionValInflationAdjShares", "derOneDaySecurityIncome" };
-
-	/**
-	 * The value to be exported for null values.
-	 */
-	private static final String NULL_CSV_VALUE = "null";
 
 	/**
 	 * The export file type.
@@ -100,19 +90,6 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 	private CalculationEngineSelector calculationEngineSelector;
 
 	/**
-	 * Creating restTemplate object helps in mock testing.
-	 */
-	@Autowired
-	private RestTemplate restTemplate;
-
-	/**
-	 * The REST API path to the endpoint used to obtain calc engine
-	 * configurations. After injection should be non-null and non-empty.
-	 */
-	@Value("${getConfigApiPath}")
-	private String getConfigApiPath;
-
-	/**
 	 * The REST API path to the endpoint used to get security SEC data. After
 	 * injection should be non-null and non-empty.
 	 */
@@ -134,25 +111,10 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 	private String getCalculatedSecuritySECDataApiPath;
 
 	/**
-	 * Configuration object for the service.
-	 */
-	private SECConfiguration configuration;
-
-	/**
 	 * Constructor
 	 */
 	public SecuritySECYieldServiceImpl() {
 		// default constructor
-	}
-
-	/**
-	 * Setter method for property <tt>restTemplate</tt>.
-	 * 
-	 * @param restTemplate
-	 *            value to be assigned to property restTemplate
-	 */
-	public void setRestTemplate(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
 	}
 
 	/**
@@ -163,9 +125,8 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(restTemplate, "restTemplate");
+	    super.checkConfiguration();
 		CommonUtility.checkNullConfig(calculationEngineSelector, "calculationEngineSelector");
-		CommonUtility.checkStringConfig(getConfigApiPath, "getConfigApiPath");
 		CommonUtility.checkStringConfig(getSecuritySECDataApiPath, "getSecuritySECDataApiPath");
 		CommonUtility.checkStringConfig(getCalculatedSecuritySECDataApiPath, "getCalculatedSecuritySECDataApiPath");
 		CommonUtility.checkStringConfig(saveCalculatedSecuritySECDataApiPath, "saveCalculatedSecuritySECDataApiPath");
@@ -191,7 +152,7 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam("businessDate", getFormattedDate(businessDate));
 
-			FundAccountingYieldData data = restTemplate.getForObject(builder.build().encode().toUri(),
+			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
 					FundAccountingYieldData.class);
 
 			// Throw DataNotFoundException if no data is returned
@@ -202,44 +163,6 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			throw e;
 		} catch (Exception e) {
 			throw new FundAccountingYieldException(e.getMessage(), e);
-		}
-	}
-
-	/**
-	 * Get SECConfiguration.
-	 *
-	 * @return SECConfiguration
-	 * @throws FundAccountingYieldException
-	 *             in case any error during processing.
-	 */
-	private SECConfiguration getSECConfiguration() throws FundAccountingYieldException {
-		if (configuration == null) {
-			try {
-				configuration = restTemplate.getForObject(getConfigApiPath, SECConfiguration.class);
-			} catch (Exception e) {
-				throw new FundAccountingYieldException("Failed to get SEC configuration from path: " + getConfigApiPath,
-						e);
-			}
-
-			// Check that configuration is not null
-			checkNullResponse(configuration, getConfigApiPath);
-		}
-		return configuration;
-	}
-
-	/**
-	 * Check data returned is not null.
-	 *
-	 * @param responseData
-	 *            The response data to check
-	 * @param apiPath
-	 *            The API path
-	 * @throws DataNotFoundException
-	 *             if response data is null
-	 */
-	private void checkNullResponse(Object responseData, String apiPath) throws DataNotFoundException {
-		if (responseData == null) {
-			throw new DataNotFoundException(String.format("No data returned when calling FAYA API: {%s}", apiPath));
 		}
 	}
 
@@ -265,7 +188,7 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getSecuritySECDataApiPath)
 					.queryParam("businessDate", getFormattedDate(businessDate));
 
-			FundAccountingYieldData data = restTemplate.getForObject(builder.build().encode().toUri(),
+			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
 					FundAccountingYieldData.class);
 
 			// Throw DataNotFoundException if no data is returned
@@ -278,7 +201,7 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 			calculationEngineSelector.getOrderedCalculatorEngines().calculate(data, getSECConfiguration());
 
 			// save calculated data
-			Boolean saveResponse = restTemplate.exchange(saveCalculatedSecuritySECDataApiPath, HttpMethod.PUT,
+			Boolean saveResponse = getRestTemplate().exchange(saveCalculatedSecuritySECDataApiPath, HttpMethod.PUT,
 					new HttpEntity<FundAccountingYieldData>(data), Boolean.class).getBody();
 
 			// if response false
@@ -424,18 +347,6 @@ public class SecuritySECYieldServiceImpl implements SecuritySECYieldService {
 		values[index] = String.valueOf(portfolioHolding.getDerSecYield1DayIncomeAmt());
 
 		return values;
-	}
-
-	/**
-	 * Retrieve formatted date.
-	 * 
-	 * @param date
-	 *            the date to be formatted
-	 * @return the formatted date
-	 */
-	private String getFormattedDate(Date date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.API_DATE_FORMAT);
-		return date != null ? dateFormat.format(date) : NULL_CSV_VALUE;
 	}
 
 }

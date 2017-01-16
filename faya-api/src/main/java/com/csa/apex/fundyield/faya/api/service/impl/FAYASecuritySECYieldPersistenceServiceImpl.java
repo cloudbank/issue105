@@ -51,11 +51,6 @@ import com.csa.apex.fundyield.utility.LogMethod;
 public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecuritySECYieldPersistenceService {
 
     /**
-     * User id. Hard coded as currently there is no user context.
-     */
-    private static final String USER_ID = "CALCULATOR";
-
-    /**
      * The auto wired StoredProcedures.
      */
     @Autowired
@@ -78,64 +73,6 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
     }
 
     /**
-     * Persist instrument data.
-     * @param instrument The instrument data to be persisted
-     * @throws PersistenceException in case any error occurred during persisting
-     */
-    private void persistInstrument(Instrument instrument) throws PersistenceException {
-
-        try {
-            if (instrument.getTradableEntities() != null) {
-                instrument.getTradableEntities().forEach(te -> {
-                    if (te.getTradableEntitySnapshots() != null) {
-                        te.getTradableEntitySnapshots().forEach(snapshot -> {
-                            snapshot.setCreateId(USER_ID);
-                            storedProcedures.saveTradableEntitySnapshot(snapshot, true);
-                        });
-                    }
-                });
-            }
-        } catch (DataAccessException dae) {
-            throw new PersistenceException("Failed to save instrument: " + instrument, dae);
-        }
-    }
-
-    /**
-     * Persist portfolio data.
-     * @param portfolio The portfolio data to be persisted
-     * @throws PersistenceException in case any error occurred during persisting
-     */
-    private void persistPortfolio(Portfolio portfolio) throws PersistenceException {
-
-        try {
-            if (portfolio.getPortfolioSnapshots() != null) {
-                portfolio.getPortfolioSnapshots().forEach(snapshot -> {
-                    snapshot.setCreateId(USER_ID);
-                    storedProcedures.savePortfolioSnapshot(snapshot, true);
-                });
-            }
-            if (portfolio.getPortfolioHoldings() != null) {
-                portfolio.getPortfolioHoldings().forEach(snapshot -> {
-                    snapshot.setCreateId(USER_ID);
-                    storedProcedures.savePortfolioHoldingSnapshot(snapshot, true);
-                });
-            }
-            if (portfolio.getShareClasses() != null) {
-                portfolio.getShareClasses().forEach(sc -> {
-                    if (sc.getShareClassSnapshots() != null) {
-                        sc.getShareClassSnapshots().forEach(snapshot -> {
-                            snapshot.setCreateId(USER_ID);
-                            storedProcedures.saveShareClassSnapshot(snapshot, true);
-                        });
-                    }
-                });
-            }
-        } catch (DataAccessException dae) {
-            throw new PersistenceException("Failed to save portfolio: " + portfolio, dae);
-        }
-    }
-
-    /**
      * Persists the calculated SEC security data.
      * @param fundAccountingYieldData The FundAccountingYieldData to be persisted
      * @return flag indicating whether The data was persisted or not
@@ -149,17 +86,8 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
             throws FundAccountingYieldException {
         CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
 
-        if (fundAccountingYieldData.getInstruments() != null) {
-            for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
-                persistInstrument(instrument);
-            }
-        }
-
-        if (fundAccountingYieldData.getPortfolios() != null) {
-            for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-                persistPortfolio(portfolio);
-            }
-        }
+        storedProcedures.saveFAYAInstrumentData(fundAccountingYieldData);
+        storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
 
         return true;
     }

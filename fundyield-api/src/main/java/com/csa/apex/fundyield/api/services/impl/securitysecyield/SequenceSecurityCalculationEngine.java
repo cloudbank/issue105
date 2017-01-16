@@ -57,15 +57,6 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	}
 
 	/**
-	 * Get engine code.
-	 * @return engine code
-	 */
-	@Override
-	public String getEngineCode() {
-		return "SequenceSecurityCalculationEngine";
-	}
-
-	/**
 	 * Calculates the security data by sequential execution of the calculation
 	 * engines.
 	 *

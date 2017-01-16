@@ -20,7 +20,36 @@
         </property>
     </bean>
 
-    <bean id="calculationEngines" class="java.util.HashMap">
+    <bean id="distributionCalculationEngines" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel1DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel12MonthDistributionYieldCalculationEngine"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="moneyMarketCalculationEngines" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayMilRateCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel30DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel30DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel7DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel7DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelEffectiveCompound7DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelEffectiveCompound7DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated30DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated7DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.FundLevel1DayGrossYieldCalculationEngine"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="secCalculationEngines" class="java.util.HashMap">
         <constructor-arg>
             <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineType" value-type="java.util.HashMap">
                 <entry>

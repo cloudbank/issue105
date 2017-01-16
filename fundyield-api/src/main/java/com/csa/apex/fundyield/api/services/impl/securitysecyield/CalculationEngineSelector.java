@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
@@ -45,8 +44,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	/**
 	 * The map from engine types to the calculation engines.
 	 */
-	@Resource
-	@Qualifier("calculationEngines")
+	@Resource(name="secCalculationEngines")
 	private Map<CalculationEngineType, Map<CalculationEngineSubType, CalculationEngine>> calculationEngines;
 
 	/**
@@ -59,16 +57,6 @@ public class CalculationEngineSelector implements CalculationEngine {
 	 */
 	public CalculationEngineSelector() {
 		// default constructor
-	}
-
-	/**
-	 * Get engine code.
-	 * 
-	 * @return engine code
-	 */
-	@Override
-	public String getEngineCode() {
-		return "CalculationEngineSelector";
 	}
 
 	/**

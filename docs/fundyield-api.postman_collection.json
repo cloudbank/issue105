@@ -39,6 +39,50 @@
 				"description": "Exports calculated SEC Security data for the given date."
 			},
 			"response": []
+		},
+		{
+			"name": "getDistributionFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/distributionFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCalculatedDistributionFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/calculatedDistributionFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getMoneyMarketFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/moneyMarketFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCalculatedMoneyMarketFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/calculatedMoneyMarketFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

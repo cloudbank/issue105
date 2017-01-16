@@ -57,7 +57,8 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
+    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid,
+            @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
         CommonUtility.checkNumber(shareClassSid, "shareClassSid");
         CommonUtility.checkNull(reportDate, "reportDate");

@@ -22,7 +22,7 @@
     </bean>
 
     <!-- StoredProcedures -->
-    <bean id="storedProcedures" class="com.csa.apex.fundyield.faya.api.controllers.service.impl.StoredProcedures">
+    <bean id="storedProcedures" class="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedures">
     </bean>
 
     <!-- Initialization for TransactionManager -->

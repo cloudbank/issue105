@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Collection;
 
-import com.csa.apex.fundyield.faya.api.controllers.service.FAYASecuritySECYieldPersistenceService;
+import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;

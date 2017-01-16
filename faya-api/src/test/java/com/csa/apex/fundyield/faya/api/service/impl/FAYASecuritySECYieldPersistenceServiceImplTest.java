@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.faya.api.controllers.service.impl;
+package com.csa.apex.fundyield.faya.api.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +19,7 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
-import com.csa.apex.fundyield.faya.api.controllers.service.FAYASecuritySECYieldPersistenceService;
+import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 
 /**

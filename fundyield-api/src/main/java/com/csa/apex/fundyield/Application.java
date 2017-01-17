@@ -56,6 +56,10 @@ public class Application extends SpringBootServletInitializer {
 				registry.addMapping("/fundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/calculatedFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/exportCalculatedFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/distributionFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedDistributionFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/moneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
 			}
 		};
 	}

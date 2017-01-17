@@ -50,9 +50,26 @@ public class Application extends SpringBootServletInitializer {
 			public void addCorsMappings(CorsRegistry registry) {
 				// add allowed origins here
 				// currently, it allows all origins
+                registry.addMapping("/securitySECDataConfiguration").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/fayaFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/calculatedFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
-				registry.addMapping("/securitySECDataConfiguration").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/customerMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedMoneyMarketFundYieldPortfolio").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedFAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/customerMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedMoneyMarketFundYieldPortfolio").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/calculatedFAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/avgOfMm1DayDistYieldPctForPreviousDays").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/sumOfDer1DayYieldN1AMmPctPreviousDays").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/sumOfDerRestate1DayYieldMmPctPreviousDays").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/avgOfMm7DayYieldPctForPreviousDays").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/sumOfDer7DayYieldN1AMmPctPreviousDays").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/secFundLevelBatchToleranceCheck").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/securityLevelBatchToleranceCheck").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/moneyMarketFundLevelBatchToleranceCheck").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/distributionFundLevelBatchToleranceCheck").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/securityLevelWhatIfToleranceCheck").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/positionLevelWhatIfToleranceCheck").allowedOrigins("*").allowedMethods("*");
 			}
 		};
 	}

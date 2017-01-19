@@ -420,7 +420,7 @@ src\client\app\shared\config\app-config.ts
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
 - You can monitor the build status from gitlab's Pipeline page. By default you will get a notification mail after every build, to your registered mail id in gitlab. 
 - If any test case fails or build fails  , maven will return non zero return code, which will stop our build process from proceeding. 
-- After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/).
+- After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)
 
 
 

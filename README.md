@@ -204,6 +204,13 @@ http://docs.sonarqube.org/display/SONAR/Get+Started+in+Two+Minutes
 - Go to SonarCube Server bin directory where executables are present (select directory inside depending on your operating system).
 E.g. C:\sonarqube-5.6\bin\windows-x86-64
 
+- Follow this guide to configure oracle to be used by the sonarcube https://docs.sonarqube.org/display/SONAR/Installing+the+Server 
+the user to create you can use this command :
+```
+CREATE USER sonarqube IDENTIFIED BY password DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+GRANT CONNECT, CREATE TABLE,  CREATE TYPE, CREATE PROCEDURE, CREATE SEQUENCE, CREATE TRIGGER TO sonarqube;
+ALTER USER sonarqube QUOTA UNLIMITED ON USERS;
+```
 - Now start the SonarCube Server using StartSonar command or directly click the executable file. You can access the SonarCube dashboard at http://localhost:9000
 This is where we will see our report.
 

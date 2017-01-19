@@ -1,0 +1,88 @@
+{
+	"variables": [],
+	"info": {
+		"name": "fundyield-api",
+		"_postman_id": "acc48814-0ae3-e8a9-a5ef-5b4c4f9457e7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getSecuritySECData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/fundAccountingSECYieldData?businessDate=2014-12-01",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Gets SEC Security data with the calculated data for the business date. The securities are also persisted using customer REST API."
+			},
+			"response": []
+		},
+		{
+			"name": "getCalculatedSecuritySECData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/calculatedFundAccountingSECYieldData?businessDate=2014-12-01",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": " Gets already calculated SEC Security data for the given date."
+			},
+			"response": []
+		},
+		{
+			"name": "exportCalculatedSecuritySECData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/exportCalculatedFundAccountingSECYieldData?businessDate=2014-12-01",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Exports calculated SEC Security data for the given date."
+			},
+			"response": []
+		},
+		{
+			"name": "getDistributionFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/distributionFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCalculatedDistributionFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/calculatedDistributionFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getMoneyMarketFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/moneyMarketFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getCalculatedMoneyMarketFundYieldData",
+			"request": {
+				"url": "http://localhost:7090/fundyield-api/calculatedMoneyMarketFundYieldData?businessDate=2016-12-20",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

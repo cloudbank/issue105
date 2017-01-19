@@ -4,15 +4,14 @@ run_tests:
   stage: deploy
   script:
 
-  - mvn install:install-file -Dfile=customerapi/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+  - mvn install:install-file -Dfile=faya-api/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f seccommons/pom.xml clean install
-  - mvn -f customerapi/pom.xml clean install
-  - mvn -f customerapi/pom.xml  exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--excel test_data/Phase1TestData.xlsx"
-  - mvn -f secyieldapi/pom.xml clean install
-  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/customerapi"
-  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/secyield"
-  - curl -T "secyieldapi/target/secyield.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/secyield&update=true"  
-  - curl -T "customerapi/target/customerapi.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/customerapi&update=true"
+  - mvn -f faya-api/pom.xml clean install
+  - mvn -f fundyield-api/pom.xml clean install -Ptomcat
+  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/faya-api"
+  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/fundyield-api"
+  - curl -T "fundyield-api/target/fundyield-api.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/fundyield-api&update=true"  
+  - curl -T "faya-api/target/faya-api.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/faya-api&update=true"
 
   only:
   - develop

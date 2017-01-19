@@ -1,6 +1,7 @@
 # Technologies Used
 
 Backend:
+
 - Java 1.8.91
 - Maven 3.3.9
 - Tomcat 8.0.36
@@ -9,8 +10,10 @@ Backend:
 - SonarCube 5.6
 - SonarScanner 2.6.1
 - EclipseNeon or SpringToolSuite 3.8 (Optional for development)
+
 Following Dependencies are in package.json, hence no need to install separately:
-- Spring 4.3.1
+
+- Spring 4.3.5
 - JUnit 4.12
 - Log4j 1.2
 
@@ -18,10 +21,11 @@ Following Dependencies are in package.json, hence no need to install separately:
 https://www.youtube.com/watch?v=-vxsPC0mS64
 
 # Verification document
-docs/SEC Yield Customer API Code Challenge.pdf
+docs/FAYA JAVA APP - PHASE 1 UPDATES CODE CHALLENGE.pdf
 
 # POSTMAN Script
-docs/sec_yield_api_postman_collection.json
+docs/faya-api.postman_collection.json
+docs/fundyield-api.postman_collection.json
 
 # Oracle Express 11g Installation
 ###### This only covers installation. Configuration will be done separately.
@@ -30,6 +34,7 @@ docs/sec_yield_api_postman_collection.json
 2. After installation, by default the database is already started. In case the database is stopped, follow this guide on how to start it: https://docs.oracle.com/cd/E17781_01/install.112/e18803/toc.htm#XEINW133
 
 ###### For Windows, the Oracle port we will use to connect is 1521.
+
 
 ## Linux (Red Hat Linux 5)
 1. To install Oracle Express 11g for Linux, follow the guide provided in this link: http://docs.oracle.com/cd/E17781_01/install.112/e18802/toc.htm#XEINL122
@@ -99,51 +104,51 @@ docs/sec_yield_api_postman_collection.json
 
 #### DB Setup
 - Configure the db credentials in  
-`customerapi/src/main/resources/db.properties`   `customerapi/src/main/resources/applicationContext-test.xml`.
+`faya-api/src/main/resources/db.properties`   `faya-api/src/test/resources/test-db.properties`.
 
 - Open Oracle Developer and connect to `local_system` and run `sql/create_user.sql`. This will create the two users `secyield` and `test_secyield`.
 
-- Still in Oracle Developer, connect to `local_secyield` and run `sql/schema.sql`. This will create the table structure for user `secyield`
+- Still in Oracle Developer, connect to `local_secyield`, run `sql/schema.sql` and `sql/procedures.sql`. This will create the table structure and stored procedures for user `secyield`
 
-- Still in Oracle Developer, connect to `local_test_secyield` and run `sql/schema.sql`. This will create the table structure for user `test_secyield`
+- Still in Oracle Developer, connect to `local_test_secyield`, run `sql/schema.sql` and `sql/procedures.sql`. This will create the table structure and stored procedures for user `test_secyield`
 
 - In case you want to pre-load some data, in Oracle Developer, connect to `local_secyield` and run `test_data/clear.sql` & `test_data/test_data.sql`.
 
 #### Build App
 - In `seccommons` folder, run the following command
 
-  ```mvn clean install ```
+  * ```mvn clean install ```
 
-- In `customerapi` folder, run the following commands
+- In `faya-api` folder, run the following commands
 
   1. `mvn install:install-file -Dfile=lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar`
   
   2. ```mvn clean install ```   
 
   3. Import data from excel  
-    `mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
+    `mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--excel <path to test>\Phase1TestData.xlsx"`
 
   4. You can clean up calculation table by passing --clean or -c options  
-  ```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
+  ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
 
   5. You can also pass path of mapping properties for excel if excel will change order of columns  
-    ```mvn exec:java -Dexec.mainClass=com.csa.apex.secyield.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of customerapi\src\main\resources\excelMapping.properties"```  
+    ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of faya-api\src\main\resources\excelMapping.properties"```  
 
   6. ```mvn spring-boot:run ```  
 
-- In `secyieldapi` folder, run the following commands  
+- In `fundyield-api` folder, run the following commands  
 
-  ```mvn clean install ```
+  1. ```mvn clean install ```
 
-  ```mvn spring-boot:run ```
+  2. ```mvn spring-boot:run ```
 
-To run unit tests, use the following command in `seccommons`, `customerapi` and `secyieldapi` folders (note that the Customer API has to be running when executing Public API tests):
+To run unit tests, use the following command in `seccommons`, `faya-api` and `fundyield-api` folders:
 
     mvn test
 
 Unit tests are run by default, please use -DskipTests parameter everywhere to skip unit tests, e.g.:
 
-  mvn install -DskipTests
+    mvn install -DskipTests
 
 # Deployment to Tomcat
 
@@ -152,35 +157,35 @@ Unit tests are run by default, please use -DskipTests parameter everywhere to sk
    mvn clean install
    ```
 
-- In `customerapi` folder, run the following command
+- In `faya-api` folder, run the following command
    ```
    mvn clean install
    ```
-   * Copy generated war (found in `target/customerapi.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
+   * Copy generated war (found in `target/faya-api.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
 
-- In `secyieldapi` folder, update the URLs in `resources/application.tomcat.properties` to point to the correct `customerapi` endpoint
-   ```
-   getConfigApiPath=http://localhost:8080/customerapi/securitySECDataConfiguration
-   getCustomerDataApiPath=http://localhost:8080/customerapi/customerSecuritySECData
-   saveCalculatedSecuritySECDataApiPath=http://localhost:8080/customerapi/persistSecuritySECData
-   getCalculatedSecuritySECDataApiPath=http://localhost:8080/customerapi/calculatedSecuritySECData
+- In `fundyield-api` folder, update the URLs in `resources/application.tomcat.properties` to point to the correct `faya-api` endpoint
+   ```properties
+   getConfigApiPath=http://localhost:8080/faya-api/securitySECDataConfiguration
+   getSecuritySECDataApiPath=http://localhost:8080/faya-api/fayaFundAccountingSECYieldData
+   saveCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-api/calculatedFundAccountingSECYieldData
+   getCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-api/calculatedFundAccountingSECYieldData
    ```
 
-- In `secyieldapi` folder, run the following command
+- In `fundyield-api` folder, run the following command
    ```
    mvn clean install -Ptomcat
    ```
-   * Copy generated war (found in `target/secyield.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
+   * Copy generated war (found in `target/fundyield-api.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
 
 - Start Tomcat server
 - Once started, these will be the endpoints:
-  * customerapi --  `/customerapi/<service_name>`  [e.g. `/customerapi/securitySECDataConfiguration`]
-  * secyieldapi --  `/secyield/<service_name>`  [e.g. `/secyield/calculatedSecuritySECData`]
+  * faya-api --  `/faya-api/<service_name>`  [e.g. `/faya-api/fayaFundAccountingSECYieldData`]
+  * fundyield-api --  `/fundyield-api/<service_name>`  [e.g. `/fundyield-api/calculatedFundAccountingSECYieldData`]
 
 
 # SonarCube Code Coverage for backend
 
-- To use SonarCube code coverage, sonar-project.properties is present in the root folders of seccommons, customerapi and secyieldapi modules.
+- To use SonarCube code coverage, sonar-project.properties is present in the root folders of seccommons, faya-api and fundyield-api modules.
 - Go to this link and download latest version of SonarCube Server and SonarCube Scanner:
 http://www.sonarqube.org/downloads/
 http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
@@ -402,18 +407,14 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 ######Updating backend project properties
 - update below files with new webserver ip address /port number and DB server ip  address and port number
 
-````
-secyieldapi\src\main\resources\application.properties
-customerapi\src\main\resources\db.properties
-customerapi\src\main\resources\applicationContext-test.xml
-````
+fundyield-api\src\main\resources\application.properties
+fundyield-api\src\main\resources\application.tomcat.properties
+faya-api\src\main\resources\db.properties
+faya-api\src\test\resources\test-db.properties
 
 ######Updating frontend project properties
 - Update below file with backend api details
-
-``
 src\client\app\shared\config\app-config.ts
-``
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.

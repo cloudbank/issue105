@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.csa.apex.fundyield" />
+
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+                <value>classpath:constants.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="distributionCalculationEngines" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel1DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel12MonthDistributionYieldCalculationEngine"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="moneyMarketCalculationEngines" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayMilRateCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel1DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel30DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel30DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel7DayDistributionYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevel7DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelEffectiveCompound7DayN1AYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelEffectiveCompound7DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated30DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated7DayYieldCalculationEngine"/>
+                <bean class="com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.FundLevel1DayGrossYieldCalculationEngine"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="secCalculationEngines" class="java.util.HashMap">
+        <constructor-arg>
+            <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineType" value-type="java.util.HashMap">
+                <entry>
+                    <key>
+                        <value>YTM</value>
+                    </key>
+                    <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType">
+                        <entry>
+                            <key>
+                                <value>YIELD</value>
+                            </key>
+                            <bean class="com.csa.apex.fundyield.api.services.impl.securitysecyield.YtmYieldCalculationEngine" />
+                        </entry>
+                        <entry>
+                            <key>
+                                <value>INCOME</value>
+                            </key>
+                            <bean class="com.csa.apex.fundyield.api.services.impl.securitysecyield.YtmIncomeCalculationEngine" />
+                        </entry>
+                    </map>
+                </entry>
+                <entry>
+                    <key>
+                        <value>COUPON</value>
+                    </key>
+                    <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType">
+                        <entry>
+                            <key>
+                                <value>YIELD</value>
+                            </key>
+                            <bean class="com.csa.apex.fundyield.api.services.impl.securitysecyield.CouponYieldCalculationEngine" />
+                        </entry>
+                        <entry>
+                            <key>
+                                <value>INCOME</value>
+                            </key>
+                            <bean class="com.csa.apex.fundyield.api.services.impl.securitysecyield.CouponIncomeCalculationEngine" />
+                        </entry>
+                    </map>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+    <bean id="simpleMappingExceptionResolver" class="com.csa.apex.fundyield.exceptions.resolver.AJAXExceptionResolver" />
+</beans>

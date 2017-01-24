@@ -423,7 +423,7 @@ public class StoredProcedures {
      * @param updateCalcResult Flag indicating whether should update the calculation result columns
      */
     public void saveTradableEntitySnapshot(TradableEntitySnapshot entity, boolean updateCalcResult) {
-        entity.setReportDate(DateUtility.convertToSqlDate(entity.getReportDate()));
+        entity.setReportDate(DateUtility.startOfDate(entity.getReportDate()));
         entity.setDerRedemptionDate(DateUtility.convertToSqlDate(entity.getDerRedemptionDate()));
         entity.setLastAdjTs(DateUtility.convertToSqlDate(entity.getLastAdjTs()));
         entity.setLastAdjApprovalTs(DateUtility.convertToSqlDate(entity.getLastAdjApprovalTs()));
@@ -445,7 +445,7 @@ public class StoredProcedures {
      * @param updateCalcResult Flag indicating whether should update the calculation result columns
      */
     public void savePortfolioSnapshot(PortfolioSnapshot entity, boolean updateCalcResult) {
-        entity.setReportDate(DateUtility.convertToSqlDate(entity.getReportDate()));
+        entity.setReportDate(DateUtility.startOfDate(entity.getReportDate()));
         entity.setCreateTs(DateUtility.convertToSqlDate(entity.getCreateTs()));
         entity.setUpdateTs(DateUtility.convertToSqlDate(entity.getUpdateTs()));
 
@@ -464,7 +464,7 @@ public class StoredProcedures {
      * @param updateCalcResult Flag indicating whether should update the calculation result columns
      */
     public void savePortfolioHoldingSnapshot(PortfolioHoldingSnapshot entity, boolean updateCalcResult) {
-        entity.setReportDate(DateUtility.convertToSqlDate(entity.getReportDate()));
+        entity.setReportDate(DateUtility.startOfDate(entity.getReportDate()));
         entity.setLastAdjTs(DateUtility.convertToSqlDate(entity.getLastAdjTs()));
         entity.setLastAdjApprovalTs(DateUtility.convertToSqlDate(entity.getLastAdjApprovalTs()));
         entity.setCreateTs(DateUtility.convertToSqlDate(entity.getCreateTs()));
@@ -485,7 +485,7 @@ public class StoredProcedures {
      * @param updateCalcResult Flag indicating whether should update the calculation result columns
      */
     public void saveShareClassSnapshot(ShareClassSnapshot entity, boolean updateCalcResult) {
-        entity.setReportDate(DateUtility.convertToSqlDate(entity.getReportDate()));
+        entity.setReportDate(DateUtility.startOfDate(entity.getReportDate()));
         entity.setCalendarDate(DateUtility.convertToSqlDate(entity.getCalendarDate()));
         entity.setCreateTs(DateUtility.convertToSqlDate(entity.getCreateTs()));
         entity.setUpdateTs(DateUtility.convertToSqlDate(entity.getUpdateTs()));

@@ -7,7 +7,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -247,5 +249,20 @@ public class DateUtilityTest {
         Date date = new Date();
         java.sql.Date sqlDate = (java.sql.Date) DateUtility.convertToSqlDate(date);
         assertEquals(sqlDate.getTime(), date.getTime());
+    }
+
+    /**
+     * Test get start of date.
+     */
+    @Test
+    public void startOfDateTest() {
+        Date date = new Date();
+        Date startOfDate = DateUtility.startOfDate(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(startOfDate.getTime());
+        assertEquals(0, cal.get(Calendar.HOUR_OF_DAY));
+        assertEquals(0, cal.get(Calendar.MINUTE));
+        assertEquals(0, cal.get(Calendar.SECOND));
+        assertEquals(0, cal.get(Calendar.MILLISECOND));
     }
 }

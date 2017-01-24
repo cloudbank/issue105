@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 
 /**
  * DateUtility Exposes useful function not available in Joda.
@@ -207,15 +206,5 @@ public class DateUtility {
 		}
 
 		return new java.sql.Date(date.getTime());
-	}
-	/**
-	 * Get the start of date.
-	 *
-	 * @param date The date to get its start in that day
-	 * @return start of date
-	 */
-	public static Date startOfDate(Date date) {
-		Date utcDate = new Date(new DateTime(date).withTimeAtStartOfDay().withZoneRetainFields(DateTimeZone.UTC).getMillis());
-		return convertToSqlDate(utcDate);
 	}
 }

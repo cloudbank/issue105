@@ -42,7 +42,6 @@ import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
 import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
-import com.csa.apex.fundyield.utility.DateUtility;
 
 /**
  * Import data from excel into DB.
@@ -268,7 +267,7 @@ public class ImportExcel {
                     Portfolio portfolio = parsePortfolio(row, columnMapping);
                     PortfolioHoldingSnapshot holding = parsePortfolioHoldingSnapshot(row, columnMapping, conf);
 
-                    Date reportDate = DateUtility.startOfDate(getDateCellValue(row, columnMapping.get("reportDate")));
+                    Date reportDate = getDateCellValue(row, columnMapping.get("reportDate"));
 
                     // Build FundAccountingYieldData for each row
                     FundAccountingYieldData data = new FundAccountingYieldData();

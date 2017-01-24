@@ -189,13 +189,4 @@ public class DateUtility {
 
         return new java.sql.Date(date.getTime());
     }
-
-    /**
-     * Get the start of date.
-     * @param date The date to get its start in that day
-     * @return start of date
-     */
-    public static Date startOfDate(Date date) {
-        return new java.sql.Date(new DateTime(date).withTimeAtStartOfDay().getMillis());
-    }
 }

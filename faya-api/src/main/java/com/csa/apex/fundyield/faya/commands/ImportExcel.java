@@ -268,7 +268,7 @@ public class ImportExcel {
                     Portfolio portfolio = parsePortfolio(row, columnMapping);
                     PortfolioHoldingSnapshot holding = parsePortfolioHoldingSnapshot(row, columnMapping, conf);
 
-                    Date reportDate = DateUtility.startOfDate(getDateCellValue(row, columnMapping.get("reportDate")));
+                    Date reportDate = DateUtility.convertToSqlDate(getDateCellValue(row, columnMapping.get("reportDate")));
 
                     // Build FundAccountingYieldData for each row
                     FundAccountingYieldData data = new FundAccountingYieldData();

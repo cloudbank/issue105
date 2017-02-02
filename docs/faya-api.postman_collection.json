@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "faya-api",
-		"_postman_id": "9454782c-0b6b-685c-6d18-2bf023764e05",
+		"_postman_id": "68765f16-837b-c7ee-a8f9-0dad16122511",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -13,7 +13,10 @@
 				"url": "http://localhost:8081/faya-api/securitySECDataConfiguration",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "Gets SEC security config for the calculations in engines."
 			},
 			"response": []
@@ -24,7 +27,10 @@
 				"url": "http://localhost:8081/faya-api/fayaFundAccountingSECYieldData?businessDate=2014-12-01",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "Gets the customer SEC security data."
 			},
 			"response": []
@@ -35,7 +41,10 @@
 				"url": "http://localhost:8081/faya-api/calculatedFundAccountingSECYieldData?businessDate=2014-12-01",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "Gets the calculated SEC security data."
 			},
 			"response": []
@@ -54,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"reportDate\": 1417363200000,\n  \"businessDate\": 1417363200000,\n  \"instruments\": [\n    {\n      \"createId\": \"EXCEL_IMPORTOR\",\n      \"createTs\": \"2017-01-02\",\n      \"updateId\": null,\n      \"updateTs\": null,\n      \"effectiveDate\": \"2017-01-02\",\n      \"expirationDate\": \"1999-12-31\",\n      \"hashKeyTxt\": \"445790770350667ffce3965f2fe8a94864d89e179e9f5ffd38ac86cf9135158b66464a2cd9bd641ad8046f0ba436ce83\",\n      \"instrumentSid\": 169,\n      \"instrumentId\": \"242846AA1\",\n      \"instrumentShortName\": \"DECATUR AL IDB NUCOR VR7@\",\n      \"instrumentTypeCode\": \"VRDN\",\n      \"couponRateTypeCode\": \"V\",\n      \"cusip\": null,\n      \"preRefundedDate\": null,\n      \"dividendPaymentFrequencyNbr\": null,\n      \"fdrEquityInd\": null,\n      \"originalIssuePrc\": null,\n      \"fdrStepBondInd\": \"F\",\n      \"fdrInstrumentClassNm\": null,\n      \"prospectiveYieldMethodCd\": null,\n      \"finalMaturityDate\": \"2036-08-01\",\n      \"hybridCalculationCd\": null,\n      \"originalIssueDate\": null,\n      \"maturityPrc\": 100,\n      \"defaultInd\": \"N\",\n      \"derFofSecurityCd\": null,\n      \"interestRateSchedules\": null,\n      \"cashDividendSchedules\": null,\n      \"callSchedules\": null,\n      \"putSchedules\": null,\n      \"underlyingInstruments\": null,\n      \"tradableEntities\": [\n        {\n          \"createId\": \"EXCEL_IMPORTOR\",\n          \"createTs\": \"2017-01-02\",\n          \"updateId\": null,\n          \"updateTs\": null,\n          \"effectiveDate\": \"2017-01-02\",\n          \"expirationDate\": \"1999-12-31\",\n          \"hashKeyTxt\": \"5a1ec59fc7f8fc35393d74e613f8e2f0be5cc9cb1d4872f54f5f0759161bdfc68cc7e6c02e33512d88130027dca7d9b9\",\n          \"instrumentSid\": 169,\n          \"tradableEntitySid\": 249,\n          \"tradableEntityId\": 1,\n          \"marketExchangeCd\": null,\n          \"tradableEntityInternalId\": null,\n          \"tradableEntitySnapshots\": [\n            {\n              \"createId\": \"EXCEL_IMPORTOR\",\n              \"createTs\": \"2017-01-02\",\n              \"updateId\": null,\n              \"updateTs\": null,\n              \"lastAdjUserId\": \"EXCEL_IMPORTOR\",\n              \"lastAdjTs\": \"2017-01-02\",\n              \"lastAdjApprovalStatusCd\": null,\n              \"lastAdjApproverUserId\": \"EXCEL_IMPORTOR\",\n              \"lastAdjApprovalTs\": null,\n              \"tradableEntitySnapshotSid\": 249,\n              \"tradableEntitySid\": 249,\n              \"reportDate\": \"2014-12-01\",\n              \"derYieldCalcEngineCode\": \"YTM\",\n              \"derIncomeCalcEngineCode\": \"TIPS\",\n              \"derRedemptionPrice\": null,\n              \"derRedemptionDate\": \"2036-08-01\",\n              \"marketPrice\": 100,\n              \"currentIncomeRate\": 0.2300011,\n              \"fdrTipsInflationaryRatio\": 1,\n              \"fdrCleanPrice\": null,\n              \"derOneDaySecurityYield\": 1.23\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"portfolios\": [\n    {\n      \"createId\": \"EXCEL_IMPORTOR\",\n      \"createTs\": \"2017-01-02\",\n      \"updateId\": null,\n      \"updateTs\": null,\n      \"effectiveDate\": \"2017-01-02\",\n      \"expirationDate\": \"1999-12-31\",\n      \"hashKeyTxt\": \"d11b7ab497f20802fce89d2576cb75382bf43fd48246fd08d1effbd4cf2ac32a579233019991160ae8a551aa53001bed\",\n      \"portfolioSid\": 175,\n      \"portfolioId\": 18,\n      \"portfolioShortName\": \"FUND 18\",\n      \"portfolioName\": null,\n      \"fdrDistributionEligibleInd\": null,\n      \"fdrPortfolioTypeCode\": null,\n      \"cusip\": null,\n      \"shareClasses\": null,\n      \"portfolioSnapshots\": null,\n      \"portfolioTaxExclusions\": null,\n      \"portfolioHoldings\": [\n        {\n          \"createId\": \"EXCEL_IMPORTOR\",\n          \"createTs\": \"2017-01-02\",\n          \"updateId\": null,\n          \"updateTs\": null,\n          \"lastAdjUserId\": \"EXCEL_IMPORTOR\",\n          \"lastAdjTs\": \"2017-01-02\",\n          \"lastAdjApprovalStatusCd\": null,\n          \"lastAdjApproverUserId\": \"EXCEL_IMPORTOR\",\n          \"lastAdjApprovalTs\": null,\n          \"portfolioHoldingSnapshotSid\": 281,\n          \"portfolioSid\": 175,\n          \"reportDate\": \"2014-12-01\",\n          \"tradableEntity\": {\n            \"createId\": \"EXCEL_IMPORTOR\",\n            \"createTs\": \"2017-01-02\",\n            \"updateId\": null,\n            \"updateTs\": null,\n            \"effectiveDate\": \"2017-01-02\",\n            \"expirationDate\": \"1999-12-31\",\n            \"hashKeyTxt\": \"5a1ec59fc7f8fc35393d74e613f8e2f0be5cc9cb1d4872f54f5f0759161bdfc68cc7e6c02e33512d88130027dca7d9b9\",\n            \"instrumentSid\": 169,\n            \"tradableEntitySid\": 249,\n            \"tradableEntityId\": 1,\n            \"marketExchangeCd\": null,\n            \"tradableEntityInternalId\": null\n          },\n          \"holdingBusinessGroupViewCd\": \"FA\",\n          \"holdingViewCd\": \"EOD\",\n          \"positionCd\": \"LONG\",\n          \"tradableEntityId\": 1,\n          \"accruedIncomeAmt\": 145.94,\n          \"earnedAmortBaseAmt\": 0,\n          \"earnedInflCmpsBaseAmt\": 0,\n          \"marketValueBaseAmt\": 23160000,\n          \"inflationAdjShareCnt\": 23160000,\n          \"settleShareCnt\": 23160000,\n          \"originalFaceShareQty\": null,\n          \"fxRt\": 1,\n          \"derSecYield1DayIncomeAmt\": 43.53,\n          \"adjDerSecYield1ayIncAmt\": null,\n          \"adjDerMarketValueBaseAmt\": null,\n          \"adjSettleShareCnt\": null,\n          \"adjAccruedIncomeAmt\": null,\n          \"adjEarnedAmortBaseAmt\": null,\n          \"adjEarnedInflCmpsBaseAmt\": null,\n          \"adjCommentsTxt\": null\n        }\n      ]\n    }\n  ]\n}"
+					"raw": "{\n  \"reportDate\": 1417363200000,\n  \"businessDate\": 1417363200000,\n  \"instruments\": [\n    {\n      \"createId\": \"EXCEL_IMPORTOR\",\n      \"createTs\": \"2017-01-02\",\n      \"updateId\": null,\n      \"updateTs\": null,\n      \"effectiveDate\": \"2017-01-02\",\n      \"expirationDate\": \"1999-12-31\",\n      \"hashKeyTxt\": \"445790770350667ffce3965f2fe8a94864d89e179e9f5ffd38ac86cf9135158b66464a2cd9bd641ad8046f0ba436ce83\",\n      \"instrumentSid\": 169,\n      \"instrumentId\": 1111,\n      \"instrumentShortName\": \"DECATUR AL IDB NUCOR VR7@\",\n      \"instrumentTypeCode\": \"VRDN\",\n      \"couponRateTypeCode\": \"V\",\n      \"cusip\": null,\n      \"preRefundedDate\": null,\n      \"dividendPaymentFrequencyNbr\": null,\n      \"fdrEquityInd\": null,\n      \"originalIssuePrc\": null,\n      \"fdrStepBondInd\": \"F\",\n      \"fdrInstrumentClassNm\": null,\n      \"prospectiveYieldMethodCd\": null,\n      \"finalMaturityDate\": \"2036-08-01\",\n      \"hybridCalculationCd\": null,\n      \"originalIssueDate\": null,\n      \"maturityPrc\": 100,\n      \"defaultInd\": \"N\",\n      \"derFofSecurityCd\": null,\n      \"interestRateSchedules\": null,\n      \"cashDividendSchedules\": null,\n      \"callSchedules\": null,\n      \"putSchedules\": null,\n      \"underlyingInstruments\": null,\n      \"tradableEntities\": [\n        {\n          \"createId\": \"EXCEL_IMPORTOR\",\n          \"createTs\": \"2017-01-02\",\n          \"updateId\": null,\n          \"updateTs\": null,\n          \"effectiveDate\": \"2017-01-02\",\n          \"expirationDate\": \"1999-12-31\",\n          \"hashKeyTxt\": \"5a1ec59fc7f8fc35393d74e613f8e2f0be5cc9cb1d4872f54f5f0759161bdfc68cc7e6c02e33512d88130027dca7d9b9\",\n          \"instrumentSid\": 169,\n          \"tradableEntitySid\": 249,\n          \"tradableEntityId\": 1,\n          \"marketExchangeCd\": null,\n          \"tradableEntityInternalId\": null,\n          \"tradableEntitySnapshots\": [\n            {\n              \"createId\": \"EXCEL_IMPORTOR\",\n              \"createTs\": \"2017-01-02\",\n              \"updateId\": null,\n              \"updateTs\": null,\n              \"lastAdjUserId\": \"EXCEL_IMPORTOR\",\n              \"lastAdjTs\": \"2017-01-02\",\n              \"lastAdjApprovalStatusCd\": null,\n              \"lastAdjApproverUserId\": \"EXCEL_IMPORTOR\",\n              \"lastAdjApprovalTs\": null,\n              \"tradableEntitySnapshotSid\": 249,\n              \"tradableEntitySid\": 249,\n              \"reportDate\": \"2014-12-01\",\n              \"derYieldCalcEngineCode\": \"YTM\",\n              \"derIncomeCalcEngineCode\": \"TIPS\",\n              \"derRedemptionPrice\": null,\n              \"derRedemptionDate\": \"2036-08-01\",\n              \"marketPrice\": 100,\n              \"currentIncomeRate\": 0.2300011,\n              \"fdrTipsInflationaryRatio\": 1,\n              \"fdrCleanPrice\": null,\n              \"derOneDaySecurityYield\": 1.23\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"portfolios\": [\n    {\n      \"createId\": \"EXCEL_IMPORTOR\",\n      \"createTs\": \"2017-01-02\",\n      \"updateId\": null,\n      \"updateTs\": null,\n      \"effectiveDate\": \"2017-01-02\",\n      \"expirationDate\": \"1999-12-31\",\n      \"hashKeyTxt\": \"d11b7ab497f20802fce89d2576cb75382bf43fd48246fd08d1effbd4cf2ac32a579233019991160ae8a551aa53001bed\",\n      \"portfolioSid\": 175,\n      \"portfolioId\": 18,\n      \"portfolioShortName\": \"FUND 18\",\n      \"portfolioName\": null,\n      \"fdrDistributionEligibleInd\": null,\n      \"fdrPortfolioTypeCode\": null,\n      \"cusip\": null,\n      \"shareClasses\": null,\n      \"portfolioSnapshots\": null,\n      \"portfolioTaxExclusions\": null,\n      \"portfolioHoldings\": [\n        {\n          \"createId\": \"EXCEL_IMPORTOR\",\n          \"createTs\": \"2017-01-02\",\n          \"updateId\": null,\n          \"updateTs\": null,\n          \"lastAdjUserId\": \"EXCEL_IMPORTOR\",\n          \"lastAdjTs\": \"2017-01-02\",\n          \"lastAdjApprovalStatusCd\": null,\n          \"lastAdjApproverUserId\": \"EXCEL_IMPORTOR\",\n          \"lastAdjApprovalTs\": null,\n          \"portfolioHoldingSnapshotSid\": 281,\n          \"portfolioSid\": 175,\n          \"reportDate\": \"2014-12-01\",\n          \"tradableEntity\": {\n            \"createId\": \"EXCEL_IMPORTOR\",\n            \"createTs\": \"2017-01-02\",\n            \"updateId\": null,\n            \"updateTs\": null,\n            \"effectiveDate\": \"2017-01-02\",\n            \"expirationDate\": \"1999-12-31\",\n            \"hashKeyTxt\": \"5a1ec59fc7f8fc35393d74e613f8e2f0be5cc9cb1d4872f54f5f0759161bdfc68cc7e6c02e33512d88130027dca7d9b9\",\n            \"instrumentSid\": 169,\n            \"tradableEntitySid\": 249,\n            \"tradableEntityId\": 1,\n            \"marketExchangeCd\": null,\n            \"tradableEntityInternalId\": null\n          },\n          \"tradableEntitySid\": 249,\n          \"holdingBusinessGroupViewCd\": \"FA\",\n          \"holdingViewCd\": \"EOD\",\n          \"positionCd\": \"LONG\",\n          \"tradableEntityId\": 1,\n          \"accruedIncomeAmt\": 145.94,\n          \"earnedAmortBaseAmt\": 0,\n          \"earnedInflCmpsBaseAmt\": 0,\n          \"marketValueBaseAmt\": 23160000,\n          \"inflationAdjShareCnt\": 23160000,\n          \"settleShareCnt\": 23160000,\n          \"originalFaceShareQty\": null,\n          \"fxRt\": 1,\n          \"derSecYield1DayIncomeAmt\": 43.53,\n          \"adjDerSecYield1ayIncAmt\": null,\n          \"adjDerMarketValueBaseAmt\": null,\n          \"adjSettleShareCnt\": null,\n          \"adjAccruedIncomeAmt\": null,\n          \"adjEarnedAmortBaseAmt\": null,\n          \"adjEarnedInflCmpsBaseAmt\": null,\n          \"adjCommentsTxt\": null\n        }\n      ]\n    }\n  ]\n}"
 				},
 				"description": "Persists the calculated SEC security data."
 			},
@@ -66,7 +75,10 @@
 				"url": "http://localhost:8081/faya-api/customerDistributionFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "Gets the customer SEC security data (without yield and income calculated)."
 			},
 			"response": []
@@ -77,7 +89,10 @@
 				"url": "http://localhost:8081/faya-api/calculatedFAYADistributionFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -108,7 +123,10 @@
 				"url": "http://localhost:8081/faya-api/customerMoneyMarketFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -119,7 +137,10 @@
 				"url": "http://localhost:8081/faya-api/calculatedFAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "Gets the calculated SEC security data."
 			},
 			"response": []
@@ -150,7 +171,10 @@
 				"url": "http://localhost:8081/faya-api/avgOfMm1DayDistYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -161,7 +185,10 @@
 				"url": "http://localhost:8081/faya-api/sumOfDer1DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -172,7 +199,10 @@
 				"url": "http://localhost:8081/faya-api/sumOfDerRestate1DayYieldMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -183,7 +213,10 @@
 				"url": "http://localhost:8081/faya-api/avgOfMm7DayYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -194,7 +227,10 @@
 				"url": "http://localhost:8081/faya-api/sumOfDer7DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []

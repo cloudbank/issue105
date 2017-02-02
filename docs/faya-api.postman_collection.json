@@ -72,7 +72,7 @@
 		{
 			"name": "getFAYADistributionFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/customerDistributionFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-api/FAYADistributionFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -120,7 +120,7 @@
 		{
 			"name": "getFAYAMoneyMarketFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/customerMoneyMarketFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-api/FAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {

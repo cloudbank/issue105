@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.ToleranceCheckService;
-import com.csa.apex.fundyield.seccommons.entities.ToleranceCheckResult;
+import com.csa.apex.fundyield.fayacommons.entities.ToleranceCheckResult;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;

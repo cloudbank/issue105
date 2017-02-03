@@ -4,8 +4,8 @@
 package com.csa.apex.fundyield.api.services.impl;
 
 import com.csa.apex.fundyield.exceptions.CalculationException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 
 /**
  * CalculationEngine Interface for all calculation engines.

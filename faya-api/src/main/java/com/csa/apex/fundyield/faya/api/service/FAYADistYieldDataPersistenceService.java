@@ -3,7 +3,7 @@ package com.csa.apex.fundyield.faya.api.service;
 import java.util.Date;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
  * Created by topcoder on 12/28/16.

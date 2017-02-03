@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
 
 /**
  * Inner row mapper to create the Portfolio from the row.

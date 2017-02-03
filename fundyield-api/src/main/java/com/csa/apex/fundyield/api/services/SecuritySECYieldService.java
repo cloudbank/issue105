@@ -8,7 +8,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
  * The interface that defines API to process SEC data.

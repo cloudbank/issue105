@@ -43,7 +43,7 @@ docs/fundyield-api.postman_collection.json
 
 ## Mac OS X (via Docker)
 1. Currently, there is no readily available installation package for Mac. To make the installation simpler, we will use Docker. Download Docker for Mac from this link: https://download.docker.com/mac/stable/Docker.dmg
-2. Follow the steps (Step 1 is sufficient) in the link to install Docker: https://docs.docker.com/docker-for-mac/#/step-1-install-and-run-docker-for-mac. 
+2. Follow the steps (Step 1 is sufficient) in the link to install Docker: https://docs.docker.com/docker-for-mac/#/step-1-install-and-run-docker-for-mac.
 3. Open a Terminal and execute the following commands:
    - `docker pull wnameless/oracle-xe-11g`
    - `docker run -d -p 49160:22 -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true wnameless/oracle-xe-11g`
@@ -60,43 +60,43 @@ docs/fundyield-api.postman_collection.json
 3. Configure connection to the local Oracle Express DB. We will need to create 3 connections:
    - For `system` user
    > Connection name: local_system
-   
+
    > Username: system
-   
+
    > Password: whatever_you_have_set
-   
+
    > Hostname: localhost
-   
+
    > Port: 1521 or 49161
-   
+
    > SID: xe
- 
+
    - For `secyield` user
    > Connection name: local_secyield
-   
+
    > Username: secyield
-   
+
    > Password: password
-   
+
    > Hostname: localhost
-   
+
    > Port: 1521 or 49161
-   
+
    > SID: xe
- 
+
    - For `test_secyield` user
    > Connection name: local_test_secyield
-   
+
    > Username: test_secyield
-   
+
    > Password: password
-   
+
    > Hostname: localhost
-   
+
    > Port: 1521 or 49161
-   
+
    > SID: xe
- 
+
 
 # Application setup
 
@@ -115,14 +115,14 @@ docs/fundyield-api.postman_collection.json
 - In case you want to pre-load some data, in Oracle Developer, connect to `local_secyield` and run `test_data/clear.sql` & `test_data/test_data.sql`.
 
 #### Build App
-- In `seccommons` folder, run the following command
+- In `faya-commons` folder, run the following command
 
   * ```mvn clean install ```
 
 - In `faya-api` folder, run the following commands
 
   1. `mvn install:install-file -Dfile=lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar`
-  
+
   2. ```mvn clean install ```   
 
   3. Import data from excel  
@@ -142,7 +142,7 @@ docs/fundyield-api.postman_collection.json
 
   2. ```mvn spring-boot:run ```
 
-To run unit tests, use the following command in `seccommons`, `faya-api` and `fundyield-api` folders:
+To run unit tests, use the following command in `faya-commons`, `faya-api` and `fundyield-api` folders:
 
     mvn test
 
@@ -152,7 +152,7 @@ Unit tests are run by default, please use -DskipTests parameter everywhere to sk
 
 # Deployment to Tomcat
 
-- In `seccommons` folder, run the following command
+- In `faya-commons` folder, run the following command
    ```
    mvn clean install
    ```
@@ -185,7 +185,7 @@ Unit tests are run by default, please use -DskipTests parameter everywhere to sk
 
 # SonarCube Code Coverage for backend
 
-- To use SonarCube code coverage, sonar-project.properties is present in the root folders of seccommons, faya-api and fundyield-api modules.
+- To use SonarCube code coverage, sonar-project.properties is present in the root folders of faya-commons, faya-api and fundyield-api modules.
 - Go to this link and download latest version of SonarCube Server and SonarCube Scanner:
 http://www.sonarqube.org/downloads/
 http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
@@ -204,7 +204,7 @@ http://docs.sonarqube.org/display/SONAR/Get+Started+in+Two+Minutes
 - Go to SonarCube Server bin directory where executables are present (select directory inside depending on your operating system).
 E.g. C:\sonarqube-5.6\bin\windows-x86-64
 
-- Follow this guide to configure oracle to be used by the sonarcube https://docs.sonarqube.org/display/SONAR/Installing+the+Server 
+- Follow this guide to configure oracle to be used by the sonarcube https://docs.sonarqube.org/display/SONAR/Installing+the+Server
 the user to create you can use this command :
 ```
 CREATE USER sonarqube IDENTIFIED BY password DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
@@ -226,7 +226,7 @@ Also one can use
 ```mvn sonar:sonar```
 
 
-# Deployment to AWS 
+# Deployment to AWS
 
 #### AWS Instance Creation
 - As a prerequisite, you should have AWS account to create instance on AWS
@@ -242,15 +242,15 @@ Also one can use
 
 ![](docs/img/select_red_hat.png )
 
-- On Choose an Instance Type page click Next as default settings is fine 
-- On Configure Instance Details page click Next as default settings is fine 
-- On Add Storage page , click on Add New Volume to add 4GB space and click Next, which will be used as SWAP memory 
+- On Choose an Instance Type page click Next as default settings is fine
+- On Configure Instance Details page click Next as default settings is fine
+- On Add Storage page , click on Add New Volume to add 4GB space and click Next, which will be used as SWAP memory
 
 ![](docs/img/add_storage.png )
 
-- On Tag page ,you can name your server like webserver or dbserver  for future reference 
-- On Configure Security Group page, add required inbound ports by clicking AddRule, all below ports(80,8080,1521,22) 
-should  be added with 	Source as 0.0.0.0/0 and click Review And Launch 
+- On Tag page ,you can name your server like webserver or dbserver  for future reference
+- On Configure Security Group page, add required inbound ports by clicking AddRule, all below ports(80,8080,1521,22)
+should  be added with 	Source as 0.0.0.0/0 and click Review And Launch
 
 ![](docs/img/security_grp.png )
 
@@ -258,7 +258,7 @@ should  be added with 	Source as 0.0.0.0/0 and click Review And Launch
 
 ![](docs/img/review.png )
 
-- Once you click on Launch, you will be asked to select security key pair, if you don't have any key pair already, click on Download Key Pair 
+- Once you click on Launch, you will be asked to select security key pair, if you don't have any key pair already, click on Download Key Pair
 after naming it. This will be used as login credential.
 
 ![](docs/img/keypair.png )
@@ -289,16 +289,16 @@ after naming it. This will be used as login credential.
 ```sudo mkswap /dev/xvdb
     sudo swapon /dev/xvdb
 ```
-- Now SWAP space has been created, you can verify this using the below command.It will list the drive  /dev/xvdb. 
+- Now SWAP space has been created, you can verify this using the below command.It will list the drive  /dev/xvdb.
 
 ```swapon -s```
 
-- Add the created SWAP space to /etc/fstab by opening file using ```sudo vi /etc/fstab``` and pasting the line ```/dev/xvdb       none    swap    sw  0       0``` 
+- Add the created SWAP space to /etc/fstab by opening file using ```sudo vi /etc/fstab``` and pasting the line ```/dev/xvdb       none    swap    sw  0       0```
 at the end of the file
 - Follow same procedure to add swap space in another server as well
 - Once you login,we have to  execute the script file script/install_sec.sh , this will install apache , tomcat , java , maven and node.
 - This script contains different sections for installing different  modules and updating user permissions.
-you can edit urls and names in script to install different version if needed. 
+you can edit urls and names in script to install different version if needed.
 - You can copy the file using scp / winscp or create new file using  ```vi install_sec.sh```
 and copy paste the content of the file. If you are using windows machine , you may have to convert the file to unix format using dos2unix tool , you can use below commands to install dos2unix and covert the file.
 
@@ -337,7 +337,7 @@ dos2unix install_sec.sh
 
 #### GIT CI Runner configuration
 - Before we begin git ci runner configuration, we have to get runner token from the gitlab
-- To get runner token, browse the project in gitlab and click on setting icon on top right corner and select Runner 
+- To get runner token, browse the project in gitlab and click on setting icon on top right corner and select Runner
 
 ![](docs/img/gitrunner.png )
 
@@ -349,7 +349,7 @@ dos2unix install_sec.sh
 ###### Configuring backend runner
 - Execute below command to start the runner configuration.
 
-```sudo gitlab-ci-multi-runner register``` 
+```sudo gitlab-ci-multi-runner register```
 
 - You will be asked to provide inputs for following questions once you run above command.
     1.Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/): https://gitlab.com/ci (obtained from runner page in gitlab)
@@ -360,31 +360,31 @@ dos2unix install_sec.sh
 
 - Backend runner has been  registered and will be visible in gitlab runner configuration page of the project backend project.
  - Build configuration is given in the file .gitlab-ci.yml of backend project.
- 
+
 ###### Configuring frontend runner
-  
+
  - Browser to frontend's project's runner configuration and get the runner token like we did for backend project.
  - Execute below command to start the runner configuration.
- 
- ```sudo gitlab-ci-multi-runner register``` 
- 
+
+ ```sudo gitlab-ci-multi-runner register```
+
  - You will be asked to provide inputs for following questions once you run above command.
      1.Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/): https://gitlab.com/ci (obtained from runner page in gitlab)
      2.Please enter the gitlab-ci token for this runner: jwasdf3Ynq3RXxikwGov (obtained from runner page in gitlab)
      3.Please enter the gitlab-ci description for this runner: frontendrunner (runner description here)
      4.Please enter the gitlab-ci tags for this runner (comma separated): frontend, angular , node (tags here)
      5.Please enter the executor: docker-ssh, ssh, virtualbox, docker-ssh+machine, kubernetes, docker, parallels, shell, docker+machine: shell (we will be using shell runner)
- 
+
  - Frontend runner has been  registered and will be visible in gitlab runner configuration page of the project frontend project.
  - Build configuration is given in the file .gitlab-ci.yml of frontend project.
 
- 
+
 #### Finalizing AWS web server setup.
 
 - We have configured apache and tomcat web servers required to host our frontend and backend.
 - Make sure our web servers are up and running, for testing apache hit http://ipaddress/ (ex:http://35.165.104.194/) , for tomcat http://ipaddress:8080/ (ex:http://35.165.104.194:8080/)
 - Take a note of web server ip address, we using this in our application configuration file.
- 
+
 #### Oracle XE Configuration on AWS
 - Login into next instance of EC2 (dbserver) . This instance will be used as our DB server.
 - We need oracle rpm package for installation , it can not be downloaded from server since oracle website required you to login to download.
@@ -405,7 +405,7 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 
 ```sudo /etc/init.d/oracle-xe configure```
 
-- it will be asking for http port, oracle listener port, password for sys, system and load on start up values 
+- it will be asking for http port, oracle listener port, password for sys, system and load on start up values
 - you can leave default for http(8080), oracle listener port (1521) and select y for start on system boot option. Configuration may take some time to complete.
 - Once Db is up and running, you can connect to this DB using sql developer and follow steps mentioned in Db Setup section to create user, schema and load sample data.
 
@@ -425,11 +425,6 @@ src\client\app\shared\config\app-config.ts
 
 ### Triggering build.
 - When you commit any changes in develop branch of frontend / backend project , build will be triggered automatically.
-- You can monitor the build status from gitlab's Pipeline page. By default you will get a notification mail after every build, to your registered mail id in gitlab. 
-- If any test case fails or build fails  , maven will return non zero return code, which will stop our build process from proceeding. 
+- You can monitor the build status from gitlab's Pipeline page. By default you will get a notification mail after every build, to your registered mail id in gitlab.
+- If any test case fails or build fails  , maven will return non zero return code, which will stop our build process from proceeding.
 - After the build our app will be available at webserver at http://ipaddress/ (ex:http://35.165.104.194/)
-
-
-
-
-

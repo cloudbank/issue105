@@ -27,11 +27,11 @@ import com.csa.apex.fundyield.api.services.SecuritySECYieldService;
 import com.csa.apex.fundyield.api.services.impl.securitysecyield.CalculationEngineSelector;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 

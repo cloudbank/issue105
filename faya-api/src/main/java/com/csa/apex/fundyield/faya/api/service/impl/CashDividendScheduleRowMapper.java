@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.CashDividendSchedule;
+import com.csa.apex.fundyield.fayacommons.entities.CashDividendSchedule;
 
 /**
  * Inner row mapper to create the CashDividendSchedule from the row.

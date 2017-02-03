@@ -18,10 +18,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.csa.apex.fundyield.Application;
 import com.csa.apex.fundyield.api.services.impl.securitysecyield.CouponIncomeCalculationEngine;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**

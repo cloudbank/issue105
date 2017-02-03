@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.faya.api.FAYAConfigurationService;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 

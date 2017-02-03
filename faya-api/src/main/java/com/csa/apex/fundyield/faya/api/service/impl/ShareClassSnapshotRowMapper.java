@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.ShareClassSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 
 /**
  * Inner row mapper to create the ShareClassSnapshot from the row.

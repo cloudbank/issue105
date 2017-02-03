@@ -6,7 +6,7 @@ package com.csa.apex.fundyield.api.services.impl.securitysecyield;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 
 /**
  * The YTM Yield calculation input.

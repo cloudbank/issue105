@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.PutSchedule;
+import com.csa.apex.fundyield.fayacommons.entities.PutSchedule;
 
 /**
  * Inner row mapper to create the PutSchedule from the row.

@@ -6,8 +6,8 @@ package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 import org.junit.Test;
 import org.springframework.boot.test.IntegrationTest;
 
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**

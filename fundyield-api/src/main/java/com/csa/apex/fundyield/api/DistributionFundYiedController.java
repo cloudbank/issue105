@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.csa.apex.fundyield.api.services.DistributionFundYieldService;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.Constants;
 

@@ -3,7 +3,7 @@
  */
 package com.csa.apex.fundyield.api.services.impl.securitysecyield;
 
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 
 /**
  * The base calculation input.

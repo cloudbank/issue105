@@ -16,7 +16,7 @@
 	<dependencies>
 		<dependency>
 		    <groupId>com.csa.apex.fundyield</groupId>
-		    <artifactId>seccommons</artifactId>
+		    <artifactId>faya-commons</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
@@ -55,7 +55,7 @@
 		    <artifactId>opencsv</artifactId>
 		    <version>3.8</version>
 		</dependency>
-		
+
 		<!-- Test Dependencies -->
 		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
 		<dependency>
@@ -94,7 +94,7 @@
             <artifactId>powermock-api-mockito</artifactId>
             <version>1.6.6</version>
             <scope>test</scope>
-        </dependency>   
+        </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>

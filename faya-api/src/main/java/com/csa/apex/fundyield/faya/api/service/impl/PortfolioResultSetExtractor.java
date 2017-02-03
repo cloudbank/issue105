@@ -9,9 +9,9 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.ShareClass;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
 
 /**
  * Inner result set extractor to create the Portfolio from the result set.

@@ -3,7 +3,7 @@ package com.csa.apex.fundyield.api.services;
 import java.util.Date;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
  * The interface that defines API to process Money Market Fund Yield data.

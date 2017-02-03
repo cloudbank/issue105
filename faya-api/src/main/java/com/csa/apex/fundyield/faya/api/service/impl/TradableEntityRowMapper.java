@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntity;
 
 /**
  * Inner row mapper to create the TradableEntity from the row.

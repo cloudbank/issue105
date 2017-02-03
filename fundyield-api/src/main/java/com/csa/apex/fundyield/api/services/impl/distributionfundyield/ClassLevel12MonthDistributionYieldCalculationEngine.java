@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.exceptions.CalculationException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.seccommons.entities.ShareClass;
-import com.csa.apex.fundyield.seccommons.entities.ShareClassSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 

@@ -51,12 +51,12 @@
 
     <bean id="secCalculationEngines" class="java.util.HashMap">
         <constructor-arg>
-            <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineType" value-type="java.util.HashMap">
+            <map key-type="com.csa.apex.fundyield.fayacommons.entities.CalculationEngineType" value-type="java.util.HashMap">
                 <entry>
                     <key>
                         <value>YTM</value>
                     </key>
-                    <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType">
+                    <map key-type="com.csa.apex.fundyield.fayacommons.entities.CalculationEngineSubType">
                         <entry>
                             <key>
                                 <value>YIELD</value>
@@ -75,7 +75,7 @@
                     <key>
                         <value>COUPON</value>
                     </key>
-                    <map key-type="com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType">
+                    <map key-type="com.csa.apex.fundyield.fayacommons.entities.CalculationEngineSubType">
                         <entry>
                             <key>
                                 <value>YIELD</value>

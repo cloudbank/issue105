@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.PortfolioSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioSnapshot;
 
 /**
  * Inner row mapper to create the PortfolioSnapshot from the row.

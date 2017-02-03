@@ -17,10 +17,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.csa.apex.fundyield.Application;
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
-import com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType;
-import com.csa.apex.fundyield.seccommons.entities.CalculationEngineType;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.CalculationEngineSubType;
+import com.csa.apex.fundyield.fayacommons.entities.CalculationEngineType;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**

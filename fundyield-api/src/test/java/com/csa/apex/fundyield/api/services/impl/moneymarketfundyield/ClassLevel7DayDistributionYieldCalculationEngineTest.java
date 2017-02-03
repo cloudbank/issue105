@@ -3,8 +3,8 @@
 */
 package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
-import static org.junit.Assert.assertEquals;
-
+import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
+import com.csa.apex.fundyield.utility.TestUtility;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -12,10 +12,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.utility.TestUtility;
+
+import static org.junit.Assert.assertEquals;
+
 
 /**
 * Test class for the ClassLevel7DayDistributionYieldCalculationEngine.
@@ -35,6 +36,7 @@ public class ClassLevel7DayDistributionYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevel7DayDistributionYieldCalculationEngine instance = new ClassLevel7DayDistributionYieldCalculationEngine();
+        instance.setThreadCount(20);
         instance.setUtilityCustomerAPIClient(TestUtility.getUtilityFAYAAPIClient());
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();

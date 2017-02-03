@@ -35,6 +35,7 @@ public class ClassLevel30DayN1AYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevel30DayN1AYieldCalculationEngine instance = new ClassLevel30DayN1AYieldCalculationEngine();
+        instance.setThreadCount(20);
         instance.setUtilityCustomerAPIClient(TestUtility.getUtilityFAYAAPIClient());
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();

@@ -35,6 +35,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevelEffectiveCompound7DayYieldCalculationEngine instance = new ClassLevelEffectiveCompound7DayYieldCalculationEngine();
+        instance.setThreadCount(20);
         instance.setUtilityCustomerAPIClient(TestUtility.getUtilityFAYAAPIClient());
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();

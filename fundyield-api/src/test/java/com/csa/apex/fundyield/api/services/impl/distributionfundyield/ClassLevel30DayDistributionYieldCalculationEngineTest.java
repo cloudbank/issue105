@@ -26,6 +26,7 @@ public class ClassLevel30DayDistributionYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevel30DayDistributionYieldCalculationEngine instance = new ClassLevel30DayDistributionYieldCalculationEngine();
+        instance.setThreadCount(20);
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();
         configuration.setOperationScale(2);

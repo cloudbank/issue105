@@ -24,8 +24,8 @@ public class ClassLevel30DayDistributionYieldCalculationOutputTest {
     public void getY() throws Exception {
         ClassLevel30DayDistributionYieldCalculationOutput instance = new ClassLevel30DayDistributionYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(71);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerDist30DayYieldPct(expected);
+        assertEquals(expected, instance.getDerDist30DayYieldPct());
     }
     /**
      * Test for method setY.
@@ -36,7 +36,7 @@ public class ClassLevel30DayDistributionYieldCalculationOutputTest {
     public void setY() throws Exception {
         ClassLevel30DayDistributionYieldCalculationOutput instance = new ClassLevel30DayDistributionYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(44);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerDist30DayYieldPct(expected);
+        assertEquals(expected, instance.getDerDist30DayYieldPct());
     }
 }

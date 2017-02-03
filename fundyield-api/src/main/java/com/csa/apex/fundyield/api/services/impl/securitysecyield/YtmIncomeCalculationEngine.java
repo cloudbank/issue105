@@ -80,20 +80,20 @@ public class YtmIncomeCalculationEngine extends BaseCalculationEngine {
 	 *
 	 * @param data The FundAccountingYieldData to calculate
 	 * @param instrument The Instrument to calculate
-	 * @param tes The TradableEntitySnapshot to calculate
+	 * @param tradableEntitySnapshot The TradableEntitySnapshot to calculate
 	 * @param configuration The SECConfiguration to be used for config values
 	 */
 	@Override
-	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tes,
+	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tradableEntitySnapshot,
 			SECConfiguration configuration) {
 
 		YtmIncomeCalculationInput input = new YtmIncomeCalculationInput(configuration);
 
 		input.setyFxThreshold(yFxThreshold);
-		input.setDerOneDaySecurityYield(tes.getDerOneDaySecurityYield());
+		input.setDerOneDaySecurityYield(tradableEntitySnapshot.getDerOneDaySecurityYield());
 
 		for (PortfolioHoldingSnapshot holding : CommonUtility.getRelatedPortfolioHoldings(data,
-				tes.getTradableEntitySid())) {
+				tradableEntitySnapshot.getTradableEntitySid())) {
 			input.setFxRate(holding.getFxRt());
 			input.setMarketValueBaseAmount(holding.getMarketValueBaseAmt());
 			input.setAccruedIncomeAmount(holding.getAccruedIncomeAmt());

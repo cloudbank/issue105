@@ -7,84 +7,84 @@ import java.math.BigDecimal;
  */
 public class ClassLevel30DayDistributionYieldCalculationInput {
 
-    /**
-     * Dist Unmod 30 Day Yield Pct;
-     */
-    private BigDecimal u;
+	/**
+	 * Dist Unmod 30 Day Yield Pct;
+	 */
+	private BigDecimal distUnmod30DayYieldPct;
 
-    /**
-     * Dist Yield Mil Rt
-     */
-    private BigDecimal m;
+	/**
+	 * Dist Yield Mil Rt
+	 */
+	private BigDecimal distYieldMilRt;
 
-    /**
-     * Dist Yield D
-     */
-    private int d;
+	/**
+	 * Dist Yield D
+	 */
+	private int daysInYear;
 
-    /**
-     * Dist Yield R
-     */
-    private int r;
+	/**
+	 * Dist Yield R
+	 */
+	private int reportingDate;
 
-    /**
-     * Nav Amt.
-     */
-    private BigDecimal n;
+	/**
+	 * Nav Amt.
+	 */
+	private BigDecimal navAmt;
 
-    /**
-     * Operation scale.
-     */
-    private int operationScale;
+	/**
+	 * Operation scale.
+	 */
+	private int operationScale;
 
-    public ClassLevel30DayDistributionYieldCalculationInput() {
-    }
+	public ClassLevel30DayDistributionYieldCalculationInput() {
+	}
 
-    public int getD() {
-        return d;
-    }
+	public int getDaysInYear() {
+		return daysInYear;
+	}
 
-    public void setD(int d) {
-        this.d = d;
-    }
+	public void setDaysInYear(int daysInYear) {
+		this.daysInYear = daysInYear;
+	}
 
-    public int getR() {
-        return r;
-    }
+	public int getReportingDate() {
+		return reportingDate;
+	}
 
-    public void setR(int r) {
-        this.r = r;
-    }
+	public void setReportingDate(int reportingDate) {
+		this.reportingDate = reportingDate;
+	}
 
-    public BigDecimal getU() {
-        return u;
-    }
+	public BigDecimal getDistUnmod30DayYieldPct() {
+		return distUnmod30DayYieldPct;
+	}
 
-    public void setU(BigDecimal u) {
-        this.u = u;
-    }
+	public void setDistUnmod30DayYieldPct(BigDecimal distUnmod30DayYieldPct) {
+		this.distUnmod30DayYieldPct = distUnmod30DayYieldPct;
+	}
 
-    public BigDecimal getM() {
-        return m;
-    }
+	public BigDecimal getDistYieldMilRt() {
+		return distYieldMilRt;
+	}
 
-    public void setM(BigDecimal m) {
-        this.m = m;
-    }
+	public void setDistYieldMilRt(BigDecimal distYieldMilRt) {
+		this.distYieldMilRt = distYieldMilRt;
+	}
 
-    public BigDecimal getN() {
-        return n;
-    }
+	public BigDecimal getNavAmt() {
+		return navAmt;
+	}
 
-    public void setN(BigDecimal n) {
-        this.n = n;
-    }
+	public void setNavAmt(BigDecimal navAmt) {
+		this.navAmt = navAmt;
+	}
 
-    public int getOperationScale() {
-        return operationScale;
-    }
+	public int getOperationScale() {
+		return operationScale;
+	}
 
-    public void setOperationScale(int operationScale) {
-        this.operationScale = operationScale;
-    }
+	public void setOperationScale(int operationScale) {
+		this.operationScale = operationScale;
+	}
 }

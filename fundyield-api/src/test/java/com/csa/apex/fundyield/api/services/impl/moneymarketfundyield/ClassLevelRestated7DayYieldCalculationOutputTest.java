@@ -24,8 +24,8 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
     public void getMil() throws Exception {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(39);
-        instance.setMil(expected);
-        assertEquals(expected, instance.getMil());
+        instance.setMoneyMarketRestartYield(expected);
+        assertEquals(expected, instance.getMoneyMarketRestartYield());
     }
     /**
      * Test for method setMil.
@@ -36,8 +36,8 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
     public void setMil() throws Exception {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(8);
-        instance.setMil(expected);
-        assertEquals(expected, instance.getMil());
+        instance.setMoneyMarketRestartYield(expected);
+        assertEquals(expected, instance.getMoneyMarketRestartYield());
     }
     /**
      * Test for method getD.
@@ -72,8 +72,8 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
     public void getY() throws Exception {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(76);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerMmRst7DayYieldPct(expected);
+        assertEquals(expected, instance.getDerMmRst7DayYieldPct());
     }
     /**
      * Test for method setY.
@@ -84,7 +84,7 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
     public void setY() throws Exception {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(82);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerMmRst7DayYieldPct(expected);
+        assertEquals(expected, instance.getDerMmRst7DayYieldPct());
     }
 }

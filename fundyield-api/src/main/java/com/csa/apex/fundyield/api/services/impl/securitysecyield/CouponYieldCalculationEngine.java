@@ -74,21 +74,21 @@ public class CouponYieldCalculationEngine extends BaseCalculationEngine {
 	 *
 	 * @param data The FundAccountingYieldData to calculate
 	 * @param instrument The Instrument to calculate
-	 * @param tes The TradableEntitySnapshot to calculate
+	 * @param tradableEntitySnapshot The TradableEntitySnapshot to calculate
 	 * @param configuration The SECConfiguration to be used for config values
 	 */
 	@Override
-	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tes,
+	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tradableEntitySnapshot,
 			SECConfiguration configuration) {
 
-		if (tes.getMarketPrice() != null && tes.getFdrTipsInflationaryRatio() != null) {
-			BigDecimal cleanPrice = tes.getMarketPrice()
-					.divide(tes.getFdrTipsInflationaryRatio(), configuration.getOperationScale(), BigDecimal.ROUND_HALF_UP);
-			tes.setFdrCleanPrice(cleanPrice);
+		if (tradableEntitySnapshot.getMarketPrice() != null && tradableEntitySnapshot.getFdrTipsInflationaryRatio() != null) {
+			BigDecimal cleanPrice = tradableEntitySnapshot.getMarketPrice()
+					.divide(tradableEntitySnapshot.getFdrTipsInflationaryRatio(), configuration.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+			tradableEntitySnapshot.setFdrCleanPrice(cleanPrice);
 		}
 		CouponYieldCalculationInput input = new CouponYieldCalculationInput(configuration);
-		input.setCurrentIncomeRate(tes.getCurrentIncomeRate());
+		input.setCurrentIncomeRate(tradableEntitySnapshot.getCurrentIncomeRate());
 		CouponYieldCalculationOutput output = calculator.calculate(input);
-	    tes.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
+	    tradableEntitySnapshot.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
 	}
 }

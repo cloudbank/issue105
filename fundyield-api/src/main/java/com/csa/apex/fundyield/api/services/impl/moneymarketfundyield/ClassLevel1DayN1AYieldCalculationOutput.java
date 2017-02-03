@@ -7,19 +7,19 @@ import java.math.BigDecimal;
  */
 public class ClassLevel1DayN1AYieldCalculationOutput {
 
-    /**
-     * Yield amount.
-     */
-    private BigDecimal y;
+	/**
+	 * Yield amount.
+	 */
+	private BigDecimal derMm1DayN1aYieldPct;
 
-    public ClassLevel1DayN1AYieldCalculationOutput() {
-    }
+	public ClassLevel1DayN1AYieldCalculationOutput() {
+	}
 
-    public BigDecimal getY() {
-        return y;
-    }
+	public BigDecimal getDerMm1DayN1aYieldPct() {
+		return derMm1DayN1aYieldPct;
+	}
 
-    public void setY(BigDecimal y) {
-        this.y = y;
-    }
+	public void setDerMm1DayN1aYieldPct(BigDecimal derMm1DayN1aYieldPct) {
+		this.derMm1DayN1aYieldPct = derMm1DayN1aYieldPct;
+	}
 }

@@ -24,8 +24,8 @@ public class ClassLevel1DayN1AYieldCalculationOutputTest {
     public void getY() throws Exception {
         ClassLevel1DayN1AYieldCalculationOutput instance = new ClassLevel1DayN1AYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(86);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerMm1DayN1aYieldPct(expected);
+        assertEquals(expected, instance.getDerMm1DayN1aYieldPct());
     }
     /**
      * Test for method setY.
@@ -36,7 +36,7 @@ public class ClassLevel1DayN1AYieldCalculationOutputTest {
     public void setY() throws Exception {
         ClassLevel1DayN1AYieldCalculationOutput instance = new ClassLevel1DayN1AYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(80);
-        instance.setY(expected);
-        assertEquals(expected, instance.getY());
+        instance.setDerMm1DayN1aYieldPct(expected);
+        assertEquals(expected, instance.getDerMm1DayN1aYieldPct());
     }
 }

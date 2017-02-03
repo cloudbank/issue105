@@ -31,17 +31,17 @@ public class ClassLevelRestated7DayYieldCalculator {
         // specified in configuration
         // calculate d using formula D=(MIL*36500)/NV with the precision and round mode specified in configuration
         // calculate y using formula y=(d+dPrevious6days)/7;
-        BigDecimal mil = input.getTni().add(input.getDa()).add(input.getRda()).add(input.getMda());
-        mil = mil.subtract(input.getB()).subtract(input.getTni().multiply(input.getStr()).multiply(input.getOpct()))
-                .subtract(input.getReim()).divide(input.getSo(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
-        BigDecimal d = mil.multiply(BigDecimal.valueOf(36500)).divide(input.getNv(), input.getOperationScale(),
+        BigDecimal derMmRestatedMilRt = input.getN1ADistIncomeUnmodAmt().add(input.getN1ADistIncomeAdjAmt()).add(input.getN1ADistIncomeAdjRevAmt()).add(input.getN1ADistReimbursementAmt());
+        derMmRestatedMilRt = derMmRestatedMilRt.subtract(input.getN1ADistIncomeBreakageAmt()).subtract(input.getN1ADistIncomeUnmodAmt().multiply(input.getN1AReimbursementStr()).multiply(input.getN1AReimbursementOpct()))
+                .subtract(input.getN1AReimbursementEarnedAmt()).divide(input.getDistributableCapstockQty(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+        BigDecimal derMmRestate1DayYieldPct = derMmRestatedMilRt.multiply(BigDecimal.valueOf(36500)).divide(input.getNavAmt(), input.getOperationScale(),
                 BigDecimal.ROUND_HALF_UP);
-        BigDecimal y = d.add(input.getdPrevious6Days()).divide(BigDecimal.valueOf(7), input.getOperationScale(),
+        BigDecimal derMmRst7DayYieldPOct = derMmRestate1DayYieldPct.add(input.getdPrevious6Days()).divide(BigDecimal.valueOf(7), input.getOperationScale(),
                 BigDecimal.ROUND_HALF_UP);
         ClassLevelRestated7DayYieldCalculationOutput output = new ClassLevelRestated7DayYieldCalculationOutput();
-        output.setMil(mil);
-        output.setD(d);
-        output.setY(y);
+        output.setMoneyMarketRestartYield(derMmRestatedMilRt);
+        output.setD(derMmRestate1DayYieldPct);
+        output.setDerMmRst7DayYieldPct(derMmRst7DayYieldPOct);
         return output;
     }
 }

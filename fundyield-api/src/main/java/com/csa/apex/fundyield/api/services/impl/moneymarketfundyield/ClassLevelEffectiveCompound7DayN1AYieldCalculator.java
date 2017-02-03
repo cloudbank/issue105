@@ -26,11 +26,11 @@ public class ClassLevelEffectiveCompound7DayN1AYieldCalculator {
     public ClassLevelEffectiveCompound7DayN1AYieldCalculationOutput calculate(
             ClassLevelEffectiveCompound7DayN1AYieldCalculationInput input) {
         CommonUtility.checkNull(input, "input");
-        BigDecimal d = input.getDerMnyMkt7DayN1AYieldPct();
+        BigDecimal derMnyMkt7DayN1AYieldPct = input.getDerMnyMkt7DayN1AYieldPct();
         BigDecimal dPrevious6Days = input.getSumOfDerMnyMkt7DayN1AYieldPctForPrevious6Days();
         // calculate y using formula y=(d+udPrevious6Days)/7 with the precision and round mode specified in
         // configuration
-        BigDecimal y = d.add(dPrevious6Days).divide(BigDecimal.valueOf(7), input.getOperationScale(),
+        BigDecimal y = derMnyMkt7DayN1AYieldPct.add(dPrevious6Days).divide(BigDecimal.valueOf(7), input.getOperationScale(),
                 BigDecimal.ROUND_HALF_UP);
         ClassLevelEffectiveCompound7DayN1AYieldCalculationOutput output = new ClassLevelEffectiveCompound7DayN1AYieldCalculationOutput();
         output.setDerMnyMktN1ACompound7DayYield(y);

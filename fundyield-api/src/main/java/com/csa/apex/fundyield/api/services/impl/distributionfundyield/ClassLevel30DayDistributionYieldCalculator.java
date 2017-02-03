@@ -23,14 +23,14 @@ public class ClassLevel30DayDistributionYieldCalculator {
     public ClassLevel30DayDistributionYieldCalculationOutput calculate(
             ClassLevel30DayDistributionYieldCalculationInput input) {
         // get parameters from input
-        BigDecimal u = input.getDistUnmod30DayYieldPct();
-        BigDecimal m = input.getDistYieldMilRt();
+        BigDecimal distUnmod30DayYieldPct = input.getDistUnmod30DayYieldPct();
+        BigDecimal adjDistMilSpikeRt = input.getDistYieldMilRt();
         BigDecimal n = input.getNavAmt();
-        int d = input.getDaysInYear();
-        int r = input.getDayOfReportingDate();
+        int daysInYear = input.getDaysInYear();
+        int dayOfReporting = input.getDayOfReportingDate();
         ClassLevel30DayDistributionYieldCalculationOutput output = new ClassLevel30DayDistributionYieldCalculationOutput();
         // calculate y using formula y=u-(m*d)/(n*r) with the precision and round mode specified in configuration
-        BigDecimal y = u.subtract(m.multiply(BigDecimal.valueOf(d)).divide(n.multiply(BigDecimal.valueOf(r)),
+        BigDecimal y = distUnmod30DayYieldPct.subtract(adjDistMilSpikeRt.multiply(BigDecimal.valueOf(daysInYear)).divide(n.multiply(BigDecimal.valueOf(dayOfReporting)),
                 input.getOperationScale(), BigDecimal.ROUND_HALF_UP));
         output.setDerDist30DayYieldPct(y);
         return output;

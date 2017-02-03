@@ -7,162 +7,162 @@ import java.math.BigDecimal;
  */
 public class ClassLevelRestated7DayYieldCalculationInput {
 
-    /**
-     * N1A Dist Income Unmod Amt
-     */
-    private BigDecimal tni;
+	/**
+	 * N1A Dist Income Unmod Amt
+	 */
+	private BigDecimal n1ADistIncomeUnmodAmt;
 
-    /**
-     * N1A Dist Income Adj Amt
-     */
-    private BigDecimal da;
+	/**
+	 * N1A Dist Income Adj Amt
+	 */
+	private BigDecimal n1ADistIncomeAdjAmt;
 
-    /**
-     * N1A Dist Income Adj Rev Amt
-     */
-    private BigDecimal rda;
+	/**
+	 * N1A Dist Income Adj Rev Amt
+	 */
+	private BigDecimal n1ADistIncomeAdjRevAmt;
 
-    /**
-     * N1A Dist Reimbursement Amt
-     */
-    private BigDecimal mda;
+	/**
+	 * N1A Dist Reimbursement Amt
+	 */
+	private BigDecimal n1ADistReimbursementAmt;
 
-    /**
-     * N1A Dist Income Breakage Amt
-     */
-    private BigDecimal b;
+	/**
+	 * N1A Dist Income Breakage Amt
+	 */
+	private BigDecimal n1ADistIncomeBreakageAmt;
 
-    /**
-     * Distributable Capstock Qty
-     */
-    private BigDecimal so;
+	/**
+	 * Distributable Capstock Qty
+	 */
+	private BigDecimal distributableCapstockQty;
 
-    /**
-     * Nav Amt
-     */
-    private BigDecimal nv;
+	/**
+	 * Nav Amt
+	 */
+	private BigDecimal navAmt;
 
-    /**
-     * N1A Reimbursement Earned Amt
-     */
-    private BigDecimal reim;
+	/**
+	 * N1A Reimbursement Earned Amt
+	 */
+	private BigDecimal n1AReimbursementEarnedAmt;
 
-    /**
-     * Sum Of Der Restate 1 Day Yield Mny Mkt Pct Previous Days
-     */
-    private BigDecimal dPrevious6Days;
+	/**
+	 * Sum Of Der Restate 1 Day Yield Mny Mkt Pct Previous Days
+	 */
+	private BigDecimal dPrevious6Days;
 
-    /**
-     * N1A Reimbursement str
-     */
-    private BigDecimal str;
+	/**
+	 * N1A Reimbursement str
+	 */
+	private BigDecimal n1AReimbursementStr;
 
-    /**
-     * N1A Reimbursement opct
-     */
-    private BigDecimal opct;
+	/**
+	 * N1A Reimbursement opct
+	 */
+	private BigDecimal n1AReimbursementOpct;
 
-    /**
-     * Operation scale.
-     */
-    private int operationScale;
+	/**
+	 * Operation scale.
+	 */
+	private int operationScale;
 
-    public ClassLevelRestated7DayYieldCalculationInput() {
-    }
+	public ClassLevelRestated7DayYieldCalculationInput() {
+	}
 
-    public BigDecimal getStr() {
-        return str;
-    }
+	public BigDecimal getN1AReimbursementStr() {
+		return n1AReimbursementStr;
+	}
 
-    public void setStr(BigDecimal str) {
-        this.str = str;
-    }
+	public void setN1AReimbursementStr(BigDecimal n1AReimbursementStr) {
+		this.n1AReimbursementStr = n1AReimbursementStr;
+	}
 
-    public BigDecimal getOpct() {
-        return opct;
-    }
+	public BigDecimal getN1AReimbursementOpct() {
+		return n1AReimbursementOpct;
+	}
 
-    public void setOpct(BigDecimal opct) {
-        this.opct = opct;
-    }
+	public void setN1AReimbursementOpct(BigDecimal n1AReimbursementOpct) {
+		this.n1AReimbursementOpct = n1AReimbursementOpct;
+	}
 
-    public BigDecimal getTni() {
-        return tni;
-    }
+	public BigDecimal getN1ADistIncomeUnmodAmt() {
+		return n1ADistIncomeUnmodAmt;
+	}
 
-    public void setTni(BigDecimal tni) {
-        this.tni = tni;
-    }
+	public void setN1ADistIncomeUnmodAmt(BigDecimal n1ADistIncomeUnmodAmt) {
+		this.n1ADistIncomeUnmodAmt = n1ADistIncomeUnmodAmt;
+	}
 
-    public BigDecimal getDa() {
-        return da;
-    }
+	public BigDecimal getN1ADistIncomeAdjAmt() {
+		return n1ADistIncomeAdjAmt;
+	}
 
-    public void setDa(BigDecimal da) {
-        this.da = da;
-    }
+	public void setN1ADistIncomeAdjAmt(BigDecimal n1ADistIncomeAdjAmt) {
+		this.n1ADistIncomeAdjAmt = n1ADistIncomeAdjAmt;
+	}
 
-    public BigDecimal getRda() {
-        return rda;
-    }
+	public BigDecimal getN1ADistIncomeAdjRevAmt() {
+		return n1ADistIncomeAdjRevAmt;
+	}
 
-    public void setRda(BigDecimal rda) {
-        this.rda = rda;
-    }
+	public void setN1ADistIncomeAdjRevAmt(BigDecimal n1ADistIncomeAdjRevAmt) {
+		this.n1ADistIncomeAdjRevAmt = n1ADistIncomeAdjRevAmt;
+	}
 
-    public BigDecimal getMda() {
-        return mda;
-    }
+	public BigDecimal getN1ADistReimbursementAmt() {
+		return n1ADistReimbursementAmt;
+	}
 
-    public void setMda(BigDecimal mda) {
-        this.mda = mda;
-    }
+	public void setN1ADistReimbursementAmt(BigDecimal n1ADistReimbursementAmt) {
+		this.n1ADistReimbursementAmt = n1ADistReimbursementAmt;
+	}
 
-    public BigDecimal getB() {
-        return b;
-    }
+	public BigDecimal getN1ADistIncomeBreakageAmt() {
+		return n1ADistIncomeBreakageAmt;
+	}
 
-    public void setB(BigDecimal b) {
-        this.b = b;
-    }
+	public void setN1ADistIncomeBreakageAmt(BigDecimal n1ADistIncomeBreakageAmt) {
+		this.n1ADistIncomeBreakageAmt = n1ADistIncomeBreakageAmt;
+	}
 
-    public BigDecimal getSo() {
-        return so;
-    }
+	public BigDecimal getDistributableCapstockQty() {
+		return distributableCapstockQty;
+	}
 
-    public void setSo(BigDecimal so) {
-        this.so = so;
-    }
+	public void setDistributableCapstockQty(BigDecimal distributableCapstockQty) {
+		this.distributableCapstockQty = distributableCapstockQty;
+	}
 
-    public BigDecimal getNv() {
-        return nv;
-    }
+	public BigDecimal getNavAmt() {
+		return navAmt;
+	}
 
-    public void setNv(BigDecimal nv) {
-        this.nv = nv;
-    }
+	public void setNavAmt(BigDecimal navAmt) {
+		this.navAmt = navAmt;
+	}
 
-    public BigDecimal getReim() {
-        return reim;
-    }
+	public BigDecimal getN1AReimbursementEarnedAmt() {
+		return n1AReimbursementEarnedAmt;
+	}
 
-    public void setReim(BigDecimal reim) {
-        this.reim = reim;
-    }
+	public void setN1AReimbursementEarnedAmt(BigDecimal n1AReimbursementEarnedAmt) {
+		this.n1AReimbursementEarnedAmt = n1AReimbursementEarnedAmt;
+	}
 
-    public BigDecimal getdPrevious6Days() {
-        return dPrevious6Days;
-    }
+	public BigDecimal getdPrevious6Days() {
+		return dPrevious6Days;
+	}
 
-    public void setdPrevious6Days(BigDecimal dPrevious6Days) {
-        this.dPrevious6Days = dPrevious6Days;
-    }
+	public void setdPrevious6Days(BigDecimal dPrevious6Days) {
+		this.dPrevious6Days = dPrevious6Days;
+	}
 
-    public int getOperationScale() {
-        return operationScale;
-    }
+	public int getOperationScale() {
+		return operationScale;
+	}
 
-    public void setOperationScale(int operationScale) {
-        this.operationScale = operationScale;
-    }
+	public void setOperationScale(int operationScale) {
+		this.operationScale = operationScale;
+	}
 }

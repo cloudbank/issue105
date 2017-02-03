@@ -7,19 +7,19 @@ import java.math.BigDecimal;
  */
 public class ClassLevel30DayDistributionYieldCalculationOutput {
 
-    /**
-     * Yield amount.
-     */
-    private BigDecimal y;
+	/**
+	 * Yield amount.
+	 */
+	private BigDecimal derDist30DayYieldPct;
 
-    public ClassLevel30DayDistributionYieldCalculationOutput() {
-    }
+	public ClassLevel30DayDistributionYieldCalculationOutput() {
+	}
 
-    public BigDecimal getY() {
-        return y;
-    }
+	public BigDecimal getDerDist30DayYieldPct() {
+		return derDist30DayYieldPct;
+	}
 
-    public void setY(BigDecimal y) {
-        this.y = y;
-    }
+	public void setDerDist30DayYieldPct(BigDecimal derDist30DayYieldPct) {
+		this.derDist30DayYieldPct = derDist30DayYieldPct;
+	}
 }

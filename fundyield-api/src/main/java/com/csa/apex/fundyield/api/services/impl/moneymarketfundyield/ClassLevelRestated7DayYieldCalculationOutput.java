@@ -7,45 +7,45 @@ import java.math.BigDecimal;
  */
 public class ClassLevelRestated7DayYieldCalculationOutput {
 
-    /**
-     * Money market restart yield.
-     */
-    private BigDecimal mil;
+	/**
+	 * Money market restart yield.
+	 */
+	private BigDecimal moneyMarketRestartYield;
 
-    /**
-     * Mny Mkt restart 1 day yield.
-     */
-    private BigDecimal d;
+	/**
+	 * Mny Mkt restart 1 day yield.
+	 */
+	private BigDecimal d;
 
-    /**
-     * Yield amount.
-     */
-    private BigDecimal y;
+	/**
+	 * Yield amount.
+	 */
+	private BigDecimal derMmRst7DayYieldPct;
 
-    public ClassLevelRestated7DayYieldCalculationOutput() {
-    }
+	public ClassLevelRestated7DayYieldCalculationOutput() {
+	}
 
-    public BigDecimal getMil() {
-        return mil;
-    }
+	public BigDecimal getMoneyMarketRestartYield() {
+		return moneyMarketRestartYield;
+	}
 
-    public void setMil(BigDecimal mil) {
-        this.mil = mil;
-    }
+	public void setMoneyMarketRestartYield(BigDecimal moneyMarketRestartYield) {
+		this.moneyMarketRestartYield = moneyMarketRestartYield;
+	}
 
-    public BigDecimal getD() {
-        return d;
-    }
+	public BigDecimal getD() {
+		return d;
+	}
 
-    public void setD(BigDecimal d) {
-        this.d = d;
-    }
+	public void setD(BigDecimal d) {
+		this.d = d;
+	}
 
-    public BigDecimal getY() {
-        return y;
-    }
+	public BigDecimal getDerMmRst7DayYieldPct() {
+		return derMmRst7DayYieldPct;
+	}
 
-    public void setY(BigDecimal y) {
-        this.y = y;
-    }
+	public void setDerMmRst7DayYieldPct(BigDecimal derMmRst7DayYieldPct) {
+		this.derMmRst7DayYieldPct = derMmRst7DayYieldPct;
+	}
 }

@@ -53,8 +53,8 @@ public class YtmYieldCalculator {
 		DateTime compareDate = new DateTime(yearBusiness, monthMaturity + 1, dayMaturity, 0, 0, 0, 0);
 		DateTime reportDate = new DateTime(yearBusiness, monthBusiness + 1, dayBusiness, 0, 0, 0, 0);
 		if (compareDate.compareTo(reportDate) < 0) {
-			Period p = new Period(compareDate, reportDate, PeriodType.months().withDaysRemoved());
-			int months = p.getMonths() + 1;
+			Period period = new Period(compareDate, reportDate, PeriodType.months().withDaysRemoved());
+			int months = period.getMonths() + 1;
 			if (months > 6) {
 				compareDate = compareDate.plusMonths(6);
 			}
@@ -105,21 +105,21 @@ public class YtmYieldCalculator {
 			BigDecimal yield) {
 		// (Redemption Value) equal to maturity price
 		Double rv = input.getMaturityPrice().doubleValue();
-		int m = input.getFrequencyValue();
-		int n = dto.couponsBetSettlementRedemption;
+		int frequencyValue = input.getFrequencyValue();
+		int betSettlementRedemption = dto.couponsBetSettlementRedemption;
 		int dsc = dto.dsc;
-		int e = input.getNumOfDaysInPeriod();
+		int numberOfDays = input.getNumOfDaysInPeriod();
 		// (Annual Interest Rate) equal to Coupon (interest) Rate
-		Double r = input.getCurrentIncomeRate().doubleValue();
-		int a = dto.daysBetPriorCouponDateSettlementDate;
-		Double p = dto.cleanPrice.doubleValue();
-		Double yByM = yield.divide(new BigDecimal(m)).doubleValue();
+		Double currentIncomeRate = input.getCurrentIncomeRate().doubleValue();
+		int dbpCouponDateSettlementDate = dto.daysBetPriorCouponDateSettlementDate;
+		Double cleanPrice = dto.cleanPrice.doubleValue();
+		Double yByM = yield.divide(new BigDecimal(frequencyValue)).doubleValue();
 		Double onePlusYByM = 1 + yByM;
-		Double comp1 = rv / Math.pow(onePlusYByM, n - 1 + ((double) dsc / e));
-		Double comp2first = (100 * r / m) / Math.pow(onePlusYByM, (double) dsc / e);
-		Double comp2Second = (Math.pow(onePlusYByM, n) - 1) / (yByM * Math.pow(onePlusYByM, (double) n - 1));
+		Double comp1 = rv / Math.pow(onePlusYByM, betSettlementRedemption - 1 + ((double) dsc / numberOfDays));
+		Double comp2first = (100 * currentIncomeRate / frequencyValue) / Math.pow(onePlusYByM, (double) dsc / numberOfDays);
+		Double comp2Second = (Math.pow(onePlusYByM, betSettlementRedemption) - 1) / (yByM * Math.pow(onePlusYByM, (double) betSettlementRedemption - 1));
 		Double comp2 = comp2first * comp2Second;
-		Double comp3 = (100 * (r / m) * ((double) a / e)) + p;
+		Double comp3 = (100 * (currentIncomeRate / frequencyValue) * ((double) dbpCouponDateSettlementDate / numberOfDays)) + cleanPrice;
 		return comp1 + comp2 - comp3;
 	}
 
@@ -213,7 +213,7 @@ public class YtmYieldCalculator {
 		CommonUtility.checkNull(input, "Parameter YtmYieldCalculationInput");
 
 		// set P (clean price) as Market Price/Inflationary Index Ratio
-		BigDecimal p = input.getMarketPrice().divide(input.getFdrTipsInsflationaryRatio(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		BigDecimal cleanPrice = input.getMarketPrice().divide(input.getFdrTipsInsflationaryRatio(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
 
 		// calculate N (Number of coupons payable between settlement date and
 		// redemption date, rounded up)
@@ -232,7 +232,7 @@ public class YtmYieldCalculator {
 		int a = DateUtility.days360(previousCouponDate, input.getReportDate());
 
 		YtmYieldCalculationVariablesDTO dto = new YtmYieldCalculationVariablesDTO();
-		dto.cleanPrice = p;
+		dto.cleanPrice = cleanPrice;
 		dto.couponsBetSettlementRedemption = n;
 		dto.daysBetPriorCouponDateSettlementDate = a;
 		dto.dsc = dsc;
@@ -242,7 +242,7 @@ public class YtmYieldCalculator {
 
 		// set the output values
 		YtmYieldCalculationOutput output = new YtmYieldCalculationOutput();
-		output.setFdrCleanPrice(p);
+		output.setFdrCleanPrice(cleanPrice);
 		output.setDerOneDaySecurityYield(yield);
 		output.setDerRedemptionPrice(input.getMaturityPrice());
 		return output;

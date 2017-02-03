@@ -47,7 +47,7 @@ public class ClassLevel12MonthDistributionYieldCalculationEngine implements Calc
                     if (snapshots == null) {
                         continue;
                     }
-                    Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
+                    Predicate<ShareClassSnapshot> predicate = shareClassSnapShot -> shareClassSnapShot.getReportDate().equals(reportDate);
                     ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
                     ClassLevel12MonthDistributionYieldCalculationInput input = new ClassLevel12MonthDistributionYieldCalculationInput();
                     input.setDist12MoMilRt(snapshot.getDist12MoMilRt());

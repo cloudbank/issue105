@@ -24,8 +24,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getStr() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(12);
-        instance.setStr(expected);
-        assertEquals(expected, instance.getStr());
+        instance.setN1ADistIncomeStr(expected);
+        assertEquals(expected, instance.getN1ADistIncomeStr());
     }
     /**
      * Test for method setStr.
@@ -36,8 +36,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setStr() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(75);
-        instance.setStr(expected);
-        assertEquals(expected, instance.getStr());
+        instance.setN1ADistIncomeStr(expected);
+        assertEquals(expected, instance.getN1ADistIncomeStr());
     }
     /**
      * Test for method getOpct.
@@ -48,8 +48,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getOpct() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(25);
-        instance.setOpct(expected);
-        assertEquals(expected, instance.getOpct());
+        instance.setN1ADistIncomeOpct(expected);
+        assertEquals(expected, instance.getN1ADistIncomeOpct());
     }
     /**
      * Test for method setOpct.
@@ -60,8 +60,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setOpct() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(77);
-        instance.setOpct(expected);
-        assertEquals(expected, instance.getOpct());
+        instance.setN1ADistIncomeOpct(expected);
+        assertEquals(expected, instance.getN1ADistIncomeOpct());
     }
     /**
      * Test for method getTni.
@@ -72,8 +72,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getTni() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(93);
-        instance.setTni(expected);
-        assertEquals(expected, instance.getTni());
+        instance.setN1ADistIncomeUnmodAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeUnmodAmt());
     }
     /**
      * Test for method setTni.
@@ -84,8 +84,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setTni() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(10);
-        instance.setTni(expected);
-        assertEquals(expected, instance.getTni());
+        instance.setN1ADistIncomeUnmodAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeUnmodAmt());
     }
     /**
      * Test for method getDa.
@@ -96,8 +96,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getDa() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(4);
-        instance.setDa(expected);
-        assertEquals(expected, instance.getDa());
+        instance.setN1ADistIncomeAdjAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeAdjAmt());
     }
     /**
      * Test for method setDa.
@@ -108,8 +108,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setDa() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(82);
-        instance.setDa(expected);
-        assertEquals(expected, instance.getDa());
+        instance.setN1ADistIncomeAdjAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeAdjAmt());
     }
     /**
      * Test for method getRda.
@@ -120,8 +120,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getRda() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(49);
-        instance.setRda(expected);
-        assertEquals(expected, instance.getRda());
+        instance.setN1ADistIncomeAdjRevAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeAdjRevAmt());
     }
     /**
      * Test for method setRda.
@@ -132,8 +132,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setRda() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(94);
-        instance.setRda(expected);
-        assertEquals(expected, instance.getRda());
+        instance.setN1ADistIncomeAdjRevAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeAdjRevAmt());
     }
     /**
      * Test for method getMda.
@@ -144,8 +144,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getMda() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(63);
-        instance.setMda(expected);
-        assertEquals(expected, instance.getMda());
+        instance.setN1ADistReimbursementAmt(expected);
+        assertEquals(expected, instance.getN1ADistReimbursementAmt());
     }
     /**
      * Test for method setMda.
@@ -156,8 +156,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setMda() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(60);
-        instance.setMda(expected);
-        assertEquals(expected, instance.getMda());
+        instance.setN1ADistReimbursementAmt(expected);
+        assertEquals(expected, instance.getN1ADistReimbursementAmt());
     }
     /**
      * Test for method getB.
@@ -168,8 +168,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getB() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(36);
-        instance.setB(expected);
-        assertEquals(expected, instance.getB());
+        instance.setN1ADistIncomeBreakageAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeBreakageAmt());
     }
     /**
      * Test for method setB.
@@ -180,8 +180,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setB() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(47);
-        instance.setB(expected);
-        assertEquals(expected, instance.getB());
+        instance.setN1ADistIncomeBreakageAmt(expected);
+        assertEquals(expected, instance.getN1ADistIncomeBreakageAmt());
     }
     /**
      * Test for method getSo.
@@ -192,8 +192,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getSo() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(99);
-        instance.setSo(expected);
-        assertEquals(expected, instance.getSo());
+        instance.setDistributableCapstockQty(expected);
+        assertEquals(expected, instance.getDistributableCapstockQty());
     }
     /**
      * Test for method setSo.
@@ -204,8 +204,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setSo() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(2);
-        instance.setSo(expected);
-        assertEquals(expected, instance.getSo());
+        instance.setDistributableCapstockQty(expected);
+        assertEquals(expected, instance.getDistributableCapstockQty());
     }
     /**
      * Test for method getNv.
@@ -216,8 +216,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void getNv() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(13);
-        instance.setNv(expected);
-        assertEquals(expected, instance.getNv());
+        instance.setNavAmount(expected);
+        assertEquals(expected, instance.getNavAmount());
     }
     /**
      * Test for method setNv.
@@ -228,8 +228,8 @@ public class ClassLevel1DayN1AYieldCalculationInputTest {
     public void setNv() throws Exception {
         ClassLevel1DayN1AYieldCalculationInput instance = new ClassLevel1DayN1AYieldCalculationInput();
         BigDecimal expected = new BigDecimal(26);
-        instance.setNv(expected);
-        assertEquals(expected, instance.getNv());
+        instance.setNavAmount(expected);
+        assertEquals(expected, instance.getNavAmount());
     }
     /**
      * Test for method getOperationScale.

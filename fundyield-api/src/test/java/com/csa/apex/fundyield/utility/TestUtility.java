@@ -100,45 +100,45 @@ public class TestUtility {
 
     public static ClassLevelRestated7DayYieldCalculationInput getClassLevelRestated7DayYieldCalculationInput() {
         ClassLevelRestated7DayYieldCalculationInput rt = new ClassLevelRestated7DayYieldCalculationInput();
-        rt.setB(BigDecimal.ONE);
-        rt.setDa(BigDecimal.ONE);
+        rt.setN1ADistIncomeBreakageAmt(BigDecimal.ONE);
+        rt.setN1ADistIncomeAdjAmt(BigDecimal.ONE);
         rt.setdPrevious6Days(BigDecimal.ONE);
-        rt.setMda(BigDecimal.ONE);
-        rt.setNv(BigDecimal.ONE);
-        rt.setOpct(BigDecimal.ONE);
+        rt.setN1ADistReimbursementAmt(BigDecimal.ONE);
+        rt.setNavAmt(BigDecimal.ONE);
+        rt.setN1AReimbursementOpct(BigDecimal.ONE);
         rt.setOperationScale(2);
-        rt.setRda(BigDecimal.ONE);
-        rt.setReim(BigDecimal.ONE);
-        rt.setSo(BigDecimal.ONE);
-        rt.setStr(BigDecimal.ONE);
-        rt.setTni(BigDecimal.ONE);
+        rt.setN1ADistIncomeAdjRevAmt(BigDecimal.ONE);
+        rt.setN1AReimbursementEarnedAmt(BigDecimal.ONE);
+        rt.setDistributableCapstockQty(BigDecimal.ONE);
+        rt.setN1AReimbursementStr(BigDecimal.ONE);
+        rt.setN1ADistIncomeUnmodAmt(BigDecimal.ONE);
         return rt;
 
     }
 
     public static ClassLevel1DayN1AYieldCalculationInput getClassLevel1DayN1AYieldCalculationInput() {
         ClassLevel1DayN1AYieldCalculationInput rt = new ClassLevel1DayN1AYieldCalculationInput();
-        rt.setB(BigDecimal.ONE);
-        rt.setDa(BigDecimal.ONE);
-        rt.setMda(BigDecimal.ONE);
-        rt.setNv(BigDecimal.ONE);
-        rt.setOpct(BigDecimal.ONE);
+        rt.setN1ADistIncomeBreakageAmt(BigDecimal.ONE);
+        rt.setN1ADistIncomeAdjAmt(BigDecimal.ONE);
+        rt.setN1ADistReimbursementAmt(BigDecimal.ONE);
+        rt.setNavAmount(BigDecimal.ONE);
+        rt.setN1ADistIncomeOpct(BigDecimal.ONE);
         rt.setOperationScale(2);
-        rt.setRda(BigDecimal.ONE);
-        rt.setSo(BigDecimal.ONE);
-        rt.setStr(BigDecimal.ONE);
-        rt.setTni(BigDecimal.ONE);
+        rt.setN1ADistIncomeAdjRevAmt(BigDecimal.ONE);
+        rt.setDistributableCapstockQty(BigDecimal.ONE);
+        rt.setN1ADistIncomeStr(BigDecimal.ONE);
+        rt.setN1ADistIncomeUnmodAmt(BigDecimal.ONE);
         return rt;
     }
 
     public static ClassLevel30DayDistributionYieldCalculationInput getClassLevel30DayDistributionYieldCalculationInput() {
         ClassLevel30DayDistributionYieldCalculationInput rt = new ClassLevel30DayDistributionYieldCalculationInput();
-        rt.setD(1);
-        rt.setM(BigDecimal.ONE);
-        rt.setN(BigDecimal.ONE);
+        rt.setDaysInYear(1);
+        rt.setDistYieldMilRt(BigDecimal.ONE);
+        rt.setNavAmt(BigDecimal.ONE);
         rt.setOperationScale(2);
-        rt.setR(1);
-        rt.setU(BigDecimal.ONE);
+        rt.setReportingDate(1);
+        rt.setDistUnmod30DayYieldPct(BigDecimal.ONE);
         return rt;
     }
 

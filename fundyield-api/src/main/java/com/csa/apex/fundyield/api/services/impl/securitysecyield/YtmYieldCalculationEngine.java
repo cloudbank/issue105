@@ -127,23 +127,23 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 	 *
 	 * @param data The FundAccountingYieldData to calculate
 	 * @param instrument The Instrument to calculate
-	 * @param tes The TradableEntitySnapshot to calculate
+	 * @param tradableEntitySnapshot The TradableEntitySnapshot to calculate
 	 * @param configuration The SECConfiguration to be used for config values
 	 */
 	@Override
-	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tes,
+	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tradableEntitySnapshot,
 			SECConfiguration configuration) {
 
 		YtmYieldCalculationInput input = new YtmYieldCalculationInput(configuration);
 
 		// Calculate derTIPSInflationaryRatio
 		List<PortfolioHoldingSnapshot> holdings = CommonUtility.getRelatedPortfolioHoldings(data,
-				tes.getTradableEntitySid());
+				tradableEntitySnapshot.getTradableEntitySid());
 		if (holdings != null && !holdings.isEmpty()) {
 			PortfolioHoldingSnapshot holding = holdings.get(0);
 			BigDecimal derTIPSInflationaryRatio = holding.getInflationAdjShareCnt().divide(holding.getSettleShareCnt(),
 					input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
-			tes.setFdrTipsInflationaryRatio(derTIPSInflationaryRatio);
+			tradableEntitySnapshot.setFdrTipsInflationaryRatio(derTIPSInflationaryRatio);
 		}
 
 		input.setFrequencyValue(frequencyValue);
@@ -152,9 +152,9 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 		input.setNumOfDaysInPeriod(numOfDaysInPeriod);
 		input.setMinYield(minYield);
 		input.setMaxYield(maxYield);
-		input.setMarketPrice(tes.getMarketPrice());
-		input.setCurrentIncomeRate(tes.getCurrentIncomeRate());
-		input.setFdrTipsInsflationaryRatio(tes.getFdrTipsInflationaryRatio());
+		input.setMarketPrice(tradableEntitySnapshot.getMarketPrice());
+		input.setCurrentIncomeRate(tradableEntitySnapshot.getCurrentIncomeRate());
+		input.setFdrTipsInsflationaryRatio(tradableEntitySnapshot.getFdrTipsInflationaryRatio());
 		input.setMaturityPrice(instrument.getMaturityPrc());
 		input.setMaturityDate(instrument.getFinalMaturityDate());
 		input.setReportDate(data.getReportDate());
@@ -162,8 +162,8 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 		// calculate
 		YtmYieldCalculationOutput output = calculator.calculate(input);
 
-		tes.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
-		tes.setFdrCleanPrice(output.getFdrCleanPrice());
-		tes.setDerRedemptionPrice(output.getDerRedemptionPrice());
+		tradableEntitySnapshot.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
+		tradableEntitySnapshot.setFdrCleanPrice(output.getFdrCleanPrice());
+		tradableEntitySnapshot.setDerRedemptionPrice(output.getDerRedemptionPrice());
 	}
 }

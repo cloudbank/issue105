@@ -45,15 +45,15 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
                 Date reportDate = fundAccountingYieldData.getReportDate();
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(reportDate);
-                int r = cal.get(Calendar.DAY_OF_MONTH);
-                int d = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
+                int dayOfReportingDate = cal.get(Calendar.DAY_OF_MONTH);
+                int daysInYear = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
                 for (ShareClass shareClass : portfolio.getShareClasses()) {
                     // get share class snapshot for the report date
                     List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
                     if (snapshots == null) {
                         continue;
                     }
-                    Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
+                    Predicate<ShareClassSnapshot> predicate = shareClassSnapshot -> shareClassSnapshot.getReportDate().equals(reportDate);
                     ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
 
                     ClassLevel30DayDistributionYieldCalculationInput input = new ClassLevel30DayDistributionYieldCalculationInput();
@@ -62,8 +62,8 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
                     input.setDistYieldMilRt(
                             (snapshot.getDistYieldMilRt() != null) ? snapshot.getDistYieldMilRt() : BigDecimal.ONE);
                     input.setNavAmt(snapshot.getNavAmt());
-                    input.setDayOfReportingDate(r);
-                    input.setDaysInYear(d);
+                    input.setDayOfReportingDate(dayOfReportingDate);
+                    input.setDaysInYear(daysInYear);
                     ClassLevel30DayDistributionYieldCalculator calculator = new ClassLevel30DayDistributionYieldCalculator();
                     ClassLevel30DayDistributionYieldCalculationOutput output = calculator.calculate(input);
                     snapshot.setDerDist30DayYieldPct(output.getDerDist30DayYieldPct());

@@ -24,12 +24,12 @@ public class ClassLevel12MonthDistributionYieldCalculator {
     public ClassLevel12MonthDistributionYieldCalculationOutput calculate(
             ClassLevel12MonthDistributionYieldCalculationInput input) {
         // get parameters from input
-        BigDecimal m = input.getDist12MoMilRt();
-        BigDecimal n = input.getNavAmt();
+        BigDecimal dist12MoMilRt = input.getDist12MoMilRt();
+        BigDecimal classNavAmount = input.getNavAmt();
         // calculate y using formula y = m / n with the precision and round mode specified in configuration
-        BigDecimal y = m.divide(n, input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+        BigDecimal der12MonthYieldDistPct = dist12MoMilRt.divide(classNavAmount, input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
         ClassLevel12MonthDistributionYieldCalculationOutput output = new ClassLevel12MonthDistributionYieldCalculationOutput();
-        output.setDerDist12MoYieldPct(y);
+        output.setDerDist12MoYieldPct(der12MonthYieldDistPct);
         return output;
     }
 }

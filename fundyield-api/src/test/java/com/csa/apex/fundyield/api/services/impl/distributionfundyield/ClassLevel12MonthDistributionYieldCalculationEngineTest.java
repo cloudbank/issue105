@@ -26,6 +26,7 @@ public class ClassLevel12MonthDistributionYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevel12MonthDistributionYieldCalculationEngine instance = new ClassLevel12MonthDistributionYieldCalculationEngine();
+        instance.setThreadCount(20);
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();
         configuration.setOperationScale(2);

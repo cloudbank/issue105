@@ -1,24 +1,21 @@
 package com.csa.apex.fundyield.api.services.impl.distributionfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationEngineImpl;
+import com.csa.apex.fundyield.exceptions.CalculationException;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
+import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
-import com.csa.apex.fundyield.exceptions.CalculationException;
-import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
-import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
-import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
-import com.csa.apex.fundyield.utility.CommonUtility;
-import com.csa.apex.fundyield.utility.Constants;
-import com.csa.apex.fundyield.utility.LogMethod;
-
 /**
  * Class Level 12 Month Distribution Yield calculation engine. Effectively thread safe after configuration.
  */
-public class ClassLevel12MonthDistributionYieldCalculationEngine implements CalculationEngine {
+@Service
+public class ClassLevel12MonthDistributionYieldCalculationEngine extends BaseCalculationEngineImpl {
 
     /**
      * Empty constructor.
@@ -27,46 +24,32 @@ public class ClassLevel12MonthDistributionYieldCalculationEngine implements Calc
     }
 
     /**
-     * Calculates the Class Level 12 Month Distribution Yield.
-     * @param fundAccountingYieldData the input FundAccountingYieldData;
-     * @param configuration the SECConfiguration to be used for config values; if the the config values are provided
-     *            they will be used instead of default ones.
+     * Calculates the Class Level 12 Month Distribution Yield (per portfolio).
+     * @param portfolio the portfolio;
+     * @param reportDate the report date.
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws CalculationException in case any error during calculation.
      */
-    @LogMethod
-	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
-			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
-				"Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
-				"Parameter configuration");
-
-		try {
-			if (fundAccountingYieldData.getPortfolios() != null) {
-				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = portfolio.getPortfolioSnapshots().get(0).getReportDate();
-					if (portfolio.getShareClasses() != null) {
-						for (ShareClass shareClass : portfolio.getShareClasses()) {
-							// get share class snapshot for the report date
-							List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
-							if (snapshots == null) {
-								continue;
-							}
-							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
-							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-							ClassLevel12MonthDistributionYieldCalculationInput input = new ClassLevel12MonthDistributionYieldCalculationInput(configuration);
-							input.setDist12MoMilRt(snapshot.getDist12MoMilRt());
-							input.setNavAmt(snapshot.getNavAmt());
-							ClassLevel12MonthDistributionYieldCalculator calculator = new ClassLevel12MonthDistributionYieldCalculator();
-							ClassLevel12MonthDistributionYieldCalculationOutput output = calculator.calculate(input);
-							snapshot.setDerDist12MoYieldPct(output.getDerDist12MoYieldPct());
-						}
-					}
+    @Override
+    protected Portfolio doCalculate(Portfolio portfolio, Date reportDate) {
+		Date pssReportDate = portfolio.getPortfolioSnapshots().get(0).getReportDate();
+		if (portfolio.getShareClasses() != null) {
+			for (ShareClass shareClass : portfolio.getShareClasses()) {
+				// get share class snapshot for the report date
+				List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
+				if (snapshots == null) {
+					continue;
 				}
+				Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(pssReportDate);
+				ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
+				ClassLevel12MonthDistributionYieldCalculationInput input = new ClassLevel12MonthDistributionYieldCalculationInput(configuration);
+				input.setDist12MoMilRt(snapshot.getDist12MoMilRt());
+				input.setNavAmt(snapshot.getNavAmt());
+				ClassLevel12MonthDistributionYieldCalculator calculator = new ClassLevel12MonthDistributionYieldCalculator();
+				ClassLevel12MonthDistributionYieldCalculationOutput output = calculator.calculate(input);
+				snapshot.setDerDist12MoYieldPct(output.getDerDist12MoYieldPct());
 			}
-		} catch (Exception e) {
-			throw new CalculationException(e.getMessage(), e);
 		}
-	}
+        return portfolio;
+    }
 }

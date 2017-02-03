@@ -260,4 +260,24 @@ public class Portfolio extends Versionable {
     public void setPortfolioHoldings(List<PortfolioHoldingSnapshot> portfolioHoldings) {
         this.portfolioHoldings = portfolioHoldings;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Portfolio portfolio = (Portfolio) o;
+
+        if (portfolioSid != portfolio.portfolioSid) return false;
+        return portfolioId == portfolio.portfolioId;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (int) (portfolioSid ^ (portfolioSid >>> 32));
+        result = 31 * result + (int) (portfolioId ^ (portfolioId >>> 32));
+        return result;
+    }
 }

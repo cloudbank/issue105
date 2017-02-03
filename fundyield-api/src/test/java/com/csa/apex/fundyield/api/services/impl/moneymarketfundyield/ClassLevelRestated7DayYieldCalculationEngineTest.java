@@ -35,6 +35,7 @@ public class ClassLevelRestated7DayYieldCalculationEngineTest {
     @Test
     public void calculate() throws Exception {
         ClassLevelRestated7DayYieldCalculationEngine instance = new ClassLevelRestated7DayYieldCalculationEngine();
+        instance.setThreadCount(20);
         instance.setUtilityCustomerAPIClient(TestUtility.getUtilityFAYAAPIClient());
         FundAccountingYieldData fundAccountingYieldData = TestUtility.getFundAccountingYieldData();
         SECConfiguration configuration = new SECConfiguration();

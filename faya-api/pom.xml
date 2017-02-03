@@ -150,13 +150,28 @@
             </plugin>
             <!-- https://mvnrepository.com/artifact/org.codehaus.mojo/exec-maven-plugin -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
-                </configuration>
-            </plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+						<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						<mainClass>com.csa.apex.fundyield.faya.commands.ImportExcel</mainClass>
+						<arguments>
+							<argument>--excel</argument>
+							<argument>${project.basedir}/../test_data/Phase1TestData.xlsx</argument>
+							<argument>--mapping</argument>
+							<argument>${project.basedir}/src/main/resources/excelMapping.properties</argument>
+						</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

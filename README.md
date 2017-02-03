@@ -114,6 +114,18 @@ docs/fundyield-api.postman_collection.json
 
 - In case you want to pre-load some data, in Oracle Developer, connect to `local_secyield` and run `test_data/clear.sql` & `test_data/test_data.sql`.
 
+#### Build all modules
+- When running for the first time ojdbc6.jar needs to be added to local maven repository
+
+  1. Go to `faya-api` folder, run:
+  
+  ```mvn install:install-file -Dfile=lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar```
+  
+  2. To build all 3 modules, go to root directory (/backend) and run:
+
+   ```mvn clean install ```
+   It will build all 3 modules with tests.
+
 #### Build App
 - In `seccommons` folder, run the following command
 

@@ -15,6 +15,7 @@ import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.FAYADistributiontFundYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -44,7 +45,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaDistYieldDataPersistenceService, "fayaDistYieldDataPersistenceService");
+        CommonUtility.checkNullConfig(fayaDistYieldDataPersistenceService, ApplicationConstant.FAYA_DIST_YIELD_DATA_PERSISTENCE_SERVICE);
     }
 
     /**
@@ -58,7 +59,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @LogMethod
     public FundAccountingYieldData getFAYADistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(businessDate);
     }
 
@@ -74,10 +75,10 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @Transactional
     public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData,
             HttpServletRequest request) throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, "fundAccountingYieldData");
-        CommonUtility.checkNull(request, "request");
+        CommonUtility.checkNull(fundAccountingYieldData, ApplicationConstant.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(request, ApplicationConstant.REQUEST);
         HttpSession session = request.getSession();
-        String currentUserId = (String) session.getAttribute("currentUserId");
+        String currentUserId = (String) session.getAttribute(ApplicationConstant.CURRENT_USER_ID);
         return fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(fundAccountingYieldData,
                 currentUserId);
     }
@@ -93,7 +94,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @LogMethod
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(businessDate);
     }
 

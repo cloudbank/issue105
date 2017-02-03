@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -44,7 +45,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, "jdbcTemplate");
+        CommonUtility.checkNullConfig(jdbcTemplate, ApplicationConstant.JDBC_TEMPLATE);
     }
 
     /**
@@ -139,9 +140,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     private BigDecimal callStoredProcedure(String spName, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         try {
             DateTime businessDateTime = new DateTime(reportDate).withTimeAtStartOfDay();
             Date endDate = businessDateTime.plusDays(numOfDays).withTimeAtStartOfDay().toDate();

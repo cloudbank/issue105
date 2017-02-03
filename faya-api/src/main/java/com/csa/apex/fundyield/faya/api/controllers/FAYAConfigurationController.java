@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.faya.api.FAYAConfigurationService;
 import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -46,7 +47,7 @@ public class FAYAConfigurationController implements FAYAConfigurationService {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(secConfiguration, "secConfiguration");
+        CommonUtility.checkNullConfig(secConfiguration, ApplicationConstant.SEC_CONFIGURATION);
     }
 
     /**

@@ -24,6 +24,7 @@ import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
 import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**
@@ -150,7 +151,7 @@ public class SequenceSecurityCalculationEngineTest {
 		TradableEntitySnapshot tes = instrument.getTradableEntities().get(0).getTradableEntitySnapshots().get(0);
 		PortfolioHoldingSnapshot holding = data.getPortfolios().get(0).getPortfolioHoldings().get(0);
 
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat(ApplicationConstant.DATE_MASK_MM_DD_YYYY);
 		data.setReportDate(formatter.parse("06/03/2016"));
 		instrument.setFinalMaturityDate(formatter.parse("02/15/2044"));
 		instrument.setMaturityPrc(utility.getBigDecimalWithScale7(new BigDecimal(100)));

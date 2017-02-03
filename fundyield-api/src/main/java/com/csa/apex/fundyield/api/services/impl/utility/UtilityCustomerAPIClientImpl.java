@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -192,8 +193,8 @@ public class UtilityCustomerAPIClientImpl implements UtilityFAYAAPIClient {
     private BigDecimal getResultFromApiPath(String path, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
         // RestTemplate restTemplate = new RestTemplate();
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(path).queryParam("reportDate", reportDate)
-                .queryParam("shareClassSid", shareClassSid).queryParam("numOfDays", numOfDays);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(path).queryParam(ApplicationConstant.REPORT_DATE, reportDate)
+                .queryParam(ApplicationConstant.SHARE_CLASS_SID, shareClassSid).queryParam(ApplicationConstant.NUM_OF_DAYS, numOfDays);
         BigDecimal result = restTemplate.getForObject(builder.build().encode().toUri(), BigDecimal.class);
         return result;
     }

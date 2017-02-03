@@ -34,6 +34,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.api.services.impl.DistributionFundYieldServiceImpl;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the CustomerDataController.
@@ -94,7 +95,7 @@ public class DistributionFundYiedControllerTest {
 	
 	@Test
 	public void getDistributionFundYieldData() throws Exception {
-		DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
 		distributionFundYiedController.getDistributionFundYieldData(businessDate);
 	}
@@ -119,7 +120,7 @@ public class DistributionFundYiedControllerTest {
 	 */
 	@Test
 	public void getCalculatedDistributionFundYieldData() throws Exception {
-		DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
 		distributionFundYiedController.getCalculatedDistributionFundYieldData(businessDate);
 	}

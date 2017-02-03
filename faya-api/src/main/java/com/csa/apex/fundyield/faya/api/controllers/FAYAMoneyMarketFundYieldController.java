@@ -15,6 +15,7 @@ import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.FAYAMoneyMarketFundYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -43,7 +44,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaMoneyMarketDataPersistenceService, "fayaMoneyMarketDataPersistenceService");
+        CommonUtility.checkNullConfig(fayaMoneyMarketDataPersistenceService, ApplicationConstant.FAYA_MONEY_MARKET_DATA_PERSISTENCE_SERVICE);
     }
 
     /**
@@ -57,7 +58,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @LogMethod
     public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(businessDate);
     }
 
@@ -73,10 +74,10 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @Transactional
     public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData,
             HttpServletRequest request) throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, "fundAccountingYieldData");
-        CommonUtility.checkNull(request, "request");
+        CommonUtility.checkNull(fundAccountingYieldData, ApplicationConstant.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(request, ApplicationConstant.REQUEST);
         HttpSession session = request.getSession();
-        String currentUserId = (String) session.getAttribute("currentUserId");
+        String currentUserId = (String) session.getAttribute(ApplicationConstant.CURRENT_USER_ID);
         return fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(fundAccountingYieldData,
                 currentUserId);
     }
@@ -92,7 +93,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @LogMethod
     public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(businessDate);
     }
 

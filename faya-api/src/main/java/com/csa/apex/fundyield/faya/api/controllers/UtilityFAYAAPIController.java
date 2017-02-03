@@ -13,6 +13,7 @@ import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.UtilityFAYAAPIService;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
@@ -43,7 +44,7 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(utilityFAYAAPIPersistenceService, "utilityFAYAAPIPersistenceService");
+        CommonUtility.checkNullConfig(utilityFAYAAPIPersistenceService, ApplicationConstant.UTILITY_FAYA_API_PERSISTENCE_SERVICE);
     }
 
     /**
@@ -60,9 +61,9 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
     public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(shareClassSid, reportDate,
                 numOfDays);
     }
@@ -81,9 +82,9 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
     public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         return utilityFAYAAPIPersistenceService.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate,
                 numOfDays);
     }
@@ -102,9 +103,9 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
     public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         return utilityFAYAAPIPersistenceService.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(shareClassSid,
                 reportDate, numOfDays);
     }
@@ -123,9 +124,9 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
     public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt7DayYieldPctForPreviousDays(shareClassSid, reportDate,
                 numOfDays);
     }
@@ -144,9 +145,9 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
     public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, "shareClassSid");
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkNumber(numOfDays, "numOfDays");
+        CommonUtility.checkNumber(shareClassSid, ApplicationConstant.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, ApplicationConstant.NUM_OF_DAYS);
         return utilityFAYAAPIPersistenceService.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate,
                 numOfDays);
     }

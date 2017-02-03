@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.Constants;
 
 /**
@@ -37,7 +38,7 @@ public interface FAYADistributiontFundYieldService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getFAYADistributionFundYieldData(
-            @RequestParam("businessDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+            @RequestParam(ApplicationConstant.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException;
 
     /**
@@ -64,6 +65,6 @@ public interface FAYADistributiontFundYieldService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(
-            @RequestParam("businessDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+            @RequestParam(ApplicationConstant.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException;
 }

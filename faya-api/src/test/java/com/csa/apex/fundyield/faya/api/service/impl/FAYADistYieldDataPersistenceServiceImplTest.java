@@ -27,6 +27,7 @@ import com.csa.apex.fundyield.seccommons.entities.Portfolio;
 import com.csa.apex.fundyield.seccommons.entities.PortfolioSnapshot;
 import com.csa.apex.fundyield.seccommons.entities.ShareClass;
 import com.csa.apex.fundyield.seccommons.entities.ShareClassSnapshot;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the FAYADistYieldDataPersistenceServiceImpl.
@@ -54,7 +55,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
      */
     @Test
     public void getFAYADistributionFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-20");
         assertNotNull(fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(businessDate));
     }
@@ -74,7 +75,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
      */
     @Test
     public void persistDistributionFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2017-01-08");
         FundAccountingYieldData data = new FundAccountingYieldData();
         data.setBusinessDate(businessDate);
@@ -125,7 +126,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
      */
     @Test
     public void getCalculatedDistributionFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
         assertNotNull(fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(businessDate));
     }

@@ -16,6 +16,7 @@ import com.csa.apex.fundyield.api.services.DistributionFundYieldService;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -87,10 +88,10 @@ public class DistributionFundYieldServiceImpl extends BaseServiceImpl implements
     @LogMethod
     public FundAccountingYieldData processDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getFAYADistributionFundDataApiPath)
-                    .queryParam("businessDate", getFormattedDate(businessDate));
+                    .queryParam(ApplicationConstant.BUSINESS_DATE, getFormattedDate(businessDate));
             FundAccountingYieldData fundAccountingYieldData = getRestTemplate()
                     .getForObject(builder.build().encode().toUri(), FundAccountingYieldData.class);
             for (CalculationEngine calcEngine : calculatorEngines) {
@@ -118,10 +119,10 @@ public class DistributionFundYieldServiceImpl extends BaseServiceImpl implements
     @LogMethod
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedDistributionFundDataApiPath)
-                    .queryParam("businessDate", getFormattedDate(businessDate));
+                    .queryParam(ApplicationConstant.BUSINESS_DATE, getFormattedDate(businessDate));
             return getRestTemplate().getForObject(builder.build().encode().toUri(), FundAccountingYieldData.class);
         } catch (Exception e) {
             throw new FundAccountingYieldException(e.getMessage());

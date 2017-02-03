@@ -12,6 +12,7 @@ import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.ToleranceCheckService;
 import com.csa.apex.fundyield.seccommons.entities.ToleranceCheckResult;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
@@ -42,7 +43,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(toleranceCheckService, "toleranceCheckService");
+        CommonUtility.checkNullConfig(toleranceCheckService, ApplicationConstant.TOLERANCE_CHECK_SERVICE);
     }
 
     /**
@@ -55,7 +56,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @LogMethod
     public void initiateSECFundLevelBatchToleranceCheck(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
-        CommonUtility.checkNull(reportDate, "reportDate");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
         toleranceCheckService.initiateSECFundLevelBatchToleranceCheck(reportDate);
     }
 
@@ -69,7 +70,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @LogMethod
     public void initiateMoneyMarketFundLevelBatchToleranceCheck(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
-        CommonUtility.checkNull(reportDate, "reportDate");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
         toleranceCheckService.initiateMoneyMarketFundLevelBatchToleranceCheck(reportDate);
     }
 
@@ -83,7 +84,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @LogMethod
     public void initiateSecurityLevelBatchToleranceCheck(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
-        CommonUtility.checkNull(reportDate, "reportDate");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
         toleranceCheckService.initiateSecurityLevelBatchToleranceCheck(reportDate);
     }
 
@@ -96,7 +97,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @Override
     @LogMethod
     public void initiateDistributionFundLevelBatchToleranceCheck(Date reportDate) {
-        CommonUtility.checkNull(reportDate, "reportDate");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
         toleranceCheckService.initiateDistributionFundLevelBatchToleranceCheck(reportDate);
     }
 
@@ -110,8 +111,8 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @Override
     @LogMethod
     public void initiateSecurityLevelWhatIfToleranceCheck(Date reportDate, String cusip) {
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkString(cusip, "cusip");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkString(cusip, ApplicationConstant.CUSIP);
         toleranceCheckService.initiateSecurityLevelWhatIfToleranceCheck(reportDate, cusip);
     }
 
@@ -128,8 +129,8 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     public void initiatePositionLevelWhatIfToleranceCheck(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip,
             int portfolioHoldingSnapshotSid) {
-        CommonUtility.checkNull(reportDate, "reportDate");
-        CommonUtility.checkString(cusip, "cusip");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
+        CommonUtility.checkString(cusip, ApplicationConstant.CUSIP);
         toleranceCheckService.initiatePositionLevelWhatIfToleranceCheck(reportDate, cusip, portfolioHoldingSnapshotSid);
     }
 
@@ -197,7 +198,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     @LogMethod
     public ToleranceCheckResult getSecurityLevelWhatIfToleranceCheckResult(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip) {
-        CommonUtility.checkString(cusip, "cusip");
+        CommonUtility.checkString(cusip, ApplicationConstant.CUSIP);
         return createCheckResult(reportDate);
     }
 
@@ -215,7 +216,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
     public ToleranceCheckResult getPositionLevelWhatIfToleranceCheckResult(
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip,
             int portfolioHoldingSnapshotSid) {
-        CommonUtility.checkString(cusip, "cusip");
+        CommonUtility.checkString(cusip, ApplicationConstant.CUSIP);
         return createCheckResult(reportDate);
     }
 
@@ -225,7 +226,7 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      * @return the results of the check
      */
     private ToleranceCheckResult createCheckResult(Date reportDate) {
-        CommonUtility.checkNull(reportDate, "reportDate");
+        CommonUtility.checkNull(reportDate, ApplicationConstant.REPORT_DATE);
         ToleranceCheckResult result = new ToleranceCheckResult();
         result.setProcessedWithoutErrors(true);
         return result;

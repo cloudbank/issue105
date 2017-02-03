@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.Constants;
 
 /**
@@ -33,9 +34,9 @@ public interface UtilityFAYAAPIService {
     @RequestMapping(value = "avgOfMm1DayDistYieldPctForPreviousDays", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(@RequestParam("shareClassSid") long shareClassSid,
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("numOfDays") int numOfDays) throws FundAccountingYieldException;
+    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(@RequestParam(ApplicationConstant.SHARE_CLASS_SID) long shareClassSid,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.NUM_OF_DAYS) int numOfDays) throws FundAccountingYieldException;
 
     /**
      * Gets the sum of Der 1 Day Yield N1A MM Pct for previous days.
@@ -49,9 +50,9 @@ public interface UtilityFAYAAPIService {
     @RequestMapping(value = "sumOfDer1DayYieldN1AMmPctPreviousDays", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(@RequestParam("shareClassSid") long shareClassSid,
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("numOfDays") int numOfDays) throws FundAccountingYieldException;
+    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(@RequestParam(ApplicationConstant.SHARE_CLASS_SID) long shareClassSid,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.NUM_OF_DAYS) int numOfDays) throws FundAccountingYieldException;
 
     /**
      * Gets the sum of Der Restate 1 Day Yield MM Pct for previous days.
@@ -66,9 +67,9 @@ public interface UtilityFAYAAPIService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(
-            @RequestParam("shareClassSid") long shareClassSid,
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("numOfDays") int numOfDays) throws FundAccountingYieldException;
+            @RequestParam(ApplicationConstant.SHARE_CLASS_SID) long shareClassSid,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.NUM_OF_DAYS) int numOfDays) throws FundAccountingYieldException;
 
     /**
      * Gets the avg of MM 7 DayYield Pct for previous days.
@@ -82,9 +83,9 @@ public interface UtilityFAYAAPIService {
     @RequestMapping(value = "avgOfMm7DayYieldPctForPreviousDays", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(@RequestParam("shareClassSid") long shareClassSid,
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("numOfDays") int numOfDays) throws FundAccountingYieldException;
+    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(@RequestParam(ApplicationConstant.SHARE_CLASS_SID) long shareClassSid,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.NUM_OF_DAYS) int numOfDays) throws FundAccountingYieldException;
 
     /**
      * Gets sum of Der 7 Day Yield N1A MM Pct for previous days.
@@ -98,7 +99,7 @@ public interface UtilityFAYAAPIService {
     @RequestMapping(value = "sumOfDer7DayYieldN1AMmPctPreviousDays", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(@RequestParam("shareClassSid") long shareClassSid,
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("numOfDays") int numOfDays) throws FundAccountingYieldException;
+    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(@RequestParam(ApplicationConstant.SHARE_CLASS_SID) long shareClassSid,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.NUM_OF_DAYS) int numOfDays) throws FundAccountingYieldException;
 }

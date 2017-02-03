@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the UtilityFAYAAPIPersistenceServiceImpl.
@@ -50,7 +51,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDays() throws Exception {
         BigDecimal expected = new BigDecimal(10);
         long shareClassSid = 111;
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 41;
         assertEquals(expected,
@@ -74,7 +75,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDays() throws Exception {
         BigDecimal expected = new BigDecimal(30);
         long shareClassSid = 111;
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 68;
         assertEquals(expected,
@@ -99,7 +100,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDays() throws Exception {
         BigDecimal expected = new BigDecimal(40);
         long shareClassSid = 111;
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 47;
         assertEquals(expected,
@@ -124,7 +125,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     public void getAvgOfMnyMkt7DayYieldPctForPreviousDays() throws Exception {
         BigDecimal expected = new BigDecimal(10);
         long shareClassSid = 111;
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 100;
         assertEquals(expected,
@@ -149,7 +150,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDays() throws Exception {
         BigDecimal expected = new BigDecimal(20);
         long shareClassSid = 111;
-        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 99;
         assertEquals(expected,

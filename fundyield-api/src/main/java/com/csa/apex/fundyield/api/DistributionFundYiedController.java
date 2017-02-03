@@ -18,6 +18,7 @@ import com.csa.apex.fundyield.api.services.DistributionFundYieldService;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.Constants;
 
@@ -63,9 +64,9 @@ public class DistributionFundYiedController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getDistributionFundYieldData(
-            @RequestParam("businessDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+            @RequestParam(ApplicationConstant.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return distributionFundYieldService.processDistributionFundYieldData(businessDate);
     }
 
@@ -80,9 +81,9 @@ public class DistributionFundYiedController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(
-            @RequestParam("businessDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+            @RequestParam(ApplicationConstant.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         return distributionFundYieldService.getCalculatedDistributionFundYieldData(businessDate);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.seccommons.entities.ToleranceCheckResult;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.Constants;
 
 /**
@@ -31,7 +32,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiateSECFundLevelBatchToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Gets the fund level tolerance check results.
@@ -44,7 +45,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getSECFundLevelBatchToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Initiates the MM fund level tolerance check results.
@@ -56,7 +57,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiateMoneyMarketFundLevelBatchToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Gets the MM fund level tolerance check results.
@@ -69,7 +70,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getMoneyMarketFundLevelBatchToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Initiates the Distribution fund level tolerance check results.
@@ -81,7 +82,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiateDistributionFundLevelBatchToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Gets the Distribution fund level tolerance check results.
@@ -94,7 +95,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getDistributionFundLevelBatchToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Initiates the secutity level batch tolerance check results.
@@ -106,7 +107,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiateSecurityLevelBatchToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Gets the secutity level tolerance check results.
@@ -119,7 +120,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getSecurityLevelBatchToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate);
 
     /**
      * Initiates the secutity level what if tolerance check results.
@@ -132,8 +133,8 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiateSecurityLevelWhatIfToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("cusip") String cusip);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.CUSIP) String cusip);
 
     /**
      * Gets the secutity level what if tolerance check results.
@@ -146,8 +147,8 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getSecurityLevelWhatIfToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("cusip") String cusip);
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.CUSIP) String cusip);
 
     /**
      * Initiates the position level what if tolerance check results.
@@ -161,8 +162,8 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public void initiatePositionLevelWhatIfToleranceCheck(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("cusip") String cusip,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.CUSIP) String cusip,
             @RequestParam("portfolioHoldingSnapshotSid") int portfolioHoldingSnapshotSid);
 
     /**
@@ -178,7 +179,7 @@ public interface ToleranceCheckService {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ToleranceCheckResult getPositionLevelWhatIfToleranceCheckResult(
-            @RequestParam("reportDate") @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
-            @RequestParam("cusip") String cusip,
+            @RequestParam(ApplicationConstant.REPORT_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate,
+            @RequestParam(ApplicationConstant.CUSIP) String cusip,
             @RequestParam("portfolioHoldingSnapshotSid") int portfolioHoldingSnapshotSid);
 }

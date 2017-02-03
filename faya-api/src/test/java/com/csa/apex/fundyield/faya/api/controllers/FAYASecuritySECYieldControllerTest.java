@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Collection;
 
-import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +30,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
+import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,7 +55,7 @@ public class FAYASecuritySECYieldControllerTest {
     /**
      * The business date parameter name.
      */
-    private static final String BUSINESS_DATE_PARAM_NAME = "businessDate";
+    private static final String BUSINESS_DATE_PARAM_NAME = ApplicationConstant.BUSINESS_DATE;
 
     /**
      * FAYASecuritySECYieldPersistenceService object.
@@ -101,7 +102,7 @@ public class FAYASecuritySECYieldControllerTest {
      */
     @Test
     public void getFAYASECDataInvalidTest() throws Exception {
-        this.mockMvc.perform(get("/fayaFundAccountingSECYieldData").param("businessDate", "invalid"))
+        this.mockMvc.perform(get("/fayaFundAccountingSECYieldData").param(ApplicationConstant.BUSINESS_DATE, "invalid"))
                 .andExpect(status().is(400));
     }
 

@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the FAYAMoneyMarketFundYieldController.
@@ -68,7 +69,7 @@ public class FAYAMoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getFAYAMoneyMarketFundYieldData() throws Exception {
-        this.mockMvc.perform(get("/customerMoneyMarketFundYieldData").param("businessDate", "2016-05-02"))
+        this.mockMvc.perform(get("/customerMoneyMarketFundYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }
@@ -90,8 +91,8 @@ public class FAYAMoneyMarketFundYieldControllerTest {
     @Test
     public void persistMoneyMarketFundYieldData() throws Exception {
         Map<String, Object> sessionAttrs = new HashMap<String, Object>();
-        sessionAttrs.put("currentUserId", "123");
-        this.mockMvc.perform(put("/calculatedMoneyMarketFundYieldPortfolio").param("businessDate", "2016-05-02")
+        sessionAttrs.put(ApplicationConstant.CURRENT_USER_ID, "123");
+        this.mockMvc.perform(put("/calculatedMoneyMarketFundYieldPortfolio").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02")
                 .sessionAttrs(sessionAttrs)).andExpect(status().is(400));
 
     }
@@ -112,7 +113,7 @@ public class FAYAMoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-        this.mockMvc.perform(get("/calculatedFAYAMoneyMarketFundYieldData").param("businessDate", "2016-05-02"))
+        this.mockMvc.perform(get("/calculatedFAYAMoneyMarketFundYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }

@@ -16,6 +16,7 @@ import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceSer
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.Portfolio;
+import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -52,7 +53,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, "jdbcTemplate");
+        CommonUtility.checkNullConfig(jdbcTemplate, ApplicationConstant.JDBC_TEMPLATE);
     }
 
     /**
@@ -81,7 +82,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
     @Transactional
     public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, "fundAccountingYieldData");
+        CommonUtility.checkNull(fundAccountingYieldData, ApplicationConstant.FUND_ACCOUNTING_YIELD_DATA);
 //        CommonUtility.checkString(userId, "userId");
         storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
         return true;
@@ -111,7 +112,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
      */
     private FundAccountingYieldData retrieveFundAccountingYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "businessDate");
+        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
         try {
             List<Portfolio> portfolios = FAYAPersistenceHelper.getPortfolios(jdbcTemplate, "QUERY_MM_PORTFOLIO",
                     businessDate);

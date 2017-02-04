@@ -53,10 +53,10 @@ public class Application extends SpringBootServletInitializer {
                 registry.addMapping("/securitySECDataConfiguration").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/fayaFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
 				registry.addMapping("/calculatedFundAccountingSECYieldData").allowedOrigins("*").allowedMethods("*");
-                registry.addMapping("/customerMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/FAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
                 registry.addMapping("/calculatedMoneyMarketFundYieldPortfolio").allowedOrigins("*").allowedMethods("*");
                 registry.addMapping("/calculatedFAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
-                registry.addMapping("/customerMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
+                registry.addMapping("/FAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
                 registry.addMapping("/calculatedMoneyMarketFundYieldPortfolio").allowedOrigins("*").allowedMethods("*");
                 registry.addMapping("/calculatedFAYAMoneyMarketFundYieldData").allowedOrigins("*").allowedMethods("*");
                 registry.addMapping("/avgOfMm1DayDistYieldPctForPreviousDays").allowedOrigins("*").allowedMethods("*");

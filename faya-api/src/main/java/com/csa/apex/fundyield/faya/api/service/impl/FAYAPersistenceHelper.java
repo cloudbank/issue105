@@ -13,8 +13,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.jdbc.object.StoredProcedure;
 
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
 
 import oracle.jdbc.OracleTypes;
 

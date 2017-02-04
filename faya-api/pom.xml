@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.csa.apex.fundyield</groupId>
-            <artifactId>seccommons</artifactId>
+            <artifactId>faya-commons</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->

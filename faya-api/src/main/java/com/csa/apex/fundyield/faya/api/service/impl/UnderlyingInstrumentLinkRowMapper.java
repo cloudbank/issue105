@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.UnderlyingInstrumentLink;
+import com.csa.apex.fundyield.fayacommons.entities.UnderlyingInstrumentLink;
 
 /**
  * Inner row mapper to create the UnderlyingInstrumentLink from the row.

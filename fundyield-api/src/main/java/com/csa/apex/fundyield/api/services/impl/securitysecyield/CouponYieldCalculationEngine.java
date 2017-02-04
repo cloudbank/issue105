@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
-import com.csa.apex.fundyield.seccommons.entities.CalculationEngineSubType;
-import com.csa.apex.fundyield.seccommons.entities.CalculationEngineType;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.CalculationEngineSubType;
+import com.csa.apex.fundyield.fayacommons.entities.CalculationEngineType;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
 
 /**

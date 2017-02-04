@@ -9,10 +9,10 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.InterestRateSchedule;
-import com.csa.apex.fundyield.seccommons.entities.PutSchedule;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.InterestRateSchedule;
+import com.csa.apex.fundyield.fayacommons.entities.PutSchedule;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntity;
 
 /**
  * Inner result set extractor to create the Instrument from the result set.

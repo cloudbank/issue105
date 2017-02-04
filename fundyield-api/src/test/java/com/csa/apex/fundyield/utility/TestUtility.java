@@ -34,15 +34,15 @@ import com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelR
 import com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated7DayYieldCalculationInput;
 import com.csa.apex.fundyield.api.services.impl.utility.UtilityCustomerAPIClientImpl;
 import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.ShareClass;
-import com.csa.apex.fundyield.seccommons.entities.ShareClassSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntity;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 
 /**
  * Utility class for the CalculationEngine.

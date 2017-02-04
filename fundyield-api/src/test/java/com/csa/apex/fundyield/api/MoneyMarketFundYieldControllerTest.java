@@ -34,7 +34,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.api.services.impl.MoneyMarketFundYieldServiceImpl;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
 * Test class for the MoneyMarketFundYieldController.

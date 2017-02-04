@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
  * Test class for the FAYADataPersistenceServiceImpl.

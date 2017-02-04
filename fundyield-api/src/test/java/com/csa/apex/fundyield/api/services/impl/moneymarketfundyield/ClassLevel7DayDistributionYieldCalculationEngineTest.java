@@ -13,8 +13,8 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**

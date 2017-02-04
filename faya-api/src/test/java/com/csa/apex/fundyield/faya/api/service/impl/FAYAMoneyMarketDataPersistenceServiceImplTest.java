@@ -22,12 +22,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.ShareClass;
-import com.csa.apex.fundyield.seccommons.entities.ShareClassSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
+import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 
 /**
  * Test class for the FAYAMoneyMarketDataPersistenceServiceImpl.

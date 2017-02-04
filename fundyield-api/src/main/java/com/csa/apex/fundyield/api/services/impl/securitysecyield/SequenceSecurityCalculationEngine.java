@@ -10,8 +10,8 @@ import javax.annotation.PostConstruct;
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.exceptions.CalculationException;
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 

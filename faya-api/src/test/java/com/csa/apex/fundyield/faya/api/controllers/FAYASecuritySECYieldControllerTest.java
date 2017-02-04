@@ -32,7 +32,7 @@ import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.faya.api.utility.TestUtility;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

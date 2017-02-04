@@ -35,14 +35,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.csa.apex.fundyield.faya.api.service.impl.StoredProcedures;
-import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.seccommons.entities.Instrument;
-import com.csa.apex.fundyield.seccommons.entities.InstrumentTypeCode;
-import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
-import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
+import com.csa.apex.fundyield.fayacommons.entities.Instrument;
+import com.csa.apex.fundyield.fayacommons.entities.InstrumentTypeCode;
+import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
+import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntity;
+import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.DateUtility;
 
 /**

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.csa.apex.fundyield.seccommons.entities.InterestRateSchedule;
+import com.csa.apex.fundyield.fayacommons.entities.InterestRateSchedule;
 
 /**
  * Inner row mapper to create the InterestRateSchedule from the row.

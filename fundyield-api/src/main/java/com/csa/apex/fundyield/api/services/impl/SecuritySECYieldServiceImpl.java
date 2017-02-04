@@ -16,6 +16,7 @@ import java.util.zip.ZipOutputStream;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -32,7 +33,6 @@ import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.Portfolio;
 import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -51,7 +51,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	/**
 	 * The field names to be exported.
 	 */
-	private static final String[] EXPORT_FIELD_NAMES = new String[] { "securityIdentifier", ApplicationConstant.REPORT_DATE,
+	private static final String[] EXPORT_FIELD_NAMES = new String[] { "securityIdentifier", Constants.REPORT_DATE,
 			"derCleanPrice", "derYieldCalcEngine", "derIncomeCalcEngine", "derOneDaySecurityYield", "derRedemptionDate",
 			"derRedemptionPrice", "derSecurityType", "derTIPSInflationaryRatio", "securityPrice", "fxRate", "ivType",
 			"securityName", "finalMaturityDate", "securityRedemptionPrice", "interestRt", "defIndicator",
@@ -151,7 +151,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
-					.queryParam(ApplicationConstant.BUSINESS_DATE, getFormattedDate(businessDate));
+					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
 
 			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
 					FundAccountingYieldData.class);
@@ -187,7 +187,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getSecuritySECDataApiPath)
-					.queryParam(ApplicationConstant.BUSINESS_DATE, getFormattedDate(businessDate));
+					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
 
 			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
 					FundAccountingYieldData.class);
@@ -236,7 +236,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
 			throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, PARAM_BUSINESS_DATE);
-		CommonUtility.checkNull(response, ApplicationConstant.PARAMETER_RESPONSE);
+		CommonUtility.checkNull(response, Constants.PARAMETER_RESPONSE);
 
 		FundAccountingYieldData data = getCalculatedSecuritySECData(businessDate);
 

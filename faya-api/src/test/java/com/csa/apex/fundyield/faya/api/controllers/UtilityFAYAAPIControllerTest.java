@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Date;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the UtilityFAYAAPIController.
@@ -67,8 +67,8 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/avgOfMm1DayDistYieldPctForPreviousDays").param(ApplicationConstant.SHARE_CLASS_SID, "111")
-                .param(ApplicationConstant.REPORT_DATE, "2016-12-20").param(ApplicationConstant.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+        this.mockMvc.perform(get("/avgOfMm1DayDistYieldPctForPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
+                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
     }
 
     /**
@@ -87,8 +87,8 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDer1DayYieldN1AMmPctPreviousDays").param(ApplicationConstant.SHARE_CLASS_SID, "111")
-                .param(ApplicationConstant.REPORT_DATE, "2016-12-20").param(ApplicationConstant.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+        this.mockMvc.perform(get("/sumOfDer1DayYieldN1AMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
+                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
     }
 
     /**
@@ -107,8 +107,8 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDerRestate1DayYieldMmPctPreviousDays").param(ApplicationConstant.SHARE_CLASS_SID, "111")
-                .param(ApplicationConstant.REPORT_DATE, "2016-12-20").param(ApplicationConstant.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+        this.mockMvc.perform(get("/sumOfDerRestate1DayYieldMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
+                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
     }
 
     /**
@@ -127,8 +127,8 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getAvgOfMnyMkt7DayYieldPctForPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/avgOfMm7DayYieldPctForPreviousDays").param(ApplicationConstant.SHARE_CLASS_SID, "111")
-                .param(ApplicationConstant.REPORT_DATE, "2016-12-20").param(ApplicationConstant.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+        this.mockMvc.perform(get("/avgOfMm7DayYieldPctForPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
+                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
     }
 
     /**
@@ -147,8 +147,8 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDer7DayYieldN1AMmPctPreviousDays").param(ApplicationConstant.SHARE_CLASS_SID, "111")
-                .param(ApplicationConstant.REPORT_DATE, "2016-12-20").param(ApplicationConstant.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+        this.mockMvc.perform(get("/sumOfDer7DayYieldN1AMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
+                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
     }
 
     /**

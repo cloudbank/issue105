@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +35,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.csa.apex.fundyield.api.services.impl.CalculationEngine;
 import com.csa.apex.fundyield.api.services.impl.MoneyMarketFundYieldServiceImpl;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
 * Test class for the MoneyMarketFundYieldController.
@@ -93,7 +93,7 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getMoneyMarketFundYieldData() throws Exception {
-    	DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
+    	DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
         moneyMarketFundYieldController.getMoneyMarketFundYieldData(businessDate);
     }
@@ -113,7 +113,7 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-    	DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
+    	DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
         moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(businessDate);
     }

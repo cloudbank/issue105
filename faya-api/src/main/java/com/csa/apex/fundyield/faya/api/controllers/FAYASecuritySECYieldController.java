@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,6 @@ import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -51,7 +51,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaSecuritySECYieldPersistenceService, ApplicationConstant.FAYA_SECURITY_SEC_YIELD_PERSISTENCE_SERVICE);
+        CommonUtility.checkNullConfig(fayaSecuritySECYieldPersistenceService, Constants.FAYA_SECURITY_SEC_YIELD_PERSISTENCE_SERVICE);
 	}
 
 	/**

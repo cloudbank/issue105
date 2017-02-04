@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.text.ParseException;
 import java.util.Date;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +30,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.csa.apex.fundyield.Application;
 import com.csa.apex.fundyield.api.services.impl.SecuritySECYieldServiceImpl;
 import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.TestUtility;
 
 /**
@@ -99,7 +99,7 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void getSecuritySECDataTest() throws Exception {
-		mockMvc.perform(get("/fundAccountingSECYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02")).andExpect(status().isOk())
+		mockMvc.perform(get("/fundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02")).andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_CONTENT_TYPE));
 	}
 
@@ -111,7 +111,7 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void getCalculatedSecuritySECDataTest() throws Exception {
-		mockMvc.perform(get("/calculatedFundAccountingSECYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
+		mockMvc.perform(get("/calculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
 				.andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON_CONTENT_TYPE));
 	}
 
@@ -123,7 +123,7 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void exportCalculatedSecuritySECDataSuccessTest() throws Exception {
-		mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
+		mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
 				.andExpect(status().isOk());
 	}
 
@@ -135,7 +135,7 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void exportCalculatedSecuritySECDataInvalidTest() throws Exception {
-		this.mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(ApplicationConstant.BUSINESS_DATE, "invalid"))
+		this.mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "invalid"))
 				.andExpect(status().is(400));
 	}
 }

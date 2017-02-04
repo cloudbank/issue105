@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 import java.util.Map;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceService;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
 * Test class for the FAYADistributiontFundYieldController.
@@ -70,7 +70,7 @@ public class FAYADistributiontFundYieldControllerTest {
      */
     @Test
     public void getFAYADistributionFundYieldData() throws Exception {
-    	this.mockMvc.perform(get("/customerDistributionFundYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
+    	this.mockMvc.perform(get("/customerDistributionFundYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
 		.andExpect(status().is(400));
     }
     /**
@@ -91,8 +91,8 @@ public class FAYADistributiontFundYieldControllerTest {
     @Test
     public void persistDistributionFundYieldData() throws Exception {
     	Map<String, Object> sessionAttrs = new HashMap<String, Object>();
-    	sessionAttrs.put(ApplicationConstant.CURRENT_USER_ID, "123");
-    	this.mockMvc.perform(put("/calculatedDistributionFundYieldPortfolio").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02").sessionAttrs(sessionAttrs))
+    	sessionAttrs.put(Constants.CURRENT_USER_ID, "123");
+    	this.mockMvc.perform(put("/calculatedDistributionFundYieldPortfolio").param(Constants.BUSINESS_DATE, "2016-05-02").sessionAttrs(sessionAttrs))
 		.andExpect(status().is(400));
     }
     /**
@@ -112,7 +112,7 @@ public class FAYADistributiontFundYieldControllerTest {
      */
     @Test
     public void getCalculatedDistributionFundYieldData() throws Exception {
-    	this.mockMvc.perform(get("/calculatedFAYADistributionFundYieldData").param(ApplicationConstant.BUSINESS_DATE, "2016-05-02"))
+    	this.mockMvc.perform(get("/calculatedFAYADistributionFundYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
 		.andExpect(status().is(400));
     }
     /**

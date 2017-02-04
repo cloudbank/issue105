@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Date;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.ToleranceCheckService;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
  * Test class for the MockToleranceCheckController.
@@ -69,7 +69,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void initiateSECFundLevelBatchToleranceCheck1() throws Exception {
-        this.mockMvc.perform(get("/secFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/secFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
     }
 
@@ -89,7 +89,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void initiateMoneyMarketFundLevelBatchToleranceCheck1() throws Exception {
-        this.mockMvc.perform(get("/moneyMarketFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/moneyMarketFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
     }
 
@@ -109,7 +109,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void initiateSecurityLevelBatchToleranceCheck1() throws Exception {
-        this.mockMvc.perform(get("/securityLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/securityLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
     }
 
@@ -129,7 +129,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void getDistributionFundLevelBatchToleranceCheckResult1() throws Exception {
-        this.mockMvc.perform(get("/distributionFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/distributionFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
     }
 
@@ -149,7 +149,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void initiateDistributionFundLevelBatchToleranceCheck1() throws Exception {
-        this.mockMvc.perform(get("/distributionFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/distributionFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }
@@ -170,7 +170,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void getSECFundLevelBatchToleranceCheckResult1() throws Exception {
-        this.mockMvc.perform(get("/secFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/secFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }
@@ -191,7 +191,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void getMoneyMarketFundLevelBatchToleranceCheckResult1() throws Exception {
-        this.mockMvc.perform(get("/moneyMarketFundLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/moneyMarketFundLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }
@@ -212,7 +212,7 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void getSecurityLevelBatchToleranceCheckResult1() throws Exception {
-        this.mockMvc.perform(get("/securityLevelBatchToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02"))
+        this.mockMvc.perform(get("/securityLevelBatchToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02"))
                 .andExpect(status().is(400));
 
     }
@@ -234,7 +234,7 @@ public class MockToleranceCheckControllerTest {
     @Test
     public void initiateSecurityLevelWhatIfToleranceCheck1() throws Exception {
         this.mockMvc.perform(
-                put("/securityLevelWhatIfToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02").param(ApplicationConstant.CUSIP, "123"))
+                put("/securityLevelWhatIfToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02").param(Constants.CUSIP, "123"))
                 .andExpect(status().is(400));
 
     }
@@ -256,7 +256,7 @@ public class MockToleranceCheckControllerTest {
     @Test
     public void getSecurityLevelWhatIfToleranceCheckResult1() throws Exception {
         this.mockMvc.perform(
-                get("/securityLevelWhatIfToleranceCheck").param(ApplicationConstant.REPORT_DATE, "2016-05-02").param(ApplicationConstant.CUSIP, "123"))
+                get("/securityLevelWhatIfToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02").param(Constants.CUSIP, "123"))
                 .andExpect(status().is(200));
 
     }

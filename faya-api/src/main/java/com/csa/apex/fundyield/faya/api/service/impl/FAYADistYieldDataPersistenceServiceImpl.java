@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceServi
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.seccommons.entities.Instrument;
 import com.csa.apex.fundyield.seccommons.entities.Portfolio;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.CommonUtility;
 import com.csa.apex.fundyield.utility.LogMethod;
 
@@ -52,7 +52,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, ApplicationConstant.JDBC_TEMPLATE);
+        CommonUtility.checkNullConfig(jdbcTemplate, Constants.JDBC_TEMPLATE);
     }
 
     /**
@@ -82,7 +82,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
     @Transactional
     public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, ApplicationConstant.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(fundAccountingYieldData, Constants.FUND_ACCOUNTING_YIELD_DATA);
 //        CommonUtility.checkString(userId, "userId");
         storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
         return true;
@@ -111,7 +111,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     private FundAccountingYieldData retrieveFundAccountingYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, ApplicationConstant.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
         try {
             List<Portfolio> portfolios = FAYAPersistenceHelper.getPortfolios(jdbcTemplate, "QUERY_DY_PORTFOLIO",
                     businessDate);

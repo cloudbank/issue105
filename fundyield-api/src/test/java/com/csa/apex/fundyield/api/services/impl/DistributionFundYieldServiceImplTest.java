@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +36,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.csa.apex.fundyield.seccommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 
 /**
 * Test class for the DistributionFundYieldServiceImpl.
@@ -92,7 +92,7 @@ public class DistributionFundYieldServiceImplTest {
      */
     @Test
     public void processDistributionFundYieldData() throws Exception {
-		DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
+		DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
 		assertNotNull(distributionFundYieldServiceImpl.processDistributionFundYieldData(businessDate));
     }
@@ -113,7 +113,7 @@ public class DistributionFundYieldServiceImplTest {
      */
     @Test
     public void getCalculatedDistributionFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(ApplicationConstant.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
         Date businessDate = f.parse("2016-12-10");
         assertNotNull(distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(businessDate));
     }

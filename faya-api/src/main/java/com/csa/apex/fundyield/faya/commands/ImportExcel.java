@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import com.csa.apex.fundyield.utility.Constants;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -42,7 +43,6 @@ import com.csa.apex.fundyield.seccommons.entities.PortfolioHoldingSnapshot;
 import com.csa.apex.fundyield.seccommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntity;
 import com.csa.apex.fundyield.seccommons.entities.TradableEntitySnapshot;
-import com.csa.apex.fundyield.utility.ApplicationConstant;
 import com.csa.apex.fundyield.utility.DateUtility;
 
 /**
@@ -269,7 +269,7 @@ public class ImportExcel {
                     Portfolio portfolio = parsePortfolio(row, columnMapping);
                     PortfolioHoldingSnapshot holding = parsePortfolioHoldingSnapshot(row, columnMapping, conf);
 
-                    Date reportDate = DateUtility.convertToSqlDate(getDateCellValue(row, columnMapping.get(ApplicationConstant.REPORT_DATE)));
+                    Date reportDate = DateUtility.convertToSqlDate(getDateCellValue(row, columnMapping.get(Constants.REPORT_DATE)));
 
                     // Build FundAccountingYieldData for each row
                     FundAccountingYieldData data = new FundAccountingYieldData();

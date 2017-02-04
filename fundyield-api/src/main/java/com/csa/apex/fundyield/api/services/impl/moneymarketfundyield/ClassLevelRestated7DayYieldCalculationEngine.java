@@ -105,7 +105,7 @@ public class ClassLevelRestated7DayYieldCalculationEngine implements Calculation
 					snapshot.setDerMnyMktRestatedMilRt(output.getMoneyMarketRestartYield().setScale(configuration.getOperationScale(),
 							configuration.getRoundingMode()));
 					snapshot.setDerMnyMktRestate1DayYieldPct(
-							output.getD().setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+							output.getMoneyMarketRestart1DayYield().setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
 					snapshot.setDerMnyMktRst7DayYieldPct(
 							output.getDerMmRst7DayYieldPct().setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
 				}

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The Coupon Income calculator.
@@ -33,7 +34,7 @@ public class CouponYieldCalculator {
 	 *             in case any error during calculation
 	 */
 	public CouponYieldCalculationOutput calculate(CouponYieldCalculationInput input) {
-		CommonUtility.checkNull(input, "Parameter CouponYieldCalculationInput");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter CouponYieldCalculationInput");
 
 		CouponYieldCalculationOutput output = new CouponYieldCalculationOutput();
 		BigDecimal yield = input.getCurrentIncomeRate().setScale(input.getOperationScale(), input.getRoundingMode());

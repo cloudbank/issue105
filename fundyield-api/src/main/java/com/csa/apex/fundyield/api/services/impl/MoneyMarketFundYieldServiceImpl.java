@@ -70,12 +70,12 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
     @PostConstruct
     protected void checkConfiguration() {
         super.checkConfiguration();
-        CommonUtility.checkStringConfig(getFAYAMoneyMarketFundDataApiPath, "getFAYAMoneyMarketFundDataApiPath");
-        CommonUtility.checkStringConfig(saveCalculatedMoneyMarketFundDataApiPath,
+        CommonUtility.checkStringConfig(getFAYAMoneyMarketFundDataApiPath, this.getClass().getCanonicalName(), "getFAYAMoneyMarketFundDataApiPath");
+        CommonUtility.checkStringConfig(saveCalculatedMoneyMarketFundDataApiPath, this.getClass().getCanonicalName(),
                 "saveCalculatedMoneyMarketFundDataApiPath");
-        CommonUtility.checkStringConfig(getCalculatedMoneyMarketFundDataApiPath,
+        CommonUtility.checkStringConfig(getCalculatedMoneyMarketFundDataApiPath, this.getClass().getCanonicalName(),
                 "getCalculatedMoneyMarketFundDataApiPath");
-        CommonUtility.checkListConfig(calculatorEngines, "calculatorEngines");
+        CommonUtility.checkListConfig(calculatorEngines, this.getClass().getCanonicalName(), "calculatorEngines");
     }
 
     /**
@@ -90,7 +90,7 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
     @LogMethod
     public FundAccountingYieldData processMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(),  "processMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getFAYAMoneyMarketFundDataApiPath)
                     .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
@@ -121,7 +121,7 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
     @LogMethod
     public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedMoneyMarketFundDataApiPath)
                     .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));

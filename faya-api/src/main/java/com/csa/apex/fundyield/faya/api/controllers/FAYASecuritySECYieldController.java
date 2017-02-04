@@ -51,7 +51,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaSecuritySECYieldPersistenceService, Constants.FAYA_SECURITY_SEC_YIELD_PERSISTENCE_SERVICE);
+        CommonUtility.checkNullConfig(fayaSecuritySECYieldPersistenceService, this.getClass().getCanonicalName(), Constants.FAYA_SECURITY_SEC_YIELD_PERSISTENCE_SERVICE);
 	}
 
 	/**
@@ -68,6 +68,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	@Override
     @LogMethod
 	public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYASECData", Constants.BUSINESS_DATE);
 		return fayaSecuritySECYieldPersistenceService.getFAYASECData(businessDate);
 	}
 
@@ -86,6 +87,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
     @LogMethod
 	@Transactional
 	public boolean persistSecuritySECData(FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistSecuritySECData", Constants.FUND_ACCOUNTING_YIELD_DATA);
 		return fayaSecuritySECYieldPersistenceService.persistSecuritySECData(fundAccountingYieldData);
 	}
 
@@ -103,6 +105,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	@Override
     @LogMethod
 	public FundAccountingYieldData getCalculatedSECData(Date businessDate) throws FundAccountingYieldException {
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSECData", Constants.BUSINESS_DATE);
 		return fayaSecuritySECYieldPersistenceService.getCalculatedSECData(businessDate);
 	}
 }

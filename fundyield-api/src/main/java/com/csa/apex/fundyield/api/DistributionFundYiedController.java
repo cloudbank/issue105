@@ -48,7 +48,7 @@ public class DistributionFundYiedController {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(distributionFundYieldService, "distributionFundYieldService");
+        CommonUtility.checkNullConfig(distributionFundYieldService, this.getClass().getCanonicalName(), "distributionFundYieldService");
     }
 
     /**
@@ -65,7 +65,7 @@ public class DistributionFundYiedController {
     public FundAccountingYieldData getDistributionFundYieldData(
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getDistributionFundYieldData", Constants.BUSINESS_DATE);
         return distributionFundYieldService.processDistributionFundYieldData(businessDate);
     }
 
@@ -82,7 +82,7 @@ public class DistributionFundYiedController {
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
         return distributionFundYieldService.getCalculatedDistributionFundYieldData(businessDate);
     }
 

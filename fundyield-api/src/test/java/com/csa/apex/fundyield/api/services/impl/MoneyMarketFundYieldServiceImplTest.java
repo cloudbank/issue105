@@ -91,7 +91,7 @@ public class MoneyMarketFundYieldServiceImplTest {
      */
     @Test
     public void processMoneyMarketFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
         assertNotNull(moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(businessDate));
     }
@@ -111,7 +111,7 @@ public class MoneyMarketFundYieldServiceImplTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
         assertNotNull(moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(businessDate));
     }

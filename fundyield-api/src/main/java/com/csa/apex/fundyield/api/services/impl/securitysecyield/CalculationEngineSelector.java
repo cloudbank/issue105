@@ -22,6 +22,7 @@ import com.csa.apex.fundyield.fayacommons.entities.InstrumentTypeCode;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -76,7 +77,7 @@ public class CalculationEngineSelector implements CalculationEngine {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(calculationEngines, "calculationEngines");
+		CommonUtility.checkNullConfig(calculationEngines, this.getClass().getCanonicalName(), "calculationEngines");
 		if (calculationEngines.get(CalculationEngineType.YTM) == null) {
 			throw new ConfigurationException("Miss engines for YTM instruments");
 		}
@@ -125,9 +126,10 @@ public class CalculationEngineSelector implements CalculationEngine {
 	@Override
 	@LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration) {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter configuration");
 
+		if (fundAccountingYieldData.getInstruments() != null) {
 		for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
 			if ("Y".equalsIgnoreCase(instrument.getFdrStepBondInd())
 					|| "HYBRID".equalsIgnoreCase(instrument.getHybridCalculationCd())) {
@@ -160,4 +162,5 @@ public class CalculationEngineSelector implements CalculationEngine {
 			}
 		}
 	}
+}
 }

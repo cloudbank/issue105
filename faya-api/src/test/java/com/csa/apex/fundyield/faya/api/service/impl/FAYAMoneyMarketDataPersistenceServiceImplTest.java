@@ -55,7 +55,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
      */
     @Test
     public void getFAYAMoneyMarketFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-20");
         assertNotNull(fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(businessDate));
     }
@@ -75,7 +75,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
      */
     @Test
     public void persistMoneyMarketFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2017-01-08");
         FundAccountingYieldData data = new FundAccountingYieldData();
         data.setBusinessDate(businessDate);
@@ -126,7 +126,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-        DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+        DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
         assertNotNull(fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(businessDate));
     }

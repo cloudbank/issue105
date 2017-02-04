@@ -20,6 +20,7 @@ import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -58,31 +59,39 @@ public class ClassLevel7DayN1AYieldCalculationEngine implements CalculationEngin
 	@LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
 			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter configuration");
 		try {
 			// check the config values and if they are provided use them instead
 			// of default ones.
-			for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-				Date reportDate = fundAccountingYieldData.getReportDate();
-				for (ShareClass shareClass : portfolio.getShareClasses()) {
-					// get share class snapshot for the report date
-					List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
-					Predicate<ShareClassSnapshot> predicate = shareClassSnapshot -> shareClassSnapshot.getReportDate()
-							.equals(reportDate);
-					ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-					BigDecimal derMnyMkt1DayN1AYieldPct = snapshot.getDerMnyMkt1DayN1AYieldPct();
-					// calculate y using formula
-					// y=(d+utilityCustomerAPIClient.getSumOfDer1DayYieldN1AMnyMktPct(shareClass.getShareClassSid(),reportDate,30))/7
-					// with the precision and round mode specified in
-					// configuration
-					BigDecimal derMm1NayN1aYieldPct = derMnyMkt1DayN1AYieldPct
-							.add(utilityCustomerAPIClient.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(
-									shareClass.getShareClassSid(), reportDate, 30))
-							.divide(BigDecimal.valueOf(7), configuration.getOperationScale(),
-									configuration.getRoundingMode());
-					snapshot.setDerMnyMkt7DayN1AYieldPct(derMm1NayN1aYieldPct
-							.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+			if (fundAccountingYieldData.getPortfolios() != null) {
+				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
+					Date reportDate = fundAccountingYieldData.getReportDate();
+					if (portfolio.getShareClasses() != null) {
+						for (ShareClass shareClass : portfolio.getShareClasses()) {
+							// get share class snapshot for the report date
+							List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
+							if (snapshots == null) {
+								continue;
+							}
+							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
+							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
+							BigDecimal derMnyMkt1DayN1AYieldPct = snapshot.getDerMnyMkt1DayN1AYieldPct();
+							// calculate y using formula
+							// y=(d+utilityCustomerAPIClient.getSumOfDer1DayYieldN1AMnyMktPct(shareClass.getShareClassSid(),reportDate,30))/7
+							// with the precision and round mode specified in
+							// configuration
+							BigDecimal derMm1NayN1aYieldPct = derMnyMkt1DayN1AYieldPct
+									.add(utilityCustomerAPIClient.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(
+											shareClass.getShareClassSid(), reportDate, 30))
+									.divide(BigDecimal.valueOf(7), configuration.getOperationScale(),
+											configuration.getRoundingMode());
+							snapshot.setDerMnyMkt7DayN1AYieldPct(derMm1NayN1aYieldPct
+									.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -99,7 +108,7 @@ public class ClassLevel7DayN1AYieldCalculationEngine implements CalculationEngin
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(utilityCustomerAPIClient, "utilityCustomerAPIClient");
+        CommonUtility.checkNullConfig(utilityCustomerAPIClient, this.getClass().getCanonicalName(), "utilityCustomerAPIClient");
 	}
 
 	/**

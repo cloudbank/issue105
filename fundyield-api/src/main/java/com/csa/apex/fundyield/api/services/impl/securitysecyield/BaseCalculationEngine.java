@@ -12,6 +12,7 @@ import com.csa.apex.fundyield.fayacommons.entities.Instrument;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -85,23 +86,27 @@ public abstract class BaseCalculationEngine implements CalculationEngine {
 	@LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
 			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter configuration");
 
 		int passedOperationScale = configuration.getOperationScale();
 		int passedRoundingMode = configuration.getRoundingMode();
 		configuration.setOperationScale(passedOperationScale != 0 ? passedOperationScale : operationScale);
 		configuration.setRoundingMode(passedRoundingMode != -1 ? passedRoundingMode : roundingMode);
 
-		for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
-			try {
-				TradableEntitySnapshot tes = CommonUtility.getTradableEntitySnapshot(instrument);
-				if (tes != null && canCalculate(tes)) {
-					doCalculate(fundAccountingYieldData, instrument, tes, configuration);
+		if (fundAccountingYieldData.getInstruments() != null) {
+			for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
+				try {
+					TradableEntitySnapshot tes = CommonUtility.getTradableEntitySnapshot(instrument);
+					if (tes != null && canCalculate(tes)) {
+						doCalculate(fundAccountingYieldData, instrument, tes, configuration);
+					}
+				} catch (Exception e) {
+					throw new CalculationException(
+							"Failed to calulate " + getEngineCode() + " for instrument: " + instrument, e);
 				}
-			} catch (Exception e) {
-				throw new CalculationException(
-						"Failed to calulate " + getEngineCode() + " for instrument: " + instrument, e);
 			}
 		}
 	}
@@ -123,7 +128,7 @@ public abstract class BaseCalculationEngine implements CalculationEngine {
 	/**
 	 * Do calculation.
 	 *
-	 * @param data
+	 * @param fundAccountingYieldData
 	 *            The FundAccountingYieldData to calculate
 	 * @param instrument
 	 *            The Instrument to calculate
@@ -132,6 +137,6 @@ public abstract class BaseCalculationEngine implements CalculationEngine {
 	 * @param configuration
 	 *            The SECConfiguration to be used for config values
 	 */
-	protected abstract void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tes,
+	protected abstract void doCalculate(FundAccountingYieldData fundAccountingYieldData, Instrument instrument, TradableEntitySnapshot tes,
 			SECConfiguration configuration);
 }

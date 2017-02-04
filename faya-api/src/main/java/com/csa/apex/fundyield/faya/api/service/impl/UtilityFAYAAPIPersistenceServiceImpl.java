@@ -45,7 +45,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, Constants.JDBC_TEMPLATE);
+        CommonUtility.checkNullConfig(jdbcTemplate, this.getClass().getCanonicalName(), Constants.JDBC_TEMPLATE);
     }
 
     /**
@@ -140,9 +140,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     private BigDecimal callStoredProcedure(String spName, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        CommonUtility.checkNumber(shareClassSid, Constants.SHARE_CLASS_SID);
-        CommonUtility.checkNull(reportDate, Constants.REPORT_DATE);
-        CommonUtility.checkNumber(numOfDays, Constants.NUM_OF_DAYS);
+        CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.SHARE_CLASS_SID);
+        CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.REPORT_DATE);
+        CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.NUM_OF_DAYS);
         try {
             DateTime businessDateTime = new DateTime(reportDate).withTimeAtStartOfDay();
             Date endDate = businessDateTime.plusDays(numOfDays).withTimeAtStartOfDay().toDate();

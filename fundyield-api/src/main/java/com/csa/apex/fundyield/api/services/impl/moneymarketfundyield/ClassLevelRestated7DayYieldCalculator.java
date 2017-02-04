@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.csa.apex.fundyield.exceptions.CalculationException;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -26,7 +27,7 @@ public class ClassLevelRestated7DayYieldCalculator {
      */
     @LogMethod
     public ClassLevelRestated7DayYieldCalculationOutput calculate(ClassLevelRestated7DayYieldCalculationInput input) {
-        CommonUtility.checkNull(input, "input");
+        CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
         // calculate mil using formula MIL=((TNI+DA+RDA+MDA-B-TNI*STR*OPCT-REIM))/SO with the precision and round mode
         // specified in configuration
         // calculate d using formula D=(MIL*36500)/NV with the precision and round mode specified in configuration

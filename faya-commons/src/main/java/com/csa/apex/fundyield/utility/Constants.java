@@ -52,6 +52,16 @@ public class Constants {
 	public static final String PARAMETER_RESPONSE = "Parameter response";
 
 	/**
+	 * The constant Parameter input string
+	 */
+	public static final String PARAMETER_INPUT = "input";
+	
+	/**
+	 * The constant Parameter configuration string
+	 */
+	public static final String PARAMETER_CONFIGURATION = "configuration";
+
+	/**
 	 * The constant cusip string
 	 */
 	public static final String CUSIP = "cusip";
@@ -102,9 +112,14 @@ public class Constants {
 	public static final String DATE_MASK_MM_DD_YYYY = "MM/dd/yyyy";
 
 	/**
-	 * Date mask yyyy-MM-dd
+	 * The constant calculate method string
 	 */
-	public static final String DATE_MASK_YYYY_MM_DD = "yyyy-MM-dd";
+	public static final String METHOD_CALCULATE = "calculate";
+	
+	/**
+	 * The constant doCalculate method string
+	 */
+	public static final String METHOD_DO_CALCULATE = "doCalculate";
 
 	/**
 	 * Private constructor.

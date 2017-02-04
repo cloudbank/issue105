@@ -14,6 +14,7 @@ import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -45,35 +46,44 @@ public class ClassLevel1DayN1AYieldCalculationEngine implements CalculationEngin
 	@LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
 			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter configuration");
+
 		try {
 			ClassLevel1DayN1AYieldCalculator calculator = new ClassLevel1DayN1AYieldCalculator();
-			for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-				Date reportDate = fundAccountingYieldData.getReportDate();
-				PortfolioSnapshot portfolioSnapshot = portfolio.getPortfolioSnapshots().get(0);
-				BigDecimal fdrPortfolioStateTaxRt = portfolioSnapshot.getFdrPortfolioStateTaxRt();
-				BigDecimal fdrN1AOospGrosDistInc = portfolioSnapshot.getFdrN1AOospGrosDistInc();
-				for (ShareClass shareClass : portfolio.getShareClasses()) {
-					// get share class snapshot for the report date
-					List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
-					Predicate<ShareClassSnapshot> predicate = shareClassSnapshot -> shareClassSnapshot.getReportDate()
-							.equals(reportDate);
-					ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-					ClassLevel1DayN1AYieldCalculationInput input = new ClassLevel1DayN1AYieldCalculationInput();
-					input.setN1ADistIncomeUnmodAmt(snapshot.getN1ADistIncomeUnmodAmt());
-					input.setN1ADistIncomeAdjAmt(snapshot.getN1ADistIncomeAdjAmt());
-					input.setN1ADistIncomeAdjRevAmt(snapshot.getN1ADistIncomeAdjRevAmt());
-					input.setN1ADistReimbursementAmt(snapshot.getN1ADistReimbursementAmt());
-					input.setN1ADistIncomeBreakageAmt(snapshot.getN1ADistIncomeBreakageAmt());
-					input.setDistributableCapstockQty(snapshot.getDistributableCapstockQty());
-					input.setNavAmount(snapshot.getNavAmt());
-					input.setN1ADistIncomeOpct(fdrN1AOospGrosDistInc);
-					input.setN1ADistIncomeStr(fdrPortfolioStateTaxRt);
+			if (fundAccountingYieldData.getPortfolios() != null) {
+				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
+					Date reportDate = fundAccountingYieldData.getReportDate();
+					PortfolioSnapshot portfolioSnapshot = portfolio.getPortfolioSnapshots().get(0);
+					BigDecimal fdrPortfolioStateTaxRt = portfolioSnapshot.getFdrPortfolioStateTaxRt();
+					BigDecimal fdrN1AOospGrosDistInc = portfolioSnapshot.getFdrN1AOospGrosDistInc();
+					if (portfolio.getShareClasses() != null) {
+						for (ShareClass shareClass : portfolio.getShareClasses()) {
+							// get share class snapshot for the report date
+							List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
+							if (snapshots == null) {
+								continue;
+							}
+							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
+							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
+							ClassLevel1DayN1AYieldCalculationInput input = new ClassLevel1DayN1AYieldCalculationInput();
+							input.setN1ADistIncomeUnmodAmt(snapshot.getN1ADistIncomeUnmodAmt());
+							input.setN1ADistIncomeAdjAmt(snapshot.getN1ADistIncomeAdjAmt());
+							input.setN1ADistIncomeAdjRevAmt(snapshot.getN1ADistIncomeAdjRevAmt());
+							input.setN1ADistReimbursementAmt(snapshot.getN1ADistReimbursementAmt());
+							input.setN1ADistIncomeBreakageAmt(snapshot.getN1ADistIncomeBreakageAmt());
+							input.setDistributableCapstockQty(snapshot.getDistributableCapstockQty());
+							input.setNavAmount(snapshot.getNavAmt());
+							input.setN1ADistIncomeOpct(fdrN1AOospGrosDistInc);
+							input.setN1ADistIncomeStr(fdrPortfolioStateTaxRt);
 
-					ClassLevel1DayN1AYieldCalculationOutput output = calculator.calculate(input);
-					snapshot.setDerMnyMkt1DayN1AYieldPct(output.getDerMm1DayN1aYieldPct()
-							.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+							ClassLevel1DayN1AYieldCalculationOutput output = calculator.calculate(input);
+							snapshot.setDerMnyMkt1DayN1AYieldPct(output.getDerMm1DayN1aYieldPct()
+									.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+						}
+					}
 				}
 			}
 		} catch (Exception e) {

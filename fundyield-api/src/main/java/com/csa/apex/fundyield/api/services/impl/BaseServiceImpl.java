@@ -59,8 +59,8 @@ public abstract class BaseServiceImpl {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(restTemplate, "restTemplate");
-        CommonUtility.checkStringConfig(getConfigApiPath, "getConfigApiPath");
+        CommonUtility.checkNullConfig(restTemplate, this.getClass().getCanonicalName(), "restTemplate");
+        CommonUtility.checkStringConfig(getConfigApiPath, this.getClass().getCanonicalName(), "getConfigApiPath");
     }
 
     /**

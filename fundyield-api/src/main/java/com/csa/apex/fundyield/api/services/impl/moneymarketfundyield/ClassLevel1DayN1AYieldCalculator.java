@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.csa.apex.fundyield.exceptions.CalculationException;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The calculator.
@@ -30,7 +31,7 @@ public class ClassLevel1DayN1AYieldCalculator {
 	 *             in case any error during calculation.
 	 */
 	public ClassLevel1DayN1AYieldCalculationOutput calculate(ClassLevel1DayN1AYieldCalculationInput input) {
-		CommonUtility.checkNull(input, "input");
+        CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
 		// get parameters from input
 		BigDecimal derMm1DayN1aYieldPct = input.getN1ADistIncomeUnmodAmt().add(input.getN1ADistIncomeAdjAmt())
 				.add(input.getN1ADistIncomeAdjRevAmt()).add(input.getN1ADistReimbursementAmt());

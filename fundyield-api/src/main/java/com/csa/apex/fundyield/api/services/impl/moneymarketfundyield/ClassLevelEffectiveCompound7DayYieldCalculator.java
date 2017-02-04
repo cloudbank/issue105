@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.csa.apex.fundyield.exceptions.CalculationException;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The calculator.
@@ -29,7 +30,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculator {
 	 */
 	public ClassLevelEffectiveCompound7DayYieldCalculationOutput calculate(
 			ClassLevelEffectiveCompound7DayYieldCalculationInput input) {
-		CommonUtility.checkNull(input, "input");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
 		BigDecimal derMnyMkt7DayYieldPct = input.getDerMnyMkt7DayYieldPct();
 		BigDecimal dPrevious6Days = input.getSumOfDerMnyMkt7DayYieldPctForPrevious6Days();
 		// calculate y using formula y=(d+dPrevious6Days)/7 with the precision

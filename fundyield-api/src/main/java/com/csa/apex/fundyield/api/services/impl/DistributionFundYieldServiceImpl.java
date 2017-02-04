@@ -70,10 +70,10 @@ public class DistributionFundYieldServiceImpl extends BaseServiceImpl implements
     @PostConstruct
     protected void checkConfiguration() {
         super.checkConfiguration();
-        CommonUtility.checkStringConfig(getFAYADistributionFundDataApiPath, "getFAYADistributionFundDataApiPath");
-        CommonUtility.checkStringConfig(saveCalculatedDistributionFundDataApiPath, "saveCalculatedDistributionFundDataApiPath");
-        CommonUtility.checkStringConfig(getCalculatedDistributionFundDataApiPath, "getCalculatedDistributionFundDataApiPath");
-        CommonUtility.checkListConfig(calculatorEngines, "calculatorEngines");
+        CommonUtility.checkStringConfig(getFAYADistributionFundDataApiPath, this.getClass().getCanonicalName(), "getFAYADistributionFundDataApiPath");
+        CommonUtility.checkStringConfig(saveCalculatedDistributionFundDataApiPath, this.getClass().getCanonicalName(), "saveCalculatedDistributionFundDataApiPath");
+        CommonUtility.checkStringConfig(getCalculatedDistributionFundDataApiPath, this.getClass().getCanonicalName(), "getCalculatedDistributionFundDataApiPath");
+        CommonUtility.checkListConfig(calculatorEngines, this.getClass().getCanonicalName(), "calculatorEngines");
     }
 
     /**
@@ -88,7 +88,7 @@ public class DistributionFundYieldServiceImpl extends BaseServiceImpl implements
     @LogMethod
     public FundAccountingYieldData processDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "processDistributionFundYieldData", Constants.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getFAYADistributionFundDataApiPath)
                     .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
@@ -119,7 +119,7 @@ public class DistributionFundYieldServiceImpl extends BaseServiceImpl implements
     @LogMethod
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
         try {
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedDistributionFundDataApiPath)
                     .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));

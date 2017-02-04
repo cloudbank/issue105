@@ -69,15 +69,15 @@ public class UtilityCustomerAPIClientImpl implements UtilityFAYAAPIClient {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkStringConfig(getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysApiPath,
+        CommonUtility.checkStringConfig(getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysApiPath, this.getClass().getCanonicalName(),
                 "getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysApiPath");
-        CommonUtility.checkStringConfig(getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysApiPath,
+        CommonUtility.checkStringConfig(getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysApiPath, this.getClass().getCanonicalName(),
                 "getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysApiPath");
-        CommonUtility.checkStringConfig(getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysApiPath,
+        CommonUtility.checkStringConfig(getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysApiPath, this.getClass().getCanonicalName(),
                 "getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysApiPath");
-        CommonUtility.checkStringConfig(getAvgOfMnyMkt7DayYieldPctForPreviousDaysApiPath,
+        CommonUtility.checkStringConfig(getAvgOfMnyMkt7DayYieldPctForPreviousDaysApiPath, this.getClass().getCanonicalName(),
                 "getAvgOfMnyMkt7DayYieldPctForPreviousDaysApiPath");
-        CommonUtility.checkStringConfig(getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysApiPath,
+        CommonUtility.checkStringConfig(getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysApiPath, this.getClass().getCanonicalName(),
                 "getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysApiPath");
     }
 

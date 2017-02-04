@@ -45,7 +45,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaDistYieldDataPersistenceService, Constants.FAYA_DIST_YIELD_DATA_PERSISTENCE_SERVICE);
+        CommonUtility.checkNullConfig(fayaDistYieldDataPersistenceService, this.getClass().getCanonicalName(), Constants.FAYA_DIST_YIELD_DATA_PERSISTENCE_SERVICE);
     }
 
     /**
@@ -59,7 +59,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @LogMethod
     public FundAccountingYieldData getFAYADistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYADistributionFundYieldData", Constants.BUSINESS_DATE);
         return fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(businessDate);
     }
 
@@ -75,8 +75,8 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @Transactional
     public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData,
             HttpServletRequest request) throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, Constants.FUND_ACCOUNTING_YIELD_DATA);
-        CommonUtility.checkNull(request, Constants.REQUEST);
+        CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(request, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.REQUEST);
         HttpSession session = request.getSession();
         String currentUserId = (String) session.getAttribute(Constants.CURRENT_USER_ID);
         return fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(fundAccountingYieldData,
@@ -94,7 +94,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @LogMethod
     public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
         return fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(businessDate);
     }
 

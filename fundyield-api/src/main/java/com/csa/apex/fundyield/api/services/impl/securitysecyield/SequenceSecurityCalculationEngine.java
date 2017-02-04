@@ -13,6 +13,7 @@ import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -53,7 +54,7 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkListConfig(calculationEngines, "calculationEngines");
+		CommonUtility.checkListConfig(calculationEngines, this.getClass().getCanonicalName(), "calculationEngines");
 	}
 
 	/**
@@ -73,8 +74,10 @@ public class SequenceSecurityCalculationEngine implements CalculationEngine {
     @LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
 			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter configuration");
 
 		for (CalculationEngine calcEngine : calculationEngines) {
 			calcEngine.calculate(fundAccountingYieldData, configuration);

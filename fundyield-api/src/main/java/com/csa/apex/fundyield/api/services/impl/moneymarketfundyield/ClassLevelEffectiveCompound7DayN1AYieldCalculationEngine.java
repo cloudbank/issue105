@@ -20,6 +20,7 @@ import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
 import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -58,23 +59,34 @@ public class ClassLevelEffectiveCompound7DayN1AYieldCalculationEngine implements
 	@LogMethod
 	public void calculate(FundAccountingYieldData fundAccountingYieldData, SECConfiguration configuration)
 			throws CalculationException {
-		CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
-		CommonUtility.checkNull(configuration, "Parameter configuration");
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter fundAccountingYieldData");
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter configuration");
+
 		try {
-			for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-				Date reportDate = portfolio.getPortfolioSnapshots().get(0).getReportDate();
-				for (ShareClass shareClass : portfolio.getShareClasses()) {
-					// get share class snapshot for the report date
-					List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
-					Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
-					ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-					BigDecimal derMnyMkt7DayN1AYieldPct = snapshot.getDerMnyMkt7DayN1AYieldPct();
-					BigDecimal derMmN1aCompound7DayYieldPct = derMnyMkt7DayN1AYieldPct.add(utilityCustomerAPIClient
-							.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(shareClass.getShareClassSid(), reportDate, 6))
-							.divide(BigDecimal.valueOf(7), configuration.getOperationScale(),
-									configuration.getRoundingMode());
-					snapshot.setDerMnyMktN1ACompound7dayYield(derMmN1aCompound7DayYieldPct
-							.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+			if (fundAccountingYieldData.getPortfolios() != null) {
+				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
+					Date reportDate = portfolio.getPortfolioSnapshots().get(0).getReportDate();
+					if (portfolio.getShareClasses() != null) {
+						for (ShareClass shareClass : portfolio.getShareClasses()) {
+							// get share class snapshot for the report date
+							List<ShareClassSnapshot> snapshots = shareClass.getShareClassSnapshots();
+							if (snapshots == null) {
+								continue;
+							}
+							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
+							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
+							BigDecimal derMnyMkt7DayN1AYieldPct = snapshot.getDerMnyMkt7DayN1AYieldPct();
+							BigDecimal derMmN1aCompound7DayYieldPct = derMnyMkt7DayN1AYieldPct
+									.add(utilityCustomerAPIClient.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(
+											shareClass.getShareClassSid(), reportDate, 6))
+									.divide(BigDecimal.valueOf(7), configuration.getOperationScale(),
+											configuration.getRoundingMode());
+							snapshot.setDerMnyMktN1ACompound7dayYield(derMmN1aCompound7DayYieldPct
+									.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -91,7 +103,7 @@ public class ClassLevelEffectiveCompound7DayN1AYieldCalculationEngine implements
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(utilityCustomerAPIClient, "utilityCustomerAPIClient");
+        CommonUtility.checkNullConfig(utilityCustomerAPIClient, this.getClass().getCanonicalName(), "utilityCustomerAPIClient");
 	}
 
 	/**

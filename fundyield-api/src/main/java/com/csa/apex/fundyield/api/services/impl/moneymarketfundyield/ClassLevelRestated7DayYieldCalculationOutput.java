@@ -15,7 +15,7 @@ public class ClassLevelRestated7DayYieldCalculationOutput {
 	/**
 	 * Mny Mkt restart 1 day yield.
 	 */
-	private BigDecimal d;
+	private BigDecimal moneyMarketRestart1DayYield;
 
 	/**
 	 * Yield amount.
@@ -33,12 +33,12 @@ public class ClassLevelRestated7DayYieldCalculationOutput {
 		this.moneyMarketRestartYield = moneyMarketRestartYield;
 	}
 
-	public BigDecimal getD() {
-		return d;
+	public BigDecimal getMoneyMarketRestart1DayYield() {
+		return moneyMarketRestart1DayYield;
 	}
 
-	public void setD(BigDecimal d) {
-		this.d = d;
+	public void setD(BigDecimal moneyMarketRestart1DayYield) {
+		this.moneyMarketRestart1DayYield = moneyMarketRestart1DayYield;
 	}
 
 	public BigDecimal getDerMmRst7DayYieldPct() {

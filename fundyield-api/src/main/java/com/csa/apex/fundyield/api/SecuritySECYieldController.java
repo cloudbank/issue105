@@ -89,7 +89,7 @@ public class SecuritySECYieldController {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(secYieldService, "secYieldService");
+		CommonUtility.checkNullConfig(secYieldService , this.getClass().getCanonicalName(), "secYieldService");
 	}
 
 	/**
@@ -108,6 +108,7 @@ public class SecuritySECYieldController {
 	public FundAccountingYieldData getSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException {
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getSecuritySECData", Constants.BUSINESS_DATE);
 
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
@@ -137,6 +138,8 @@ public class SecuritySECYieldController {
 	public FundAccountingYieldData getCalculatedSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException {
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", Constants.BUSINESS_DATE);
+		
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
@@ -167,6 +170,9 @@ public class SecuritySECYieldController {
 	public void exportCalculatedSecuritySECData(
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate,
 			HttpServletResponse response) throws FundAccountingYieldException {
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", Constants.BUSINESS_DATE);
+		CommonUtility.checkNull(response, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", "response");
+		
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
@@ -184,7 +190,7 @@ public class SecuritySECYieldController {
 	 *            the security SEC data
 	 */
 	private void truncateResults(FundAccountingYieldData calculatedSecuritySECData) {
-		if (maxNumberOfSecurityData != null && calculatedSecuritySECData.getInstruments().size() > maxNumberOfSecurityData) {
+		if (maxNumberOfSecurityData != null && calculatedSecuritySECData.getInstruments() != null && calculatedSecuritySECData.getInstruments().size() > maxNumberOfSecurityData) {
 			calculatedSecuritySECData.setInstruments(calculatedSecuritySECData.getInstruments().subList(0, maxNumberOfSecurityData));
 		}
 	}

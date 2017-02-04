@@ -8,7 +8,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>faya-api</module>
-	<module>seccommons</module>
+	<module>faya-commons</module>
 	<module>fundyield-api</module>
   </modules>
 </project>

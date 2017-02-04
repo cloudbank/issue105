@@ -68,7 +68,7 @@ public class FAYAMoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getFAYAMoneyMarketFundYieldData() throws Exception {
-        this.mockMvc.perform(get("/customerMoneyMarketFundYieldData").param("businessDate", "2016-05-02"))
+        this.mockMvc.perform(get("/FAYAMoneyMarketFundYieldData").param("businessDate", "2016-05-02"))
                 .andExpect(status().is(400));
 
     }

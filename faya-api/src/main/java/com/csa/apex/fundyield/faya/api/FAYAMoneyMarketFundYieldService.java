@@ -31,7 +31,7 @@ public interface FAYAMoneyMarketFundYieldService {
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    @RequestMapping(value = "customerMoneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "FAYAMoneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(

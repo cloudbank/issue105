@@ -33,7 +33,7 @@ public interface FAYADistributiontFundYieldService {
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    @RequestMapping(value = "customerDistributionFundYieldData", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "FAYADistributionFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public FundAccountingYieldData getFAYADistributionFundYieldData(

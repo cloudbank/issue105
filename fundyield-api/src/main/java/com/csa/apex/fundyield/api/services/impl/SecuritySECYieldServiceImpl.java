@@ -6,6 +6,7 @@ package com.csa.apex.fundyield.api.services.impl;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -127,10 +128,10 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	@PostConstruct
 	protected void checkConfiguration() {
 	    super.checkConfiguration();
-		CommonUtility.checkNullConfig(calculationEngineSelector, "calculationEngineSelector");
-		CommonUtility.checkStringConfig(getSecuritySECDataApiPath, "getSecuritySECDataApiPath");
-		CommonUtility.checkStringConfig(getCalculatedSecuritySECDataApiPath, "getCalculatedSecuritySECDataApiPath");
-		CommonUtility.checkStringConfig(saveCalculatedSecuritySECDataApiPath, "saveCalculatedSecuritySECDataApiPath");
+		CommonUtility.checkNullConfig(calculationEngineSelector, this.getClass().getCanonicalName(), "calculationEngineSelector");
+		CommonUtility.checkStringConfig(getSecuritySECDataApiPath, this.getClass().getCanonicalName(), "getSecuritySECDataApiPath");
+		CommonUtility.checkStringConfig(getCalculatedSecuritySECDataApiPath, this.getClass().getCanonicalName(), "getCalculatedSecuritySECDataApiPath");
+		CommonUtility.checkStringConfig(saveCalculatedSecuritySECDataApiPath, this.getClass().getCanonicalName(), "saveCalculatedSecuritySECDataApiPath");
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	@Override
 	@LogMethod
 	public FundAccountingYieldData getCalculatedSecuritySECData(Date businessDate) throws FundAccountingYieldException {
-		CommonUtility.checkNull(businessDate, PARAM_BUSINESS_DATE);
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", PARAM_BUSINESS_DATE);
 
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
@@ -183,7 +184,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	@Override
 	@LogMethod
 	public FundAccountingYieldData processSecuritySECData(Date businessDate) throws FundAccountingYieldException {
-		CommonUtility.checkNull(businessDate, PARAM_BUSINESS_DATE);
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "processSecuritySECData", PARAM_BUSINESS_DATE);
 
 		try {
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getSecuritySECDataApiPath)
@@ -235,8 +236,8 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	@LogMethod
 	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
 			throws FundAccountingYieldException {
-		CommonUtility.checkNull(businessDate, PARAM_BUSINESS_DATE);
-		CommonUtility.checkNull(response, Constants.PARAMETER_RESPONSE);
+		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", PARAM_BUSINESS_DATE);
+		CommonUtility.checkNull(response, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", Constants.PARAMETER_RESPONSE);
 
 		FundAccountingYieldData data = getCalculatedSecuritySECData(businessDate);
 
@@ -273,9 +274,13 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 
 		zos.write((Arrays.asList(EXPORT_FIELD_NAMES).stream().collect(Collectors.joining(",")) + "\n").getBytes());
 
-		Map<Long, Portfolio> portfoliosMap = data.getPortfolios().stream()
+		Map<Long, Portfolio> portfoliosMap = new HashMap<>();
+		if (data.getPortfolios() != null) {
+			portfoliosMap = data.getPortfolios().stream()
 				.collect(Collectors.toMap(Portfolio::getPortfolioSid, Function.identity()));
+		}
 
+		if (data.getInstruments() != null) {
 		for (Instrument instrument : data.getInstruments()) {
 			TradableEntitySnapshot tes = CommonUtility.getTradableEntitySnapshot(instrument);
 			if (tes != null) {
@@ -289,6 +294,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 				}
 			}
 		}
+		}
 		zos.closeEntry();
 		zos.close();
 	}
@@ -296,7 +302,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	/**
 	 * Convert the SEC data to an array of field values which compose a CSV row.
 	 *
-	 * @param data
+	 * @param fundAccountingYieldData
 	 *            the FundAccountingYieldData
 	 * @param instrument
 	 *            the Instrument
@@ -308,12 +314,12 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	 *            the PortfolioHoldingSnapshot
 	 * @return the array of position data field values
 	 */
-	private String[] convertSECDataToCSVRow(FundAccountingYieldData data, Instrument instrument,
+	private String[] convertSECDataToCSVRow(FundAccountingYieldData fundAccountingYieldData, Instrument instrument,
 			TradableEntitySnapshot tes, Portfolio portfolio, PortfolioHoldingSnapshot portfolioHolding) {
 		String[] values = new String[EXPORT_FIELD_NAMES.length];
 		int index = 0;
 		values[index++] = String.valueOf(instrument.getInstrumentId());
-		values[index++] = getFormattedDate(data.getReportDate());
+		values[index++] = getFormattedDate(fundAccountingYieldData.getReportDate());
 		values[index++] = String.valueOf(tes.getFdrCleanPrice());
 		values[index++] = tes.getDerYieldCalcEngineCode();
 		values[index++] = tes.getDerIncomeCalcEngineCode();

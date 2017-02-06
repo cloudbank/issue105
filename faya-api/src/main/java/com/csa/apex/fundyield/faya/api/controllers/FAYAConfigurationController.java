@@ -47,7 +47,7 @@ public class FAYAConfigurationController implements FAYAConfigurationService {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(secConfiguration, Constants.SEC_CONFIGURATION);
+        CommonUtility.checkNullConfig(secConfiguration, this.getClass().getCanonicalName(), Constants.SEC_CONFIGURATION);
     }
 
     /**

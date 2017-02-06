@@ -14,6 +14,7 @@ import org.joda.time.PeriodType;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.DateUtility;
 
 /**
@@ -210,7 +211,7 @@ public class YtmYieldCalculator {
 	 * @throws IllegalArgumentException in case any error during calculation
 	 */
 	public YtmYieldCalculationOutput calculate(YtmYieldCalculationInput input) {
-		CommonUtility.checkNull(input, "Parameter YtmYieldCalculationInput");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter YtmYieldCalculationInput");
 
 		// set P (clean price) as Market Price/Inflationary Index Ratio
 		BigDecimal cleanPrice = input.getMarketPrice().divide(input.getFdrTipsInsflationaryRatio(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);

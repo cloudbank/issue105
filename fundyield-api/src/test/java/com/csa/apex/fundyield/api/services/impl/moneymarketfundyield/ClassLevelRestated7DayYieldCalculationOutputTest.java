@@ -49,7 +49,7 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(34);
         instance.setD(expected);
-        assertEquals(expected, instance.getD());
+        assertEquals(expected, instance.getMoneyMarketRestart1DayYield());
     }
     /**
      * Test for method setD.
@@ -61,7 +61,7 @@ public class ClassLevelRestated7DayYieldCalculationOutputTest {
         ClassLevelRestated7DayYieldCalculationOutput instance = new ClassLevelRestated7DayYieldCalculationOutput();
         BigDecimal expected = new BigDecimal(28);
         instance.setD(expected);
-        assertEquals(expected, instance.getD());
+        assertEquals(expected, instance.getMoneyMarketRestart1DayYield());
     }
     /**
      * Test for method getY.

@@ -185,7 +185,7 @@ public class StoredProcedures {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(dataSource, "dataSource");
+        CommonUtility.checkNullConfig(dataSource, this.getClass().getCanonicalName(), "dataSource");
 
         // Initialize the stored procedure calls to get data
         this.getPortfoliosCall = new SimpleJdbcCall(dataSource)

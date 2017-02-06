@@ -52,7 +52,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, Constants.JDBC_TEMPLATE);
+        CommonUtility.checkNullConfig(jdbcTemplate, this.getClass().getCanonicalName(), Constants.JDBC_TEMPLATE);
     }
 
     /**
@@ -82,7 +82,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
     @Transactional
     public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, Constants.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
 //        CommonUtility.checkString(userId, "userId");
         storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
         return true;
@@ -111,7 +111,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     private FundAccountingYieldData retrieveFundAccountingYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "retrieveFundAccountingYieldData", Constants.BUSINESS_DATE);
         try {
             List<Portfolio> portfolios = FAYAPersistenceHelper.getPortfolios(jdbcTemplate, "QUERY_DY_PORTFOLIO",
                     businessDate);

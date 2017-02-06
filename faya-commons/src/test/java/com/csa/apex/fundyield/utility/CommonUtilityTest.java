@@ -78,7 +78,7 @@ public class CommonUtilityTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void checkNullTest() {
-        CommonUtility.checkNull(null, "Test object");
+        CommonUtility.checkNull(null, this.getClass().getCanonicalName(), "checkNullTest", "Test object");
     }
 
     /**
@@ -86,7 +86,7 @@ public class CommonUtilityTest {
      */
     @Test(expected = ConfigurationException.class)
     public void checkNullConfigTest() {
-        CommonUtility.checkNullConfig(null, "Test object");
+        CommonUtility.checkNullConfig(null, this.getClass().getCanonicalName(), "Test object");
     }
 
     /**
@@ -94,7 +94,7 @@ public class CommonUtilityTest {
      */
     @Test(expected = ConfigurationException.class)
     public void checkStringConfigTest() {
-        CommonUtility.checkStringConfig("  ", "Test string");
+        CommonUtility.checkStringConfig("  ", this.getClass().getCanonicalName(), "Test string");
     }
 
     /**
@@ -102,7 +102,7 @@ public class CommonUtilityTest {
      */
     @Test(expected = ConfigurationException.class)
     public void checkListConfigTest1() {
-        CommonUtility.checkListConfig(new ArrayList<>(), "Test list");
+        CommonUtility.checkListConfig(new ArrayList<>(), this.getClass().getCanonicalName(), "Test list");
     }
 
     /**
@@ -112,6 +112,6 @@ public class CommonUtilityTest {
     public void checkListConfigTest2() {
         List<String> list = new ArrayList<>();
         list.add(null);
-        CommonUtility.checkListConfig(list, "Test list");
+        CommonUtility.checkListConfig(list, this.getClass().getCanonicalName(), "Test list");
     }
 }

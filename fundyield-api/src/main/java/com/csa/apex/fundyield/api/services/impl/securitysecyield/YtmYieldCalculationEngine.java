@@ -21,6 +21,7 @@ import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The YTM (TIPS) Yield calculation engine.
@@ -95,8 +96,8 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkNullConfig(calculator, "YtmYieldCalculator");
-		CommonUtility.checkStringConfig(engineCode, "engineCode");
+		CommonUtility.checkNullConfig(calculator, this.getClass().getCanonicalName(), "YtmYieldCalculator");
+		CommonUtility.checkStringConfig(engineCode, this.getClass().getCanonicalName(), "engineCode");
 
 		if (minYield > maxYield) {
 			throw new ConfigurationException("minYield can not be greater than maxYield");
@@ -125,19 +126,23 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 	/**
 	 * Do calculation.
 	 *
-	 * @param data The FundAccountingYieldData to calculate
+	 * @param fundAccountingYieldData The FundAccountingYieldData to calculate
 	 * @param instrument The Instrument to calculate
 	 * @param tradableEntitySnapshot The TradableEntitySnapshot to calculate
 	 * @param configuration The SECConfiguration to be used for config values
 	 */
 	@Override
-	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tradableEntitySnapshot,
-			SECConfiguration configuration) {
+	protected void doCalculate(FundAccountingYieldData fundAccountingYieldData, Instrument instrument,
+			TradableEntitySnapshot tradableEntitySnapshot, SECConfiguration configuration) {
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(),
+				Constants.METHOD_DO_CALCULATE, Constants.FUND_ACCOUNTING_YIELD_DATA);
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_DO_CALCULATE,
+				Constants.PARAMETER_CONFIGURATION);
 
 		YtmYieldCalculationInput input = new YtmYieldCalculationInput(configuration);
 
 		// Calculate derTIPSInflationaryRatio
-		List<PortfolioHoldingSnapshot> holdings = CommonUtility.getRelatedPortfolioHoldings(data,
+		List<PortfolioHoldingSnapshot> holdings = CommonUtility.getRelatedPortfolioHoldings(fundAccountingYieldData,
 				tradableEntitySnapshot.getTradableEntitySid());
 		if (holdings != null && !holdings.isEmpty()) {
 			PortfolioHoldingSnapshot holding = holdings.get(0);
@@ -157,7 +162,7 @@ public class YtmYieldCalculationEngine extends BaseCalculationEngine {
 		input.setFdrTipsInsflationaryRatio(tradableEntitySnapshot.getFdrTipsInflationaryRatio());
 		input.setMaturityPrice(instrument.getMaturityPrc());
 		input.setMaturityDate(instrument.getFinalMaturityDate());
-		input.setReportDate(data.getReportDate());
+		input.setReportDate(fundAccountingYieldData.getReportDate());
 
 		// calculate
 		YtmYieldCalculationOutput output = calculator.calculate(input);

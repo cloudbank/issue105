@@ -44,7 +44,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(fayaMoneyMarketDataPersistenceService, Constants.FAYA_MONEY_MARKET_DATA_PERSISTENCE_SERVICE);
+        CommonUtility.checkNullConfig(fayaMoneyMarketDataPersistenceService, this.getClass().getCanonicalName(), Constants.FAYA_MONEY_MARKET_DATA_PERSISTENCE_SERVICE);
     }
 
     /**
@@ -58,7 +58,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @LogMethod
     public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYAMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         return fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(businessDate);
     }
 
@@ -74,8 +74,8 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @Transactional
     public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData,
             HttpServletRequest request) throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, Constants.FUND_ACCOUNTING_YIELD_DATA);
-        CommonUtility.checkNull(request, Constants.REQUEST);
+        CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
+        CommonUtility.checkNull(request, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.REQUEST);
         HttpSession session = request.getSession();
         String currentUserId = (String) session.getAttribute(Constants.CURRENT_USER_ID);
         return fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(fundAccountingYieldData,
@@ -93,7 +93,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @LogMethod
     public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         return fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(businessDate);
     }
 

@@ -95,7 +95,7 @@ public class DistributionFundYiedControllerTest {
 	
 	@Test
 	public void getDistributionFundYieldData() throws Exception {
-		DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+		DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
 		distributionFundYiedController.getDistributionFundYieldData(businessDate);
 	}
@@ -120,7 +120,7 @@ public class DistributionFundYiedControllerTest {
 	 */
 	@Test
 	public void getCalculatedDistributionFundYieldData() throws Exception {
-		DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+		DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
 		distributionFundYiedController.getCalculatedDistributionFundYieldData(businessDate);
 	}

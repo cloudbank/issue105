@@ -93,7 +93,7 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getMoneyMarketFundYieldData() throws Exception {
-    	DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+    	DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
         moneyMarketFundYieldController.getMoneyMarketFundYieldData(businessDate);
     }
@@ -113,7 +113,7 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-    	DateFormat f = new SimpleDateFormat(Constants.DATE_MASK_YYYY_MM_DD);
+    	DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
         moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(businessDate);
     }

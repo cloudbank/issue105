@@ -69,7 +69,7 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(storedProcedures, "storedProcedures");
+        CommonUtility.checkNullConfig(storedProcedures, this.getClass().getCanonicalName(), "storedProcedures");
     }
 
     /**
@@ -84,7 +84,7 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
     @Transactional
     public boolean persistSecuritySECData(FundAccountingYieldData fundAccountingYieldData)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(fundAccountingYieldData, "Parameter fundAccountingYieldData");
+        CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistSecuritySECData", "Parameter fundAccountingYieldData");
 
         storedProcedures.saveFAYAInstrumentData(fundAccountingYieldData);
         storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
@@ -102,7 +102,7 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
     @Override
     @LogMethod
     public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, "Parameter businessDate");
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYASECData", "Parameter businessDate");
 
         // The business date input parameters
         DateTime businessDateTime = new DateTime(businessDate).withTimeAtStartOfDay();

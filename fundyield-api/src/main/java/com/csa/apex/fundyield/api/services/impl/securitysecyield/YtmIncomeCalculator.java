@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The YTM (TIPS) Income calculator.
@@ -34,7 +35,7 @@ public class YtmIncomeCalculator {
 	 * @throws IllegalArgumentException in case any error during calculation
 	 */
 	public YtmIncomeCalculationOutput calculate(YtmIncomeCalculationInput input) {
-		CommonUtility.checkNull(input, "Parameter YtmIncomeCalculationInput");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter YtmIncomeCalculationInput");
 
 		BigDecimal income;
 		if (input.getDerOneDaySecurityYield().divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).compareTo(BigDecimal

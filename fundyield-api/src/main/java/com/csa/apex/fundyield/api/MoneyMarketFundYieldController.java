@@ -49,7 +49,7 @@ public class MoneyMarketFundYieldController {
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(moneyMarketFundYieldService, "moneyMarketFundYieldService");
+        CommonUtility.checkNullConfig(moneyMarketFundYieldService, this.getClass().getCanonicalName(), "moneyMarketFundYieldService");
     }
 
     /**
@@ -66,7 +66,7 @@ public class MoneyMarketFundYieldController {
     public FundAccountingYieldData getMoneyMarketFundYieldData(
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         return moneyMarketFundYieldService.processMoneyMarketFundYieldData(businessDate);
     }
 
@@ -83,7 +83,7 @@ public class MoneyMarketFundYieldController {
     public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, Constants.BUSINESS_DATE);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         return moneyMarketFundYieldService.getCalculatedMoneyMarketFundYieldData(businessDate);
     }
 

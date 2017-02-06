@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.csa.apex.fundyield.exceptions.CalculationException;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The calculator.
@@ -28,7 +29,7 @@ public class ClassLevelRestated30DayYieldCalculator {
 	 *             in case any error during calculation.
 	 */
 	public ClassLevelRestated30DayYieldCalculationOutput calculate(ClassLevelRestated30DayYieldCalculationInput input) {
-		CommonUtility.checkNull(input, "input");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
 		BigDecimal derMmRestate1DayYieldPct = input.getDerMmRestate1DayYieldPct();
 		BigDecimal dPrevious29Days = input.getSumOfDerRestate1DayYieldMnyMktPctPrevious29Days();
 		// calculate y using formula y=(d+dPrevious29Days)/30;

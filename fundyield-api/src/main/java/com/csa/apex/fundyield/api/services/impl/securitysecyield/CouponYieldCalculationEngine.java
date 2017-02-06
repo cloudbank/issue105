@@ -19,6 +19,7 @@ import com.csa.apex.fundyield.fayacommons.entities.Instrument;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * The Coupon Yield calculation engine.
@@ -57,7 +58,8 @@ public class CouponYieldCalculationEngine extends BaseCalculationEngine {
 	 */
 	@PostConstruct
 	protected void checkConfiguration() {
-		CommonUtility.checkStringConfig(engineCode, "engineCode");
+		CommonUtility.checkStringConfig(engineCode, this.getClass().getCanonicalName(), "engineCode");
+		CommonUtility.checkNullConfig(calculator, this.getClass().getCanonicalName(), "calculator");
 	}
 
 	/**
@@ -72,23 +74,29 @@ public class CouponYieldCalculationEngine extends BaseCalculationEngine {
 	/**
 	 * Do calculation.
 	 *
-	 * @param data The FundAccountingYieldData to calculate
+	 * @param fundAccountingYieldData The FundAccountingYieldData to calculate
 	 * @param instrument The Instrument to calculate
 	 * @param tradableEntitySnapshot The TradableEntitySnapshot to calculate
 	 * @param configuration The SECConfiguration to be used for config values
 	 */
 	@Override
-	protected void doCalculate(FundAccountingYieldData data, Instrument instrument, TradableEntitySnapshot tradableEntitySnapshot,
-			SECConfiguration configuration) {
+	protected void doCalculate(FundAccountingYieldData fundAccountingYieldData, Instrument instrument,
+			TradableEntitySnapshot tradableEntitySnapshot, SECConfiguration configuration) {
+		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(),
+				Constants.METHOD_DO_CALCULATE, Constants.FUND_ACCOUNTING_YIELD_DATA);
+		CommonUtility.checkNull(configuration, this.getClass().getCanonicalName(), Constants.METHOD_DO_CALCULATE,
+				Constants.PARAMETER_CONFIGURATION);
 
-		if (tradableEntitySnapshot.getMarketPrice() != null && tradableEntitySnapshot.getFdrTipsInflationaryRatio() != null) {
-			BigDecimal cleanPrice = tradableEntitySnapshot.getMarketPrice()
-					.divide(tradableEntitySnapshot.getFdrTipsInflationaryRatio(), configuration.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		if (tradableEntitySnapshot.getMarketPrice() != null
+				&& tradableEntitySnapshot.getFdrTipsInflationaryRatio() != null) {
+			BigDecimal cleanPrice = tradableEntitySnapshot.getMarketPrice().divide(
+					tradableEntitySnapshot.getFdrTipsInflationaryRatio(), configuration.getOperationScale(),
+					BigDecimal.ROUND_HALF_UP);
 			tradableEntitySnapshot.setFdrCleanPrice(cleanPrice);
 		}
 		CouponYieldCalculationInput input = new CouponYieldCalculationInput(configuration);
 		input.setCurrentIncomeRate(tradableEntitySnapshot.getCurrentIncomeRate());
 		CouponYieldCalculationOutput output = calculator.calculate(input);
-	    tradableEntitySnapshot.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
+		tradableEntitySnapshot.setDerOneDaySecurityYield(output.getDerOneDaySecurityYield());
 	}
 }

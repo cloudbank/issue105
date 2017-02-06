@@ -24,7 +24,7 @@ https://www.youtube.com/watch?v=-vxsPC0mS64
 docs/FAYA JAVA APP - PHASE 1 UPDATES CODE CHALLENGE.pdf
 
 # POSTMAN Script
-docs/faya-api.postman_collection.json
+docs/faya-dataaccess.postman_collection.json
 docs/fundyield-api.postman_collection.json
 
 # Oracle Express 11g Installation
@@ -104,7 +104,7 @@ docs/fundyield-api.postman_collection.json
 
 #### DB Setup
 - Configure the db credentials in  
-`faya-api/src/main/resources/db.properties`   `faya-api/src/test/resources/test-db.properties`.
+`faya-dataaccess/src/main/resources/db.properties`   `faya-dataaccess/src/test/resources/test-db.properties`.
 
 - Open Oracle Developer and connect to `local_system` and run `sql/create_user.sql`. This will create the two users `secyield` and `test_secyield`.
 
@@ -117,7 +117,7 @@ docs/fundyield-api.postman_collection.json
 #### Build all modules
 - When running for the first time ojdbc6.jar needs to be added to local maven repository
 
-  1. Go to `faya-api` folder, run:
+  1. Go to `faya-dataaccess` folder, run:
   
   ```mvn install:install-file -Dfile=lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar```
   
@@ -131,7 +131,7 @@ docs/fundyield-api.postman_collection.json
 
   * ```mvn clean install ```
 
-- In `faya-api` folder, run the following commands
+- In `faya-dataaccess` folder, run the following commands
 
   1. `mvn install:install-file -Dfile=lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar`
 
@@ -144,7 +144,7 @@ docs/fundyield-api.postman_collection.json
   ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args=" --clean --excel <path to test>\Phase1TestData.xlsx"```
 
   5. You can also pass path of mapping properties for excel if excel will change order of columns  
-    ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of faya-api\src\main\resources\excelMapping.properties"```  
+    ```mvn exec:java -Dexec.mainClass=com.csa.apex.fundyield.faya.commands.ImportExcel -Dexec.args="--clean --excel <path to test>/Phase1TestData.xlsx --mapping absolute path of faya-dataaccess\src\main\resources\excelMapping.properties"```
 
   6. ```mvn spring-boot:run ```  
 
@@ -154,7 +154,7 @@ docs/fundyield-api.postman_collection.json
 
   2. ```mvn spring-boot:run ```
 
-To run unit tests, use the following command in `faya-commons`, `faya-api` and `fundyield-api` folders:
+To run unit tests, use the following command in `faya-commons`, `faya-dataaccess` and `fundyield-api` folders:
 
     mvn test
 
@@ -169,18 +169,18 @@ Unit tests are run by default, please use -DskipTests parameter everywhere to sk
    mvn clean install
    ```
 
-- In `faya-api` folder, run the following command
+- In `faya-dataaccess` folder, run the following command
    ```
    mvn clean install
    ```
-   * Copy generated war (found in `target/faya-api.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
+   * Copy generated war (found in `target/faya-dataaccess.war`) to Tomcat webapp directory (`TOMCAT_HOME/webapps`).
 
-- In `fundyield-api` folder, update the URLs in `resources/application.tomcat.properties` to point to the correct `faya-api` endpoint
+- In `fundyield-api` folder, update the URLs in `resources/application.tomcat.properties` to point to the correct `faya-dataaccess` endpoint
    ```properties
-   getConfigApiPath=http://localhost:8080/faya-api/securitySECDataConfiguration
-   getSecuritySECDataApiPath=http://localhost:8080/faya-api/fayaFundAccountingSECYieldData
-   saveCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-api/calculatedFundAccountingSECYieldData
-   getCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-api/calculatedFundAccountingSECYieldData
+   getConfigApiPath=http://localhost:8080/faya-dataaccess/securitySECDataConfiguration
+   getSecuritySECDataApiPath=http://localhost:8080/faya-dataaccess/fayaFundAccountingSECYieldData
+   saveCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-dataaccess/calculatedFundAccountingSECYieldData
+   getCalculatedSecuritySECDataApiPath=http://localhost:8080/faya-dataaccess/calculatedFundAccountingSECYieldData
    ```
 
 - In `fundyield-api` folder, run the following command
@@ -191,13 +191,13 @@ Unit tests are run by default, please use -DskipTests parameter everywhere to sk
 
 - Start Tomcat server
 - Once started, these will be the endpoints:
-  * faya-api --  `/faya-api/<service_name>`  [e.g. `/faya-api/fayaFundAccountingSECYieldData`]
+  * faya-dataaccess --  `/faya-dataaccess/<service_name>`  [e.g. `/faya-dataaccess/fayaFundAccountingSECYieldData`]
   * fundyield-api --  `/fundyield-api/<service_name>`  [e.g. `/fundyield-api/calculatedFundAccountingSECYieldData`]
 
 
 # SonarCube Code Coverage for backend
 
-- To use SonarCube code coverage, sonar-project.properties is present in the root folders of faya-commons, faya-api and fundyield-api modules.
+- To use SonarCube code coverage, sonar-project.properties is present in the root folders of faya-commons, faya-dataaccess and fundyield-api modules.
 - Go to this link and download latest version of SonarCube Server and SonarCube Scanner:
 http://www.sonarqube.org/downloads/
 http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
@@ -428,8 +428,8 @@ sudo rpm -i oracle-xe-11.2.0-1.0.x86_64.rpm
 
 fundyield-api\src\main\resources\application.properties
 fundyield-api\src\main\resources\application.tomcat.properties
-faya-api\src\main\resources\db.properties
-faya-api\src\test\resources\test-db.properties
+faya-dataaccess\src\main\resources\db.properties
+faya-dataaccess\src\test\resources\test-db.properties
 
 ######Updating frontend project properties
 - Update below file with backend api details

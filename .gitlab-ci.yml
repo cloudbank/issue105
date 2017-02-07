@@ -4,14 +4,14 @@ run_tests:
   stage: deploy
   script:
 
-  - mvn install:install-file -Dfile=faya-api/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+  - mvn install:install-file -Dfile=faya-dataaccess/lib/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
   - mvn -f faya-commons/pom.xml clean install
-  - mvn -f faya-api/pom.xml clean install
+  - mvn -f faya-dataaccess/pom.xml clean install
   - mvn -f fundyield-api/pom.xml clean install -Ptomcat
-  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/faya-api"
+  - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/faya-dataaccess"
   - curl "http://tomcat:admin@localhost:8080/manager/text/undeploy?path=/fundyield-api"
   - curl -T "fundyield-api/target/fundyield-api.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/fundyield-api&update=true"
-  - curl -T "faya-api/target/faya-api.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/faya-api&update=true"
+  - curl -T "faya-dataaccess/target/faya-dataaccess.war" "http://tomcat:admin@localhost:8080/manager/text/deploy?path=/faya-dataaccess&update=true"
 
   only:
   - develop

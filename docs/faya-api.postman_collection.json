@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "faya-api",
+		"name": "faya-dataaccess",
 		"_postman_id": "68765f16-837b-c7ee-a8f9-0dad16122511",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -10,7 +10,7 @@
 		{
 			"name": "getConfiguration",
 			"request": {
-				"url": "http://localhost:8081/faya-api/securitySECDataConfiguration",
+				"url": "http://localhost:8081/faya-dataaccess/securitySECDataConfiguration",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -24,7 +24,7 @@
 		{
 			"name": "getCustomerSECData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/fayaFundAccountingSECYieldData?businessDate=2014-12-01",
+				"url": "http://localhost:8081/faya-dataaccess/fayaFundAccountingSECYieldData?businessDate=2014-12-01",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -38,7 +38,7 @@
 		{
 			"name": "getCalculatedSECData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedFundAccountingSECYieldData?businessDate=2014-12-01",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedFundAccountingSECYieldData?businessDate=2014-12-01",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -52,7 +52,7 @@
 		{
 			"name": "persistSecuritySECData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedFundAccountingSECYieldData",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedFundAccountingSECYieldData",
 				"method": "PUT",
 				"header": [
 					{
@@ -72,7 +72,7 @@
 		{
 			"name": "getFAYADistributionFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/FAYADistributionFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/FAYADistributionFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -86,7 +86,7 @@
 		{
 			"name": "getCalculatedDistributionFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedFAYADistributionFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedFAYADistributionFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -100,7 +100,7 @@
 		{
 			"name": "persistDistributionFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedDistributionFundYieldPortfolio?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedDistributionFundYieldPortfolio?businessDate=2016-12-20",
 				"method": "PUT",
 				"header": [
 					{
@@ -120,7 +120,7 @@
 		{
 			"name": "getFAYAMoneyMarketFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/FAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/FAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -134,7 +134,7 @@
 		{
 			"name": "getCalculatedMoneyMarketFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedFAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedFAYAMoneyMarketFundYieldData?businessDate=2016-12-20",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -148,7 +148,7 @@
 		{
 			"name": "persistMoneyMarketFundYieldData",
 			"request": {
-				"url": "http://localhost:8081/faya-api/calculatedMoneyMarketFundYieldPortfolio?businessDate=2016-12-20",
+				"url": "http://localhost:8081/faya-dataaccess/calculatedMoneyMarketFundYieldPortfolio?businessDate=2016-12-20",
 				"method": "PUT",
 				"header": [
 					{
@@ -168,7 +168,7 @@
 		{
 			"name": "getAvgOfMnyMkt1DayDistYieldPctForPreviousDays",
 			"request": {
-				"url": "http://localhost:8081/faya-api/avgOfMm1DayDistYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
+				"url": "http://localhost:8081/faya-dataaccess/avgOfMm1DayDistYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -182,7 +182,7 @@
 		{
 			"name": "getSumOfDer1DayYieldN1AMnyMktPctPreviousDays",
 			"request": {
-				"url": "http://localhost:8081/faya-api/sumOfDer1DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
+				"url": "http://localhost:8081/faya-dataaccess/sumOfDer1DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -196,7 +196,7 @@
 		{
 			"name": "getSumOfDerRestate1DayYieldMnyMktPctPreviousDays",
 			"request": {
-				"url": "http://localhost:8081/faya-api/sumOfDerRestate1DayYieldMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
+				"url": "http://localhost:8081/faya-dataaccess/sumOfDerRestate1DayYieldMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -210,7 +210,7 @@
 		{
 			"name": "getAvgOfMnyMkt7DayYieldPctForPreviousDays",
 			"request": {
-				"url": "http://localhost:8081/faya-api/avgOfMm7DayYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
+				"url": "http://localhost:8081/faya-dataaccess/avgOfMm7DayYieldPctForPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -224,7 +224,7 @@
 		{
 			"name": "getSumOfDer7DayYieldN1AMnyMktPctPreviousDays",
 			"request": {
-				"url": "http://localhost:8081/faya-api/sumOfDer7DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
+				"url": "http://localhost:8081/faya-dataaccess/sumOfDer7DayYieldN1AMmPctPreviousDays?shareClassSid=111&numOfDays=3&reportDate=2016-12-19",
 				"method": "GET",
 				"header": [],
 				"body": {

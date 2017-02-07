@@ -7,7 +7,7 @@
   <version>1</version>
   <packaging>pom</packaging>
   <modules>
-    <module>faya-api</module>
+    <module>faya-dataaccess</module>
 	<module>faya-commons</module>
 	<module>fundyield-api</module>
   </modules>

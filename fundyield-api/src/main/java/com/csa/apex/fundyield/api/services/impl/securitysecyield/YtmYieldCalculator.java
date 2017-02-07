@@ -221,8 +221,8 @@ public class YtmYieldCalculator {
 		BigDecimal diffInMillis = new BigDecimal(
 				Math.abs(input.getMaturityDate().getTime() - input.getReportDate().getTime()));
 		BigDecimal millisInYear = new BigDecimal(31556952000L);
-		int n = diffInMillis.divide(millisInYear, input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-				.multiply(new BigDecimal(2)).setScale(0, RoundingMode.UP).intValue();
+		BigDecimal numberOfCouponsPayable = diffInMillis.divide(millisInYear, input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		numberOfCouponsPayable = numberOfCouponsPayable.multiply(new BigDecimal(2)).setScale(0, RoundingMode.UP);
 
 		// calculate DSC
 		// calculate previous coupon and next coupon dates first.
@@ -234,7 +234,7 @@ public class YtmYieldCalculator {
 
 		YtmYieldCalculationVariablesDTO dto = new YtmYieldCalculationVariablesDTO();
 		dto.cleanPrice = cleanPrice;
-		dto.couponsBetSettlementRedemption = n;
+		dto.couponsBetSettlementRedemption = numberOfCouponsPayable.intValue();
 		dto.daysBetPriorCouponDateSettlementDate = a;
 		dto.dsc = dsc;
 

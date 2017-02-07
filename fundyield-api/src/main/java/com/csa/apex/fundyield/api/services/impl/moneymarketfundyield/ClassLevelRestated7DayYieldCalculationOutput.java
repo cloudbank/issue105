@@ -37,7 +37,7 @@ public class ClassLevelRestated7DayYieldCalculationOutput {
 		return moneyMarketRestart1DayYield;
 	}
 
-	public void setD(BigDecimal moneyMarketRestart1DayYield) {
+	public void setMoneyMarketRestart1DayYield(BigDecimal moneyMarketRestart1DayYield) {
 		this.moneyMarketRestart1DayYield = moneyMarketRestart1DayYield;
 	}
 

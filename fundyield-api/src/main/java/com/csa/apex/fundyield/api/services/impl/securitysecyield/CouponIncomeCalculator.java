@@ -35,17 +35,21 @@ public class CouponIncomeCalculator {
 	 * @throws IllegalArgumentException in case any error during calculation
 	 */
 	public CouponIncomeCalculationOutput calculate(CouponIncomeCalculationInput input) {
-		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter CouponIncomeCalculationInput");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter CouponIncomeCalculationInput");
 
-		BigDecimal rightSide = input.getSettledShareCount().multiply(input.getDerOneDaySecurityYield())
-				.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-				.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
-		BigDecimal income = input.getEarnedAmortBaseAmount().divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-				.add(rightSide);
+		BigDecimal rightSide = input.getSettledShareCount();
+		rightSide = rightSide.multiply(input.getDerOneDaySecurityYield());
+		rightSide = rightSide.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		rightSide = rightSide.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+
+		BigDecimal income = input.getEarnedAmortBaseAmount();
+		income = income.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		income = income.add(rightSide);
 		income = income.setScale(input.getOperationScale(), input.getRoundingMode());
 
 		CouponIncomeCalculationOutput output = new CouponIncomeCalculationOutput();
 		output.setDerSecYield1DayIncomeAmt(income);
 		return output;
-    }
+	}
 }

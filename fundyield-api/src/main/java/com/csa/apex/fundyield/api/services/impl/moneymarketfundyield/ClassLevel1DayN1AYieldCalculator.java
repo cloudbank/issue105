@@ -31,16 +31,26 @@ public class ClassLevel1DayN1AYieldCalculator {
 	 *             in case any error during calculation.
 	 */
 	public ClassLevel1DayN1AYieldCalculationOutput calculate(ClassLevel1DayN1AYieldCalculationInput input) {
-        CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
+
 		// get parameters from input
-		BigDecimal derMm1DayN1aYieldPct = input.getN1ADistIncomeUnmodAmt().add(input.getN1ADistIncomeAdjAmt())
-				.add(input.getN1ADistIncomeAdjRevAmt()).add(input.getN1ADistReimbursementAmt());
-		derMm1DayN1aYieldPct = derMm1DayN1aYieldPct.subtract(input.getN1ADistIncomeBreakageAmt())
-				.subtract(input.getN1ADistIncomeUnmodAmt().multiply(input.getN1ADistIncomeStr())
-						.multiply(input.getN1ADistIncomeOpct()));
-		derMm1DayN1aYieldPct = derMm1DayN1aYieldPct.multiply(BigDecimal.valueOf(36500))
-				.divide(input.getDistributableCapstockQty(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-				.divide(input.getNavAmount(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		BigDecimal dividend = input.getN1ADistIncomeUnmodAmt(); // TNI
+		dividend = dividend.add(input.getN1ADistIncomeAdjAmt()); // DA
+		dividend = dividend.add(input.getN1ADistIncomeAdjRevAmt()); // RDA
+		dividend = dividend.add(input.getN1ADistReimbursementAmt()); // MDA
+		dividend = dividend.subtract(input.getN1ADistIncomeBreakageAmt()); // B
+		
+		BigDecimal multiplyTmpValue = input.getN1ADistIncomeUnmodAmt(); // TNI
+		multiplyTmpValue = multiplyTmpValue.multiply(input.getN1ADistIncomeStr()); // STR
+		multiplyTmpValue = multiplyTmpValue.multiply(input.getN1ADistIncomeOpct()); // OPCT
+		
+		dividend = dividend.subtract(multiplyTmpValue);
+		dividend = dividend.multiply(BigDecimal.valueOf(36500));
+		
+		BigDecimal divisor = input.getDistributableCapstockQty(); // SO
+		divisor = divisor.multiply(input.getNavAmount()); // NV
+				
+		BigDecimal derMm1DayN1aYieldPct = dividend.divide(divisor,input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
 		ClassLevel1DayN1AYieldCalculationOutput output = new ClassLevel1DayN1AYieldCalculationOutput();
 		output.setDerMm1DayN1aYieldPct(derMm1DayN1aYieldPct);
 		return output;

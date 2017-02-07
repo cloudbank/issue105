@@ -2,6 +2,9 @@ package com.csa.apex.fundyield.api.services.impl.distributionfundyield;
 
 import java.math.BigDecimal;
 
+import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
+
 /**
  */
 public class ClassLevel30DayDistributionYieldCalculator {
@@ -13,7 +16,7 @@ public class ClassLevel30DayDistributionYieldCalculator {
     }
 
     /**
-     * Calculates the Class Level Restated 7 Day Yield. Please see the
+     * Calculates the Class Level 30 Day Distribution Yield. Please see the
      * MMandDistFundandClassLevelYieldCalculations.docxfor formula details.
      * @param input the calculation input
      * @return calculated result;
@@ -22,17 +25,23 @@ public class ClassLevel30DayDistributionYieldCalculator {
      */
     public ClassLevel30DayDistributionYieldCalculationOutput calculate(
             ClassLevel30DayDistributionYieldCalculationInput input) {
-        // get parameters from input
-        BigDecimal distUnmod30DayYieldPct = input.getDistUnmod30DayYieldPct();
-        BigDecimal adjDistMilSpikeRt = input.getDistYieldMilRt();
-        BigDecimal n = input.getNavAmt();
-        int daysInYear = input.getDaysInYear();
-        int dayOfReporting = input.getDayOfReportingDate();
-        ClassLevel30DayDistributionYieldCalculationOutput output = new ClassLevel30DayDistributionYieldCalculationOutput();
+    	CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
+        
+    	// get parameters from input
+        BigDecimal distUnmod30DayYieldPct = input.getDistUnmod30DayYieldPct(); // U
+        BigDecimal adjDistMilSpikeRt = input.getDistYieldMilRt(); // M
+        BigDecimal navAmt = input.getNavAmt(); // N
+        int daysInYear = input.getDaysInYear(); // D
+        int dayOfReporting = input.getDayOfReportingDate(); // R
+        BigDecimal dividend = adjDistMilSpikeRt.multiply(BigDecimal.valueOf(daysInYear));
+        BigDecimal divisor = navAmt.multiply(BigDecimal.valueOf(dayOfReporting));
+        BigDecimal divideTmpValue = dividend.divide(divisor, input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+
         // calculate y using formula y=u-(m*d)/(n*r) with the precision and round mode specified in configuration
-        BigDecimal y = distUnmod30DayYieldPct.subtract(adjDistMilSpikeRt.multiply(BigDecimal.valueOf(daysInYear)).divide(n.multiply(BigDecimal.valueOf(dayOfReporting)),
-                input.getOperationScale(), BigDecimal.ROUND_HALF_UP));
-        output.setDerDist30DayYieldPct(y);
+        BigDecimal derDist30DayYieldPct = distUnmod30DayYieldPct.subtract(divideTmpValue);
+
+        ClassLevel30DayDistributionYieldCalculationOutput output = new ClassLevel30DayDistributionYieldCalculationOutput();
+        output.setDerDist30DayYieldPct(derDist30DayYieldPct);
         return output;
     }
 }

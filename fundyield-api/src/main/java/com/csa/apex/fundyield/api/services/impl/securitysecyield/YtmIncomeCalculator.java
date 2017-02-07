@@ -35,21 +35,33 @@ public class YtmIncomeCalculator {
 	 * @throws IllegalArgumentException in case any error during calculation
 	 */
 	public YtmIncomeCalculationOutput calculate(YtmIncomeCalculationInput input) {
-		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, "Parameter YtmIncomeCalculationInput");
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				"Parameter YtmIncomeCalculationInput");
 
 		BigDecimal income;
-		if (input.getDerOneDaySecurityYield().divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).compareTo(BigDecimal
-				.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(), BigDecimal.ROUND_HALF_UP)) > 0)
-			income = input.getMarketValueBaseAmount().add(input.getAccruedIncomeAmount())
-					.multiply(BigDecimal.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(),
-							BigDecimal.ROUND_HALF_UP))
-					.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP)
-					.add(input.getEarnedInflCmpsBaseAmount());
-		else
-			income = input.getMarketValueBaseAmount().add(input.getAccruedIncomeAmount()).multiply(input.getDerOneDaySecurityYield())
-					.divide(BigDecimal.valueOf(360).setScale(input.getOperationScale(), BigDecimal.ROUND_HALF_UP),
-							BigDecimal.ROUND_HALF_UP)
-					.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP).add(input.getEarnedInflCmpsBaseAmount());
+		BigDecimal condition1 = input.getDerOneDaySecurityYield();
+		condition1 = condition1.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		BigDecimal condition2 = BigDecimal.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(),
+				BigDecimal.ROUND_HALF_UP);
+
+		BigDecimal earnedInflCmpsBaseAmount = input.getEarnedInflCmpsBaseAmount();
+		
+		if (condition1.compareTo(condition2) > 0) {
+			income = input.getMarketValueBaseAmount();
+			income = income.add(input.getAccruedIncomeAmount());
+			income = income.multiply(BigDecimal.valueOf(input.getyFxThreshold()).setScale(input.getOperationScale(),
+					BigDecimal.ROUND_HALF_UP));
+			income = income.divide(new BigDecimal(360), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		} else {
+			income = input.getMarketValueBaseAmount();
+			income = income.add(input.getAccruedIncomeAmount());
+			income = income.multiply(input.getDerOneDaySecurityYield());
+			income = income.divide(
+					BigDecimal.valueOf(360).setScale(input.getOperationScale(), BigDecimal.ROUND_HALF_UP),
+					BigDecimal.ROUND_HALF_UP);
+			income = income.divide(input.getFxRate(), input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		}
+		income = income.add(earnedInflCmpsBaseAmount);
 
 		// round off income to operation scale
 		income = income.setScale(input.getOperationScale(), input.getRoundingMode());

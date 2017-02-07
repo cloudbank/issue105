@@ -29,14 +29,18 @@ public class ClassLevel7DayDistributionYieldCalculator {
 	 */
 	public ClassLevel7DayDistributionYieldCalculationOutput calculate(
 			ClassLevel7DayDistributionYieldCalculationInput input) {
-        CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE, Constants.PARAMETER_INPUT);
-        BigDecimal mnyMkt1DayDistYieldPct = input.getMnyMkt1DayDistYieldPct();
+		CommonUtility.checkNull(input, this.getClass().getCanonicalName(), Constants.METHOD_CALCULATE,
+				Constants.PARAMETER_INPUT);
+
+		BigDecimal mnyMkt1DayDistYieldPct = input.getMnyMkt1DayDistYieldPct();
 		BigDecimal dPrevious6Days = input.getSumOfMnyMkt1DayDistYieldPctForPrevious6Days();
 		// calculate y using formula y=(d+udPrevious6Days)/7 with the precision
 		// and round mode specified in
 		// configuration
-		BigDecimal derMm7DayDistYieldPct = mnyMkt1DayDistYieldPct.add(dPrevious6Days).divide(BigDecimal.valueOf(7),
-				input.getOperationScale(), BigDecimal.ROUND_HALF_UP);
+		BigDecimal derMm7DayDistYieldPct = mnyMkt1DayDistYieldPct.add(dPrevious6Days);
+		derMm7DayDistYieldPct = derMm7DayDistYieldPct.divide(BigDecimal.valueOf(7), input.getOperationScale(),
+				BigDecimal.ROUND_HALF_UP);
+
 		ClassLevel7DayDistributionYieldCalculationOutput output = new ClassLevel7DayDistributionYieldCalculationOutput();
 		output.setDerMnyMktRst7DayYieldPct(derMm7DayDistYieldPct);
 		return output;

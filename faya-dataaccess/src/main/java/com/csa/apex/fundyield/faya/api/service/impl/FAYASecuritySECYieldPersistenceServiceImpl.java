@@ -8,7 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
@@ -135,47 +137,65 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
     @SuppressWarnings("unchecked")
     private static List<Portfolio> populatePortfolioData(Map<String, Object> results) {
 
-        // Map from TradableEntity sid to TradableEntitySnapshots
-        Map<Long, List<TradableEntitySnapshot>> tradableEntitySnapshotsMap = ((List<TradableEntitySnapshot>) results
-                .get("TRADABLE_ENTITY_SNAPSHOT_CUR")).stream()
-                        .collect(Collectors.groupingBy(TradableEntitySnapshot::getTradableEntitySid));
+    	// Map from TradableEntity sid to TradableEntitySnapshots
+		Map<Long, List<TradableEntitySnapshot>> tradableEntitySnapshotsMap = mapTradableEntitySnapshotList(results);
 
-        // Map from TradableEntity sid to TradableEntity
-        Map<Long, TradableEntity> tradableEntitiesMap = ((List<TradableEntity>) results.get("TRADABLE_ENTITY_CUR"))
-                .stream().collect(Collectors.toMap(TradableEntity::getTradableEntitySid, e -> {
-                    e.setTradableEntitySnapshots(tradableEntitySnapshotsMap.get(e.getTradableEntitySid()));
-                    return e;
-                }));
+		// Map from TradableEntity sid to TradableEntity
+		List<TradableEntity> tradableEntityList = (List<TradableEntity>) results.get("TRADABLE_ENTITY_CUR");
+		Stream<TradableEntity> tradableEntityStream = tradableEntityList.stream();
+		Collector<TradableEntity, ?, Map<Long, TradableEntity>> tradableEntityCollector = Collectors
+				.toMap(TradableEntity::getTradableEntitySid, e -> {
+					e.setTradableEntitySnapshots(tradableEntitySnapshotsMap.get(e.getTradableEntitySid()));
+					return e;
+				});
+		Map<Long, TradableEntity> tradableEntitiesMap = tradableEntityStream.collect(tradableEntityCollector);
 
-        // Map from Portfolio sid to PortfolioHoldingSnapshots
-        Map<Long, List<PortfolioHoldingSnapshot>> portfolioHoldingSnapshotsMap = ((List<PortfolioHoldingSnapshot>) results
-                .get("PORTFOLIO_HOLDING_SNAPSHOT_CUR")).stream().collect(Collectors.groupingBy(e -> {
-                    e.setTradableEntity(tradableEntitiesMap.get(e.getTradableEntitySid()));
-                    return e.getPortfolioSid();
-                }));
+		// Map from Portfolio sid to PortfolioHoldingSnapshots
+		List<PortfolioHoldingSnapshot> portfolioHoldingSnapshotList = (List<PortfolioHoldingSnapshot>) results
+				.get("PORTFOLIO_HOLDING_SNAPSHOT_CUR");
+		Stream<PortfolioHoldingSnapshot> portfolioHoldingSnapshotStream = portfolioHoldingSnapshotList.stream();
+		Collector<PortfolioHoldingSnapshot, ?, Map<Long, List<PortfolioHoldingSnapshot>>> groupedPortfolioHoldingSnapshot = Collectors
+				.groupingBy(e -> {
+					e.setTradableEntity(tradableEntitiesMap.get(e.getTradableEntitySid()));
+					return e.getPortfolioSid();
+				});
+		Map<Long, List<PortfolioHoldingSnapshot>> portfolioHoldingSnapshotsMap = portfolioHoldingSnapshotStream
+				.collect(groupedPortfolioHoldingSnapshot);
+		
+		// Map from ShareClass sid to ShareClassSnapshots
+		List<ShareClassSnapshot> shareClassSnapshotList = (List<ShareClassSnapshot>) results
+				.get("SHARE_CLASS_SNAPSHOT_CUR");
+		Stream<ShareClassSnapshot> shareClassSnapshotStream = shareClassSnapshotList.stream();
+		Collector<ShareClassSnapshot, ?, Map<Long, List<ShareClassSnapshot>>> groupedShareClassSnapshot = Collectors
+				.groupingBy(ShareClassSnapshot::getShareClassSid);
+		Map<Long, List<ShareClassSnapshot>> shareClassSnapshotsMap = shareClassSnapshotStream
+				.collect(groupedShareClassSnapshot);
 
-        // Map from ShareClass sid to ShareClassSnapshots
-        Map<Long, List<ShareClassSnapshot>> shareClassSnapshotsMap = ((List<ShareClassSnapshot>) results
-                .get("SHARE_CLASS_SNAPSHOT_CUR")).stream()
-                        .collect(Collectors.groupingBy(ShareClassSnapshot::getShareClassSid));
+		// Map from Portfolio sid to ShareClasses
+		List<ShareClass> shareClassList = (List<ShareClass>) results.get("SHARE_CLASS_CUR");
+		Stream<ShareClass> shareClassStream = shareClassList.stream();
+		Collector<ShareClass, ?, Map<Long, List<ShareClass>>> groupedShareClass = Collectors.groupingBy(e -> {
+			e.setShareClassSnapshots(shareClassSnapshotsMap.get(e.getShareClassSid()));
+			return e.getPortfolioSid();
+		});
+		Map<Long, List<ShareClass>> shareClassesMap = shareClassStream.collect(groupedShareClass);
 
-        // Map from Portfolio sid to ShareClasses
-        Map<Long, List<ShareClass>> shareClassesMap = ((List<ShareClass>) results.get("SHARE_CLASS_CUR")).stream()
-                .collect(Collectors.groupingBy(e -> {
-                    e.setShareClassSnapshots(shareClassSnapshotsMap.get(e.getShareClassSid()));
-                    return e.getPortfolioSid();
-                }));
+		// Map from Portfolio sid to PortfolioSnapshots
+		List<PortfolioSnapshot> portfolioSnapshotList = (List<PortfolioSnapshot>) results.get("PORTFOLIO_SNAPSHOT_CUR");
+		Stream<PortfolioSnapshot> portfolioSnapshotStream = portfolioSnapshotList.stream();
+		Collector<PortfolioSnapshot, ?, Map<Long, List<PortfolioSnapshot>>> groupedPortfolioSnapshot = Collectors
+				.groupingBy(PortfolioSnapshot::getPortfolioSid);
+		Map<Long, List<PortfolioSnapshot>> portfolioSnapshotsMap = portfolioSnapshotStream
+				.collect(groupedPortfolioSnapshot);
 
-        // Map from Portfolio sid to PortfolioSnapshots
-        Map<Long, List<PortfolioSnapshot>> portfolioSnapshotsMap = ((List<PortfolioSnapshot>) results
-                .get("PORTFOLIO_SNAPSHOT_CUR")).stream()
-                        .collect(Collectors.groupingBy(PortfolioSnapshot::getPortfolioSid));
+		// Map from Portfolio sid to TaxExclusions
+		List<TaxExclusion> taxExclusionList = (List<TaxExclusion>) results.get("TAX_EXCLUSION_CUR");
+		Stream<TaxExclusion> taxExclusionStream = taxExclusionList.stream();
+		Collector<TaxExclusion, ?, Map<Long, List<TaxExclusion>>> groupedTaxExclusion = Collectors
+				.groupingBy(TaxExclusion::getPortfolioSid);
+		Map<Long, List<TaxExclusion>> taxExclusionsMap = taxExclusionStream.collect(groupedTaxExclusion);
 
-        // Map from Portfolio sid to TaxExclusions
-        Map<Long, List<TaxExclusion>> taxExclusionsMap = ((List<TaxExclusion>) results.get("TAX_EXCLUSION_CUR"))
-                .stream().collect(Collectors.groupingBy(TaxExclusion::getPortfolioSid));
-
-        List<Portfolio> portfolios = (List<Portfolio>) results.get("PORTFOLIO_CUR");
+		List<Portfolio> portfolios = (List<Portfolio>) results.get("PORTFOLIO_CUR");
 
         for (Portfolio portfolio : portfolios) {
             long portfolioSid = portfolio.getPortfolioSid();
@@ -194,63 +214,101 @@ public class FAYASecuritySECYieldPersistenceServiceImpl implements FAYASecurityS
      * @return list of instruments
      */
     @SuppressWarnings("unchecked")
-    private static List<Instrument> populateInstrumentData(Map<String, Object> results) {
-        // Map from Instrument sid to InterestRateSchedules
-        Map<Long, List<InterestRateSchedule>> interestRateSchedulesMap = ((List<InterestRateSchedule>) results
-                .get("INTEREST_RATE_SCHEDULE_CUR")).stream()
-                        .collect(Collectors.groupingBy(InterestRateSchedule::getInstrumentSid));
+	private static List<Instrument> populateInstrumentData(Map<String, Object> results) {
+		// Map from Instrument sid to InterestRateSchedules
+		List<InterestRateSchedule> interestRateScheduleList = (List<InterestRateSchedule>) results
+				.get("INTEREST_RATE_SCHEDULE_CUR");
+		Stream<InterestRateSchedule> interestRateScheduleStream = interestRateScheduleList.stream();
+		Collector<InterestRateSchedule, ?, Map<Long, List<InterestRateSchedule>>> groupedInterestRateSchedule = Collectors
+				.groupingBy(InterestRateSchedule::getInstrumentSid);
+		Map<Long, List<InterestRateSchedule>> interestRateSchedulesMap = interestRateScheduleStream
+				.collect(groupedInterestRateSchedule);
 
-        // Map from Instrument sid to CashDividendSchedules
-        Map<Long, List<CashDividendSchedule>> cashDividendSchedulesMap = ((List<CashDividendSchedule>) results
-                .get("CASH_DIVIDEND_SCHEDULE_CUR")).stream()
-                        .collect(Collectors.groupingBy(CashDividendSchedule::getInstrumentSid));
+		// Map from Instrument sid to CashDividendSchedules
+		List<CashDividendSchedule> cashDividendScheduleList = (List<CashDividendSchedule>) results
+				.get("CASH_DIVIDEND_SCHEDULE_CUR");
+		Stream<CashDividendSchedule> cashDividendScheduleStream = cashDividendScheduleList.stream();
+		Collector<CashDividendSchedule, ?, Map<Long, List<CashDividendSchedule>>> groupedCashDividendSchedule = Collectors
+				.groupingBy(CashDividendSchedule::getInstrumentSid);
+		Map<Long, List<CashDividendSchedule>> cashDividendSchedulesMap = cashDividendScheduleStream
+				.collect(groupedCashDividendSchedule);
 
-        // Map from Instrument sid to CallSchedules
-        Map<Long, List<CallSchedule>> callSchedulesMap = ((List<CallSchedule>) results.get("CALL_SCHEDULE_CUR"))
-                .stream().collect(Collectors.groupingBy(CallSchedule::getInstrumentSid));
+		// Map from Instrument sid to CallSchedules
+		List<CallSchedule> callScheduleList = (List<CallSchedule>) results.get("CALL_SCHEDULE_CUR");
+		Stream<CallSchedule> callScheduleStream = callScheduleList.stream();
+		Collector<CallSchedule, ?, Map<Long, List<CallSchedule>>> groupedCallSchedule = Collectors
+				.groupingBy(CallSchedule::getInstrumentSid);
+		Map<Long, List<CallSchedule>> callSchedulesMap = callScheduleStream.collect(groupedCallSchedule);
 
-        // Map from Instrument sid to PutSchedules
-        Map<Long, List<PutSchedule>> putSchedulesMap = ((List<PutSchedule>) results.get("PUT_SCHEDULE_CUR")).stream()
-                .collect(Collectors.groupingBy(PutSchedule::getInstrumentSid));
+		// Map from Instrument sid to PutSchedules
+		List<PutSchedule> putScheduleList = (List<PutSchedule>) results.get("PUT_SCHEDULE_CUR");
+		Stream<PutSchedule> putScheduleStream = putScheduleList.stream();
+		Collector<PutSchedule, ?, Map<Long, List<PutSchedule>>> groupedPutSchedule = Collectors
+				.groupingBy(PutSchedule::getInstrumentSid);
+		Map<Long, List<PutSchedule>> putSchedulesMap = putScheduleStream.collect(groupedPutSchedule);
 
-        // Map from TradableEntity sid to TradableEntitySnapshots
-        Map<Long, List<TradableEntitySnapshot>> tradableEntitySnapshotsMap = ((List<TradableEntitySnapshot>) results
-                .get("TRADABLE_ENTITY_SNAPSHOT_CUR")).stream()
-                        .collect(Collectors.groupingBy(TradableEntitySnapshot::getTradableEntitySid));
+		// Map from TradableEntity sid to TradableEntitySnapshots
+		Map<Long, List<TradableEntitySnapshot>> tradableEntitySnapshotsMap = mapTradableEntitySnapshotList(results);
 
-        // Map from Instrument sid to TradableEntities
-        Map<Long, List<TradableEntity>> tradableEntitiesMap = ((List<TradableEntity>) results
-                .get("TRADABLE_ENTITY_CUR")).stream().collect(Collectors.groupingBy(e -> {
-                    e.setTradableEntitySnapshots(tradableEntitySnapshotsMap.get(e.getTradableEntitySid()));
-                    return e.getInstrumentSid();
-                }));
+		// Map from Instrument sid to TradableEntities
+		List<TradableEntity> tradableEntityList = (List<TradableEntity>) results.get("TRADABLE_ENTITY_CUR");
+		Stream<TradableEntity> tradableEntityStream = tradableEntityList.stream();
+		Collector<TradableEntity, ?, Map<Long, List<TradableEntity>>> groupedTradableEntity = Collectors
+				.groupingBy(e -> {
+					e.setTradableEntitySnapshots(tradableEntitySnapshotsMap.get(e.getTradableEntitySid()));
+					return e.getInstrumentSid();
+				});
+		Map<Long, List<TradableEntity>> tradableEntitiesMap = tradableEntityStream.collect(groupedTradableEntity);
 
-        // Map from Instrument sid to underlying Instruments
-        Map<Long, Instrument> underlyingInstrumentsMap = ((List<Instrument>) results.get("UNDERLYING_INSTRUMENT_CUR"))
-                .stream().collect(Collectors.toMap(Instrument::getInstrumentSid, Function.identity()));
+		// Map from Instrument sid to underlying Instruments
+		List<Instrument> instrumentList = (List<Instrument>) results.get("UNDERLYING_INSTRUMENT_CUR");
+		Stream<Instrument> instrumentStream = instrumentList.stream();
+		Collector<Instrument, ?, Map<Long, Instrument>> instrumentMap = Collectors.toMap(Instrument::getInstrumentSid,
+				Function.identity());
+		Map<Long, Instrument> underlyingInstrumentsMap = instrumentStream.collect(instrumentMap);
 
-        // Map from Instrument sid to UnderlyingInstrumentLinks
-        Map<Long, List<UnderlyingInstrumentLink>> underlyingInstrumentLinksMap = ((List<UnderlyingInstrumentLink>) results
-                .get("UNDERLYING_INSTRUMENT_LINK_CUR")).stream().collect(Collectors.groupingBy(e -> {
-                    long underlyingInstrumentSid = e.getUnderlyingInstrumentSid();
-                    e.setUnderlyingInstrument(underlyingInstrumentsMap.get(underlyingInstrumentSid));
-                    return e.getOverlayingInstrumentSid();
-                }));
+		// Map from Instrument sid to UnderlyingInstrumentLinks
+		List<UnderlyingInstrumentLink> underlyingInstrumentLinkList = (List<UnderlyingInstrumentLink>) results
+				.get("UNDERLYING_INSTRUMENT_LINK_CUR");
+		Stream<UnderlyingInstrumentLink> underlyingInstrumentLinkStream = underlyingInstrumentLinkList.stream();
+		Collector<UnderlyingInstrumentLink, ?, Map<Long, List<UnderlyingInstrumentLink>>> groupedUnderlyingInstrumentLink = Collectors
+				.groupingBy(e -> {
+					long underlyingInstrumentSid = e.getUnderlyingInstrumentSid();
+					e.setUnderlyingInstrument(underlyingInstrumentsMap.get(underlyingInstrumentSid));
+					return e.getOverlayingInstrumentSid();
+				});
+		Map<Long, List<UnderlyingInstrumentLink>> underlyingInstrumentLinksMap = underlyingInstrumentLinkStream
+				.collect(groupedUnderlyingInstrumentLink);
 
-        List<Instrument> instruments = (List<Instrument>) results.get("INSTRUMENT_CUR");
+		List<Instrument> instruments = (List<Instrument>) results.get("INSTRUMENT_CUR");
 
-        for (Instrument instrument : instruments) {
-            long instrumentSid = instrument.getInstrumentSid();
-            instrument.setPutSchedules(putSchedulesMap.get(instrumentSid));
-            instrument.setCallSchedules(callSchedulesMap.get(instrumentSid));
-            instrument.setInterestRateSchedules(interestRateSchedulesMap.get(instrumentSid));
-            instrument.setCashDividendSchedules(cashDividendSchedulesMap.get(instrumentSid));
-            instrument.setUnderlyingInstruments(underlyingInstrumentLinksMap.get(instrumentSid));
-            instrument.setTradableEntities(tradableEntitiesMap.get(instrumentSid));
-        }
+		for (Instrument instrument : instruments) {
+			long instrumentSid = instrument.getInstrumentSid();
+			instrument.setPutSchedules(putSchedulesMap.get(instrumentSid));
+			instrument.setCallSchedules(callSchedulesMap.get(instrumentSid));
+			instrument.setInterestRateSchedules(interestRateSchedulesMap.get(instrumentSid));
+			instrument.setCashDividendSchedules(cashDividendSchedulesMap.get(instrumentSid));
+			instrument.setUnderlyingInstruments(underlyingInstrumentLinksMap.get(instrumentSid));
+			instrument.setTradableEntities(tradableEntitiesMap.get(instrumentSid));
+		}
 
-        return instruments;
-    }
+		return instruments;
+	}
+    
+	/**
+	 * utility method to map from TradableEntity sid to TradableEntitySnapshots
+	 */
+    @SuppressWarnings("unchecked")
+	private static Map<Long, List<TradableEntitySnapshot>> mapTradableEntitySnapshotList(Map<String, Object> results) {
+		List<TradableEntitySnapshot> tradableEntitySnapshotList = (List<TradableEntitySnapshot>) results
+				.get("TRADABLE_ENTITY_SNAPSHOT_CUR");
+		Stream<TradableEntitySnapshot> tradableEntitySnapshotStream = tradableEntitySnapshotList.stream();
+		Collector<TradableEntitySnapshot, ?, Map<Long, List<TradableEntitySnapshot>>> groupedTradableEntitySnapshot = Collectors
+				.groupingBy(TradableEntitySnapshot::getTradableEntitySid);
+		Map<Long, List<TradableEntitySnapshot>> tradableEntitySnapshotsMap = tradableEntitySnapshotStream
+				.collect(groupedTradableEntitySnapshot);
+		return tradableEntitySnapshotsMap;
+	}
 
     /**
      * Gets the calculated SEC security data.

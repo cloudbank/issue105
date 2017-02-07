@@ -144,12 +144,15 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.NUM_OF_DAYS);
         try {
-            DateTime businessDateTime = new DateTime(reportDate).withTimeAtStartOfDay();
-            Date endDate = businessDateTime.plusDays(numOfDays).withTimeAtStartOfDay().toDate();
+            DateTime businessDateTime = new DateTime(reportDate);
+            businessDateTime = businessDateTime.withTimeAtStartOfDay();
+            DateTime endDateTime = businessDateTime.plusDays(numOfDays);
+            endDateTime = endDateTime.withTimeAtStartOfDay();
+            
             Map<String, Object> inParamMap = new HashMap<String, Object>();
             inParamMap.put("p_sid", shareClassSid);
             inParamMap.put("start_date", reportDate);
-            inParamMap.put("end_date", endDate);
+            inParamMap.put("end_date", endDateTime.toDate());
             Map<String, Object> result = FAYAPersistenceHelper.callStoredProcedure(spName, jdbcTemplate, inParamMap);
             return (BigDecimal) result.values().toArray()[0];
         } catch (Exception e) {

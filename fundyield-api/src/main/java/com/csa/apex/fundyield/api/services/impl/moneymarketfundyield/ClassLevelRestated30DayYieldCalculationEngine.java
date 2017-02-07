@@ -80,11 +80,10 @@ public class ClassLevelRestated30DayYieldCalculationEngine implements Calculatio
 							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
 							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
 							BigDecimal derMnyMktRestate1DayYieldPct = snapshot.getDerMnyMktRestate1DayYieldPct();
-							BigDecimal derMmRst30DayYieldPct = (derMnyMktRestate1DayYieldPct
-									.add(utilityCustomerAPIClient.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(
-											shareClass.getShareClassSid(), reportDate, 29))).divide(
-													BigDecimal.valueOf(30), configuration.getOperationScale(),
-													configuration.getRoundingMode());
+							BigDecimal sumOfDerRestate1DayYieldMnyMktPctPreviousDays = utilityCustomerAPIClient
+									.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(shareClass.getShareClassSid(), reportDate, 29);
+							BigDecimal dividend = derMnyMktRestate1DayYieldPct .add(sumOfDerRestate1DayYieldMnyMktPctPreviousDays);
+							BigDecimal derMmRst30DayYieldPct = dividend.divide(BigDecimal.valueOf(30),configuration.getOperationScale(), configuration.getRoundingMode());
 							snapshot.setDerMnyMktRst30DayYieldPct(derMmRst30DayYieldPct
 									.setScale(configuration.getOperationScale(), configuration.getRoundingMode()));
 						}

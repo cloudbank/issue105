@@ -187,65 +187,78 @@ public class StoredProcedures {
     protected void checkConfiguration() {
         CommonUtility.checkNullConfig(dataSource, this.getClass().getCanonicalName(), "dataSource");
 
-        // Initialize the stored procedure calls to get data
-        this.getPortfoliosCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("GET_PORTFOLIO_DATA")
-                .declareParameters(new SqlParameter("BUSINESS_DATE_START", Types.DATE),
-                        new SqlParameter("BUSINESS_DATE_END", Types.DATE))
-                .returningResultSet("PORTFOLIO_CUR", PortfolioRowMapper.INSTANCE)
-                .returningResultSet("TAX_EXCLUSION_CUR", TaxExclusionRowMapper.INSTANCE)
-                .returningResultSet("PORTFOLIO_SNAPSHOT_CUR", PortfolioSnapshotRowMapper.INSTANCE)
-                .returningResultSet("PORTFOLIO_HOLDING_SNAPSHOT_CUR", PortfolioHoldingSnapshotRowMapper.INSTANCE)
-                .returningResultSet("SHARE_CLASS_CUR", ShareClassRowMapper.INSTANCE)
-                .returningResultSet("SHARE_CLASS_SNAPSHOT_CUR", ShareClassSnapshotRowMapper.INSTANCE)
-                .returningResultSet("TRADABLE_ENTITY_CUR", TradableEntityRowMapper.INSTANCE)
-                .returningResultSet("TRADABLE_ENTITY_SNAPSHOT_CUR", TradableEntitySnapshotRowMapper.INSTANCE);
+		// Initialize the stored procedure calls to get data
+		this.getPortfoliosCall = new SimpleJdbcCall(dataSource);
+		this.getPortfoliosCall = this.getPortfoliosCall.withProcedureName("GET_PORTFOLIO_DATA");
+		this.getPortfoliosCall = this.getPortfoliosCall.declareParameters(new SqlParameter("BUSINESS_DATE_START", Types.DATE), new SqlParameter("BUSINESS_DATE_END", Types.DATE));
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("PORTFOLIO_CUR", PortfolioRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("TAX_EXCLUSION_CUR", TaxExclusionRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("PORTFOLIO_SNAPSHOT_CUR", PortfolioSnapshotRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("PORTFOLIO_HOLDING_SNAPSHOT_CUR", PortfolioHoldingSnapshotRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("SHARE_CLASS_CUR", ShareClassRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("SHARE_CLASS_SNAPSHOT_CUR", ShareClassSnapshotRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("TRADABLE_ENTITY_CUR", TradableEntityRowMapper.INSTANCE);
+		this.getPortfoliosCall = this.getPortfoliosCall.returningResultSet("TRADABLE_ENTITY_SNAPSHOT_CUR", TradableEntitySnapshotRowMapper.INSTANCE);
 
-        this.getInstrumentsCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("GET_INSTRUMENT_DATA")
-                .declareParameters(new SqlParameter("BUSINESS_DATE_START", Types.DATE),
-                        new SqlParameter("BUSINESS_DATE_END", Types.DATE))
-                .returningResultSet("INSTRUMENT_CUR", InstrumentRowMapper.INSTANCE)
-                .returningResultSet("UNDERLYING_INSTRUMENT_CUR", InstrumentRowMapper.INSTANCE)
-                .returningResultSet("INTEREST_RATE_SCHEDULE_CUR", InterestRateScheduleRowMapper.INSTANCE)
-                .returningResultSet("CASH_DIVIDEND_SCHEDULE_CUR", CashDividendScheduleRowMapper.INSTANCE)
-                .returningResultSet("CALL_SCHEDULE_CUR", CallScheduleRowMapper.INSTANCE)
-                .returningResultSet("PUT_SCHEDULE_CUR", PutScheduleRowMapper.INSTANCE)
-                .returningResultSet("UNDERLYING_INSTRUMENT_LINK_CUR", UnderlyingInstrumentLinkRowMapper.INSTANCE)
-                .returningResultSet("TRADABLE_ENTITY_CUR", TradableEntityRowMapper.INSTANCE)
-                .returningResultSet("TRADABLE_ENTITY_SNAPSHOT_CUR", TradableEntitySnapshotRowMapper.INSTANCE);
+        this.getInstrumentsCall = new SimpleJdbcCall(dataSource);
+        this.getInstrumentsCall = this.getInstrumentsCall.withProcedureName("GET_INSTRUMENT_DATA");
+        this.getInstrumentsCall = this.getInstrumentsCall.declareParameters(new SqlParameter("BUSINESS_DATE_START", Types.DATE), new SqlParameter("BUSINESS_DATE_END", Types.DATE));
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("INSTRUMENT_CUR", InstrumentRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("UNDERLYING_INSTRUMENT_CUR", InstrumentRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("INTEREST_RATE_SCHEDULE_CUR", InterestRateScheduleRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("CASH_DIVIDEND_SCHEDULE_CUR", CashDividendScheduleRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("CALL_SCHEDULE_CUR", CallScheduleRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("PUT_SCHEDULE_CUR", PutScheduleRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("UNDERLYING_INSTRUMENT_LINK_CUR", UnderlyingInstrumentLinkRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("TRADABLE_ENTITY_CUR", TradableEntityRowMapper.INSTANCE);
+        this.getInstrumentsCall = this.getInstrumentsCall.returningResultSet("TRADABLE_ENTITY_SNAPSHOT_CUR", TradableEntitySnapshotRowMapper.INSTANCE);
 
         // Initialize the stored procedure calls to save data
-        this.saveInstrumentCall = new SimpleJdbcCall(dataSource).withProcedureName("SAVE_INSTRUMENT")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "INSTRUMENT_T"),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.saveTradableEntityCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("SAVE_TRADABLE_ENTITY")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "TRADABLE_ENTITY_T"),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.savePortfolioCall = new SimpleJdbcCall(dataSource).withProcedureName("SAVE_PORTFOLIO")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_T"),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.savePortfolioSnapshotCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("SAVE_PORTFOLIO_SNAPSHOT")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_SNAPSHOT_T"),
-                        new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.saveTradableEntitySnapshotCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("SAVE_TRADABLE_ENTITY_SNAPSHOT")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "TRADABLE_ENTITY_SNAPSHOT_T"),
-                        new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.savePortfolioHoldingSnapshotCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("SAVE_PORTFOLIO_HOLDING")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_HOLDING_T"),
-                        new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
-        this.saveShareClassSnapshotCall = new SimpleJdbcCall(dataSource)
-                .withProcedureName("SAVE_SHARE_CLASS_SNAPSHOT")
-                .declareParameters(new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "SHARE_CLASS_SNAPSHOT_T"),
-                        new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
-                        new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        this.saveInstrumentCall = new SimpleJdbcCall(dataSource);
+        this.saveInstrumentCall = this.saveInstrumentCall.withProcedureName("SAVE_INSTRUMENT");
+		this.saveInstrumentCall = this.saveInstrumentCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "INSTRUMENT_T"),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.saveTradableEntityCall = new SimpleJdbcCall(dataSource);
+        this.saveTradableEntityCall = this.saveTradableEntityCall.withProcedureName("SAVE_TRADABLE_ENTITY");
+		this.saveTradableEntityCall = this.saveTradableEntityCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "TRADABLE_ENTITY_T"),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.savePortfolioCall = new SimpleJdbcCall(dataSource);
+        this.savePortfolioCall = this.savePortfolioCall.withProcedureName("SAVE_PORTFOLIO");
+		this.savePortfolioCall = this.savePortfolioCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_T"),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.savePortfolioSnapshotCall = new SimpleJdbcCall(dataSource);
+        this.savePortfolioSnapshotCall = this.savePortfolioSnapshotCall.withProcedureName("SAVE_PORTFOLIO_SNAPSHOT");
+		this.savePortfolioSnapshotCall = this.savePortfolioSnapshotCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_SNAPSHOT_T"),
+				new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.saveTradableEntitySnapshotCall = new SimpleJdbcCall(dataSource);
+        this.saveTradableEntitySnapshotCall = this.saveTradableEntitySnapshotCall.withProcedureName("SAVE_TRADABLE_ENTITY_SNAPSHOT");
+		this.saveTradableEntitySnapshotCall = this.saveTradableEntitySnapshotCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "TRADABLE_ENTITY_SNAPSHOT_T"),
+				new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.savePortfolioHoldingSnapshotCall = new SimpleJdbcCall(dataSource);
+        this.savePortfolioHoldingSnapshotCall = this.savePortfolioHoldingSnapshotCall.withProcedureName("SAVE_PORTFOLIO_HOLDING");
+		this.savePortfolioHoldingSnapshotCall = this.savePortfolioHoldingSnapshotCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "PORTFOLIO_HOLDING_T"),
+				new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
+        
+        this.saveShareClassSnapshotCall = new SimpleJdbcCall(dataSource);
+        this.saveShareClassSnapshotCall = this.saveShareClassSnapshotCall.withProcedureName("SAVE_SHARE_CLASS_SNAPSHOT");
+		this.saveShareClassSnapshotCall = this.saveShareClassSnapshotCall.declareParameters(
+				new SqlParameter(ENTITY_PARAM, OracleTypes.STRUCT, "SHARE_CLASS_SNAPSHOT_T"),
+				new SqlParameter(UPDATE_CALC_RESULT_PARAM, Types.SMALLINT),
+				new SqlOutParameter(OSID_PARAM, Types.DECIMAL));
     }
 
     /**

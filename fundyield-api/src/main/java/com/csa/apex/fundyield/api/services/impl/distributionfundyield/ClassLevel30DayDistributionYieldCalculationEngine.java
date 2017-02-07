@@ -46,12 +46,13 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
 
 		try {
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(reportDate);
+				int dayOfReportingDate = cal.get(Calendar.DAY_OF_MONTH);
+				int daysInYear = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
+
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(reportDate);
-					int dayOfReportingDate = cal.get(Calendar.DAY_OF_MONTH);
-					int daysInYear = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
 					if (portfolio.getShareClasses() != null) {
 						for (ShareClass shareClass : portfolio.getShareClasses()) {
 							// get share class snapshot for the report date
@@ -63,7 +64,7 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
 									.getReportDate().equals(reportDate);
 							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
 
-							ClassLevel30DayDistributionYieldCalculationInput input = new ClassLevel30DayDistributionYieldCalculationInput();
+							ClassLevel30DayDistributionYieldCalculationInput input = new ClassLevel30DayDistributionYieldCalculationInput(configuration);
 							// set the data to input and calculate
 							input.setDistUnmod30DayYieldPct(snapshot.getDistUnmod30DayYieldPct());
 							input.setDistYieldMilRt((snapshot.getDistYieldMilRt() != null)

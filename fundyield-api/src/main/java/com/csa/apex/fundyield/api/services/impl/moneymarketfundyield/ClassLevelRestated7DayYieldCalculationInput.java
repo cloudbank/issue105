@@ -1,11 +1,14 @@
 package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+
 import java.math.BigDecimal;
 
 /**
  * Calculation input.
  */
-public class ClassLevelRestated7DayYieldCalculationInput {
+public class ClassLevelRestated7DayYieldCalculationInput extends BaseCalculationInput{
 
 	/**
 	 * N1A Dist Income Unmod Amt
@@ -63,11 +66,12 @@ public class ClassLevelRestated7DayYieldCalculationInput {
 	private BigDecimal n1AReimbursementOpct;
 
 	/**
-	 * Operation scale.
+	 * Constructor.
+	 *
+	 * @param configuration The SEC configuration
 	 */
-	private int operationScale;
-
-	public ClassLevelRestated7DayYieldCalculationInput() {
+	public ClassLevelRestated7DayYieldCalculationInput(SECConfiguration configuration) {
+		super(configuration);
 	}
 
 	public BigDecimal getN1AReimbursementStr() {
@@ -158,11 +162,4 @@ public class ClassLevelRestated7DayYieldCalculationInput {
 		this.dPrevious6Days = dPrevious6Days;
 	}
 
-	public int getOperationScale() {
-		return operationScale;
-	}
-
-	public void setOperationScale(int operationScale) {
-		this.operationScale = operationScale;
-	}
 }

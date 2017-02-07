@@ -1,11 +1,14 @@
 package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+
 import java.math.BigDecimal;
 
 /**
  * Calculation input.
  */
-public class ClassLevel1DayN1AYieldCalculationInput {
+public class ClassLevel1DayN1AYieldCalculationInput extends BaseCalculationInput {
 
 	/**
 	 * N1A Dist Income Unmod Amt.
@@ -53,11 +56,12 @@ public class ClassLevel1DayN1AYieldCalculationInput {
 	private BigDecimal navAmount;
 
 	/**
-	 * Operation scale.
+	 * Constructor.
+	 *
+	 * @param configuration The SEC configuration
 	 */
-	private int operationScale;
-
-	public ClassLevel1DayN1AYieldCalculationInput() {
+	public ClassLevel1DayN1AYieldCalculationInput(SECConfiguration configuration) {
+		super(configuration);
 	}
 
 	public BigDecimal getN1ADistIncomeStr() {
@@ -132,11 +136,4 @@ public class ClassLevel1DayN1AYieldCalculationInput {
 		this.navAmount = navAmount;
 	}
 
-	public int getOperationScale() {
-		return operationScale;
-	}
-
-	public void setOperationScale(int operationScale) {
-		this.operationScale = operationScale;
-	}
 }

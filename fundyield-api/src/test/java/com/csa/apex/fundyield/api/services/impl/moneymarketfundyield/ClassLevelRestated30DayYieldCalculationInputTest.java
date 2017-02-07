@@ -22,7 +22,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getDerMmRestate1DayYieldPct() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(79);
         instance.setDerMmRestate1DayYieldPct(expected);
         assertEquals(expected, instance.getDerMmRestate1DayYieldPct());
@@ -34,7 +34,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void setDerMmRestate1DayYieldPct() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(17);
         instance.setDerMmRestate1DayYieldPct(expected);
         assertEquals(expected, instance.getDerMmRestate1DayYieldPct());
@@ -46,7 +46,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getSumOfDerRestate1DayYieldMnyMktPctPrevious29Days() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(89);
         instance.setSumOfDerRestate1DayYieldMnyMktPctPrevious29Days(expected);
         assertEquals(expected, instance.getSumOfDerRestate1DayYieldMnyMktPctPrevious29Days());
@@ -58,7 +58,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(null);
         int expected = 92;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -70,7 +70,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(null);
         int expected = 31;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

@@ -22,7 +22,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getDistUnmod30DayYieldPct() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(22);
         instance.setDistUnmod30DayYieldPct(expected);
         assertEquals(expected, instance.getDistUnmod30DayYieldPct());
@@ -34,7 +34,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setDistUnmod30DayYieldPct() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(84);
         instance.setDistUnmod30DayYieldPct(expected);
         assertEquals(expected, instance.getDistUnmod30DayYieldPct());
@@ -46,7 +46,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getDistYieldMilRt() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(72);
         instance.setDistYieldMilRt(expected);
         assertEquals(expected, instance.getDistYieldMilRt());
@@ -58,7 +58,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setDistYieldMilRt() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(27);
         instance.setDistYieldMilRt(expected);
         assertEquals(expected, instance.getDistYieldMilRt());
@@ -70,7 +70,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getNavAmt() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(91);
         instance.setNavAmt(expected);
         assertEquals(expected, instance.getNavAmt());
@@ -82,7 +82,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setNavAmt() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(20);
         instance.setNavAmt(expected);
         assertEquals(expected, instance.getNavAmt());
@@ -94,7 +94,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 87;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -106,7 +106,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 70;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -118,7 +118,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getDayOfReportingDate() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 20;
         instance.setDayOfReportingDate(expected);
         assertEquals(expected, instance.getDayOfReportingDate());
@@ -130,7 +130,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setDayOfReportingDate() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 27;
         instance.setDayOfReportingDate(expected);
         assertEquals(expected, instance.getDayOfReportingDate());
@@ -142,7 +142,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getDaysInYear() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 46;
         instance.setDaysInYear(expected);
         assertEquals(expected, instance.getDaysInYear());
@@ -154,7 +154,7 @@ public class ClassLevel30DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setDaysInYear() throws Exception {
-        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput instance = new ClassLevel30DayDistributionYieldCalculationInput(null);
         int expected = 71;
         instance.setDaysInYear(expected);
         assertEquals(expected, instance.getDaysInYear());

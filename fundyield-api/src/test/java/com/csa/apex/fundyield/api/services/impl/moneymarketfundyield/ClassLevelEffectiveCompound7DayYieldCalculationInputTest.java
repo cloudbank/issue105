@@ -22,7 +22,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void getDerMnyMkt7DayYieldPct() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(98);
         instance.setDerMnyMkt7DayYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt7DayYieldPct());
@@ -34,7 +34,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void setDerMnyMkt7DayYieldPct() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(62);
         instance.setDerMnyMkt7DayYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt7DayYieldPct());
@@ -46,7 +46,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void getSumOfDerMnyMkt7DayYieldPctForPrevious6Days() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(50);
         instance.setSumOfDerMnyMkt7DayYieldPctForPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfDerMnyMkt7DayYieldPctForPrevious6Days());
@@ -58,7 +58,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void setSumOfDerMnyMkt7DayYieldPctForPrevious6Days() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(16);
         instance.setSumOfDerMnyMkt7DayYieldPctForPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfDerMnyMkt7DayYieldPctForPrevious6Days());
@@ -70,7 +70,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         int expected = 99;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -82,7 +82,7 @@ public class ClassLevelEffectiveCompound7DayYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput();
+        ClassLevelEffectiveCompound7DayYieldCalculationInput instance = new ClassLevelEffectiveCompound7DayYieldCalculationInput(null);
         int expected = 73;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

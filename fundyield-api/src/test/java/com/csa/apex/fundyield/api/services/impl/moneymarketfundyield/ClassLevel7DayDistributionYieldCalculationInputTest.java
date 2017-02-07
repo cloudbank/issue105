@@ -22,7 +22,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getMnyMkt1DayDistYieldPct() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(12);
         instance.setMnyMkt1DayDistYieldPct(expected);
         assertEquals(expected, instance.getMnyMkt1DayDistYieldPct());
@@ -34,7 +34,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setMnyMkt1DayDistYieldPct() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(99);
         instance.setMnyMkt1DayDistYieldPct(expected);
         assertEquals(expected, instance.getMnyMkt1DayDistYieldPct());
@@ -46,7 +46,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getSumOfMnyMkt1DayDistYieldPctForPrevious6Days() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(86);
         instance.setSumOfMnyMkt1DayDistYieldPctForPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfMnyMkt1DayDistYieldPctForPrevious6Days());
@@ -58,7 +58,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setSumOfMnyMkt1DayDistYieldPctForPrevious6Days() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(45);
         instance.setSumOfMnyMkt1DayDistYieldPctForPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfMnyMkt1DayDistYieldPctForPrevious6Days());
@@ -70,7 +70,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         int expected = 3;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -82,7 +82,7 @@ public class ClassLevel7DayDistributionYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput();
+        ClassLevel7DayDistributionYieldCalculationInput instance = new ClassLevel7DayDistributionYieldCalculationInput(null);
         int expected = 80;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

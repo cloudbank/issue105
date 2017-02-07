@@ -1,11 +1,14 @@
 package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+
 import java.math.BigDecimal;
 
 /**
  * Calculation input.
  */
-public class ClassLevel7DayN1AYieldCalculationInput {
+public class ClassLevel7DayN1AYieldCalculationInput extends BaseCalculationInput {
 
     /**
      * Der Mny Mkt 1 Day N1A Yield Pct
@@ -18,9 +21,13 @@ public class ClassLevel7DayN1AYieldCalculationInput {
     private BigDecimal sumOfDer1DayYieldN1AMnyMktPctPrevious6Days;
 
     /**
-     * Operation scale.
+     * Constructor.
+     *
+     * @param configuration The SEC configuration
      */
-    private int operationScale;
+    public ClassLevel7DayN1AYieldCalculationInput(SECConfiguration configuration) {
+        super(configuration);
+    }
 
     public BigDecimal getDerMnyMkt1DayN1AYieldPct() {
         return derMnyMkt1DayN1AYieldPct;
@@ -36,14 +43,6 @@ public class ClassLevel7DayN1AYieldCalculationInput {
 
     public void setSumOfDer1DayYieldN1AMnyMktPctPrevious6Days(BigDecimal sumOfDer1DayYieldN1AMnyMktPctPrevious6Days) {
         this.sumOfDer1DayYieldN1AMnyMktPctPrevious6Days = sumOfDer1DayYieldN1AMnyMktPctPrevious6Days;
-    }
-
-    public int getOperationScale() {
-        return operationScale;
-    }
-
-    public void setOperationScale(int operationScale) {
-        this.operationScale = operationScale;
     }
 
 }

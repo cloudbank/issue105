@@ -22,7 +22,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getDerMnyMkt1DayN1AYieldPct() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(48);
         instance.setDerMnyMkt1DayN1AYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt1DayN1AYieldPct());
@@ -34,7 +34,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setDerMnyMkt1DayN1AYieldPct() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(83);
         instance.setDerMnyMkt1DayN1AYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt1DayN1AYieldPct());
@@ -46,7 +46,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getSumOfDer1DayYieldN1AMnyMktPctPrevious6Days() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(77);
         instance.setSumOfDer1DayYieldN1AMnyMktPctPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfDer1DayYieldN1AMnyMktPctPrevious6Days());
@@ -58,7 +58,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setSumOfDer1DayYieldN1AMnyMktPctPrevious6Days() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         BigDecimal expected = new BigDecimal(33);
         instance.setSumOfDer1DayYieldN1AMnyMktPctPrevious6Days(expected);
         assertEquals(expected, instance.getSumOfDer1DayYieldN1AMnyMktPctPrevious6Days());
@@ -70,7 +70,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         int expected = 0;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -82,7 +82,7 @@ public class ClassLevel7DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput instance = new ClassLevel7DayN1AYieldCalculationInput(null);
         int expected = 27;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

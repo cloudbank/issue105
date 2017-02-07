@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.api.services.impl.securitysecyield;
+package com.csa.apex.fundyield.api.services.impl;
 
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 
@@ -29,6 +29,9 @@ public abstract class BaseCalculationInput {
 	 * @param configuration The SEC configuration
 	 */
 	protected BaseCalculationInput(SECConfiguration configuration) {
+		if (configuration == null)
+			return;
+
 		this.operationScale = configuration.getOperationScale();
 		this.roundingMode = configuration.getRoundingMode();
 	}

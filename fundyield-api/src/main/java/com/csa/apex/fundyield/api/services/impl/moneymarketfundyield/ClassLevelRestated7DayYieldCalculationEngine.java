@@ -69,8 +69,8 @@ public class ClassLevelRestated7DayYieldCalculationEngine implements Calculation
 			// check the config values and if they are provided use them instead
 			// of default ones.
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
 					PortfolioSnapshot portfolioSnapshot = portfolio.getPortfolioSnapshots().get(0);
 					BigDecimal fdrPortfolioStateTaxRt = portfolioSnapshot.getFdrPortfolioStateTaxRt();
 					BigDecimal fdrN1AOospGrosDistInc = portfolioSnapshot.getFdrN1AOospGrosDistInc();
@@ -96,7 +96,7 @@ public class ClassLevelRestated7DayYieldCalculationEngine implements Calculation
 											reportDate, 6);
 
 							// set the data to input and calculate:
-							ClassLevelRestated7DayYieldCalculationInput input = new ClassLevelRestated7DayYieldCalculationInput();
+							ClassLevelRestated7DayYieldCalculationInput input = new ClassLevelRestated7DayYieldCalculationInput(configuration);
 							input.setN1ADistIncomeUnmodAmt(n1ADistIncomeUnmodAmt);
 							input.setN1ADistIncomeAdjAmt(n1ADistIncomeAdjAmt);
 							input.setN1ADistIncomeAdjRevAmt(n1ADistIncomeAdjRevAmt);

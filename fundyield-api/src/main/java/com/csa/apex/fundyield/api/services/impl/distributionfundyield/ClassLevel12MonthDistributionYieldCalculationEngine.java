@@ -55,7 +55,7 @@ public class ClassLevel12MonthDistributionYieldCalculationEngine implements Calc
 							}
 							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
 							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-							ClassLevel12MonthDistributionYieldCalculationInput input = new ClassLevel12MonthDistributionYieldCalculationInput();
+							ClassLevel12MonthDistributionYieldCalculationInput input = new ClassLevel12MonthDistributionYieldCalculationInput(configuration);
 							input.setDist12MoMilRt(snapshot.getDist12MoMilRt());
 							input.setNavAmt(snapshot.getNavAmt());
 							ClassLevel12MonthDistributionYieldCalculator calculator = new ClassLevel12MonthDistributionYieldCalculator();

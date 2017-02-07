@@ -1,11 +1,14 @@
 package com.csa.apex.fundyield.api.services.impl.distributionfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+
 import java.math.BigDecimal;
 
 /**
  * Calculation input.
  */
-public class ClassLevel12MonthDistributionYieldCalculationInput {
+public class ClassLevel12MonthDistributionYieldCalculationInput extends BaseCalculationInput {
 
     /**
      * Dist 12 Mo Mil Rt.
@@ -18,9 +21,13 @@ public class ClassLevel12MonthDistributionYieldCalculationInput {
     private BigDecimal navAmt;
 
     /**
-     * Operation scale.
+     * Constructor.
+     *
+     * @param configuration The SEC configuration
      */
-    private int operationScale;
+    public ClassLevel12MonthDistributionYieldCalculationInput(SECConfiguration configuration) {
+        super(configuration);
+    }
 
     public BigDecimal getDist12MoMilRt() {
         return dist12MoMilRt;
@@ -36,14 +43,6 @@ public class ClassLevel12MonthDistributionYieldCalculationInput {
 
     public void setNavAmt(BigDecimal navAmt) {
         this.navAmt = navAmt;
-    }
-
-    public int getOperationScale() {
-        return operationScale;
-    }
-
-    public void setOperationScale(int operationScale) {
-        this.operationScale = operationScale;
     }
 
 }

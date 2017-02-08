@@ -42,6 +42,11 @@ public class Constants {
 	public static final String REPORT_DATE = "reportDate";
 
 	/**
+	 * The constant storedProcedure string
+	 */
+	public static final String STORED_PROCEDURE = "storedProcedure";
+
+	/**
 	 * The constant jdbcTemplate string
 	 */
 	public static final String JDBC_TEMPLATE = "jdbcTemplate";

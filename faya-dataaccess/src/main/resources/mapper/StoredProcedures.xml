@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedure">
+
+    <select id="getInstruments" parameterType="java.util.Map" statementType="CALLABLE">
+        { call GET_INSTRUMENT_DATA
+            (
+                #{businessDateStart, mode=IN, jdbcType=DATE} ,
+                #{businessDateEnd, mode=IN, jdbcType=DATE} ,
+                #{instruments, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.instrumentResultMap} ,
+                #{underlyingInstruments, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.instrumentResultMap} ,
+                #{interestRateSchedules, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.interestRateScheduleResultMap} ,
+                #{cashDividendSchedules, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.cashDividendScheduleResultMap} ,
+                #{callSchedules, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.callScheduleResultMap} ,
+                #{putSchedules, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.putScheduleResultMap} ,
+                #{underlyingInstrumentLinks, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.underlyingInstrumentLinkResultMap} ,
+                #{tradableEntities, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.tradableEntityResultMap} ,
+                #{tradableEntitySnapshots, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.tradableEntitySnapshotResultMap}
+            )
+        }
+    </select>
+
+    <select id="getPortfolio" parameterType="java.util.Map" statementType="CALLABLE">
+        { call GET_PORTFOLIO_DATA
+            (
+                #{businessDateStart, mode=IN, jdbcType=DATE} ,
+                #{businessDateEnd, mode=IN, jdbcType=DATE} ,
+                #{portfolio, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.portfolioResultMap} ,
+                #{taxExclusions, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.taxExclusionResultMap} ,
+                #{portfolioSnapshots, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.portfolioSnapshotResultMap} ,
+                #{portfolioHoldingSnapshots, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.portfolioHoldingSnapshotResultMap} ,
+                #{shareClasses, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.shareClassResultMap} ,
+                #{shareClassSnapshots, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.shareClassSnapshotResultMap} ,
+                #{tradableEntities, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.tradableEntityResultMap} ,
+                #{tradableEntitySnapshots, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.tradableEntitySnapshotResultMap}
+            )
+        }
+    </select>
+
+
+    <select id="saveInstrument" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_INSTRUMENT
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=INSTRUMENT_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="savePortfolio" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_PORTFOLIO
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=PORTFOLIO_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="saveTradableEntity" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_TRADABLE_ENTITY
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=TRADABLE_ENTITY_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="saveTradableEntitySnapshot" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_TRADABLE_ENTITY_SNAPSHOT
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=TRADABLE_ENTITY_SNAPSHOT_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{updateCalcResult, mode=IN, jdbcType=SMALLINT} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="savePortfolioHolding" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_PORTFOLIO_HOLDING
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=PORTFOLIO_HOLDING_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{updateCalcResult, mode=IN, jdbcType=SMALLINT} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="savePortfolioSnapshot" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_PORTFOLIO_SNAPSHOT
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=PORTFOLIO_SNAPSHOT_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{updateCalcResult, mode=IN, jdbcType=SMALLINT} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+    <select id="saveShareClassSnapshot" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_SHARE_CLASS_SNAPSHOT
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=SHARE_CLASS_SNAPSHOT_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{updateCalcResult, mode=IN, jdbcType=SMALLINT} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+
+
+    <select id="avgMM1" parameterType="java.util.Map" statementType="CALLABLE">
+        { call AVG_MM1
+            (
+                #{p_sid, mode=IN, jdbcType=NUMERIC} ,
+                #{start_date, mode=IN, jdbcType=DATE} ,
+                #{end_date, mode=IN, jdbcType=DATE} ,
+                #{s, mode=OUT, jdbcType=NUMERIC, javaType=BigDecimal}
+            )
+        }
+    </select>
+
+    <select id="sumD1" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SUM_D1
+            (
+                #{p_sid, mode=IN, jdbcType=NUMERIC} ,
+                #{start_date, mode=IN, jdbcType=DATE} ,
+                #{end_date, mode=IN, jdbcType=DATE} ,
+                #{s, mode=OUT, jdbcType=NUMERIC, javaType=BigDecimal}
+            )
+        }
+    </select>
+
+    <select id="sumDR1" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SUM_DR1
+            (
+                #{p_sid, mode=IN, jdbcType=NUMERIC} ,
+                #{start_date, mode=IN, jdbcType=DATE} ,
+                #{end_date, mode=IN, jdbcType=DATE} ,
+                #{s, mode=OUT, jdbcType=NUMERIC, javaType=BigDecimal}
+            )
+        }
+    </select>
+
+    <select id="avgMM7" parameterType="java.util.Map" statementType="CALLABLE">
+        { call AVG_MM7
+            (
+                #{p_sid, mode=IN, jdbcType=NUMERIC} ,
+                #{start_date, mode=IN, jdbcType=DATE} ,
+                #{end_date, mode=IN, jdbcType=DATE} ,
+                #{s, mode=OUT, jdbcType=NUMERIC, javaType=BigDecimal}
+            )
+        }
+    </select>
+
+    <select id="sumD7" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SUM_D7
+            (
+                #{p_sid, mode=IN, jdbcType=NUMERIC} ,
+                #{start_date, mode=IN, jdbcType=DATE} ,
+                #{end_date, mode=IN, jdbcType=DATE} ,
+                #{s, mode=OUT, jdbcType=NUMERIC, javaType=BigDecimal}
+            )
+        }
+    </select>
+
+    <select id="queryDYPortfolio" parameterType="java.util.Map" statementType="CALLABLE">
+        { call QUERY_DY_PORTFOLIO
+            (
+                #{business_date, mode=IN, jdbcType=DATE} ,
+                #{rs, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.portfolioResultMap}
+            )
+        }
+    </select>
+
+    <select id="queryMMPortfolio" parameterType="java.util.Map" statementType="CALLABLE">
+        { call QUERY_MM_PORTFOLIO
+            (
+                #{business_date, mode=IN, jdbcType=DATE} ,
+                #{rs, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.portfolioResultMap}
+            )
+        }
+    </select>
+
+    <select id="queryDYInstrument" parameterType="java.util.Map" statementType="CALLABLE">
+        { call QUERY_DY_INSTRUMENT
+            (
+                #{business_date, mode=IN, jdbcType=DATE} ,
+                #{rs, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.instrumentResultMap}
+            )
+        }
+    </select>
+
+    <select id="queryMMInstrument" parameterType="java.util.Map" statementType="CALLABLE">
+        { call QUERY_MM_INSTRUMENT
+            (
+                #{business_date, mode=IN, jdbcType=DATE} ,
+                #{rs, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=common.mapper.instrumentResultMap}
+            )
+        }
+    </select>
+
+</mapper>

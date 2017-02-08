@@ -21,8 +21,8 @@
         <property name="password" value="${oracle.password}" />
     </bean>
 
-    <!-- StoredProcedures -->
-    <bean id="storedProcedures" class="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedures">
+    <!-- StoredProcedureHelper -->
+    <bean id="storedProcedureHelper" class="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedureHelper">
     </bean>
 
     <!-- Initialization for TransactionManager -->

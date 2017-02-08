@@ -22,8 +22,19 @@
         <property name="password" value="${oracle.password}" />
     </bean>
 
-    <!-- StoredProcedures -->
-    <bean id="storedProcedures" class="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedures">
+    <!-- sqlSessionFactory uses dataSource -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <bean id="storedProcedure" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedure" />
+    </bean>
+
+    <!-- StoredProcedureHelper -->
+    <bean id="storedProcedureHelper" class="com.csa.apex.fundyield.faya.api.service.impl.StoredProcedureHelper">
     </bean>
 
     <!-- Initialization for TransactionManager -->

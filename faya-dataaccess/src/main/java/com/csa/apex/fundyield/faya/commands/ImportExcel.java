@@ -34,7 +34,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import com.csa.apex.fundyield.faya.api.service.impl.StoredProcedures;
+import com.csa.apex.fundyield.faya.api.service.impl.StoredProcedureHelper;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.fayacommons.entities.Instrument;
 import com.csa.apex.fundyield.fayacommons.entities.InstrumentTypeCode;
@@ -205,9 +205,6 @@ public class ImportExcel {
 
     /**
      * Parse tradable entity data.
-     * @param row the row
-     * @param columnMapping the mapping properties
-     * @param conf the rounding configurations
      * @return the tradable entity data
      */
     private static TradableEntity parseTradableEntity() {
@@ -380,7 +377,7 @@ public class ImportExcel {
                 context.registerShutdownHook();
                 PlatformTransactionManager transactionManager = context.getBean("transactionManager",
                         PlatformTransactionManager.class);
-                StoredProcedures storedProcedures = context.getBean("storedProcedures", StoredProcedures.class);
+                StoredProcedureHelper storedProcedureHelper = context.getBean("storedProcedureHelper", StoredProcedureHelper.class);
 
                 // Load excel
                 List<FundAccountingYieldData> result = loadExcel(path, columnMapping, secConfiguration);
@@ -389,7 +386,7 @@ public class ImportExcel {
                 boolean cleanCalcResult = cmd.hasOption("c");
 
                 // Save data
-                result.forEach(data -> saveData(data, transactionManager, storedProcedures, cleanCalcResult));
+                result.forEach(data -> saveData(data, transactionManager, storedProcedureHelper, cleanCalcResult));
             }
         } catch (ParseException e) {
             LOGGER.error("command parse error", e);
@@ -407,51 +404,51 @@ public class ImportExcel {
      * Save data.
      * @param fundAccountingYieldData The FundAccountingYieldData to save
      * @param transactionManager The transactionManager
-     * @param storedProcedures The stored procedures
      * @param cleanCalcResult Flag indicating whether should clean up calculation results
      */
     private static void saveData(FundAccountingYieldData fundAccountingYieldData, PlatformTransactionManager transactionManager,
-            StoredProcedures storedProcedures, boolean cleanCalcResult) {
+            StoredProcedureHelper storedProcedureHelper, boolean cleanCalcResult) {
         TransactionTemplate tt = new TransactionTemplate(transactionManager);
 		if (fundAccountingYieldData.getInstruments() != null) {
-        tt.execute(transactionStatus -> {
-				storedProcedures.saveInstrument(fundAccountingYieldData.getInstruments().get(0));
+            tt.execute(transactionStatus -> {
+                storedProcedureHelper.saveInstrument(fundAccountingYieldData.getInstruments().get(0));
 
-				TradableEntity te = null;
-				if (fundAccountingYieldData.getInstruments().get(0).getTradableEntities() != null
-						&& !fundAccountingYieldData.getInstruments().get(0).getTradableEntities().isEmpty()) {
-					te = fundAccountingYieldData.getInstruments().get(0).getTradableEntities().get(0);
-					te.setInstrumentSid(fundAccountingYieldData.getInstruments().get(0).getInstrumentSid());
-            storedProcedures.saveTradableEntity(te);
-				}
+                TradableEntity te = null;
+                if (fundAccountingYieldData.getInstruments().get(0).getTradableEntities() != null
+                        && !fundAccountingYieldData.getInstruments().get(0).getTradableEntities().isEmpty()) {
+                    te = fundAccountingYieldData.getInstruments().get(0).getTradableEntities().get(0);
+                    te.setInstrumentSid(fundAccountingYieldData.getInstruments().get(0).getInstrumentSid());
+                    storedProcedureHelper.saveTradableEntity(te);
+                }
 
-				if (te != null) {
-					if (te.getTradableEntitySnapshots() != null && !te.getTradableEntitySnapshots().isEmpty()) {
-            TradableEntitySnapshot tes = te.getTradableEntitySnapshots().get(0);
-            tes.setTradableEntitySid(te.getTradableEntitySid());
-            storedProcedures.saveTradableEntitySnapshot(tes, cleanCalcResult);
-					}
-				}
+                if (te != null) {
+                    if (te.getTradableEntitySnapshots() != null && !te.getTradableEntitySnapshots().isEmpty()) {
+                        TradableEntitySnapshot tes = te.getTradableEntitySnapshots().get(0);
+                        tes.setTradableEntitySid(te.getTradableEntitySid());
+                        storedProcedureHelper.saveTradableEntitySnapshot(tes, cleanCalcResult);
+                    }
+                }
 
-				if (fundAccountingYieldData.getPortfolios() != null) {
-					storedProcedures.savePortfolio(fundAccountingYieldData.getPortfolios().get(0));
-				}
+                if (fundAccountingYieldData.getPortfolios() != null) {
+                    storedProcedureHelper.savePortfolio(fundAccountingYieldData.getPortfolios().get(0));
+                }
 
-				if (fundAccountingYieldData.getPortfolios() != null && !fundAccountingYieldData.getPortfolios().isEmpty()) {
-					List<PortfolioHoldingSnapshot> portfolioHoldings = fundAccountingYieldData.getPortfolios().get(0)
-							.getPortfolioHoldings();
-					if (portfolioHoldings != null && !portfolioHoldings.isEmpty()) {
-						PortfolioHoldingSnapshot holding = portfolioHoldings.get(0);
-						holding.setPortfolioSid(fundAccountingYieldData.getPortfolios().get(0).getPortfolioSid());
-						if (te != null) {
-            holding.setTradableEntitySid(te.getTradableEntitySid());
-						}storedProcedures.savePortfolioHoldingSnapshot(holding, cleanCalcResult);
-					}
-				}
+                if (fundAccountingYieldData.getPortfolios() != null && !fundAccountingYieldData.getPortfolios().isEmpty()) {
+                    List<PortfolioHoldingSnapshot> portfolioHoldings = fundAccountingYieldData.getPortfolios().get(0)
+                            .getPortfolioHoldings();
+                    if (portfolioHoldings != null && !portfolioHoldings.isEmpty()) {
+                        PortfolioHoldingSnapshot holding = portfolioHoldings.get(0);
+                        holding.setPortfolioSid(fundAccountingYieldData.getPortfolios().get(0).getPortfolioSid());
+                        if (te != null) {
+                            holding.setTradableEntitySid(te.getTradableEntitySid());
+                        }
+                        storedProcedureHelper.savePortfolioHoldingSnapshot(holding, cleanCalcResult);
+                    }
+                }
 
-				LOGGER.info("Row imported:\n" + fundAccountingYieldData.toString());
-            return null;
-        });
+                LOGGER.info("Row imported:\n" + fundAccountingYieldData.toString());
+                return null;
+            });
     }
 }
 }

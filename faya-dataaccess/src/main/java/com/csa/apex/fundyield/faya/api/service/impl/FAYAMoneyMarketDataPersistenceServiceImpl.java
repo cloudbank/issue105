@@ -1,13 +1,14 @@
 package com.csa.apex.fundyield.faya.api.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
 import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,16 +30,16 @@ import com.csa.apex.fundyield.utility.LogMethod;
 public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarketDataPersistenceService {
 
     /**
-     * The autowired jdbcTemplate. Should be non-null after injection.
+     * The auto wired storedProcedure.
      */
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private StoredProcedure storedProcedure;
 
     /**
-     * The auto wired StoredProcedures.
+     * The auto wired StoredProcedureHelper.
      */
     @Autowired
-    private StoredProcedures storedProcedures;
+    private StoredProcedureHelper storedProcedureHelper;
 
     /**
      * Empty constructor.
@@ -53,7 +54,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, this.getClass().getCanonicalName(), Constants.JDBC_TEMPLATE);
+        CommonUtility.checkNullConfig(storedProcedure, this.getClass().getCanonicalName(), "storedProcedure");
     }
 
     /**
@@ -83,14 +84,13 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
     public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId)
             throws FundAccountingYieldException {
         CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
-//        CommonUtility.checkString(userId, "userId");
-        storedProcedures.saveFAYAPortfolioData(fundAccountingYieldData);
+        storedProcedureHelper.saveFAYAPortfolioData(fundAccountingYieldData);
         return true;
     }
 
     /**
      * Persists the calculated Distribution Fund Yield data.
-     * @param securitySECData - the SecuritySECDatae @RequestParam;
+     * @param businessDate - the business date @RequestParam;
      * @return the result of the execution.
      * @throws FundAccountingYieldException
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -114,10 +114,14 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
             throws FundAccountingYieldException {
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(),"retrieveFundAccountingYieldData", Constants.BUSINESS_DATE);
         try {
-            List<Portfolio> portfolios = FAYAPersistenceHelper.getPortfolios(jdbcTemplate, "QUERY_MM_PORTFOLIO",
-                    businessDate);
-            List<Instrument> instruments = FAYAPersistenceHelper.getInstruments(jdbcTemplate, "QUERY_MM_INSTRUMENT",
-                    businessDate);
+            Map<String,Object> param1 = new HashMap<String,Object>(){{ put("business_date", businessDate); }};
+            storedProcedure.queryMMPortfolio(param1);
+            List<Portfolio> portfolios = (List<Portfolio>) param1.get("rs");
+
+            Map<String,Object> param2 = new HashMap<String,Object>(){{ put("business_date", businessDate); }};
+            storedProcedure.queryMMInstrument(param2);
+            List<Instrument> instruments = (List<Instrument>) param2.get("rs");
+
             FundAccountingYieldData data = new FundAccountingYieldData();
             data.setBusinessDate(businessDate);
             data.setReportDate(businessDate);
@@ -129,19 +133,4 @@ public class FAYAMoneyMarketDataPersistenceServiceImpl implements FAYAMoneyMarke
         }
     }
 
-    /**
-     * Getter jdbcTemplate.
-     * @return the jdbc template
-     */
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    /**
-     * Setter jdbcTemplate.
-     * @param jdbcTemplate the jdbc template to be set
-     */
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 }

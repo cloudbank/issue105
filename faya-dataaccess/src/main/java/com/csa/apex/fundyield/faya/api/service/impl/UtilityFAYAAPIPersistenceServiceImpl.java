@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 import com.csa.apex.fundyield.utility.Constants;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.csa.apex.fundyield.exceptions.ConfigurationException;
@@ -26,10 +25,10 @@ import com.csa.apex.fundyield.utility.LogMethod;
 public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersistenceService {
 
     /**
-     * The autowired jdbcTemplate. Should be non-null after injection.
+     * The auto wired storedProcedure.
      */
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private StoredProcedure storedProcedure;
 
     /**
      * Empty constructor.
@@ -45,7 +44,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @PostConstruct
     protected void checkConfiguration() {
-        CommonUtility.checkNullConfig(jdbcTemplate, this.getClass().getCanonicalName(), Constants.JDBC_TEMPLATE);
+        CommonUtility.checkNullConfig(storedProcedure, this.getClass().getCanonicalName(), Constants.STORED_PROCEDURE);
     }
 
     /**
@@ -61,7 +60,13 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
     @LogMethod
     public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        return callStoredProcedure("AVG_MM1", shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        try {
+            storedProcedure.avgMM1(params);
+        } catch(Exception e) {
+            throw new FundAccountingYieldException(e.getMessage());
+        }
+        return (BigDecimal) params.get("s");
     }
 
     /**
@@ -77,7 +82,13 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
     @LogMethod
     public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        return callStoredProcedure("SUM_D1", shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        try {
+            storedProcedure.sumD1(params);
+        } catch(Exception e) {
+            throw new FundAccountingYieldException(e.getMessage());
+        }
+        return (BigDecimal) params.get("s");
     }
 
     /**
@@ -93,7 +104,13 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
     @LogMethod
     public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(long shareClassSid, Date reportDate,
             int numOfDays) throws FundAccountingYieldException {
-        return callStoredProcedure("SUM_DR1", shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        try {
+            storedProcedure.sumDR1(params);
+        } catch(Exception e) {
+            throw new FundAccountingYieldException(e.getMessage());
+        }
+        return (BigDecimal) params.get("s");
     }
 
     /**
@@ -109,7 +126,13 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
     @LogMethod
     public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        return callStoredProcedure("AVG_MM7", shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        try {
+            storedProcedure.avgMM7(params);
+        } catch(Exception e) {
+            throw new FundAccountingYieldException(e.getMessage());
+        }
+        return (BigDecimal) params.get("s");
     }
 
     /**
@@ -125,12 +148,17 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
     @LogMethod
     public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        return callStoredProcedure("SUM_D7", shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        try {
+            storedProcedure.sumD7(params);
+        } catch(Exception e) {
+            throw new FundAccountingYieldException(e.getMessage());
+        }
+        return (BigDecimal) params.get("s");
     }
 
     /**
-     * Call stored procedure.
-     * @param spName the stored procedure name;
+     * Build parameters to Map.
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -138,42 +166,19 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    private BigDecimal callStoredProcedure(String spName, long shareClassSid, Date reportDate, int numOfDays)
+    private Map<String,Object> buildParameters(long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.NUM_OF_DAYS);
-        try {
-            DateTime businessDateTime = new DateTime(reportDate);
-            businessDateTime = businessDateTime.withTimeAtStartOfDay();
-            DateTime endDateTime = businessDateTime.plusDays(numOfDays);
-            endDateTime = endDateTime.withTimeAtStartOfDay();
-            
-            Map<String, Object> inParamMap = new HashMap<String, Object>();
-            inParamMap.put("p_sid", shareClassSid);
-            inParamMap.put("start_date", reportDate);
-            inParamMap.put("end_date", endDateTime.toDate());
-            Map<String, Object> result = FAYAPersistenceHelper.callStoredProcedure(spName, jdbcTemplate, inParamMap);
-            return (BigDecimal) result.values().toArray()[0];
-        } catch (Exception e) {
-            throw new FundAccountingYieldException(e.getMessage());
-        }
-    }
 
-    /**
-     * Getter jdbcTemplate.
-     * @return the jdbc template
-     */
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    /**
-     * Setter jdbcTemplate.
-     * @param jdbcTemplate the jdbc template to be set
-     */
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        DateTime businessDateTime = new DateTime(reportDate).withTimeAtStartOfDay();
+        Date endDate = businessDateTime.plusDays(numOfDays).withTimeAtStartOfDay().toDate();
+        Map<String, Object> inParamMap = new HashMap<>();
+        inParamMap.put("p_sid", shareClassSid);
+        inParamMap.put("start_date", reportDate);
+        inParamMap.put("end_date", endDate);
+        return inParamMap;
     }
 
 }

@@ -54,8 +54,8 @@ public class ClassLevel1DayN1AYieldCalculationEngine implements CalculationEngin
 		try {
 			ClassLevel1DayN1AYieldCalculator calculator = new ClassLevel1DayN1AYieldCalculator();
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
 					PortfolioSnapshot portfolioSnapshot = portfolio.getPortfolioSnapshots().get(0);
 					BigDecimal fdrPortfolioStateTaxRt = portfolioSnapshot.getFdrPortfolioStateTaxRt();
 					BigDecimal fdrN1AOospGrosDistInc = portfolioSnapshot.getFdrN1AOospGrosDistInc();
@@ -68,7 +68,7 @@ public class ClassLevel1DayN1AYieldCalculationEngine implements CalculationEngin
 							}
 							Predicate<ShareClassSnapshot> predicate = c -> c.getReportDate().equals(reportDate);
 							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
-							ClassLevel1DayN1AYieldCalculationInput input = new ClassLevel1DayN1AYieldCalculationInput();
+							ClassLevel1DayN1AYieldCalculationInput input = new ClassLevel1DayN1AYieldCalculationInput(configuration);
 							input.setN1ADistIncomeUnmodAmt(snapshot.getN1ADistIncomeUnmodAmt());
 							input.setN1ADistIncomeAdjAmt(snapshot.getN1ADistIncomeAdjAmt());
 							input.setN1ADistIncomeAdjRevAmt(snapshot.getN1ADistIncomeAdjRevAmt());

@@ -56,12 +56,12 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
 			// check the config values and if they are provided use them instead
 			// of default ones.
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(reportDate);
+				int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+				int dayOfYear = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(reportDate);
-					int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-					int dayOfYear = cal.getActualMaximum(Calendar.DAY_OF_YEAR);
 					if (portfolio.getShareClasses() != null) {
 						for (ShareClass shareClass : portfolio.getShareClasses()) {
 							// get share class snapshot for the report date
@@ -76,7 +76,7 @@ public class ClassLevel30DayDistributionYieldCalculationEngine implements Calcul
 									? snapshot.getDistYieldMilRt() : BigDecimal.ONE;
 							BigDecimal navAmt = snapshot.getNavAmt();
 							// set the data to input and calculate:
-							ClassLevel30DayDistributionYieldCalculationInput input = new ClassLevel30DayDistributionYieldCalculationInput();
+							ClassLevel30DayDistributionYieldCalculationInput input = new ClassLevel30DayDistributionYieldCalculationInput(configuration);
 							input.setDistUnmod30DayYieldPct(distUnmod30DayYieldPct);
 							input.setDistYieldMilRt(distYieldMilRt);
 							input.setReportingDate(dayOfMonth);

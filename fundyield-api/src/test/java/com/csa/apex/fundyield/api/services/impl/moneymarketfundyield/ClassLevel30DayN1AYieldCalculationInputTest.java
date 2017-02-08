@@ -5,6 +5,8 @@ package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
 import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
+
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import org.junit.Test;
 import org.springframework.boot.test.IntegrationTest;
 /**
@@ -22,7 +24,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getDerMnyMkt1DayN1AYieldPct() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(58);
         instance.setDerMnyMkt1DayN1AYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt1DayN1AYieldPct());
@@ -34,7 +36,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setDerMnyMkt1DayN1AYieldPct() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(93);
         instance.setDerMnyMkt1DayN1AYieldPct(expected);
         assertEquals(expected, instance.getDerMnyMkt1DayN1AYieldPct());
@@ -46,7 +48,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getSumOfDer1DayYieldN1AMnyMktPctPrevious29Days() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(66);
         instance.setSumOfDer1DayYieldN1AMnyMktPctPrevious29Days(expected);
         assertEquals(expected, instance.getSumOfDer1DayYieldN1AMnyMktPctPrevious29Days());
@@ -58,7 +60,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setSumOfDer1DayYieldN1AMnyMktPctPrevious29Days() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(0);
         instance.setSumOfDer1DayYieldN1AMnyMktPctPrevious29Days(expected);
         assertEquals(expected, instance.getSumOfDer1DayYieldN1AMnyMktPctPrevious29Days());
@@ -70,7 +72,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         int expected = 69;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -82,7 +84,7 @@ public class ClassLevel30DayN1AYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput instance = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         int expected = 99;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

@@ -5,6 +5,7 @@ package com.csa.apex.fundyield.api.services.impl.securitysecyield;
 
 import java.math.BigDecimal;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 
 /**

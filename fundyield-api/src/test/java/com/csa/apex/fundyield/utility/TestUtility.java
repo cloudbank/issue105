@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
+import com.csa.apex.fundyield.fayacommons.entities.*;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.powermock.api.mockito.PowerMockito;
 import org.springframework.http.HttpEntity;
@@ -34,15 +35,6 @@ import com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelR
 import com.csa.apex.fundyield.api.services.impl.moneymarketfundyield.ClassLevelRestated7DayYieldCalculationInput;
 import com.csa.apex.fundyield.api.services.impl.utility.UtilityCustomerAPIClientImpl;
 import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
-import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
-import com.csa.apex.fundyield.fayacommons.entities.Instrument;
-import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
-import com.csa.apex.fundyield.fayacommons.entities.PortfolioHoldingSnapshot;
-import com.csa.apex.fundyield.fayacommons.entities.PortfolioSnapshot;
-import com.csa.apex.fundyield.fayacommons.entities.ShareClass;
-import com.csa.apex.fundyield.fayacommons.entities.ShareClassSnapshot;
-import com.csa.apex.fundyield.fayacommons.entities.TradableEntity;
-import com.csa.apex.fundyield.fayacommons.entities.TradableEntitySnapshot;
 
 /**
  * Utility class for the CalculationEngine.
@@ -99,7 +91,7 @@ public class TestUtility {
     }
 
     public static ClassLevelRestated7DayYieldCalculationInput getClassLevelRestated7DayYieldCalculationInput() {
-        ClassLevelRestated7DayYieldCalculationInput rt = new ClassLevelRestated7DayYieldCalculationInput();
+        ClassLevelRestated7DayYieldCalculationInput rt = new ClassLevelRestated7DayYieldCalculationInput(new SECConfiguration());
         rt.setN1ADistIncomeBreakageAmt(BigDecimal.ONE);
         rt.setN1ADistIncomeAdjAmt(BigDecimal.ONE);
         rt.setdPrevious6Days(BigDecimal.ONE);
@@ -117,7 +109,7 @@ public class TestUtility {
     }
 
     public static ClassLevel1DayN1AYieldCalculationInput getClassLevel1DayN1AYieldCalculationInput() {
-        ClassLevel1DayN1AYieldCalculationInput rt = new ClassLevel1DayN1AYieldCalculationInput();
+        ClassLevel1DayN1AYieldCalculationInput rt = new ClassLevel1DayN1AYieldCalculationInput(new SECConfiguration());
         rt.setN1ADistIncomeBreakageAmt(BigDecimal.ONE);
         rt.setN1ADistIncomeAdjAmt(BigDecimal.ONE);
         rt.setN1ADistReimbursementAmt(BigDecimal.ONE);
@@ -132,7 +124,7 @@ public class TestUtility {
     }
 
     public static ClassLevel30DayDistributionYieldCalculationInput getClassLevel30DayDistributionYieldCalculationInput() {
-        ClassLevel30DayDistributionYieldCalculationInput rt = new ClassLevel30DayDistributionYieldCalculationInput();
+        ClassLevel30DayDistributionYieldCalculationInput rt = new ClassLevel30DayDistributionYieldCalculationInput(new SECConfiguration());
         rt.setDaysInYear(1);
         rt.setDistYieldMilRt(BigDecimal.ONE);
         rt.setNavAmt(BigDecimal.ONE);
@@ -143,7 +135,7 @@ public class TestUtility {
     }
 
     public static com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationInput getClassLevel30DayDistributionYieldCalculationInput2() {
-        com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationInput rt = new com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationInput();
+        com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationInput rt = new com.csa.apex.fundyield.api.services.impl.distributionfundyield.ClassLevel30DayDistributionYieldCalculationInput(new SECConfiguration());
         rt.setDayOfReportingDate(1);
         rt.setDaysInYear(1);
         rt.setDistUnmod30DayYieldPct(BigDecimal.ONE);
@@ -154,7 +146,7 @@ public class TestUtility {
     }
 
     public static ClassLevel30DayN1AYieldCalculationInput getClassLevel30DayN1AYieldCalculationInput() {
-        ClassLevel30DayN1AYieldCalculationInput rt = new ClassLevel30DayN1AYieldCalculationInput();
+        ClassLevel30DayN1AYieldCalculationInput rt = new ClassLevel30DayN1AYieldCalculationInput(new SECConfiguration());
         rt.setDerMnyMkt1DayN1AYieldPct(BigDecimal.ONE);
         rt.setSumOfDer1DayYieldN1AMnyMktPctPrevious29Days(BigDecimal.ONE);
         rt.setOperationScale(2);
@@ -162,7 +154,7 @@ public class TestUtility {
     }
 
     public static ClassLevel7DayN1AYieldCalculationInput getClassLevel7DayN1AYieldCalculationInput() {
-        ClassLevel7DayN1AYieldCalculationInput rt = new ClassLevel7DayN1AYieldCalculationInput();
+        ClassLevel7DayN1AYieldCalculationInput rt = new ClassLevel7DayN1AYieldCalculationInput(new SECConfiguration());
         rt.setDerMnyMkt1DayN1AYieldPct(BigDecimal.ONE);
         rt.setSumOfDer1DayYieldN1AMnyMktPctPrevious6Days(BigDecimal.ONE);
         rt.setOperationScale(2);
@@ -170,7 +162,7 @@ public class TestUtility {
     }
 
     public static ClassLevelRestated30DayYieldCalculationInput getClassLevelRestated30DayYieldCalculationInput() {
-        ClassLevelRestated30DayYieldCalculationInput rt = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput rt = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         rt.setDerMmRestate1DayYieldPct(BigDecimal.ONE);
         rt.setSumOfDerRestate1DayYieldMnyMktPctPrevious29Days(BigDecimal.ONE);
         rt.setOperationScale(2);

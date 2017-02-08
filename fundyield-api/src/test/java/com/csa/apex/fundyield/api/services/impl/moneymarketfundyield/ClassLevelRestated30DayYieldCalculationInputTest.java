@@ -5,6 +5,8 @@ package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
 import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
+
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import org.junit.Test;
 import org.springframework.boot.test.IntegrationTest;
 /**
@@ -22,7 +24,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getDerMmRestate1DayYieldPct() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(79);
         instance.setDerMmRestate1DayYieldPct(expected);
         assertEquals(expected, instance.getDerMmRestate1DayYieldPct());
@@ -34,7 +36,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void setDerMmRestate1DayYieldPct() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(17);
         instance.setDerMmRestate1DayYieldPct(expected);
         assertEquals(expected, instance.getDerMmRestate1DayYieldPct());
@@ -46,7 +48,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getSumOfDerRestate1DayYieldMnyMktPctPrevious29Days() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         BigDecimal expected = new BigDecimal(89);
         instance.setSumOfDerRestate1DayYieldMnyMktPctPrevious29Days(expected);
         assertEquals(expected, instance.getSumOfDerRestate1DayYieldMnyMktPctPrevious29Days());
@@ -58,7 +60,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void getOperationScale() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         int expected = 92;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());
@@ -70,7 +72,7 @@ public class ClassLevelRestated30DayYieldCalculationInputTest {
      */
     @Test
     public void setOperationScale() throws Exception {
-        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput();
+        ClassLevelRestated30DayYieldCalculationInput instance = new ClassLevelRestated30DayYieldCalculationInput(new SECConfiguration());
         int expected = 31;
         instance.setOperationScale(expected);
         assertEquals(expected, instance.getOperationScale());

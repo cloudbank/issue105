@@ -1,11 +1,14 @@
 package com.csa.apex.fundyield.api.services.impl.moneymarketfundyield;
 
+import com.csa.apex.fundyield.api.services.impl.BaseCalculationInput;
+import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
+
 import java.math.BigDecimal;
 
 /**
  * Calculation input.
  */
-public class ClassLevel30DayDistributionYieldCalculationInput {
+public class ClassLevel30DayDistributionYieldCalculationInput extends BaseCalculationInput {
 
 	/**
 	 * Dist Unmod 30 Day Yield Pct;
@@ -33,11 +36,12 @@ public class ClassLevel30DayDistributionYieldCalculationInput {
 	private BigDecimal navAmt;
 
 	/**
-	 * Operation scale.
+	 * Constructor.
+	 *
+	 * @param configuration The SEC configuration
 	 */
-	private int operationScale;
-
-	public ClassLevel30DayDistributionYieldCalculationInput() {
+	public ClassLevel30DayDistributionYieldCalculationInput(SECConfiguration configuration) {
+		super(configuration);
 	}
 
 	public int getDaysInYear() {
@@ -80,11 +84,4 @@ public class ClassLevel30DayDistributionYieldCalculationInput {
 		this.navAmt = navAmt;
 	}
 
-	public int getOperationScale() {
-		return operationScale;
-	}
-
-	public void setOperationScale(int operationScale) {
-		this.operationScale = operationScale;
-	}
 }

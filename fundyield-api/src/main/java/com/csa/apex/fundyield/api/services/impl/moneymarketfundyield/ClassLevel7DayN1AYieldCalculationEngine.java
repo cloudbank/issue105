@@ -67,8 +67,8 @@ public class ClassLevel7DayN1AYieldCalculationEngine implements CalculationEngin
 			// check the config values and if they are provided use them instead
 			// of default ones.
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
 					if (portfolio.getShareClasses() != null) {
 						for (ShareClass shareClass : portfolio.getShareClasses()) {
 							// get share class snapshot for the report date

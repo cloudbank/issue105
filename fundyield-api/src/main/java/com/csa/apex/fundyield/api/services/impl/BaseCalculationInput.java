@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2017 TopCoder, Inc. All rights reserved.
  */
-package com.csa.apex.fundyield.api.services.impl.securitysecyield;
+package com.csa.apex.fundyield.api.services.impl;
 
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 

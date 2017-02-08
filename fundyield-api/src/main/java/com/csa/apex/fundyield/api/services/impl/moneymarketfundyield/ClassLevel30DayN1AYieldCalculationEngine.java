@@ -67,8 +67,8 @@ public class ClassLevel30DayN1AYieldCalculationEngine implements CalculationEngi
 			// check the config values and if they are provided use them instead
 			// of default ones.
 			if (fundAccountingYieldData.getPortfolios() != null) {
+				Date reportDate = fundAccountingYieldData.getReportDate();
 				for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-					Date reportDate = fundAccountingYieldData.getReportDate();
 					if (portfolio.getShareClasses() != null) {
 						for (ShareClass shareClass : portfolio.getShareClasses()) {
 							// get share class snapshot for the report date
@@ -80,7 +80,7 @@ public class ClassLevel30DayN1AYieldCalculationEngine implements CalculationEngi
 							ShareClassSnapshot snapshot = snapshots.stream().filter(predicate).findFirst().get();
 
 							ClassLevel30DayN1AYieldCalculator calculator = new ClassLevel30DayN1AYieldCalculator();
-							ClassLevel30DayN1AYieldCalculationInput input = new ClassLevel30DayN1AYieldCalculationInput();
+							ClassLevel30DayN1AYieldCalculationInput input = new ClassLevel30DayN1AYieldCalculationInput(configuration);
 							input.setDerMnyMkt1DayN1AYieldPct(snapshot.getDerMnyMkt1DayN1AYieldPct());
 							input.setSumOfDer1DayYieldN1AMnyMktPctPrevious29Days(
 									utilityCustomerAPIClient.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(

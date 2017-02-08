@@ -29,9 +29,6 @@ public abstract class BaseCalculationInput {
 	 * @param configuration The SEC configuration
 	 */
 	protected BaseCalculationInput(SECConfiguration configuration) {
-		if (configuration == null)
-			return;
-
 		this.operationScale = configuration.getOperationScale();
 		this.roundingMode = configuration.getRoundingMode();
 	}

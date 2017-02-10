@@ -114,6 +114,56 @@ docs/fundyield-api.postman_collection.json
 
 - In case you want to pre-load some data, in Oracle Developer, connect to `local_secyield` and run `test_data/clear.sql` & `test_data/test_data.sql`.
 
+#### Mybatis Configuration
+- These are the configurations for Mybatis:
+```
+    - faya-dataaccess/src/main/resources/mybatis-config.xml
+    - faya-dataaccess/src/main/resources/mapper/RowMapper.xml
+    - faya-dataaccess/src/main/resources/mapper/StoredProcedures.xml
+```
+##### Java Object to Oracle Table Mapping
+- Exceprt from `faya-dataaccess/src/main/resources/mapper/RowMapper.xml`
+```
+    <resultMap id="instrumentResultMap" type="Instrument">
+        <id property="instrumentSid" column="INSTRUMENT_SID" />
+        <result property="instrumentId" column="INSTRUMENT_ID" />
+        <result property="instrumentShortName" column="INSTRUMENT_SHORT_NM" />
+        <result property="couponRateTypeCode" column="COUPON_RATE_TYPE_CD" />
+        <result property="cusip" column="CUSIP" />
+        <result property="effectiveDate" column="EFFECTIVE_DT" />
+        <result property="expirationDate" column="EXPIRATION_DT" />
+    </resultMap>
+```
+- `type` is the corresponding class
+- `property` is the attribute of the class
+
+##### Stored Procedure Mapping
+- Excerpt from `faya-dataaccess/src/main/resources/mapper/StoredProcedures.xml`
+```
+    <select id="saveTradableEntitySnapshot" parameterType="java.util.Map" statementType="CALLABLE">
+        { call SAVE_TRADABLE_ENTITY_SNAPSHOT
+            (
+                #{entity, mode=IN, jdbcType=STRUCT, jdbcTypeName=TRADABLE_ENTITY_SNAPSHOT_T, typeHandler=com.csa.apex.fundyield.faya.api.service.impl.StructTypeHandler} ,
+                #{updateCalcResult, mode=IN, jdbcType=SMALLINT} ,
+                #{oSid, mode=OUT, jdbcType=INTEGER}
+            )
+        }
+    </select>
+```
+
+- Stored Procedure method signature
+```
+    CREATE OR REPLACE PROCEDURE SAVE_TRADABLE_ENTITY_SNAPSHOT
+    (
+        entity IN TRADABLE_ENTITY_SNAPSHOT_T,
+        updateCalcResult IN SMALLINT,
+        oSid OUT INTEGER
+    )
+```
+- Corresponding method in `com.csa.apex.fundyield.faya.api.service.impl.StoredProcedure`
+```
+    public void saveTradableEntitySnapshot(Map<String,Object> params);
+```
 #### Build all modules
 - When running for the first time ojdbc6.jar needs to be added to local maven repository
 
@@ -262,7 +312,7 @@ Also one can use
 
 - On Tag page ,you can name your server like webserver or dbserver  for future reference
 - On Configure Security Group page, add required inbound ports by clicking AddRule, all below ports(80,8080,1521,22)
-should  be added with 	Source as 0.0.0.0/0 and click Review And Launch
+should  be added with  Source as 0.0.0.0/0 and click Review And Launch
 
 ![](docs/img/security_grp.png )
 

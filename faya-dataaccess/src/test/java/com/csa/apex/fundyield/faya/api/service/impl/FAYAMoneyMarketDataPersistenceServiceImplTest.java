@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.fayacommons.entities.Instrument;
 import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
@@ -57,7 +58,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
     public void getFAYAMoneyMarketFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-20");
-        assertNotNull(fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(businessDate));
+        assertNotNull(fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
 
     /**
@@ -66,7 +67,16 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getFAYAMoneyMarketFundYieldDataInvalid() throws Exception {
-        fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(null);
+        fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getFAYAMoneyMarketFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getFAYAMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(null, new Date());
     }
 
     /**
@@ -108,7 +118,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
         p.getPortfolioSnapshots().add(snapshot);
 
         data.getPortfolios().add(p);
-        fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(data, "100");
+        fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, data);
     }
 
     /**
@@ -128,7 +138,7 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        assertNotNull(fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(businessDate));
+        assertNotNull(fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
 
     /**
@@ -137,6 +147,15 @@ public class FAYAMoneyMarketDataPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedMoneyMarketFundYieldDataInvalid() throws Exception {
-        fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(null);
+        fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedMoneyMarketFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(null, new Date());
     }
 }

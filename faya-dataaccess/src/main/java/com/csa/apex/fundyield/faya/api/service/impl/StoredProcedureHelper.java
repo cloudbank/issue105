@@ -50,11 +50,6 @@ public class StoredProcedureHelper {
     private StoredProcedure storedProcedure;
 
     /**
-     * User id. Hard coded as currently there is no user context.
-     */
-    private static final String USER_ID = "CALCULATOR";
-
-    /**
      * Struct mapper for Instrument.
      */
     private static final StructMapper<Instrument> INSTRUMENT_MAPPER = createStructMapper(Instrument.class);
@@ -143,21 +138,22 @@ public class StoredProcedureHelper {
 
     /**
      * Persist portfolio data.
+     * @param userId The user id
      * @param portfolio The portfolio data to be persisted
      * @throws PersistenceException in case any error occurred during persisting
      */
-    private void persistPortfolio(Portfolio portfolio) throws PersistenceException {
+    private void persistPortfolio(String userId, Portfolio portfolio) throws PersistenceException {
 
         try {
             if (portfolio.getPortfolioSnapshots() != null) {
                 portfolio.getPortfolioSnapshots().forEach(snapshot -> {
-                    snapshot.setCreateId(USER_ID);
+                    snapshot.setCreateId(userId);
                     savePortfolioSnapshot(snapshot, true);
                 });
             }
             if (portfolio.getPortfolioHoldings() != null) {
                 portfolio.getPortfolioHoldings().forEach(snapshot -> {
-                    snapshot.setCreateId(USER_ID);
+                    snapshot.setCreateId(userId);
                     savePortfolioHoldingSnapshot(snapshot, true);
                 });
             }
@@ -165,7 +161,7 @@ public class StoredProcedureHelper {
                 portfolio.getShareClasses().forEach(sc -> {
                     if (sc.getShareClassSnapshots() != null) {
                         sc.getShareClassSnapshots().forEach(snapshot -> {
-                            snapshot.setCreateId(USER_ID);
+                            snapshot.setCreateId(userId);
                             saveShareClassSnapshot(snapshot, true);
                         });
                     }
@@ -178,30 +174,32 @@ public class StoredProcedureHelper {
 
     /**
      * Persist portfolio data.
+     * @param userId The user id
      * @param fundAccountingYieldData The FAYA data to be persisted
      * @throws PersistenceException in case any error occurred during persisting
      */
-    public void saveFAYAPortfolioData(FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
+    public void saveFAYAPortfolioData(String userId, FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
         if (fundAccountingYieldData.getPortfolios() != null) {
             for (Portfolio portfolio : fundAccountingYieldData.getPortfolios()) {
-                persistPortfolio(portfolio);
+                persistPortfolio(userId, portfolio);
             }
         }
     }
 
     /**
      * Persist instrument data.
+     * @param userId The user id
      * @param instrument The instrument data to be persisted
      * @throws PersistenceException in case any error occurred during persisting
      */
-    private void persistInstrument(Instrument instrument) throws PersistenceException {
+    private void persistInstrument(String userId, Instrument instrument) throws PersistenceException {
 
         try {
             if (instrument.getTradableEntities() != null) {
                 instrument.getTradableEntities().forEach(te -> {
                     if (te.getTradableEntitySnapshots() != null) {
                         te.getTradableEntitySnapshots().forEach(snapshot -> {
-                            snapshot.setCreateId(USER_ID);
+                            snapshot.setCreateId(userId);
                             saveTradableEntitySnapshot(snapshot, true);
                         });
                     }
@@ -215,13 +213,14 @@ public class StoredProcedureHelper {
 
     /**
      * Persist instrument data.
+     * @param userId The user id
      * @param fundAccountingYieldData The FAYA data to be persisted
      * @throws PersistenceException in case any error occurred during persisting
      */
-    public void saveFAYAInstrumentData(FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
+    public void saveFAYAInstrumentData(String userId, FundAccountingYieldData fundAccountingYieldData) throws PersistenceException {
         if (fundAccountingYieldData.getInstruments() != null) {
             for (Instrument instrument : fundAccountingYieldData.getInstruments()) {
-                persistInstrument(instrument);
+                persistInstrument(userId, instrument);
             }
         }
     }

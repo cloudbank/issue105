@@ -49,6 +49,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Gets the average of MM 1 Day Dist Yield Pct for previous days.
+     * @param userId The user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -58,9 +59,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @Override
     @LogMethod
-    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
+    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(String userId, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(userId, shareClassSid, reportDate, numOfDays);
         try {
             storedProcedure.avgMM1(params);
         } catch(Exception e) {
@@ -71,6 +72,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Gets the sum of Der 1 Day Yield N1A MM Pct for previous days.
+     * @param userId The user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -80,9 +82,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
+    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(String userId, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(userId, shareClassSid, reportDate, numOfDays);
         try {
             storedProcedure.sumD1(params);
         } catch(Exception e) {
@@ -93,6 +95,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Gets the sum of Der Restate 1 Day Yield MM Pct for previous days.
+     * @param userId The user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -102,9 +105,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(long shareClassSid, Date reportDate,
+    public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(String userId, long shareClassSid, Date reportDate,
             int numOfDays) throws FundAccountingYieldException {
-        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(userId, shareClassSid, reportDate, numOfDays);
         try {
             storedProcedure.sumDR1(params);
         } catch(Exception e) {
@@ -115,6 +118,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Gets the avg of MM 7 DayYield Pct for previous days.
+     * @param userId the user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -124,9 +128,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @Override
     @LogMethod
-    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
+    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(String userId, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(userId, shareClassSid, reportDate, numOfDays);
         try {
             storedProcedure.avgMM7(params);
         } catch(Exception e) {
@@ -137,6 +141,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Gets sum of Der 7 Day Yield N1A MM Pct for previous days.
+     * @param userId The user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -146,9 +151,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(long shareClassSid, Date reportDate, int numOfDays)
+    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(String userId, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
-        Map<String,Object> params = buildParameters(shareClassSid, reportDate, numOfDays);
+        Map<String,Object> params = buildParameters(userId, shareClassSid, reportDate, numOfDays);
         try {
             storedProcedure.sumD7(params);
         } catch(Exception e) {
@@ -159,6 +164,7 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
 
     /**
      * Build parameters to Map.
+     * @param userId teh user id;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -166,8 +172,9 @@ public class UtilityFAYAAPIPersistenceServiceImpl implements UtilityFAYAAPIPersi
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    private Map<String,Object> buildParameters(long shareClassSid, Date reportDate, int numOfDays)
+    private Map<String,Object> buildParameters(String userId, long shareClassSid, Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.USER_ID);
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "callStoredProcedure", Constants.NUM_OF_DAYS);

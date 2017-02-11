@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 
 /**
  * Test class for the UtilityFAYAAPIPersistenceServiceImpl.
@@ -55,7 +56,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 41;
         assertEquals(expected,
-                utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(shareClassSid, reportDate, numOfDays));
+                utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, shareClassSid, reportDate, numOfDays));
     }
 
     /**
@@ -64,7 +65,16 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysInvalid() throws Exception {
-        utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(-1, null, 1);
+        utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, -1, null, 1);
+    }
+    
+    /**
+     * Test for method getAvgOfMnyMkt1DayDistYieldPctForPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysInvaliduserId() throws Exception {
+        utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -79,7 +89,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 68;
         assertEquals(expected,
-                utilityFAYAAPIPersistenceService.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate, numOfDays));
+                utilityFAYAAPIPersistenceService.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, shareClassSid, reportDate, numOfDays));
     }
 
     /**
@@ -89,7 +99,17 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
-        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(1, null, -1);
+        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, 1, null, -1);
+    }
+    
+    /**
+     * Test for method getSumOfDer1DayYieldN1AMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
+        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -104,7 +124,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 47;
         assertEquals(expected,
-                utilityFAYAAPIPersistenceService.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(shareClassSid, reportDate, numOfDays));
+                utilityFAYAAPIPersistenceService.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, shareClassSid, reportDate, numOfDays));
     }
 
     /**
@@ -114,7 +134,17 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
-        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(-1, new Date(), 1);
+        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, -1, new Date(), 1);
+    }
+    
+    /**
+     * Test for method getSumOfDerRestate1DayYieldMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
+        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -129,7 +159,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 100;
         assertEquals(expected,
-                utilityFAYAAPIPersistenceService.getAvgOfMnyMkt7DayYieldPctForPreviousDays(shareClassSid, reportDate, numOfDays));
+                utilityFAYAAPIPersistenceService.getAvgOfMnyMkt7DayYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, shareClassSid, reportDate, numOfDays));
     }
 
     /**
@@ -139,7 +169,17 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void getAvgOfMnyMkt7DayYieldPctForPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
-        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(1, new Date(), -1);
+        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, 1, new Date(), -1);
+    }
+    
+    /**
+     * Test for method getAvgOfMnyMkt7DayYieldPctForPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getAvgOfMnyMkt7DayYieldPctForPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
+        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -154,7 +194,7 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
         Date reportDate = f.parse("2016-12-10");
         int numOfDays = 99;
         assertEquals(expected,
-                utilityFAYAAPIPersistenceService.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate, numOfDays));
+                utilityFAYAAPIPersistenceService.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, shareClassSid, reportDate, numOfDays));
     }
 
     /**
@@ -164,6 +204,16 @@ public class UtilityFAYAAPIPersistenceServiceImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
-        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(-1, new Date(), 1);
+        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, -1, new Date(), 1);
+    }
+    
+    /**
+     * Test for method getSumOfDer7DayYieldN1AMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIPersistenceServiceImpl instance = new UtilityFAYAAPIPersistenceServiceImpl();
+        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 }

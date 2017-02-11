@@ -23,6 +23,7 @@ public interface SecuritySECYieldService {
 	 * Process SEC Security data for the business data. This method gets the securities and then process each security
 	 * first to calculate the data, then to persist it using API.
 	 *
+	 * @param userId The user id;
 	 * @param businessDate
 	 *            the business date;
 	 * @return securitySECData with calculated result
@@ -32,12 +33,13 @@ public interface SecuritySECYieldService {
 	 * @throws FundAccountingYieldException
 	 *             any error during processing
 	 */
-	public FundAccountingYieldData processSecuritySECData(Date businessDate)
+	public FundAccountingYieldData processSecuritySECData(String userId, Date businessDate)
 			throws FundAccountingYieldException;
 
 	/**
 	 * Gets already calculated SEC Security data for the given date.
 	 *
+	 * @param userId The user id
 	 * @param businessDate
 	 *            the business date
 	 * @return already calculated securitySECData
@@ -47,12 +49,13 @@ public interface SecuritySECYieldService {
 	 * @throws FundAccountingYieldException
 	 *             any error during processing
 	 */
-	public FundAccountingYieldData getCalculatedSecuritySECData(Date businessDate)
+	public FundAccountingYieldData getCalculatedSecuritySECData(String userId, Date businessDate)
 			throws FundAccountingYieldException;
 
 	/**
 	 * Exports SEC Security data in CSV format in an archive.
 	 *
+	 * @param userId The user id
 	 * @param businessDate
 	 *            the business date
 	 * @param response
@@ -62,6 +65,6 @@ public interface SecuritySECYieldService {
 	 * @throws FundAccountingYieldException
 	 *             any error during processing
 	 */
-	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
+	public void exportCalculatedSecuritySECData(String userId, Date businessDate, HttpServletResponse response)
 			throws FundAccountingYieldException;
 }

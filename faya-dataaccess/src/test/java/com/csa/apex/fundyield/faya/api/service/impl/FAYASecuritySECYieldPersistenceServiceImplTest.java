@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 
 /**
@@ -50,7 +51,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
     @Test
     public void getFAYASECDataTestSuccess() throws Exception {
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
         assertEquals(12, data.getInstruments().size());
         assertEquals(13, data.getPortfolios().size());
 
@@ -76,7 +77,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
     @Test
     public void getFAYASECDataTestNoData() throws Exception {
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getFAYASECData(DateTime.parse("2000-12-01").toDate());
+                .getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2000-12-01").toDate());
         assertEquals(data.getInstruments().size(), 0);
         assertEquals(data.getPortfolios().size(), 0);
     }
@@ -87,7 +88,16 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getFAYASECDataTestNullDate() throws Exception {
-        fayaSecuritySECYieldPersistenceService.getFAYASECData(null);
+        fayaSecuritySECYieldPersistenceService.getFAYASECData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test getFAYASECData throws IllegalArgumentException in case the provided user id is null.
+     * @throws Exception if any exception occurs
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getFAYASECDataTestNullUserId() throws Exception {
+        fayaSecuritySECYieldPersistenceService.getFAYASECData(null, new Date());
     }
 
     /**
@@ -98,7 +108,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
     public void persistSecuritySECDataTestSuccess() throws Exception {
 
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
 
         BigDecimal yield = new BigDecimal(23.55);
         BigDecimal income = new BigDecimal(0.532);
@@ -127,9 +137,9 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
         });
 
         // Persist
-        fayaSecuritySECYieldPersistenceService.persistSecuritySECData(data);
+        fayaSecuritySECYieldPersistenceService.persistSecuritySECData(TestUtility.DEFAULT_USER_ID, data);
 
-        data = fayaSecuritySECYieldPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
+        data = fayaSecuritySECYieldPersistenceService.getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
 
         assertEquals(yield.setScale(2, BigDecimal.ROUND_HALF_DOWN),
                 data.getInstruments().get(0).getTradableEntities().get(0).getTradableEntitySnapshots().get(0)
@@ -153,7 +163,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void persistSecuritySECDataTestNullInput() throws Exception {
-        fayaSecuritySECYieldPersistenceService.persistSecuritySECData(null);
+        fayaSecuritySECYieldPersistenceService.persistSecuritySECData(null, null);
     }
 
     /**
@@ -163,7 +173,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
     @Test
     public void getCalculatedSECDataTestSuccess() throws Exception {
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getCalculatedSECData(DateTime.parse("2014-12-01").toDate());
+                .getCalculatedSECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
         assertEquals(12, data.getInstruments().size());
         assertEquals(13, data.getPortfolios().size());
 
@@ -182,7 +192,7 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
     @Test
     public void getCalculatedSECDataTestNoData() throws Exception {
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getCalculatedSECData(DateTime.parse("2000-12-01").toDate());
+                .getCalculatedSECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2000-12-01").toDate());
         assertEquals(data.getInstruments().size(), 0);
         assertEquals(data.getPortfolios().size(), 0);
     }
@@ -193,6 +203,15 @@ public class FAYASecuritySECYieldPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedSECDataTestNullDate() throws Exception {
-        fayaSecuritySECYieldPersistenceService.getCalculatedSECData(null);
+        fayaSecuritySECYieldPersistenceService.getCalculatedSECData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test getCalculatedSECData throws IllegalArgumentException in case the provided user id is null.
+     * @throws Exception if any exception occurs
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedSECDataTestNullUserId() throws Exception {
+        fayaSecuritySECYieldPersistenceService.getCalculatedSECData(null, new Date());
     }
 }

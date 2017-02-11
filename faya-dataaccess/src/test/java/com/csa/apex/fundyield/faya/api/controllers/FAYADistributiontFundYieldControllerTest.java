@@ -7,10 +7,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
 * Test class for the FAYADistributiontFundYieldController.
@@ -81,7 +83,17 @@ public class FAYADistributiontFundYieldControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getFAYADistributionFundYieldDataInvalid() throws Exception {
         FAYADistributiontFundYieldController instance = new FAYADistributiontFundYieldController();
-        instance.getFAYADistributionFundYieldData(null);
+        instance.getFAYADistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    /**
+     * Test for method getFAYADistributionFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getFAYADistributionFundYieldDataInvalidUserId() throws Exception {
+        FAYADistributiontFundYieldController instance = new FAYADistributiontFundYieldController();
+        instance.getFAYADistributionFundYieldData(null, new Date());
     }
     /**
      * Test for method persistDistributionFundYieldData.
@@ -91,7 +103,7 @@ public class FAYADistributiontFundYieldControllerTest {
     @Test
     public void persistDistributionFundYieldData() throws Exception {
     	Map<String, Object> sessionAttrs = new HashMap<String, Object>();
-    	sessionAttrs.put(Constants.CURRENT_USER_ID, "123");
+    	sessionAttrs.put(Constants.USER_ID, "123");
     	this.mockMvc.perform(put("/calculatedDistributionFundYieldPortfolio").param(Constants.BUSINESS_DATE, "2016-05-02").sessionAttrs(sessionAttrs))
 		.andExpect(status().is(400));
     }
@@ -123,6 +135,16 @@ public class FAYADistributiontFundYieldControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedDistributionFundYieldDataInvalid() throws Exception {
         FAYADistributiontFundYieldController instance = new FAYADistributiontFundYieldController();
-        instance.getCalculatedDistributionFundYieldData(null);
+        instance.getCalculatedDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    /**
+     * Test for method getCalculatedDistributionFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedDistributionFundYieldDataInvalidUserId() throws Exception {
+        FAYADistributiontFundYieldController instance = new FAYADistributiontFundYieldController();
+        instance.getCalculatedDistributionFundYieldData(null, new Date());
     }
 }

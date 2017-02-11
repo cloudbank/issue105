@@ -5,7 +5,6 @@ package com.csa.apex.fundyield.faya.api.controllers;
 
 import javax.annotation.PostConstruct;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -13,6 +12,7 @@ import com.csa.apex.fundyield.exceptions.ConfigurationException;
 import com.csa.apex.fundyield.faya.api.FAYAConfigurationService;
 import com.csa.apex.fundyield.fayacommons.entities.SECConfiguration;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 
@@ -53,11 +53,13 @@ public class FAYAConfigurationController implements FAYAConfigurationService {
     /**
      * Gets SEC security config for the calculations in engines.
      * 
+     * @param userId The user id passed in header. 
      * @return the SEC security configuration
      */
     @Override
     @LogMethod
-    public SECConfiguration getConfiguration() {
+    public SECConfiguration getConfiguration(String userId) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getConfiguration", Constants.USER_ID);
         return secConfiguration;
     }
 }

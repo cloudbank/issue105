@@ -19,4 +19,8 @@ public class TestUtility {
      */
     public static final String APPLICATION_JSON_CONTENT_TYPE = "application/json";
 
+    /**
+     * User Id for tests
+     */
+    public static final String DEFAULT_USER_ID = "U53R1D";
 }

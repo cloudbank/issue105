@@ -1,5 +1,6 @@
 package com.csa.apex.fundyield.api.services.impl;
 
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,9 @@ import javax.annotation.Resource;
 import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -81,6 +84,7 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
     /**
      * Process Money Market Fund data for the business date. This method gets the fund yield data and then process it by
      * each engine and finally persists data using API.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -88,14 +92,20 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData processMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData processMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(),  "processMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "processMoneyMarketFundYieldData", Constants.USER_ID);
+    	CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(),  "processMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getFAYAMoneyMarketFundDataApiPath)
-                    .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
-            FundAccountingYieldData fundAccountingYieldData = getRestTemplate()
-                    .getForObject(builder.build().encode().toUri(), FundAccountingYieldData.class);
+        	HttpHeaders headers = new HttpHeaders();
+			headers.set(Constants.USER_ID, userId);
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getFAYAMoneyMarketFundDataApiPath)
+					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
+			URI uri = builder.build().encode().toUri();
+			ResponseEntity<FundAccountingYieldData> responseEntity = getRestTemplate().exchange(uri, HttpMethod.GET,
+					new HttpEntity<>(headers), FundAccountingYieldData.class);
+			FundAccountingYieldData fundAccountingYieldData = responseEntity.getBody();
+        	
             for (CalculationEngine calcEngine : calculatorEngines) {
                 calcEngine.calculate(fundAccountingYieldData, getSECConfiguration());
             }
@@ -112,6 +122,7 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
 
     /**
      * Gets already calculated Distribution Fund Yield data for the given date.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -119,13 +130,19 @@ public class MoneyMarketFundYieldServiceImpl extends BaseServiceImpl implements 
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldDatas", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedMoneyMarketFundDataApiPath)
-                    .queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
-            return getRestTemplate().getForObject(builder.build().encode().toUri(), FundAccountingYieldData.class);
+        	HttpHeaders headers = new HttpHeaders();
+			headers.set(Constants.USER_ID, userId);
+			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedMoneyMarketFundDataApiPath)
+					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
+			URI uri = builder.build().encode().toUri();
+			ResponseEntity<FundAccountingYieldData> responseEntity = getRestTemplate().exchange(uri, HttpMethod.GET,
+					new HttpEntity<>(headers), FundAccountingYieldData.class);
+			return responseEntity.getBody();
         } catch (Exception e) {
             throw new FundAccountingYieldException(e.getMessage());
         }

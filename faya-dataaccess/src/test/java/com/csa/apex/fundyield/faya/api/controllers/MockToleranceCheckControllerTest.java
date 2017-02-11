@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.ToleranceCheckService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 
 /**
  * Test class for the MockToleranceCheckController.
@@ -80,7 +81,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void initiateSECFundLevelBatchToleranceCheckInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.initiateSECFundLevelBatchToleranceCheck(null);
+        instance.initiateSECFundLevelBatchToleranceCheck(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method initiateSECFundLevelBatchToleranceCheck with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void initiateSECFundLevelBatchToleranceCheckInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.initiateSECFundLevelBatchToleranceCheck(null, new Date());
     }
 
     /**
@@ -100,7 +111,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void initiateMoneyMarketFundLevelBatchToleranceCheckInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.initiateMoneyMarketFundLevelBatchToleranceCheck(null);
+        instance.initiateMoneyMarketFundLevelBatchToleranceCheck(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method initiateMoneyMarketFundLevelBatchToleranceCheck with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void initiateMoneyMarketFundLevelBatchToleranceCheckInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.initiateMoneyMarketFundLevelBatchToleranceCheck(null, new Date());
     }
 
     /**
@@ -120,7 +141,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void initiateSecurityLevelBatchToleranceCheckInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.initiateSecurityLevelBatchToleranceCheck(null);
+        instance.initiateSecurityLevelBatchToleranceCheck(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method initiateSecurityLevelBatchToleranceCheck with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void initiateSecurityLevelBatchToleranceCheckInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.initiateSecurityLevelBatchToleranceCheck(null, new Date());
     }
 
     /**
@@ -140,7 +171,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getDistributionFundLevelBatchToleranceCheckResultInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.getDistributionFundLevelBatchToleranceCheckResult(null);
+        instance.getDistributionFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getDistributionFundLevelBatchToleranceCheckResult with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getDistributionFundLevelBatchToleranceCheckResultInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.getDistributionFundLevelBatchToleranceCheckResult(null, new Date());
     }
 
     /**
@@ -161,7 +202,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void initiateDistributionFundLevelBatchToleranceCheckInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.initiateDistributionFundLevelBatchToleranceCheck(null);
+        instance.initiateDistributionFundLevelBatchToleranceCheck(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method initiateDistributionFundLevelBatchToleranceCheck with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void initiateDistributionFundLevelBatchToleranceCheckInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.initiateDistributionFundLevelBatchToleranceCheck(null, new Date());
     }
 
     /**
@@ -182,7 +233,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSECFundLevelBatchToleranceCheckResultInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.getSECFundLevelBatchToleranceCheckResult(null);
+        instance.getSECFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getSECFundLevelBatchToleranceCheckResult with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSECFundLevelBatchToleranceCheckResultInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.getSECFundLevelBatchToleranceCheckResult(null, new Date());
     }
 
     /**
@@ -203,7 +264,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getMoneyMarketFundLevelBatchToleranceCheckResultInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.getMoneyMarketFundLevelBatchToleranceCheckResult(null);
+        instance.getMoneyMarketFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getMoneyMarketFundLevelBatchToleranceCheckResult with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getMoneyMarketFundLevelBatchToleranceCheckResultInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.getMoneyMarketFundLevelBatchToleranceCheckResult(null, new Date());
     }
 
     /**
@@ -224,7 +295,17 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSecurityLevelBatchToleranceCheckResultInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.getSecurityLevelBatchToleranceCheckResult(null);
+        instance.getSecurityLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getSecurityLevelBatchToleranceCheckResult with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSecurityLevelBatchToleranceCheckResultInvalidUserId() throws Exception {
+        MockToleranceCheckController instance = new MockToleranceCheckController();
+        instance.getSecurityLevelBatchToleranceCheckResult(null, new Date());
     }
 
     /**
@@ -246,7 +327,7 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void initiateSecurityLevelWhatIfToleranceCheckInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.initiateSecurityLevelWhatIfToleranceCheck(null, null);
+        instance.initiateSecurityLevelWhatIfToleranceCheck(null, null, null);
     }
 
     /**
@@ -255,10 +336,11 @@ public class MockToleranceCheckControllerTest {
      */
     @Test
     public void getSecurityLevelWhatIfToleranceCheckResult1() throws Exception {
-        this.mockMvc.perform(
-                get("/securityLevelWhatIfToleranceCheck").param(Constants.REPORT_DATE, "2016-05-02").param(Constants.CUSIP, "123"))
-                .andExpect(status().is(200));
-
+		this.mockMvc
+				.perform(
+						get("/securityLevelWhatIfToleranceCheck").param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+								.param(Constants.REPORT_DATE, "2016-05-02").param(Constants.CUSIP, "123"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -268,7 +350,7 @@ public class MockToleranceCheckControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSecurityLevelWhatIfToleranceCheckResultInvalid() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
-        instance.getSecurityLevelWhatIfToleranceCheckResult(null, null);
+        instance.getSecurityLevelWhatIfToleranceCheckResult(null, null, null);
     }
 
     /**
@@ -279,7 +361,7 @@ public class MockToleranceCheckControllerTest {
     public void getDistributionFundLevelBatchToleranceCheckResult() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
         Date reportDate = new Date();
-        assertNotNull(instance.getDistributionFundLevelBatchToleranceCheckResult(reportDate));
+        assertNotNull(instance.getDistributionFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, reportDate));
     }
 
     /**
@@ -290,7 +372,7 @@ public class MockToleranceCheckControllerTest {
     public void getSECFundLevelBatchToleranceCheckResult() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
         Date reportDate = new Date();
-        assertNotNull(instance.getSECFundLevelBatchToleranceCheckResult(reportDate));
+        assertNotNull(instance.getSECFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, reportDate));
     }
 
     /**
@@ -301,7 +383,7 @@ public class MockToleranceCheckControllerTest {
     public void getMoneyMarketFundLevelBatchToleranceCheckResult() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
         Date reportDate = new Date();
-        assertNotNull(instance.getMoneyMarketFundLevelBatchToleranceCheckResult(reportDate));
+        assertNotNull(instance.getMoneyMarketFundLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, reportDate));
     }
 
     /**
@@ -312,7 +394,7 @@ public class MockToleranceCheckControllerTest {
     public void getSecurityLevelBatchToleranceCheckResult() throws Exception {
         MockToleranceCheckController instance = new MockToleranceCheckController();
         Date reportDate = new Date();
-        assertNotNull(instance.getSecurityLevelBatchToleranceCheckResult(reportDate));
+        assertNotNull(instance.getSecurityLevelBatchToleranceCheckResult(TestUtility.DEFAULT_USER_ID, reportDate));
     }
 
     /**
@@ -324,7 +406,7 @@ public class MockToleranceCheckControllerTest {
         MockToleranceCheckController instance = new MockToleranceCheckController();
         Date reportDate = new Date();
         String cusip = "test4";
-        assertNotNull(instance.getSecurityLevelWhatIfToleranceCheckResult(reportDate, cusip));
+        assertNotNull(instance.getSecurityLevelWhatIfToleranceCheckResult(TestUtility.DEFAULT_USER_ID, reportDate, cusip));
     }
 
 }

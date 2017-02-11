@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.csa.apex.fundyield.utility.Constants;
+import com.csa.apex.fundyield.utility.TestUtility;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,13 +81,15 @@ public class DistributionFundYieldServiceImplTest {
 		when(builder.build()).thenReturn(c);
 		when(c.encode()).thenReturn(c);
 		when(c.toUri()).thenReturn(uri);
-		when(restTemplate.getForObject(any(URI.class), eq(FundAccountingYieldData.class))).thenReturn(data);
+		when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(FundAccountingYieldData.class)))
+				.thenReturn(new ResponseEntity<FundAccountingYieldData>(data, new HttpHeaders(), HttpStatus.CREATED));
 		when(restTemplate.exchange(any(String.class), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Boolean.class)))
 				.thenReturn(new ResponseEntity<Boolean>(true, new HttpHeaders(), HttpStatus.CREATED));
 
 		distributionFundYieldServiceImpl.setRestTemplate(restTemplate);
 	}
-    /**
+    
+	/**
      * Test for method processDistributionFundYieldData.
      *
      * @throws Exception to JUnit
@@ -94,8 +98,9 @@ public class DistributionFundYieldServiceImplTest {
     public void processDistributionFundYieldData() throws Exception {
 		DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-		assertNotNull(distributionFundYieldServiceImpl.processDistributionFundYieldData(businessDate));
+		assertNotNull(distributionFundYieldServiceImpl.processDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
+    
     /**
      * Test for method processDistributionFundYieldData with invalid data.
      *
@@ -103,7 +108,17 @@ public class DistributionFundYieldServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void processDistributionFundYieldDataInvalid() throws Exception {
-        distributionFundYieldServiceImpl.processDistributionFundYieldData(null);
+        distributionFundYieldServiceImpl.processDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method processDistributionFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void processDistributionFundYieldDataInvalidUserId() throws Exception {
+        distributionFundYieldServiceImpl.processDistributionFundYieldData(null, new Date());
     }
     
     /**
@@ -115,8 +130,9 @@ public class DistributionFundYieldServiceImplTest {
     public void getCalculatedDistributionFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        assertNotNull(distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(businessDate));
+        assertNotNull(distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
+    
     /**
      * Test for method getCalculatedDistributionFundYieldData with invalid data.
      *
@@ -124,7 +140,17 @@ public class DistributionFundYieldServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedDistributionFundYieldDataInvalid() throws Exception {
-    	distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(null);
+    	distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedDistributionFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedDistributionFundYieldDataInvalidUserId() throws Exception {
+    	distributionFundYieldServiceImpl.getCalculatedDistributionFundYieldData(null, new Date());
     }
   
 }

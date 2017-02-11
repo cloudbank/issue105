@@ -86,8 +86,8 @@ public class SecuritySECYieldControllerTest {
 	@Before
 	public void setUp() throws FundAccountingYieldException, ParseException {
 		MockitoAnnotations.initMocks(this);
-		when(secYieldServiceImpl.processSecuritySECData(any(Date.class))).thenReturn(utility.constructFAYAData());
-		when(secYieldServiceImpl.getCalculatedSecuritySECData(any(Date.class)))
+		when(secYieldServiceImpl.processSecuritySECData(any(String.class), any(Date.class))).thenReturn(utility.constructFAYAData());
+		when(secYieldServiceImpl.getCalculatedSecuritySECData(any(String.class), any(Date.class)))
 				.thenReturn(utility.constructFAYAData());
 		this.mockMvc = MockMvcBuilders.standaloneSetup(seyYieldController).build();
 	}
@@ -100,7 +100,8 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void getSecuritySECDataTest() throws Exception {
-		mockMvc.perform(get("/fundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02")).andExpect(status().isOk())
+		mockMvc.perform(get("/fundAccountingSECYieldData").header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+				.param(Constants.BUSINESS_DATE, "2016-05-02")).andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_CONTENT_TYPE));
 	}
 
@@ -112,7 +113,8 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void getCalculatedSecuritySECDataTest() throws Exception {
-		mockMvc.perform(get("/calculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
+		mockMvc.perform(get("/calculatedFundAccountingSECYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.BUSINESS_DATE, "2016-05-02"))
 				.andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON_CONTENT_TYPE));
 	}
 
@@ -124,7 +126,8 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void exportCalculatedSecuritySECDataSuccessTest() throws Exception {
-		mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
+		mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.BUSINESS_DATE, "2016-05-02"))
 				.andExpect(status().isOk());
 	}
 
@@ -136,7 +139,8 @@ public class SecuritySECYieldControllerTest {
 	 */
 	@Test
 	public void exportCalculatedSecuritySECDataInvalidTest() throws Exception {
-		this.mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "invalid"))
+		this.mockMvc.perform(get("/exportCalculatedFundAccountingSECYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.BUSINESS_DATE, "invalid"))
 				.andExpect(status().is(400));
 	}
 }

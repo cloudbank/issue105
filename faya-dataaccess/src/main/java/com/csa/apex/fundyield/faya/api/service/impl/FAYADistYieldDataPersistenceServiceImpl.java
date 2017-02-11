@@ -56,6 +56,7 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
 
     /**
      * Gets Distribution Fund data for the business date.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws FundAccountingYieldException
@@ -64,13 +65,16 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getFAYADistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData getFAYADistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
-        return retrieveFundAccountingYieldData(businessDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getFAYADistributionFundYieldData", Constants.USER_ID);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYADistributionFundYieldData", Constants.BUSINESS_DATE);
+        return retrieveFundAccountingYieldData(userId, businessDate);
     }
 
     /**
      * Persists the calculated Distribution Fund Yield data.
+     * @param userId The user id.
      * @param fundAccountingYieldData FundAccountingYieldData.
      * @return the result of the execution.
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -79,15 +83,17 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
     @Override
     @LogMethod
     @Transactional
-    public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId)
+    public boolean persistDistributionFundYieldData(String userId, FundAccountingYieldData fundAccountingYieldData)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
-        storedProcedureHelper.saveFAYAPortfolioData(fundAccountingYieldData);
+        storedProcedureHelper.saveFAYAPortfolioData(userId, fundAccountingYieldData);
         return true;
     }
 
     /**
      * Gets already calculated Distribution Fund Yield data for the given date.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -95,21 +101,25 @@ public class FAYADistYieldDataPersistenceServiceImpl implements FAYADistYieldDat
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedDistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
-        return retrieveFundAccountingYieldData(businessDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.USER_ID);
+        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
+        return retrieveFundAccountingYieldData(userId, businessDate);
     }
 
     /**
      * Gets FundAccountingYieldData from persistence.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    private FundAccountingYieldData retrieveFundAccountingYieldData(Date businessDate)
+    private FundAccountingYieldData retrieveFundAccountingYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "retrieveFundAccountingYieldData", Constants.BUSINESS_DATE);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "retrieveFundAccountingYieldData", Constants.USER_ID);
         try {
             Map<String,Object> param1 = new HashMap<String,Object>(){{ put("business_date", businessDate); }};
             storedProcedure.queryDYPortfolio(param1);

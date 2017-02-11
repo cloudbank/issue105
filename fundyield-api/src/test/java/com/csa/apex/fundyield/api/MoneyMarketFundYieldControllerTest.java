@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.csa.apex.fundyield.utility.Constants;
+import com.csa.apex.fundyield.utility.TestUtility;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +52,7 @@ public class MoneyMarketFundYieldControllerTest {
 	 * MoneyMarketFundYieldController to be tested.
 	 */
 	MoneyMarketFundYieldController moneyMarketFundYieldController;
+
 	/**
 	 * Mock Setup.
 	 * 
@@ -76,7 +79,8 @@ public class MoneyMarketFundYieldControllerTest {
 		when(builder.build()).thenReturn(c);
 		when(c.encode()).thenReturn(c);
 		when(c.toUri()).thenReturn(uri);
-		when(restTemplate.getForObject(any(URI.class), eq(FundAccountingYieldData.class))).thenReturn(data);
+		when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(FundAccountingYieldData.class)))
+				.thenReturn(new ResponseEntity<FundAccountingYieldData>(data, new HttpHeaders(), HttpStatus.CREATED));
 		when(restTemplate.exchange(any(String.class), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Boolean.class)))
 				.thenReturn(new ResponseEntity<Boolean>(true, new HttpHeaders(), HttpStatus.CREATED));
 
@@ -95,8 +99,9 @@ public class MoneyMarketFundYieldControllerTest {
     public void getMoneyMarketFundYieldData() throws Exception {
     	DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        moneyMarketFundYieldController.getMoneyMarketFundYieldData(businessDate);
+        moneyMarketFundYieldController.getMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate);
     }
+    
     /**
      * Test for method getMoneyMarketFundYieldData with invalid data.
      *
@@ -104,8 +109,19 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getMoneyMarketFundYieldDataInvalid() throws Exception {
-        moneyMarketFundYieldController.getMoneyMarketFundYieldData(null);
+        moneyMarketFundYieldController.getMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
     }
+    
+    /**
+     * Test for method getMoneyMarketFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        moneyMarketFundYieldController.getMoneyMarketFundYieldData(null, new Date());
+    }
+    
     /**
      * Test for method getCalculatedMoneyMarketFundYieldData.
      *
@@ -115,8 +131,9 @@ public class MoneyMarketFundYieldControllerTest {
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
     	DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(businessDate);
+        moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate);
     }
+    
     /**
      * Test for method getCalculatedMoneyMarketFundYieldData with invalid data.
      *
@@ -124,6 +141,16 @@ public class MoneyMarketFundYieldControllerTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedMoneyMarketFundYieldDataInvalid() throws Exception {
-        moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(null);
+        moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedMoneyMarketFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        moneyMarketFundYieldController.getCalculatedMoneyMarketFundYieldData(null, new Date());
     }
 }

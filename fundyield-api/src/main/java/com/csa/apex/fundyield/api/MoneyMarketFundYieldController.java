@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,6 +56,7 @@ public class MoneyMarketFundYieldController {
     /**
      * Gets Money Market data for the business date. In service data is obtained from customer REST API, calculated and
      * then persisted using customer REST API. using API.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -63,15 +65,17 @@ public class MoneyMarketFundYieldController {
     @RequestMapping(value = "moneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getMoneyMarketFundYieldData(
+    public FundAccountingYieldData getMoneyMarketFundYieldData(@RequestHeader("userId") String userId, 
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getMoneyMarketFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
-        return moneyMarketFundYieldService.processMoneyMarketFundYieldData(businessDate);
+        return moneyMarketFundYieldService.processMoneyMarketFundYieldData(userId, businessDate);
     }
 
     /**
      * Gets already calculated Money Market Fund Yield data for the given date.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -80,11 +84,12 @@ public class MoneyMarketFundYieldController {
     @RequestMapping(value = "calculatedMoneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(
+    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(@RequestHeader("userId") String userId, 
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
-        return moneyMarketFundYieldService.getCalculatedMoneyMarketFundYieldData(businessDate);
+        return moneyMarketFundYieldService.getCalculatedMoneyMarketFundYieldData(userId, businessDate);
     }
 
     public MoneyMarketFundYieldService getMoneyMarketFundYieldService() {

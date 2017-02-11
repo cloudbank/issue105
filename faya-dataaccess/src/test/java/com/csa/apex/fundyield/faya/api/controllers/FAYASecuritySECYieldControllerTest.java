@@ -123,24 +123,6 @@ public class FAYASecuritySECYieldControllerTest {
                 .setDerOneDaySecurityYield(yield);
         data.getPortfolios().get(0).getPortfolioHoldings().get(0).setDerSecYield1DayIncomeAmt(income);
 
-        data.getInstruments().forEach(instrument -> {
-            instrument.getTradableEntities().forEach(tradableEntity -> {
-                tradableEntity.getTradableEntitySnapshots().forEach(tradableEntitySnapshot -> {
-                    tradableEntitySnapshot.setLastAdjUserId("CALCULATOR");
-                    tradableEntitySnapshot.setLastAdjTs(new Date());
-                    tradableEntitySnapshot.setLastAdjApproverUserId("CALCULATOR");
-                });
-            });
-        });
-
-        data.getPortfolios().forEach(portfolio -> {
-            portfolio.getPortfolioHoldings().forEach(portfolioHoldingSnapshot -> {
-                portfolioHoldingSnapshot.setLastAdjUserId("CALCULATOR");
-                portfolioHoldingSnapshot.setLastAdjTs(new Date());
-                portfolioHoldingSnapshot.setLastAdjApproverUserId("CALCULATOR");
-            });
-        });
-
         Gson gson = new GsonBuilder().setDateFormat(Constants.API_DATE_FORMAT).create();
         String json = gson.toJson(data);
 

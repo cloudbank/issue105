@@ -7,77 +7,83 @@
 
 <mapper namespace="common.mapper">
 
-    <resultMap id="instrumentResultMap" type="Instrument">
-        <id property="instrumentSid" column="INSTRUMENT_SID" />
-        <result property="instrumentId" column="INSTRUMENT_ID" />
-        <result property="instrumentShortName" column="INSTRUMENT_SHORT_NM" />
-        <result property="couponRateTypeCode" column="COUPON_RATE_TYPE_CD" />
-        <result property="cusip" column="CUSIP" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
+    <resultMap id="auditableResultMap" type="Auditable">
+        <result property="createId" column="CREATE_ID" />
+        <result property="createTs" column="CREATE_TS" />
+        <result property="updateId" column="UPDATE_ID" />
+        <result property="updateTs" column="UPDATE_TS" />
     </resultMap>
 
-    <resultMap id="interestRateScheduleResultMap" type="InterestRateSchedule">
-        <id property="interestRateScheduleSid" column="INTEREST_RATE_SCHEDULE_SID" />
-        <result property="interestRateTypeCd" column="INTEREST_RATE_TYPE_CD" />
-        <result property="interestRt" column="INTEREST_RT" />
+    <resultMap id="adjustableResultMap" type="Adjustable" extends="auditableResultMap">
+        <result property="lastAdjUserId" column="LAST_ADJ_USER_ID" />
+        <result property="lastAdjTs" column="LAST_ADJ_TS" />
+        <result property="lastAdjApprovalStatusCd" column="LAST_ADJ_APPROVAL_STATUS_CD" />
+        <result property="lastAdjApproverUserId" column="LAST_ADJ_APPROVER_USER_ID" />
+        <result property="lastAdjApprovalTs" column="LAST_ADJ_APPROVAL_TS" />
+    </resultMap>
+
+    <resultMap id="versionableResultMap" type="Versionable" extends="auditableResultMap">
         <result property="effectiveDate" column="EFFECTIVE_DT" />
         <result property="expirationDate" column="EXPIRATION_DT" />
         <result property="hashKeyTxt" column="HASH_KEY_TXT" />
     </resultMap>
 
-    <resultMap id="cashDividendScheduleResultMap" type="CashDividendSchedule">
+    <resultMap id="instrumentResultMap" type="Instrument" extends="versionableResultMap">
+        <id property="instrumentSid" column="INSTRUMENT_SID" />
+        <result property="instrumentId" column="INSTRUMENT_ID" />
+        <result property="instrumentShortName" column="INSTRUMENT_SHORT_NM" />
+        <result property="couponRateTypeCode" column="COUPON_RATE_TYPE_CD" />
+        <result property="cusip" column="CUSIP" />
+    </resultMap>
+
+    <resultMap id="interestRateScheduleResultMap" type="InterestRateSchedule" extends="versionableResultMap">
+        <id property="interestRateScheduleSid" column="INTEREST_RATE_SCHEDULE_SID" />
+        <result property="interestRateTypeCd" column="INTEREST_RATE_TYPE_CD" />
+        <result property="interestRt" column="INTEREST_RT" />
+    </resultMap>
+
+    <resultMap id="cashDividendScheduleResultMap" type="CashDividendSchedule" extends="versionableResultMap">
         <id property="instrumentSid" column="INSTRUMENT_SID" />
         <result property="dividendTypeCd" column="DIVIDEND_TYPE_CD" />
         <result property="dividendSubtypeCd" column="DIVIDEND_SUBTYPE_CD" />
         <result property="currencyCd" column="CURRENCY_CD" />
         <result property="exDividendDate" column="EX_DIVIDEND_DT" />
         <result property="netPaymentAmt" column="NET_PAYMNT_AMT" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="callScheduleResultMap" type="CallSchedule">
+    <resultMap id="callScheduleResultMap" type="CallSchedule" extends="versionableResultMap">
         <id property="callScheduleSid" column="CALL_SCHEDULE_SID" />
         <result property="instrumentSid" column="INSTRUMENT_SID" />
         <result property="callProvisionTypeCd" column="CALL_PROVISION_TYPE_CD" />
         <result property="callDate" column="CALL_DT" />
         <result property="callPrc" column="CALL_PRC" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="putScheduleResultMap" type="PutSchedule">
+    <resultMap id="putScheduleResultMap" type="PutSchedule" extends="versionableResultMap">
         <id property="putScheduleSid" column="PUT_SCHEDULE_SID" />
         <result property="instrumentSid" column="INSTRUMENT_SID" />
         <result property="putTermsSeqNbr" column="PUT_TERMS_SEQ_NBR" />
         <result property="putDate" column="PUT_DT" />
         <result property="putPrc" column="PUT_PRC" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="underlyingInstrumentLinkResultMap" type="UnderlyingInstrumentLink">
+    <resultMap id="underlyingInstrumentLinkResultMap" type="UnderlyingInstrumentLink" extends="versionableResultMap">
         <id property="underlyingInstrumentLinkSid" column="UNDERLYING_INSTRUMENT_LINK_SID" />
         <result property="underlyingInstrumentSid" column="UNDERLYING_INSTRUMENT_SID" />
         <result property="overlayingInstrumentSid" column="OVERLAYING_INSTRUMENT_SID" />
         <result property="expirationOrConverEndDate" column="EXPIRATION_OR_CONVER_END_DT" />
         <result property="converFctr" column="CONVER_FCTR" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="tradableEntityResultMap" type="TradableEntity">
+    <resultMap id="tradableEntityResultMap" type="TradableEntity" extends="versionableResultMap">
         <id property="tradableEntitySid" column="TRADABLE_ENTITY_SID" />
         <result property="instrumentSid" column="INSTRUMENT_SID" />
         <result property="tradableEntityId" column="TRADABLE_ENTITY_ID" />
         <result property="marketExchangeCd" column="MARKET_EXCHANGE_CD" />
         <result property="tradableEntityInternalId" column="TRADABLE_ENTITY_INTERNAL_ID" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="tradableEntitySnapshotResultMap" type="TradableEntitySnapshot">
+    <resultMap id="tradableEntitySnapshotResultMap" type="TradableEntitySnapshot" extends="adjustableResultMap">
         <id property="tradableEntitySnapshotSid" column="TRADABLE_ENTITY_SNAPSHOT_SID" />
         <result property="tradableEntitySid" column="TRADABLE_ENTITY_SID" />
         <result property="reportDate" column="REPORTING_DT" />
@@ -90,11 +96,9 @@
         <result property="fdrTipsInflationaryRatio" column="FDR_TIPS_INFLATIONARY_RATIO_RT" />
         <result property="fdrCleanPrice" column="FDR_CLEAN_PRC" />
         <result property="derOneDaySecurityYield" column="DER_SEC_1_DAY_YIELD_RT" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="portfolioResultMap" type="Portfolio">
+    <resultMap id="portfolioResultMap" type="Portfolio" extends="versionableResultMap">
         <id property="portfolioSid" column="PORTFOLIO_SID" />
         <result property="portfolioId" column="PORTFOLIO_ID" />
         <result property="portfolioShortName" column="PORTFOLIO_SHORT_NM" />
@@ -102,19 +106,15 @@
         <result property="fdrDistributionEligibleInd" column="FDR_DISTRIBUTION_ELIGIBLE_IND" />
         <result property="fdrPortfolioTypeCode" column="FDR_PORTFOLIO_TYPE_CD" />
         <result property="cusip" column="CUSIP" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="taxExclusionResultMap" type="TaxExclusion">
+    <resultMap id="taxExclusionResultMap" type="TaxExclusion" extends="versionableResultMap">
         <id property="taxExclusionSid" column="PORTFOLIO_TAX_EXCLUSION_SID" />
         <result property="portfolioSid" column="PORTFOLIO_SID" />
         <result property="portfolioTaxExclLocCd" column="PORTFOLIO_TAX_EXCL_LOC_CD" />
-        <result property="effectiveDate" column="EFFECTIVE_DT" />
-        <result property="expirationDate" column="EXPIRATION_DT" />
     </resultMap>
 
-    <resultMap id="portfolioSnapshotResultMap" type="PortfolioSnapshot">
+    <resultMap id="portfolioSnapshotResultMap" type="PortfolioSnapshot" extends="auditableResultMap">
         <id property="portfolioSnapshotSid" column="PORTFOLIO_SNAPSHOT_SID" />
         <result property="portfolioSid" column="PORTFOLIO_SID" />
         <result property="reportDate" column="REPORTING_DT" />
@@ -152,7 +152,7 @@
         <result property="der30DaySecMilRt" column="DER_SEC_30_DAY_MIL_RT" />
     </resultMap>
 
-    <resultMap id="portfolioHoldingSnapshotResultMap" type="PortfolioHoldingSnapshot">
+    <resultMap id="portfolioHoldingSnapshotResultMap" type="PortfolioHoldingSnapshot" extends="adjustableResultMap">
         <id property="portfolioHoldingSnapshotSid" column="PORTFOLIO_HOLDING_SNAPSHOT_SID" />
         <result property="portfolioSid" column="PORTFOLIO_SID" />
         <result property="reportDate" column="REPORTING_DT" />
@@ -179,7 +179,7 @@
         <result property="adjCommentsTxt" column="ADJ_COMMENTS_TXT" />
     </resultMap>
 
-    <resultMap id="shareClassResultMap" type="ShareClass">
+    <resultMap id="shareClassResultMap" type="ShareClass" extends="versionableResultMap">
         <id property="shareClassSid" column="SHARE_CLASS_SID" />
         <result property="portfolioSid" column="PORTFOLIO_SID" />
         <result property="transferAgentShareClassId" column="TRANSFER_AGENT_SHARE_CLASS_ID" />
@@ -190,7 +190,7 @@
         <result property="nasdaqShareClassId" column="NASDAQ_SHARE_CLASS_ID" />
     </resultMap>
 
-    <resultMap id="shareClassSnapshotResultMap" type="ShareClassSnapshot">
+    <resultMap id="shareClassSnapshotResultMap" type="ShareClassSnapshot" extends="auditableResultMap">
         <id property="shareClassSnapshotSid" column="SHARE_CLASS_SNAPSHOT_SID" />
         <result property="shareClassSid" column="SHARE_CLASS_SID" />
         <result property="reportDate" column="REPORTING_DT" />

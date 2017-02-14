@@ -4,6 +4,7 @@
 package com.csa.apex.fundyield.api.services.impl;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,7 +22,9 @@ import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -137,6 +140,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	/**
 	 * Gets already calculated FundAccountingYieldData data for the given date.
 	 *
+	 * @param userId The user id
 	 * @param businessDate
 	 *            the business date
 	 * @return FundAccountingYieldData for the date with calculated result
@@ -147,15 +151,19 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	 */
 	@Override
 	@LogMethod
-	public FundAccountingYieldData getCalculatedSecuritySECData(Date businessDate) throws FundAccountingYieldException {
+	public FundAccountingYieldData getCalculatedSecuritySECData(String userId, Date businessDate) throws FundAccountingYieldException {
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", Constants.USER_ID);
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", PARAM_BUSINESS_DATE);
 
 		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.set(Constants.USER_ID, userId);
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getCalculatedSecuritySECDataApiPath)
 					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
-
-			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
-					FundAccountingYieldData.class);
+			URI uri = builder.build().encode().toUri();
+			ResponseEntity<FundAccountingYieldData> responseEntity = getRestTemplate().exchange(uri, HttpMethod.GET,
+					new HttpEntity<>(headers), FundAccountingYieldData.class);
+			FundAccountingYieldData data = responseEntity.getBody();
 
 			// Throw DataNotFoundException if no data is returned
 			checkNullResponse(data, builder.toUriString());
@@ -173,6 +181,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	 * securities and then process each security first to calculate the data,
 	 * then to persist it using API.
 	 * 
+	 * @param userId The user id
 	 * @param businessDate
 	 *            the business date
 	 * @return FundAccountingYieldData with calculated result
@@ -183,16 +192,20 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	 */
 	@Override
 	@LogMethod
-	public FundAccountingYieldData processSecuritySECData(Date businessDate) throws FundAccountingYieldException {
+	public FundAccountingYieldData processSecuritySECData(String userId, Date businessDate) throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "processSecuritySECData", PARAM_BUSINESS_DATE);
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "processSecuritySECData", Constants.USER_ID);
 
 		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.set(Constants.USER_ID, userId);
 			UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(getSecuritySECDataApiPath)
 					.queryParam(Constants.BUSINESS_DATE, getFormattedDate(businessDate));
-
-			FundAccountingYieldData data = getRestTemplate().getForObject(builder.build().encode().toUri(),
-					FundAccountingYieldData.class);
-
+			URI uri = builder.build().encode().toUri();
+			ResponseEntity<FundAccountingYieldData> responseEntity = getRestTemplate().exchange(uri, HttpMethod.GET,
+					new HttpEntity<>(headers), FundAccountingYieldData.class);
+			FundAccountingYieldData data = responseEntity.getBody();
+			
 			// Throw DataNotFoundException if no data is returned
 			checkNullResponse(data, builder.toUriString());
 
@@ -223,6 +236,7 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	/**
 	 * Exports SEC Security data in CSV format in an archive.
 	 * 
+	 * @param userId The user id
 	 * @param businessDate
 	 *            the business date;
 	 * @param response
@@ -234,12 +248,12 @@ public class SecuritySECYieldServiceImpl extends BaseServiceImpl implements Secu
 	 */
 	@Override
 	@LogMethod
-	public void exportCalculatedSecuritySECData(Date businessDate, HttpServletResponse response)
+	public void exportCalculatedSecuritySECData(String userId, Date businessDate, HttpServletResponse response)
 			throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", PARAM_BUSINESS_DATE);
 		CommonUtility.checkNull(response, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", Constants.PARAMETER_RESPONSE);
 
-		FundAccountingYieldData data = getCalculatedSecuritySECData(businessDate);
+		FundAccountingYieldData data = getCalculatedSecuritySECData(userId, businessDate);
 
 		try {
 			createExportArchive(response, data, getFormattedDate(businessDate));

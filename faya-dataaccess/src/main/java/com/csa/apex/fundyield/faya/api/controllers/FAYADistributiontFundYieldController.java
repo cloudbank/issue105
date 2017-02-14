@@ -3,10 +3,7 @@ package com.csa.apex.fundyield.faya.api.controllers;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +14,7 @@ import com.csa.apex.fundyield.faya.api.FAYADistributiontFundYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceService;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -50,6 +48,7 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
 
     /**
      * Gets Distribution Fund data for the business date.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -57,14 +56,16 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getFAYADistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData getFAYADistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getFAYADistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYADistributionFundYieldData", Constants.BUSINESS_DATE);
-        return fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(businessDate);
+        return fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(userId, businessDate);
     }
 
     /**
      * Persists the calculated Distribution Fund Yield data.
+     * @param userId The user id passed in header.
      * @param fundAccountingYieldData FundAccountingYieldData
      * @return the result of the execution.
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -73,18 +74,15 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
     @Override
     @LogMethod
     @Transactional
-    public boolean persistDistributionFundYieldData(FundAccountingYieldData fundAccountingYieldData,
-            HttpServletRequest request) throws FundAccountingYieldException {
+    public boolean persistDistributionFundYieldData(String userId, FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
-        CommonUtility.checkNull(request, this.getClass().getCanonicalName(), "persistDistributionFundYieldData", Constants.REQUEST);
-        HttpSession session = request.getSession();
-        String currentUserId = (String) session.getAttribute(Constants.CURRENT_USER_ID);
-        return fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(fundAccountingYieldData,
-                currentUserId);
+        return fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(userId, fundAccountingYieldData);
     }
 
     /**
      * Gets already calculated Distribution Fund Yield data for the given date.
+     * @param userId The user id passed in header.
      * @param businessDate - the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -92,10 +90,11 @@ public class FAYADistributiontFundYieldController implements FAYADistributiontFu
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedDistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
-        return fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(businessDate);
+        return fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(userId, businessDate);
     }
 
     public FAYADistYieldDataPersistenceService getFayaDistYieldDataPersistenceService() {

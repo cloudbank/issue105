@@ -20,6 +20,7 @@ public interface FAYASecuritySECYieldPersistenceService {
     /**
      * Gets the SEC Security.
      * 
+     * @param userId The user id
      * @param businessDate
      *        the business date
      * @return the list of security SEC data
@@ -28,11 +29,12 @@ public interface FAYASecuritySECYieldPersistenceService {
      * @throws IllegalArgumentException
      *         in case the input is invalid (null)
      */
-    public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException;
+    public FundAccountingYieldData getFAYASECData(String userId, Date businessDate) throws FundAccountingYieldException;
 
     /**
      * Persists the calculated SEC security data.
      * 
+     * @param userId The user id.
      * @param fundAccountingYieldData
      *        the SEC security data to be persisted
      * @return flag indicating whether the data was persisted or not
@@ -41,11 +43,12 @@ public interface FAYASecuritySECYieldPersistenceService {
      * @throws IllegalArgumentException
      *         in case the input is invalid (null)
      */
-    public boolean persistSecuritySECData(FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
+    public boolean persistSecuritySECData(String userId, FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
 
     /**
      * Gets the calculated SEC security data.
      * 
+     * @param userId The user id.
      * @param businessDate
      *        the business date
      * @return the list of calculated SEC security data
@@ -54,5 +57,5 @@ public interface FAYASecuritySECYieldPersistenceService {
      * @throws IllegalArgumentException
      *         in case the input is invalid (null)
      */
-    public FundAccountingYieldData getCalculatedSECData(Date businessDate) throws FundAccountingYieldException;
+    public FundAccountingYieldData getCalculatedSECData(String userId, Date businessDate) throws FundAccountingYieldException;
 }

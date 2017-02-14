@@ -7,10 +7,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * Test class for the FAYAMoneyMarketFundYieldController.
@@ -69,9 +71,8 @@ public class FAYAMoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getFAYAMoneyMarketFundYieldData() throws Exception {
-        this.mockMvc.perform(get("/FAYAMoneyMarketFundYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
-                .andExpect(status().is(400));
-
+		this.mockMvc.perform(get("/FAYAMoneyMarketFundYieldData").header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+				.param(Constants.BUSINESS_DATE, "2016-05-02")).andExpect(status().is(400));
     }
 
     /**
@@ -81,7 +82,17 @@ public class FAYAMoneyMarketFundYieldControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getFAYAMoneyMarketFundYieldDataInvalid() throws Exception {
         FAYAMoneyMarketFundYieldController instance = new FAYAMoneyMarketFundYieldController();
-        instance.getFAYAMoneyMarketFundYieldData(null);
+        instance.getFAYAMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getFAYAMoneyMarketFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getFAYAMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        FAYAMoneyMarketFundYieldController instance = new FAYAMoneyMarketFundYieldController();
+        instance.getFAYAMoneyMarketFundYieldData(null, new Date());
     }
 
     /**
@@ -91,10 +102,12 @@ public class FAYAMoneyMarketFundYieldControllerTest {
     @Test
     public void persistMoneyMarketFundYieldData() throws Exception {
         Map<String, Object> sessionAttrs = new HashMap<String, Object>();
-        sessionAttrs.put(Constants.CURRENT_USER_ID, "123");
-        this.mockMvc.perform(put("/calculatedMoneyMarketFundYieldPortfolio").param(Constants.BUSINESS_DATE, "2016-05-02")
-                .sessionAttrs(sessionAttrs)).andExpect(status().is(400));
-
+        sessionAttrs.put(Constants.USER_ID, "123");
+		this.mockMvc
+				.perform(put("/calculatedMoneyMarketFundYieldPortfolio")
+						.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+						.param(Constants.BUSINESS_DATE, "2016-05-02").sessionAttrs(sessionAttrs))
+				.andExpect(status().is(400));
     }
 
     /**
@@ -113,9 +126,9 @@ public class FAYAMoneyMarketFundYieldControllerTest {
      */
     @Test
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
-        this.mockMvc.perform(get("/calculatedFAYAMoneyMarketFundYieldData").param(Constants.BUSINESS_DATE, "2016-05-02"))
-                .andExpect(status().is(400));
-
+		this.mockMvc.perform(get("/calculatedFAYAMoneyMarketFundYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.BUSINESS_DATE, "2016-05-02"))
+				.andExpect(status().is(400));
     }
 
     /**
@@ -125,6 +138,16 @@ public class FAYAMoneyMarketFundYieldControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedMoneyMarketFundYieldDataInvalid() throws Exception {
         FAYAMoneyMarketFundYieldController instance = new FAYAMoneyMarketFundYieldController();
-        instance.getCalculatedMoneyMarketFundYieldData(null);
+        instance.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedMoneyMarketFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+        FAYAMoneyMarketFundYieldController instance = new FAYAMoneyMarketFundYieldController();
+        instance.getCalculatedMoneyMarketFundYieldData(null, new Date());
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.FAYADistYieldDataPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.fayacommons.entities.Instrument;
 import com.csa.apex.fundyield.fayacommons.entities.Portfolio;
@@ -57,7 +58,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
     public void getFAYADistributionFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-20");
-        assertNotNull(fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(businessDate));
+        assertNotNull(fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
 
     /**
@@ -66,7 +67,16 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getFAYADistributionFundYieldDataInvalid() throws Exception {
-        fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(null);
+        fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getFAYADistributionFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getFAYADistributionFundYieldDataInvalidUserId() throws Exception {
+        fayaDistYieldDataPersistenceService.getFAYADistributionFundYieldData(null, new Date());
     }
 
     /**
@@ -108,7 +118,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
         p.getPortfolioSnapshots().add(snapshot);
 
         data.getPortfolios().add(p);
-        fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(data, "100");
+        fayaDistYieldDataPersistenceService.persistDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, data);
     }
 
     /**
@@ -128,7 +138,7 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
     public void getCalculatedDistributionFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        assertNotNull(fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(businessDate));
+        assertNotNull(fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
 
     /**
@@ -137,6 +147,15 @@ public class FAYADistYieldDataPersistenceServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedDistributionFundYieldDataInvalid() throws Exception {
-        fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(null);
+        fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedDistributionFundYieldData with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedDistributionFundYieldDataInvalidUserId() throws Exception {
+        fayaDistYieldDataPersistenceService.getCalculatedDistributionFundYieldData(null, new Date());
     }
 }

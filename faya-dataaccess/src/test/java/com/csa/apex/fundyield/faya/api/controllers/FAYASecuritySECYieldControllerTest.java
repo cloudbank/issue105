@@ -92,8 +92,9 @@ public class FAYASecuritySECYieldControllerTest {
      */
     @Test
     public void getFAYASECDataTest() throws Exception {
-        mockMvc.perform(get("/fayaFundAccountingSECYieldData").param(BUSINESS_DATE_PARAM_NAME, "2014-12-01"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE));
+		mockMvc.perform(get("/fayaFundAccountingSECYieldData").header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+				.param(BUSINESS_DATE_PARAM_NAME, "2014-12-01")).andExpect(status().isOk())
+				.andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE));
     }
 
     /**
@@ -102,7 +103,8 @@ public class FAYASecuritySECYieldControllerTest {
      */
     @Test
     public void getFAYASECDataInvalidTest() throws Exception {
-        this.mockMvc.perform(get("/fayaFundAccountingSECYieldData").param(Constants.BUSINESS_DATE, "invalid"))
+		this.mockMvc.perform(get("/fayaFundAccountingSECYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.BUSINESS_DATE, "invalid"))
                 .andExpect(status().is(400));
     }
 
@@ -114,7 +116,7 @@ public class FAYASecuritySECYieldControllerTest {
     public void persistSecuritySECDataTest() throws Exception {
 
         FundAccountingYieldData data = fayaSecuritySECYieldPersistenceService
-                .getFAYASECData(DateTime.parse("2014-12-01").toDate());
+                .getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
 
         // Set some calculation result
         BigDecimal yield = new BigDecimal(23.55);
@@ -126,10 +128,12 @@ public class FAYASecuritySECYieldControllerTest {
         Gson gson = new GsonBuilder().setDateFormat(Constants.API_DATE_FORMAT).create();
         String json = gson.toJson(data);
 
-        mockMvc.perform(put("/calculatedFundAccountingSECYieldData")
-                .contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE).content(json)).andExpect(status().isOk());
+		mockMvc.perform(
+				put("/calculatedFundAccountingSECYieldData").header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID)
+						.contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE).content(json))
+				.andExpect(status().isOk());
 
-        data = fayaSecuritySECYieldPersistenceService.getFAYASECData(DateTime.parse("2014-12-01").toDate());
+        data = fayaSecuritySECYieldPersistenceService.getFAYASECData(TestUtility.DEFAULT_USER_ID, DateTime.parse("2014-12-01").toDate());
 
         assertEquals(yield.setScale(2, BigDecimal.ROUND_HALF_DOWN),
                 data.getInstruments().get(0).getTradableEntities().get(0).getTradableEntitySnapshots().get(0)
@@ -162,7 +166,8 @@ public class FAYASecuritySECYieldControllerTest {
      */
     @Test
     public void getCalculatedSECDataTest() throws Exception {
-        mockMvc.perform(get("/calculatedFundAccountingSECYieldData").param(BUSINESS_DATE_PARAM_NAME, "2016-05-02"))
+		mockMvc.perform(get("/calculatedFundAccountingSECYieldData")
+				.header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(BUSINESS_DATE_PARAM_NAME, "2016-05-02"))
                 .andExpect(status().isOk()).andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE));
     }
 

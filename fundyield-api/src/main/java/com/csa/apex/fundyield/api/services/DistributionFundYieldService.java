@@ -13,21 +13,23 @@ public interface DistributionFundYieldService {
     /**
      * Process Distribution Fund data for the business date. This method gets the fund yield data and then process each
      * portfolio first to calculate the data, then to persist it using API.
+     * @param userId the user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData processDistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData processDistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException;
 
     /**
      * Gets already calculated Distribution Fund Yield data for the given date.
+     * @param userId The user id;
      * @param businessDate -the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData getCalculatedDistributionFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedDistributionFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException;
 }

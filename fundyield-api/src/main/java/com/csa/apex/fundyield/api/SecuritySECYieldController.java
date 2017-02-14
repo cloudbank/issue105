@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StopWatch;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,6 +97,7 @@ public class SecuritySECYieldController {
 	 * Gets SEC Security data with the calculated data for the business date. The securities are also persisted using
 	 * FAYA REST API.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            The Business date
 	 * @return List<SecuritySECData>
@@ -105,15 +107,16 @@ public class SecuritySECYieldController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
     @LogMethod
-	public FundAccountingYieldData getSecuritySECData(
+	public FundAccountingYieldData getSecuritySECData(@RequestHeader("userId") String userId, 
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getSecuritySECData", Constants.BUSINESS_DATE);
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSecuritySECData", Constants.USER_ID);
 
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
-		final FundAccountingYieldData securitySECData = secYieldService.processSecuritySECData(businessDate);
+		final FundAccountingYieldData securitySECData = secYieldService.processSecuritySECData(userId, businessDate);
 		truncateResults(securitySECData);
 
 		stopWatch.stop();
@@ -126,6 +129,7 @@ public class SecuritySECYieldController {
 	/**
 	 * Gets already calculated SEC Security data for the given date.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the Business date
 	 * @return already calculated securitySECData;
@@ -135,15 +139,16 @@ public class SecuritySECYieldController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
     @LogMethod
-	public FundAccountingYieldData getCalculatedSecuritySECData(
+	public FundAccountingYieldData getCalculatedSecuritySECData(@RequestHeader("userId") String userId,
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException {
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", Constants.USER_ID);
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSecuritySECData", Constants.BUSINESS_DATE);
 		
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
-		final FundAccountingYieldData securitySECData = secYieldService.getCalculatedSecuritySECData(businessDate);
+		final FundAccountingYieldData securitySECData = secYieldService.getCalculatedSecuritySECData(userId, businessDate);
 		truncateResults(securitySECData);
 
 		stopWatch.stop();
@@ -156,6 +161,7 @@ public class SecuritySECYieldController {
 	/**
 	 * Exports SEC Security data in CSV format in a zip archive.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the Business date
 	 * @param response
@@ -167,16 +173,17 @@ public class SecuritySECYieldController {
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
     @LogMethod
-	public void exportCalculatedSecuritySECData(
+	public void exportCalculatedSecuritySECData(@RequestHeader("userId") String userId, 
 			@RequestParam @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate,
 			HttpServletResponse response) throws FundAccountingYieldException {
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", Constants.USER_ID);
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", Constants.BUSINESS_DATE);
 		CommonUtility.checkNull(response, this.getClass().getCanonicalName(), "exportCalculatedSecuritySECData", "response");
 		
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
-		secYieldService.exportCalculatedSecuritySECData(businessDate, response);
+		secYieldService.exportCalculatedSecuritySECData(userId, businessDate, response);
 
 		stopWatch.stop();
 		logger.info("METHOD: SecuritySECYieldController.exportCalculatedSecuritySECData(), RUNTIME: " +

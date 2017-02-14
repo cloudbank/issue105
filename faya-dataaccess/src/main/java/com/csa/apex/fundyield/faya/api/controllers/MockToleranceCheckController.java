@@ -47,61 +47,70 @@ public class MockToleranceCheckController implements ToleranceCheckService {
 
     /**
      * Initiates the fund level tolerance check results.
+     * @param userId The user id passed in header.
      * @param reportDate the report date ;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
     @Override
     @LogMethod
-    public void initiateSECFundLevelBatchToleranceCheck(
+    public void initiateSECFundLevelBatchToleranceCheck(String userId,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiateSECFundLevelBatchToleranceCheck", Constants.REPORT_DATE);
-        toleranceCheckService.initiateSECFundLevelBatchToleranceCheck(reportDate);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiateSECFundLevelBatchToleranceCheck", Constants.USER_ID);
+		toleranceCheckService.initiateSECFundLevelBatchToleranceCheck(userId, reportDate);
     }
 
     /**
      * Initiates the MM fund level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
     @Override
     @LogMethod
-    public void initiateMoneyMarketFundLevelBatchToleranceCheck(
+    public void initiateMoneyMarketFundLevelBatchToleranceCheck(String userId,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiateMoneyMarketFundLevelBatchToleranceCheck", Constants.REPORT_DATE);
-        toleranceCheckService.initiateMoneyMarketFundLevelBatchToleranceCheck(reportDate);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiateMoneyMarketFundLevelBatchToleranceCheck", Constants.USER_ID);
+        toleranceCheckService.initiateMoneyMarketFundLevelBatchToleranceCheck(userId, reportDate);
     }
 
     /**
      * Initiates the security level batch tolerance check results.
+     * @param userId The user id passed in header.
      * @param reportDate the report date ;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
     @Override
     @LogMethod
-    public void initiateSecurityLevelBatchToleranceCheck(
+    public void initiateSecurityLevelBatchToleranceCheck(String userId,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate) {
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiateSecurityLevelBatchToleranceCheck", Constants.REPORT_DATE);
-        toleranceCheckService.initiateSecurityLevelBatchToleranceCheck(reportDate);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiateSecurityLevelBatchToleranceCheck", Constants.USER_ID);
+        toleranceCheckService.initiateSecurityLevelBatchToleranceCheck(userId, reportDate);
     }
 
     /**
      * Initiates the Distribution fund level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) ;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
     @Override
     @LogMethod
-    public void initiateDistributionFundLevelBatchToleranceCheck(Date reportDate) {
+    public void initiateDistributionFundLevelBatchToleranceCheck(String userId, Date reportDate) {
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiateDistributionFundLevelBatchToleranceCheck", Constants.REPORT_DATE);
-        toleranceCheckService.initiateDistributionFundLevelBatchToleranceCheck(reportDate);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiateDistributionFundLevelBatchToleranceCheck", Constants.USER_ID);
+        toleranceCheckService.initiateDistributionFundLevelBatchToleranceCheck(userId, reportDate);
     }
 
     /**
      * Initiates the secutity level what if tolerance check results.
+     * @param userId The user id passed in header.
      * @param reportDate the report date ;
      * @param cusip the cusip.
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -109,14 +118,16 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public void initiateSecurityLevelWhatIfToleranceCheck(Date reportDate, String cusip) {
+    public void initiateSecurityLevelWhatIfToleranceCheck(String userId, Date reportDate, String cusip) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiateSecurityLevelWhatIfToleranceCheck", Constants.USER_ID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiateSecurityLevelWhatIfToleranceCheck", Constants.REPORT_DATE);
         CommonUtility.checkNull(cusip, this.getClass().getCanonicalName(), "initiateSecurityLevelWhatIfToleranceCheck", Constants.CUSIP);
-        toleranceCheckService.initiateSecurityLevelWhatIfToleranceCheck(reportDate, cusip);
+        toleranceCheckService.initiateSecurityLevelWhatIfToleranceCheck(userId, reportDate, cusip);
     }
 
     /**
      * Initiates the position level what if tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @param cusip the cusip.
      * @param portfolioHoldingSnapshotSid - the holding snapshot id
@@ -125,16 +136,18 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public void initiatePositionLevelWhatIfToleranceCheck(
+    public void initiatePositionLevelWhatIfToleranceCheck(String userId, 
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip,
             int portfolioHoldingSnapshotSid) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "initiatePositionLevelWhatIfToleranceCheck", Constants.USER_ID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "initiatePositionLevelWhatIfToleranceCheck", Constants.REPORT_DATE);
         CommonUtility.checkNull(cusip, this.getClass().getCanonicalName(), "initiatePositionLevelWhatIfToleranceCheck", Constants.CUSIP);
-        toleranceCheckService.initiatePositionLevelWhatIfToleranceCheck(reportDate, cusip, portfolioHoldingSnapshotSid);
+        toleranceCheckService.initiatePositionLevelWhatIfToleranceCheck(userId, reportDate, cusip, portfolioHoldingSnapshotSid);
     }
 
     /**
      * Gets the Distribution fund level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @return the results of the check
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -142,13 +155,15 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getDistributionFundLevelBatchToleranceCheckResult(Date reportDate) {
+    public ToleranceCheckResult getDistributionFundLevelBatchToleranceCheckResult(String userId, Date reportDate) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getDistributionFundLevelBatchToleranceCheckResult", Constants.USER_ID);
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getDistributionFundLevelBatchToleranceCheckResult", Constants.REPORT_DATE);
-    	return createCheckResult(reportDate);
+    	return createCheckResult(userId, reportDate);
     }
 
     /**
      * Gets the fund level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @return the results of the check
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -156,13 +171,15 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getSECFundLevelBatchToleranceCheckResult(Date reportDate) {
+    public ToleranceCheckResult getSECFundLevelBatchToleranceCheckResult(String userId, Date reportDate) {
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSECFundLevelBatchToleranceCheckResult", Constants.REPORT_DATE);
-    	return createCheckResult(reportDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSECFundLevelBatchToleranceCheckResult", Constants.USER_ID);
+    	return createCheckResult(userId, reportDate);
     }
 
     /**
      * Gets the MM fund level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @return the results of the check
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -170,13 +187,15 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getMoneyMarketFundLevelBatchToleranceCheckResult(Date reportDate) {
+    public ToleranceCheckResult getMoneyMarketFundLevelBatchToleranceCheckResult(String userId, Date reportDate) {
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getMoneyMarketFundLevelBatchToleranceCheckResult", Constants.REPORT_DATE);
-    	return createCheckResult(reportDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getMoneyMarketFundLevelBatchToleranceCheckResult", Constants.USER_ID);
+    	return createCheckResult(userId, reportDate);
     }
 
     /**
      * Gets the secutity level tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @return the results of the check
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -185,13 +204,15 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getSecurityLevelBatchToleranceCheckResult(Date reportDate) {
+    public ToleranceCheckResult getSecurityLevelBatchToleranceCheckResult(String userId, Date reportDate) {
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSecurityLevelBatchToleranceCheckResult", Constants.REPORT_DATE);
-    	return createCheckResult(reportDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSecurityLevelBatchToleranceCheckResult", Constants.USER_ID);
+    	return createCheckResult(userId, reportDate);
     }
 
     /**
      * Gets the security level what if tolerance check results.
+     * @param userId The user id passed in header;
      * @param reportDate the report date ;
      * @return the results of the check
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -199,15 +220,17 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getSecurityLevelWhatIfToleranceCheckResult(
+    public ToleranceCheckResult getSecurityLevelWhatIfToleranceCheckResult(String userId, 
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSecurityLevelWhatIfToleranceCheckResult", Constants.USER_ID);
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSecurityLevelWhatIfToleranceCheckResult", Constants.REPORT_DATE);
     	CommonUtility.checkNull(cusip, this.getClass().getCanonicalName(), "getSecurityLevelWhatIfToleranceCheckResult", Constants.CUSIP);
-        return createCheckResult(reportDate);
+        return createCheckResult(userId, reportDate);
     }
 
     /**
      * Gets the position level what if tolerance check results.
+     * @param userId The user id passed in header.
      * @param reportDate the report date ;
      * @param cusip the cusip.
      * @param portfolioHoldingSnapshotSid the holding snapshot id
@@ -217,21 +240,24 @@ public class MockToleranceCheckController implements ToleranceCheckService {
      */
     @Override
     @LogMethod
-    public ToleranceCheckResult getPositionLevelWhatIfToleranceCheckResult(
+    public ToleranceCheckResult getPositionLevelWhatIfToleranceCheckResult(String userId, 
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, String cusip,
             int portfolioHoldingSnapshotSid) {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getPositionLevelWhatIfToleranceCheckResult", Constants.USER_ID);
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getPositionLevelWhatIfToleranceCheckResult", Constants.REPORT_DATE);
     	CommonUtility.checkNull(cusip, this.getClass().getCanonicalName(), "getPositionLevelWhatIfToleranceCheckResult", Constants.CUSIP);
-        return createCheckResult(reportDate);
+        return createCheckResult(userId, reportDate);
     }
 
     /**
      * Create the check result.
+     * @param userId The user id
      * @param reportDate the report date
      * @return the results of the check
      */
-    private ToleranceCheckResult createCheckResult(Date reportDate) {
+    private ToleranceCheckResult createCheckResult(String userId, Date reportDate) {
     	CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "createCheckResult", Constants.REPORT_DATE);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "createCheckResult", Constants.USER_ID);
         ToleranceCheckResult result = new ToleranceCheckResult();
         result.setProcessedWithoutErrors(true);
         return result;

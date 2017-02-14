@@ -2,12 +2,11 @@ package com.csa.apex.fundyield.faya.api;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +25,7 @@ public interface FAYAMoneyMarketFundYieldService {
 
     /**
      * Gets Money Market data for the business date.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -34,12 +34,13 @@ public interface FAYAMoneyMarketFundYieldService {
     @RequestMapping(value = "FAYAMoneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(
-            @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
-            throws FundAccountingYieldException;
+	public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(@RequestHeader("userId") String userId,
+			@RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+			throws FundAccountingYieldException;
 
     /**
      * Persists the calculated Money Market Fund Yield data.
+     * @param userId The user id passed in header.
      * @param fundAccountingYieldData FundAccountingYieldData @RequestParam;
      * @return the result of the execution.
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -48,11 +49,11 @@ public interface FAYAMoneyMarketFundYieldService {
     @RequestMapping(value = "calculatedMoneyMarketFundYieldPortfolio", method = RequestMethod.PUT, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public boolean persistMoneyMarketFundYieldData(@RequestBody FundAccountingYieldData fundAccountingYieldData,
-            HttpServletRequest request) throws FundAccountingYieldException;
+    public boolean persistMoneyMarketFundYieldData(@RequestHeader("userId") String userId, @RequestBody FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
 
     /**
      * Gets already calculated Money Market Fund Yield data for the given date.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -61,7 +62,7 @@ public interface FAYAMoneyMarketFundYieldService {
     @RequestMapping(value = "calculatedFAYAMoneyMarketFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(
-            @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
-            throws FundAccountingYieldException;
+	public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(@RequestHeader("userId") String userId,
+			@RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
+			throws FundAccountingYieldException;
 }

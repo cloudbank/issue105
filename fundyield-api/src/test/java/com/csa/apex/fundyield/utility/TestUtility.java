@@ -46,6 +46,11 @@ import com.csa.apex.fundyield.api.services.impl.utility.UtilityFAYAAPIClient;
 public class TestUtility {
 
     /**
+     * User Id for tests
+     */
+    public static final String DEFAULT_USER_ID = "U53R1D";
+	
+    /**
      * Inject field value.
      * @param obj The object
      * @param fieldName The field name

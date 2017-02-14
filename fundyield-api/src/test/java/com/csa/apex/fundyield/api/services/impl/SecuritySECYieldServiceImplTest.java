@@ -130,7 +130,8 @@ public class SecuritySECYieldServiceImplTest {
 		MockitoAnnotations.initMocks(this);
 		when(restTemplate.getForObject(any(String.class), eq(SECConfiguration.class)))
 				.thenReturn(new SECConfiguration());
-		when(restTemplate.getForObject(any(URI.class), eq(FundAccountingYieldData.class))).thenReturn(data);
+		when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(FundAccountingYieldData.class)))
+				.thenReturn(new ResponseEntity<FundAccountingYieldData>(data, new HttpHeaders(), HttpStatus.CREATED));
 		when(restTemplate.exchange(any(String.class), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Boolean.class)))
 				.thenReturn(new ResponseEntity<Boolean>(true, new HttpHeaders(), HttpStatus.CREATED));
 
@@ -145,7 +146,7 @@ public class SecuritySECYieldServiceImplTest {
 	 */
 	@Test
 	public void processSecuritySECDataTest() throws Exception {
-		FundAccountingYieldData data = securitySECYieldServiceImpl.processSecuritySECData(new Date());
+		FundAccountingYieldData data = securitySECYieldServiceImpl.processSecuritySECData(TestUtility.DEFAULT_USER_ID, new Date());
 
 		assertEquals(
 				CommonUtility.getTradableEntitySnapshot(data.getInstruments().get(0)).getDerOneDaySecurityYield()
@@ -163,7 +164,7 @@ public class SecuritySECYieldServiceImplTest {
 	 */
 	@Test
 	public void getCalculatedSecuritySECDataMockTest() throws Exception {
-		FundAccountingYieldData data = securitySECYieldServiceImpl.getCalculatedSecuritySECData(new Date());
+		FundAccountingYieldData data = securitySECYieldServiceImpl.getCalculatedSecuritySECData(TestUtility.DEFAULT_USER_ID, new Date());
 		assertEquals(data.getInstruments().size(), 1);
 		assertEquals(data.getPortfolios().size(), 1);
 	}
@@ -179,7 +180,7 @@ public class SecuritySECYieldServiceImplTest {
 		HttpServletResponse response = mock(HttpServletResponse.class);
 		MockServletOutputStream servletOutputStream = new MockServletOutputStream();
 		when(response.getOutputStream()).thenReturn(servletOutputStream);
-		securitySECYieldServiceImpl.exportCalculatedSecuritySECData(new Date(), response);
+		securitySECYieldServiceImpl.exportCalculatedSecuritySECData(TestUtility.DEFAULT_USER_ID, new Date(), response);
 		verify(response).setContentType(EXPORT_FILE_TYPE);
 		final File csvFile = convertServletOutputStreamToFile(servletOutputStream);
 		try {

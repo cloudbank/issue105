@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.csa.apex.fundyield.utility.Constants;
+import com.csa.apex.fundyield.utility.TestUtility;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,13 +80,15 @@ public class MoneyMarketFundYieldServiceImplTest {
 		when(builder.build()).thenReturn(c);
 		when(c.encode()).thenReturn(c);
 		when(c.toUri()).thenReturn(uri);
-		when(restTemplate.getForObject(any(URI.class), eq(FundAccountingYieldData.class))).thenReturn(data);
+		when(restTemplate.exchange(any(URI.class), eq(HttpMethod.GET), any(HttpEntity.class), eq(FundAccountingYieldData.class)))
+				.thenReturn(new ResponseEntity<FundAccountingYieldData>(data, new HttpHeaders(), HttpStatus.CREATED));
 		when(restTemplate.exchange(any(String.class), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Boolean.class)))
 				.thenReturn(new ResponseEntity<Boolean>(true, new HttpHeaders(), HttpStatus.CREATED));
 
 		moneyMarketFundYieldServiceImpl.setRestTemplate(restTemplate);
 	}
-    /**
+    
+	/**
      * Test for method processMoneyMarketFundYieldData.
      *
      * @throws Exception to JUnit
@@ -93,8 +97,9 @@ public class MoneyMarketFundYieldServiceImplTest {
     public void processMoneyMarketFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        assertNotNull(moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(businessDate));
+        assertNotNull(moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
+    
     /**
      * Test for method processMoneyMarketFundYieldData with invalid data.
      *
@@ -102,8 +107,19 @@ public class MoneyMarketFundYieldServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void processMoneyMarketFundYieldDataInvalid() throws Exception {
-    	moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(null);
+    	moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
     }
+    
+    /**
+     * Test for method processMoneyMarketFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void processMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+    	moneyMarketFundYieldServiceImpl.processMoneyMarketFundYieldData(null, new Date());
+    }
+    
     /**
      * Test for method getCalculatedMoneyMarketFundYieldData.
      *
@@ -113,8 +129,9 @@ public class MoneyMarketFundYieldServiceImplTest {
     public void getCalculatedMoneyMarketFundYieldData() throws Exception {
         DateFormat f = new SimpleDateFormat(Constants.API_DATE_FORMAT);
         Date businessDate = f.parse("2016-12-10");
-        assertNotNull(moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(businessDate));
+        assertNotNull(moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, businessDate));
     }
+    
     /**
      * Test for method getCalculatedMoneyMarketFundYieldData with invalid data.
      *
@@ -122,6 +139,16 @@ public class MoneyMarketFundYieldServiceImplTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void getCalculatedMoneyMarketFundYieldDataInvalid() throws Exception {
-    	moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(null);
+    	moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(TestUtility.DEFAULT_USER_ID, null);
+    }
+    
+    /**
+     * Test for method getCalculatedMoneyMarketFundYieldData with invalid user id.
+     *
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getCalculatedMoneyMarketFundYieldDataInvalidUserId() throws Exception {
+    	moneyMarketFundYieldServiceImpl.getCalculatedMoneyMarketFundYieldData(null, new Date());
     }
 }

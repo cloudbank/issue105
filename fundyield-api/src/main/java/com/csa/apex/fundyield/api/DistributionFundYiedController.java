@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +55,7 @@ public class DistributionFundYiedController {
     /**
      * Gets Distribution Fund data for the business date. In service data is obtained from customer REST API, calculated
      * and then persisted using customer REST API. using API.
+     * @param userId The user id passed in header;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -62,15 +64,17 @@ public class DistributionFundYiedController {
     @RequestMapping(value = "distributionFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getDistributionFundYieldData(
+    public FundAccountingYieldData getDistributionFundYieldData(@RequestHeader("userId") String userId,
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getDistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getDistributionFundYieldData", Constants.BUSINESS_DATE);
-        return distributionFundYieldService.processDistributionFundYieldData(businessDate);
+        return distributionFundYieldService.processDistributionFundYieldData(userId, businessDate);
     }
 
     /**
      * Gets already calculated Distribution Fund Yield data for the given date.
+     * @param userId The user id passed in header;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -79,11 +83,12 @@ public class DistributionFundYiedController {
     @RequestMapping(value = "calculatedDistributionFundYieldData", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public FundAccountingYieldData getCalculatedDistributionFundYieldData(
+    public FundAccountingYieldData getCalculatedDistributionFundYieldData(@RequestHeader("userId") String userId,
             @RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.USER_ID);
         CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedDistributionFundYieldData", Constants.BUSINESS_DATE);
-        return distributionFundYieldService.getCalculatedDistributionFundYieldData(businessDate);
+        return distributionFundYieldService.getCalculatedDistributionFundYieldData(userId, businessDate);
     }
 
     public DistributionFundYieldService getDistributionFundYieldService() {

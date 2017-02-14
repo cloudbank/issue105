@@ -3,10 +3,7 @@ package com.csa.apex.fundyield.faya.api.controllers;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +14,7 @@ import com.csa.apex.fundyield.faya.api.FAYAMoneyMarketFundYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYAMoneyMarketDataPersistenceService;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -49,6 +47,7 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
 
     /**
      * Gets Money Market data for the business date.
+     * @param userId The user id passed in header.
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -56,14 +55,16 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYAMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
-        return fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(businessDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getFAYAMoneyMarketFundYieldData", Constants.USER_ID);
+    	CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYAMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
+        return fayaMoneyMarketDataPersistenceService.getFAYAMoneyMarketFundYieldData(userId, businessDate);
     }
 
     /**
      * Persists the calculated Money Market Fund Yield data.
+     * @param userId The user id passed in header.
      * @param fundAccountingYieldData FundAccountingYieldData
      * @return the result of the execution.
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -72,18 +73,15 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
     @Override
     @LogMethod
     @Transactional
-    public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData,
-            HttpServletRequest request) throws FundAccountingYieldException {
+    public boolean persistMoneyMarketFundYieldData(String userId, FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
         CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.FUND_ACCOUNTING_YIELD_DATA);
-        CommonUtility.checkNull(request, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.REQUEST);
-        HttpSession session = request.getSession();
-        String currentUserId = (String) session.getAttribute(Constants.CURRENT_USER_ID);
-        return fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(fundAccountingYieldData,
-                currentUserId);
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "persistMoneyMarketFundYieldData", Constants.USER_ID);
+        return fayaMoneyMarketDataPersistenceService.persistMoneyMarketFundYieldData(userId, fundAccountingYieldData);
     }
 
     /**
      * Gets already calculated Money Market Fund Yield data for the given date.
+     * @param userId The user id.
      * @param businessDate the business date;
      * @returns FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
@@ -91,10 +89,11 @@ public class FAYAMoneyMarketFundYieldController implements FAYAMoneyMarketFundYi
      */
     @Override
     @LogMethod
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException {
-        CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
-        return fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(businessDate);
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.USER_ID);
+    	CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedMoneyMarketFundYieldData", Constants.BUSINESS_DATE);
+        return fayaMoneyMarketDataPersistenceService.getCalculatedMoneyMarketFundYieldData(userId, businessDate);
     }
 
     public FAYAMoneyMarketDataPersistenceService getFayaMoneyMarketDataPersistenceService() {

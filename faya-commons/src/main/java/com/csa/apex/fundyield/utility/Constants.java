@@ -19,7 +19,7 @@ public class Constants {
 	/**
 	 * The constant currentUserId STRING
 	 */
-	public static final String CURRENT_USER_ID = "currentUserId";
+	public static final String USER_ID = "userId";
 
 	/**
 	 * The constant request string

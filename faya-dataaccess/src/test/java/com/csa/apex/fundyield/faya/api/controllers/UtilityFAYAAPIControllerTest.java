@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.service.UtilityFAYAAPIPersistenceService;
+import com.csa.apex.fundyield.faya.api.utility.TestUtility;
 
 /**
  * Test class for the UtilityFAYAAPIController.
@@ -67,8 +68,11 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/avgOfMm1DayDistYieldPctForPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
-                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+		this.mockMvc
+				.perform(get("/avgOfMm1DayDistYieldPctForPreviousDays")
+						.param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.SHARE_CLASS_SID, "111")
+						.param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -78,7 +82,17 @@ public class UtilityFAYAAPIControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
-        instance.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(-1, new Date(), 1);
+        instance.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, -1, new Date(), 1);
+    }
+    
+    /**
+     * Test for method getAvgOfMnyMkt1DayDistYieldPctForPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getAvgOfMnyMkt1DayDistYieldPctForPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
+        instance.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -87,8 +101,11 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDer1DayYieldN1AMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
-                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+		this.mockMvc
+				.perform(get("/sumOfDer1DayYieldN1AMmPctPreviousDays")
+						.param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.SHARE_CLASS_SID, "111")
+						.param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -98,7 +115,17 @@ public class UtilityFAYAAPIControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
-        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(1, null, 1);
+        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, 1, null, 1);
+    }
+    
+    /**
+     * Test for method getSumOfDer1DayYieldN1AMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDer1DayYieldN1AMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
+        instance.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -107,8 +134,11 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDerRestate1DayYieldMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
-                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+		this.mockMvc
+				.perform(get("/sumOfDerRestate1DayYieldMmPctPreviousDays")
+						.param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.SHARE_CLASS_SID, "111")
+						.param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -118,7 +148,17 @@ public class UtilityFAYAAPIControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
-        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(1, null, 1);
+        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, 1, null, 1);
+    }
+    
+    /**
+     * Test for method getSumOfDerRestate1DayYieldMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDerRestate1DayYieldMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
+        instance.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -127,8 +167,11 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getAvgOfMnyMkt7DayYieldPctForPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/avgOfMm7DayYieldPctForPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
-                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+		this.mockMvc
+				.perform(get("/avgOfMm7DayYieldPctForPreviousDays")
+						.param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.SHARE_CLASS_SID, "111")
+						.param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -138,7 +181,17 @@ public class UtilityFAYAAPIControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getAvgOfMnyMkt7DayYieldPctForPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
-        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(1, null, 1);
+        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(TestUtility.DEFAULT_USER_ID, 1, null, 1);
+    }
+    
+    /**
+     * Test for method getAvgOfMnyMkt7DayYieldPctForPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getAvgOfMnyMkt7DayYieldPctForPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
+        instance.getAvgOfMnyMkt7DayYieldPctForPreviousDays(null, 1, new Date(), 1);
     }
 
     /**
@@ -147,8 +200,11 @@ public class UtilityFAYAAPIControllerTest {
      */
     @Test
     public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDays() throws Exception {
-        this.mockMvc.perform(get("/sumOfDer7DayYieldN1AMmPctPreviousDays").param(Constants.SHARE_CLASS_SID, "111")
-                .param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2")).andExpect(status().is(200));
+		this.mockMvc
+				.perform(get("/sumOfDer7DayYieldN1AMmPctPreviousDays")
+						.param(Constants.USER_ID, TestUtility.DEFAULT_USER_ID).param(Constants.SHARE_CLASS_SID, "111")
+						.param(Constants.REPORT_DATE, "2016-12-20").param(Constants.NUM_OF_DAYS, "2"))
+				.andExpect(status().is(200));
     }
 
     /**
@@ -158,6 +214,16 @@ public class UtilityFAYAAPIControllerTest {
     @Test(expected = IllegalArgumentException.class)
     public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysInvalid() throws Exception {
         UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
-        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(1, null, 1);
+        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(TestUtility.DEFAULT_USER_ID, 1, null, 1);
+    }
+    
+    /**
+     * Test for method getSumOfDer7DayYieldN1AMnyMktPctPreviousDays with invalid user id.
+     * @throws Exception to JUnit
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void getSumOfDer7DayYieldN1AMnyMktPctPreviousDaysInvalidUserId() throws Exception {
+        UtilityFAYAAPIController instance = new UtilityFAYAAPIController();
+        instance.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(null, 1, new Date(), 1);
     }
 }

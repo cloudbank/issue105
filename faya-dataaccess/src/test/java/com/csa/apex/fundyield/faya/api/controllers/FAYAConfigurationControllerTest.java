@@ -26,6 +26,7 @@ import com.csa.apex.fundyield.exceptions.FundAccountingYieldException;
 import com.csa.apex.fundyield.faya.Application;
 import com.csa.apex.fundyield.faya.api.FAYAConfigurationService;
 import com.csa.apex.fundyield.faya.api.utility.TestUtility;
+import com.csa.apex.fundyield.utility.Constants;
 
 /**
  * Test class for the FAYAConfigurationController.
@@ -65,10 +66,10 @@ public class FAYAConfigurationControllerTest {
      * @throws Exception if any exception occurs
      */
     @Test
-    public void getConfigurationTest() throws Exception {
-        mockMvc.perform(get("/securitySECDataConfiguration")).andExpect(status().isOk())
-                .andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE))
-                .andExpect(jsonPath("$.operationScale", Matchers.is(7)))
-                .andExpect(jsonPath("$.roundingMode", Matchers.is(4)));
-    }
+	public void getConfigurationTest() throws Exception {
+		mockMvc.perform(get("/securitySECDataConfiguration").header(Constants.USER_ID, TestUtility.DEFAULT_USER_ID))
+				.andExpect(status().isOk()).andExpect(content().contentType(TestUtility.APPLICATION_JSON_CONTENT_TYPE))
+				.andExpect(jsonPath("$.operationScale", Matchers.is(7)))
+				.andExpect(jsonPath("$.roundingMode", Matchers.is(4)));
+	}
 }

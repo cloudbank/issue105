@@ -7,7 +7,6 @@ import java.util.Date;
 
 import javax.annotation.PostConstruct;
 
-import com.csa.apex.fundyield.utility.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +17,7 @@ import com.csa.apex.fundyield.faya.api.FAYASecuritySECYieldService;
 import com.csa.apex.fundyield.faya.api.service.FAYASecuritySECYieldPersistenceService;
 import com.csa.apex.fundyield.fayacommons.entities.FundAccountingYieldData;
 import com.csa.apex.fundyield.utility.CommonUtility;
+import com.csa.apex.fundyield.utility.Constants;
 import com.csa.apex.fundyield.utility.LogMethod;
 
 /**
@@ -57,6 +57,7 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	/**
 	 * Gets the SEC security data.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the business date
 	 * @return the list of security SEC data
@@ -67,14 +68,16 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@Override
     @LogMethod
-	public FundAccountingYieldData getFAYASECData(Date businessDate) throws FundAccountingYieldException {
+	public FundAccountingYieldData getFAYASECData(String userId, Date businessDate) throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getFAYASECData", Constants.BUSINESS_DATE);
-		return fayaSecuritySECYieldPersistenceService.getFAYASECData(businessDate);
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getFAYASECData", Constants.USER_ID);
+		return fayaSecuritySECYieldPersistenceService.getFAYASECData(userId, businessDate);
 	}
 
 	/**
 	 * Persists the calculated SEC security data.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param fundAccountingYieldData
 	 *            the SEC security data to be persisted
 	 * @return flag indicating whether the data was persisted or not
@@ -86,14 +89,16 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	@Override
     @LogMethod
 	@Transactional
-	public boolean persistSecuritySECData(FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
+	public boolean persistSecuritySECData(String userId, FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException {
+		CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "persistSecuritySECData", Constants.USER_ID);
 		CommonUtility.checkNull(fundAccountingYieldData, this.getClass().getCanonicalName(), "persistSecuritySECData", Constants.FUND_ACCOUNTING_YIELD_DATA);
-		return fayaSecuritySECYieldPersistenceService.persistSecuritySECData(fundAccountingYieldData);
+		return fayaSecuritySECYieldPersistenceService.persistSecuritySECData(userId, fundAccountingYieldData);
 	}
 
 	/**
 	 * Gets the calculated SEC security data.
 	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the business date
 	 * @return the list of calculated SEC security data
@@ -104,8 +109,8 @@ public class FAYASecuritySECYieldController implements FAYASecuritySECYieldServi
 	 */
 	@Override
     @LogMethod
-	public FundAccountingYieldData getCalculatedSECData(Date businessDate) throws FundAccountingYieldException {
+	public FundAccountingYieldData getCalculatedSECData(String userId, Date businessDate) throws FundAccountingYieldException {
 		CommonUtility.checkNull(businessDate, this.getClass().getCanonicalName(), "getCalculatedSECData", Constants.BUSINESS_DATE);
-		return fayaSecuritySECYieldPersistenceService.getCalculatedSECData(businessDate);
+		return fayaSecuritySECYieldPersistenceService.getCalculatedSECData(userId, businessDate);
 	}
 }

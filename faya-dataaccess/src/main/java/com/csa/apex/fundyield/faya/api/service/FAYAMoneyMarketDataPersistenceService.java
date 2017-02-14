@@ -15,36 +15,40 @@ public interface FAYAMoneyMarketDataPersistenceService {
 
     /**
      * Gets Money Market data for the business date. 
-     *
+     * 
+     * @param userId The user id
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws FundAccountingYieldException 
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(Date businessDate) throws FundAccountingYieldException;
+    public FundAccountingYieldData getFAYAMoneyMarketFundYieldData(String userId, Date businessDate) throws FundAccountingYieldException;
 
     /**
      * Persists the calculated Money Market Fund Yield data.
      *
+     * @param userId The user id.
      * @param fundAccountingYieldData FundAccountingYieldData @RequestParam;
+     * @param userId The user id from user context.
      * @return the result of the execution.
      *
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public boolean persistMoneyMarketFundYieldData(FundAccountingYieldData fundAccountingYieldData, String userId) throws FundAccountingYieldException;
+    public boolean persistMoneyMarketFundYieldData(String userId, FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
 
     /**
      * Persists the calculated Distribution Fund Yield data.
-     *
+     * 
+     * @param userId The user id.
      * @param businessDate the SecuritySECDatae @RequestParam;
      * @return the result of the execution.
      *
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate) throws FundAccountingYieldException;
+    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(String userId, Date businessDate) throws FundAccountingYieldException;
 
 }
 

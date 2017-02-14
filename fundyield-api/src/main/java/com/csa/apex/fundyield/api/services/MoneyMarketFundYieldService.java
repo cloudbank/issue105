@@ -13,21 +13,23 @@ public interface MoneyMarketFundYieldService {
     /**
      * Process SEC Security data for the business date. This method gets the fund acccounting yield data and then
      * process each portfolio first to calculate the data, then to persist it using API.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData processMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData processMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException;
 
     /**
      * Gets already calculated Money Market Fund Yield data for the given date.
+     * @param userId The user id;
      * @param businessDate the business date;
      * @return FundAccountingYieldData with calculated result;
      * @throws IllegalArgumentException in case the input is invalid (null).
      * @throws FundAccountingYieldException in case any error during processing.
      */
-    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(Date businessDate)
+    public FundAccountingYieldData getCalculatedMoneyMarketFundYieldData(String userId, Date businessDate)
             throws FundAccountingYieldException;
 }

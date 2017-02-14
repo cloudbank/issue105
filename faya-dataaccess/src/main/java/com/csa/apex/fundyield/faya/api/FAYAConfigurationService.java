@@ -5,6 +5,7 @@ package com.csa.apex.fundyield.faya.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,7 @@ public interface FAYAConfigurationService {
 
     /**
      * Gets SEC security config for the calculations in engines.
-     * 
+     * @param userId The user id passed in header.
      * @return the SEC security configuration
      * @throws FundAccountingYieldException
      *             in case any error occurred during processing
@@ -34,5 +35,5 @@ public interface FAYAConfigurationService {
     @RequestMapping(value = "securitySECDataConfiguration", method = RequestMethod.GET, produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public SECConfiguration getConfiguration() throws FundAccountingYieldException;
+    public SECConfiguration getConfiguration(@RequestHeader("userId") String userId) throws FundAccountingYieldException;
 }

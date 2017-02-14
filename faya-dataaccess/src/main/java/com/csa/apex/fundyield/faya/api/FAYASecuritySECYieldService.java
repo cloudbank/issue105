@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,7 @@ public interface FAYASecuritySECYieldService {
 	/**
 	 * Gets the SEC security data.
 	 *
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the business date
 	 * @return the list of security SEC data
@@ -43,13 +45,14 @@ public interface FAYASecuritySECYieldService {
 	@RequestMapping(value = "fayaFundAccountingSECYieldData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public FundAccountingYieldData getFAYASECData(
+	public FundAccountingYieldData getFAYASECData(@RequestHeader("userId") String userId,
 			@RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException;
 
 	/**
 	 * Persists the calculated SEC security data.
 	 *
+	 * @param userId The user id passed in header.
 	 * @param fundAccountingYieldData
 	 *            the SEC security data to be persisted
 	 * @return flag indicating whether the data was persisted or not
@@ -61,11 +64,12 @@ public interface FAYASecuritySECYieldService {
 	@RequestMapping(value = "calculatedFundAccountingSECYieldData", method = RequestMethod.PUT, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public boolean persistSecuritySECData(@RequestBody FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
+	public boolean persistSecuritySECData(@RequestHeader("userId") String userId, @RequestBody FundAccountingYieldData fundAccountingYieldData) throws FundAccountingYieldException;
 
 	/**
 	 * Gets the calculated SEC security data.
-	 *
+	 * 
+	 * @param userId The user id passed in header.
 	 * @param businessDate
 	 *            the business date
 	 * @return the list of calculated SEC security data
@@ -77,7 +81,7 @@ public interface FAYASecuritySECYieldService {
 	@RequestMapping(value = "calculatedFundAccountingSECYieldData", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public FundAccountingYieldData getCalculatedSECData(
+	public FundAccountingYieldData getCalculatedSECData(@RequestHeader("userId") String userId,
 			@RequestParam(Constants.BUSINESS_DATE) @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date businessDate)
 			throws FundAccountingYieldException;
 }

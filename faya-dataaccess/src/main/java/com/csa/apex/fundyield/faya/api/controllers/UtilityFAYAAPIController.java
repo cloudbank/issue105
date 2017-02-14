@@ -48,6 +48,7 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
 
     /**
      * Gets the average of MM 1 Day Dist Yield Pct for previous days.
+     * @param userId The user id passed in header.
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -57,18 +58,20 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(long shareClassSid,
+    public BigDecimal getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(String userId, long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getAvgOfMnyMkt1DayDistYieldPctForPreviousDays", Constants.USER_ID);
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "getAvgOfMnyMkt1DayDistYieldPctForPreviousDays", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getAvgOfMnyMkt1DayDistYieldPctForPreviousDays", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "getAvgOfMnyMkt1DayDistYieldPctForPreviousDays", Constants.NUM_OF_DAYS);
-        return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(shareClassSid, reportDate,
-                numOfDays);
+		return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt1DayDistYieldPctForPreviousDays(userId, shareClassSid,
+				reportDate, numOfDays);
     }
 
     /**
      * Gets the sum of Der 1 Day Yield N1A MM Pct for previous days.
+     * @param userId The user id passed in header.
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -78,18 +81,20 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(long shareClassSid,
+    public BigDecimal getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(String userId, long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSumOfDer1DayYieldN1AMnyMktPctPreviousDays", Constants.USER_ID);
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "getSumOfDer1DayYieldN1AMnyMktPctPreviousDays", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSumOfDer1DayYieldN1AMnyMktPctPreviousDays", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "getSumOfDer1DayYieldN1AMnyMktPctPreviousDays", Constants.NUM_OF_DAYS);
-        return utilityFAYAAPIPersistenceService.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate,
+        return utilityFAYAAPIPersistenceService.getSumOfDer1DayYieldN1AMnyMktPctPreviousDays(userId, shareClassSid, reportDate,
                 numOfDays);
     }
 
     /**
      * Gets the sum of Der Restate 1 Day Yield MM Pct for previous days.
+     * @param userId The user id passed in header.
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -99,18 +104,20 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(long shareClassSid,
+    public BigDecimal getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(String userId, long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "getSumOfDerRestate1DayYieldMnyMktPctPreviousDays", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSumOfDerRestate1DayYieldMnyMktPctPreviousDays", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "getSumOfDerRestate1DayYieldMnyMktPctPreviousDays", Constants.NUM_OF_DAYS);
-        return utilityFAYAAPIPersistenceService.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(shareClassSid,
+        CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSumOfDerRestate1DayYieldMnyMktPctPreviousDays", Constants.USER_ID);
+        return utilityFAYAAPIPersistenceService.getSumOfDerRestate1DayYieldMnyMktPctPreviousDays(userId, shareClassSid,
                 reportDate, numOfDays);
     }
 
     /**
      * Gets the avg of MM 7 DayYield Pct for previous days.
+     * @param userId The user id passed in header.
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -120,18 +127,20 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(long shareClassSid,
+    public BigDecimal getAvgOfMnyMkt7DayYieldPctForPreviousDays(String userId, long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getAvgOfMnyMkt7DayYieldPctForPreviousDays", Constants.USER_ID);
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "getAvgOfMnyMkt7DayYieldPctForPreviousDays", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getAvgOfMnyMkt7DayYieldPctForPreviousDays", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "getAvgOfMnyMkt7DayYieldPctForPreviousDays", Constants.NUM_OF_DAYS);
-        return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt7DayYieldPctForPreviousDays(shareClassSid, reportDate,
-                numOfDays);
+		return utilityFAYAAPIPersistenceService.getAvgOfMnyMkt7DayYieldPctForPreviousDays(userId, shareClassSid,
+				reportDate, numOfDays);
     }
 
     /**
      * Gets sum of Der 7 Day Yield N1A MM Pct for previous days.
+     * @param userId The user id passed in header;
      * @param shareClassSid the share class id;
      * @param reportDate the report date;
      * @param numOfDays the number of days;
@@ -141,14 +150,15 @@ public class UtilityFAYAAPIController implements UtilityFAYAAPIService {
      */
     @Override
     @LogMethod
-    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(long shareClassSid,
+    public BigDecimal getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(String userId, long shareClassSid,
             @DateTimeFormat(pattern = Constants.API_DATE_FORMAT) Date reportDate, int numOfDays)
             throws FundAccountingYieldException {
+    	CommonUtility.checkString(userId, this.getClass().getCanonicalName(), "getSumOfDer7DayYieldN1AMnyMktPctPreviousDays", Constants.USER_ID);
         CommonUtility.checkNumber(shareClassSid, this.getClass().getCanonicalName(), "getSumOfDer7DayYieldN1AMnyMktPctPreviousDays", Constants.SHARE_CLASS_SID);
         CommonUtility.checkNull(reportDate, this.getClass().getCanonicalName(), "getSumOfDer7DayYieldN1AMnyMktPctPreviousDays", Constants.REPORT_DATE);
         CommonUtility.checkNumber(numOfDays, this.getClass().getCanonicalName(), "getSumOfDer7DayYieldN1AMnyMktPctPreviousDays", Constants.NUM_OF_DAYS);
-        return utilityFAYAAPIPersistenceService.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(shareClassSid, reportDate,
-                numOfDays);
+		return utilityFAYAAPIPersistenceService.getSumOfDer7DayYieldN1AMnyMktPctPreviousDays(userId, shareClassSid,
+				reportDate, numOfDays);
     }
 
     public UtilityFAYAAPIPersistenceService getUtilityFAYAAPIPersistenceService() {

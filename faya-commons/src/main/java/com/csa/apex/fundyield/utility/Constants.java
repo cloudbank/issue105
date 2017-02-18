@@ -90,6 +90,11 @@ public class Constants {
 	 * The constant utilityFAYAAPIPersistenceService string
 	 */
 	public static final String UTILITY_FAYA_API_PERSISTENCE_SERVICE = "utilityFAYAAPIPersistenceService";
+	
+	/**
+	 * The constant userPersistenceService string
+	 */
+	public static final String USER_SERVICE = "userPersistenceService";
 
 	/**
 	 * The constant secConfiguration string

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="faya-commons/src/main/java"/>
+	<classpathentry kind="src" path="faya-commons/src/test/java"/>
+	<classpathentry kind="src" path="faya-dataaccess/src/main/java"/>
+	<classpathentry kind="src" path="faya-dataaccess/src/test/java"/>
+	<classpathentry kind="src" path="fundyield-api/src/main/java"/>
+	<classpathentry kind="src" path="fundyield-api/src/test/java"/>
+	<classpathentry kind="lib" path="faya-dataaccess/lib/ojdbc6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
